@@ -31,14 +31,13 @@ public class MemberDao {
 	public Member login(Connection conn,String userId,String password) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		Member m=null;
+		Member m=new Member();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("login"));
 			pstmt.setString(1,userId);
 			pstmt.setString(2,password);
 			rs=pstmt.executeQuery();
 			if(rs.next()) {
-				m=new Member();
 				m.setMemberId(rs.getString("member_id"));
 				m.setMemberPwd(rs.getString("member_pwd"));
 				m.setMemberName(rs.getString("member_name"));
