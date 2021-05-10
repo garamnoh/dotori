@@ -1,0 +1,9 @@
+*/.git/*
+.deployables
+.git
+.project
+.classpath
+.settings
+*/target/*
+/web/WEB-INF/classes/
+/resources/
