@@ -15,10 +15,10 @@
 	
 	        // 사이드메뉴
 	        sidemenu.classList.remove('hide');
-	        $('.sidemenu>iframe').attr('src', 'views/sidebarHome.jsp');
+	        $('.sidemenu>iframe').attr('src', 'sidebarHome.jsp');
 	        
 	        // 컨텐츠
-	        $(".contents>iframe").attr("src","views/contentHome.jsp");
+	        $(".contents>iframe").attr("src","contentHome.jsp");
 	    });
 	
 	    // 그룹버튼 클릭이벤트
@@ -29,10 +29,10 @@
 	
 	        // 사이드메뉴
 	        sidemenu.classList.remove('hide');
-	        $('.sidemenu>iframe').attr('src', 'views/sidebarGroup.jsp');
+	        $('.sidemenu>iframe').attr('src', 'sidebarGroup.jsp');
 	        
 	        // 컨텐츠
-	        $(".contents>iframe").attr("src","views/contentGroup.jsp");
+	        $(".contents>iframe").attr("src","contentGroup.jsp");
 	    });
 	
 	    // 쇼핑버튼 클릭이벤트
@@ -43,10 +43,10 @@
 	
 	        // 사이드메뉴
 	        sidemenu.classList.remove('hide');
-	        $('.sidemenu>iframe').attr('src', 'views/sidebarShop.jsp');
+	        $('.sidemenu>iframe').attr('src', 'sidebarShop.jsp');
 	        
 	        // 컨텐츠
-	        $(".contents>iframe").attr("src","views/contentShop.jsp");
+	        $(".contents>iframe").attr("src","contentShop.jsp");
 	    });
 	
 	    // 미니홈피버튼 클릭이벤트
@@ -57,5 +57,5 @@
 	        // 사이드바 숨기기(display:none)
 	        sidemenu.classList.add('hide');
 	
-	        $(".contents>iframe").attr("src","views/minihome/minihome.jsp");   
+	        $(".contents>iframe").attr("src","minihome/minihome.jsp");   
 	    });
