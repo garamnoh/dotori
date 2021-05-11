@@ -1,7 +1,24 @@
 /*********right_board**********/
 
-*::-webkit-scrollbar{
+/* *::-webkit-scrollbar{
     display: none;
+} */
+
+#geust_reply_box{
+	height:150px;
+    width:520px;
+    margin-bottom: 20px;
+    margin-left:5px;
+    background-color: white;
+    border: 1px solid;
+}
+
+#real_reply{
+	display: block-inline;
+	height:105px;
+	width:350px;
+	float:right;
+	display:flex;	
 }
 
 #geust_box{
@@ -21,17 +38,23 @@
 }
 #guest_no{
     display: inline-block;
+    float:left;
     height:25px;
     width:30px;
     margin-left: 15px;
-    border:1px solid red;
+    /* border:1px solid red; */
+    font-weight:bolder;   
+    font-size:18px; 
 }
 #guest_name{
     display: inline-block;
+    float:left;
     height:25px;
     width:55px;
     margin-left: 8px;
     border:1px solid red;
+    font-weight:bolder;   
+    font-size:18px;
 }
 #guest_date{
     display: inline-block;
@@ -45,7 +68,7 @@
     height:120px;
     width:520px;
     border: 1px solid;
-
+	margin-right:10px;
 }
 #guest_minimi{
     display: inline-block;
@@ -55,7 +78,7 @@
     margin-left: 20px;
     border:1px solid;
 }
-#guest_reply{
+#guest_reply_box{
     display: inline-block;
     height:110px;
     width:350px;
