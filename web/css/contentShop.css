@@ -33,9 +33,18 @@
 
 /* 이후버전 */
 
+html{
+	height:100%;
+}
+
+
+
 body{
     box-sizing: border-box;
     font-family: 'Roboto', 'Noto Sans KR';
+    height:100%;
+    background-color: black;
+    
 }
 
 *::-webkit-scrollbar{
@@ -59,7 +68,7 @@ body{
 
     flex-direction: column;
     width: 880px;
-    height: auto;
+    height: 1000px;
     margin: auto;
     background-color: rgb(241, 221, 217);
     

@@ -1,0 +1,46 @@
+@charset "UTF-8";
+
+/* test img내용  */
+ div.MinimiPicture>img{
+    width: 150px;
+    height: 150px;
+}
+/* 체크박스+내용 */
+div.MinimiInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* 가운데 정렬 밑 오른쪽 체크박스 없애기 */
+div.MinimiInfo>input:nth-child(3){
+    opacity: 0;
+}
+/* 체크박스정렬 */
+/* relate빼고 텍스트와 위아래 맞추려면 */
+.MinimiInfo>input{
+    width: 18px;
+    height: 18px;
+    
+}
+/* 뮤직 전체 움직임 */
+div.productMinimi{
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 5px;
+}
+
+.MinimiInfo> ul{
+    list-style: none;
+}
+/* #MusicTable>table{
+    width: 151;
+    width: 151;
+} */
+/* 뮤직 내용 */
+.MinimiInfo{
+    width: 150px;
+    height: 70px;
+}
+/* table 양옆 사이 조정 */
+#MinimiTable>tbody tr td{
+    padding: 0 0 40px 40px;   
+}
