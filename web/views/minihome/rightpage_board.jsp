@@ -7,7 +7,7 @@
 </head>
 <body>
     <!-- <p>right-page-board</p> -->
-    <div id="right_board">
+    <div id="right_board_box">
         <div id="geust_box">
             <div id="guest_info">
                 <span id="guest_no"></span>
