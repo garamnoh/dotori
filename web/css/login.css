@@ -53,7 +53,8 @@ p{
     border-radius: 3%;
     color: white;
     position:relative;
-    bottom: -10%;           
+    bottom: -10%; 
+    top : 23px;          
 }
 
 /*앞에 아이디*/
@@ -77,7 +78,7 @@ p{
 #selectEmail{
    margin: 10px;
     left :112px;
-    top: 18px;
+    top: 12px;
     position:relative;
 }
 /*패스워드*/
@@ -86,6 +87,7 @@ p{
     height: 30px;
     position:relative;
     bottom: -5%;
+    top : 20px;
 }
 
 #title{

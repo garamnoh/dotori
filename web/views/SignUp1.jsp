@@ -40,19 +40,19 @@
       <div class="join">
         <p style="font-weight: bold; text-align: center;">회원가입</p>
         계정  <br><input type="text" name="email1" id="email1">  @ 
-        <input type="text" name="email2" id="email2" disabled value="-- 선택 --"> 
+        <input type="text" name="domain" id="domain" disabled value="-- 선택 --"> 
         <select name='selectEmail' id="selectEmail">
             <option value='' selected>-- 선택 --</option>
-            <option value='dotori'>dotori.com</option>
-            <option value="dreamwiz">dreamwiz.com</option> 
-            <option value="freechal">freechal.com</option>
-            <option value="gmail">gmail.com</option> 
-            <option value='daum'>hanmail.net</option>
-            <option value="korea">korea.com</option> 
-            <option value="lycos">lycos.co.kr</option> 
-            <option value='nate'>nate.com</option>
-            <option value='naver'>naver.com</option>
-            <option value='yahoo'>yahoo.co.kr</option>
+            <option value='dotori.com'>dotori.com</option>
+            <option value="dreamwiz.com">dreamwiz.com</option> 
+            <option value="freechal.com">freechal.com</option>
+            <option value="gmail.com">gmail.com</option> 
+            <option value='hanmail.net'>hanmail.net</option>
+            <option value="korea.com">korea.com</option> 
+            <option value="lycos.co.kr">lycos.co.kr</option> 
+            <option value='nate.com'>nate.com</option>
+            <option value='naver.com'>naver.com</option>
+            <option value='yahoo.com'>yahoo.co.kr</option>
             <option value="1">직접입력</option>
 
           </select>
@@ -79,19 +79,19 @@
     </div>
 
     <div id="no">
-        주민등록번호 <br> <input type="number" id="no1" max="991231" > -
-        <input type="password" id="no1" >
+        주민등록번호 <br>   <input type="text" maxlength="6" size="8">-
+        <input type="password" maxlength="7" size="10" id="no1">
     </div> 
        <br>
     <div >
-        핸드폰번호 <br> <input type="number" id="phone">-
-       <input type="number" id="phone">-
-      <input type="number" id="phone">
+        핸드폰번호 <br> <input type="text" id="phone" maxlength="3">-
+       <input type="text" id="phone" maxlength="4">-
+      <input type="text" id="phone" maxlength="4">
       <button id="ingine">핸드폰 인증</button>
     </div>
     <div style="display: inline-block">
           
-        <button id="cancle" onclick="location.href='SignUp.html'">취소</button>  
+        <button id="cancle" onclick="location.href='SignUp.jsp'">취소</button>  
        
 
         <button id= "okay">등록</button>    
@@ -113,11 +113,11 @@
    $("#selectEmail option:selected").each(function () {
 		
 		if($(this).val()== '1'){ //직접입력일 경우
-			 $("#email2").val('');                        //값 초기화
-			 $("#email2").attr("disabled",false); //활성화
+			 $("#domain").val('');                        //값 초기화
+			 $("#domain").attr("disabled",false); //활성화
 		}else{ //직접입력이 아닐경우
-			 $("#email2").val($(this).text());      //선택값 입력
-			 $("#email2").attr("disabled",true); //비활성화
+			 $("#domain").val($(this).text());      //선택값 입력
+			 $("#domain").attr("readonly",true); //비활성화
 		}
    });
 });

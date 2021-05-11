@@ -196,12 +196,13 @@
 
             <div style="display: inline-block">
           
-                <button id="cancle" onclick="location.href='login.html'">취소</button>  
-               
-
+                <button id="cancle" onclick="location.href='../index.jsp'">취소</button>  
+    			
+    			   
+	
                 <button id= "okay">확인</button>     </div>
                     
-               <form action="SignUp1.html" id="join"></form>
+               <form action="SignUp1.jsp" id="join"></form>
         
 </div>
    

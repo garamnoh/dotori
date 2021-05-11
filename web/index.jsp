@@ -21,16 +21,16 @@
 	            <input type="text" name="domain" id="domain"  value=""> 
 	            <select name='selectEmail' id="selectEmail">
 	                <option value="1">직접입력</option>
-	                <option value='dotori'>dotori.com</option>
-	                <option value="dreamwiz">dreamwiz.com</option> 
-	                <option value="freechal">freechal.com</option>
-	                <option value="gmail">gmail.com</option> 
-	                <option value='daum'>hanmail.net</option>
-	                <option value="korea">korea.com</option> 
-	                <option value="lycos">lycos.co.kr</option> 
-	                <option value='nate'>nate.com</option>
-	                <option value='naver'>naver.com</option>
-	                <option value='yahoo'>yahoo.co.kr</option>
+	                <option value="dotori.com">dotori.com</option>
+	                <option value="dreamwiz.com">dreamwiz.com</option> 
+	                <option value="freechal.com">freechal.com</option>
+	                <option value="gmail.com">gmail.com</option> 
+	                <option value="hanmail.net">hanmail.net</option>
+	                <option value="korea.com">korea.com</option> 
+	                <option value="lycos.co.kr">lycos.co.kr</option> 
+	                <option value="nate.com">nate.com</option>
+	                <option value="naver.com">naver.com</option>
+	                <option value="yahoo.co.kr">yahoo.co.kr</option>
 	            </select>
 	            <input type="password" name="password" id="password" placeholder="*******" required>
 	            <img src="<%=request.getContextPath()%>/images/logo_main.png" alt="">
@@ -40,10 +40,10 @@
             
             
     
-            <p><a href="/semiproject/html/idpwSearch.html">아이디 </a>/<a href="/semiproject/html/idpwSearch.html">비밀번호 찾기</a></p>
+            <p><a href="views/IdpwSearch.jsp">아이디 </a>/<a href="views/IdpwSearch.jsp">비밀번호 찾기</a></p>
        
             <hr>
-            <button id="new"onClick="location.href='SignUp.html'">새 계정 만들기</button>
+            <button id="new" onClick="location.href='views/SignUp.jsp'">새 계정 만들기</button>
         
        
         </div>
@@ -56,12 +56,19 @@
         $("#selectEmail option:selected").each(function () {
                 
                 if($(this).val()== '1'){ //직접입력일 경우
-                    $("#email2").val('');                        //값 초기화
-                    $("#email2").attr("disabled",false); //활성화
-                }else{ //직접입력이 아닐경우
-                    $("#email2").val($(this).text());      //선택값 입력
-                    $("#email2").attr("disabled",true); //비활성화
+                    $("#domain").val('');                        //값 초기화
+                    $("#domain").attr("disabled",false); //활성화
+                }        
+                else{ 
+                	//직접입력이 아닐경우
+                	 
+                  $("#domain").val($(this).text());     //선택값 입력
+                    $("#domain").attr("readonly",true); //읽기전용
                 }
+               
+
+            
+                
             });
         });
      </script>
