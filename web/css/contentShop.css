@@ -1,4 +1,5 @@
-body{
+/* 초기버전
+ body{
     box-sizing: border-box;
     font-family: 'Roboto', 'Noto Sans KR';
 }
@@ -26,4 +27,137 @@ body{
 .container>div>p{   
     font-size: 20px;   
     color: white;
+} */
+
+
+
+/* 이후버전 */
+
+body{
+    box-sizing: border-box;
+    font-family: 'Roboto', 'Noto Sans KR';
 }
+
+*::-webkit-scrollbar{
+    display: none;
+}
+
+/* .searchTopShop{
+    position: relative;
+    right: 50px;
+
+} */
+
+
+.container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    margin-left: 300px;
+    
+
+    flex-direction: column;
+    width: 880px;
+    height: auto;
+    margin: auto;
+    background-color: rgb(241, 221, 217);
+    
+}
+/* .shopTopLeft{
+    display: block;
+}
+.shopTopRight{
+    display: block;
+}
+.test2{
+    display: block;
+} */
+
+.container>.shopTop{
+    display: flex;
+    width: 880px;
+}
+
+/* .shopTopRight{
+    display: flex;
+    justify-content: flex-end;
+} */
+
+.container>div{
+    /* width: 880px; */
+    /* height: 1000px; */
+    /* background-color: rgb(241, 221, 217); */
+    display: flex;
+    justify-content: center;
+}
+
+
+
+
+/*.shopCenter */
+
+/* .shopProductMusic{
+    position: relative;
+    right: 30px;
+} */
+
+/* table용  */
+.container>.test2>iframe{
+    width: 880px;
+    height: 1000px;
+}
+.container>div>p{   
+    font-size: 20px;   
+    color: white;
+}
+/* 검색바 */
+.shopTopLeft>iframe{
+    width: 500px;
+    padding: 30px 0 0 50px;
+
+    
+}
+/* .shopTopRigth>iframe{
+    width: 380;
+} */
+
+/* 여기서부터 테스트용 */
+
+ /* test img내용  */
+ div.MusicPicture>img{
+    width: 150px;
+    height: 150px;
+}
+/* 체크박스+내용 */
+div.MusicInfo{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+/* 가운데 정렬 밑 오른쪽 체크박스 없애기 */
+div.MusicInfo>input:nth-child(3){
+    opacity: 0;
+}
+/* 체크박스정렬 */
+/* div.MusicInfo>input{
+    width: 18px;
+    height: 18px;
+    
+} */
+/* 뮤직 전체 움직임 */
+div.productMusic{
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 5px;
+}
+/* #MusicTable{
+    position: absolute;
+    right: 10px;
+} */
+.shopTopLeft>if{
+    height: 50px;
+    
+
+    
+}
+

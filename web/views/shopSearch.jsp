@@ -11,9 +11,14 @@
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shopsearch.css">
 </head>
 <body>
+    
+    
     <div id="searchShop">
-        <input id="searchTap" type="text">
-        <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="">
+        <form>
+            <input id="searchTap" type="text">
+            <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="검색버튼" type="submit" value="검색">
+        </form>
+        
     </div>
    
     
