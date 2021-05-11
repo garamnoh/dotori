@@ -7,20 +7,20 @@ body{
 }
 
 body>.profile{
-    height: 280px;
-    width: 280px;
+    height: 200px;
+    width: 200px;
     background-color: rgb(190, 190, 190);
-    margin: 10px 10px 0 10px;
-    border-radius: 3px;
+    margin: 30px 10px 20px 10px;
+    border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
 }
 
 body>.profile>img{
-    height: 280px;
-    width: 280px;
-    border-radius: 5px;
+    height: 200px;
+    width: 200px;
+    border-radius: 50%;
 }
 
 body>.info{
@@ -33,7 +33,10 @@ body>.info>div{
     font-size: 14px;
     font-weight: 500;
     color: rgb(94, 94, 94);
-    background-color: rgb(190, 190, 190);
     margin: 10px 0 10px 0;
+}
+
+body>.info>hr{
+    margin-right: 80px;
 }
 

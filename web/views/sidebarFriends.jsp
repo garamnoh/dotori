@@ -8,9 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>sidebar_home</title>
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css">
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sidebarGroup.css">
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&family=Roboto:wght@100;300;400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/sideFriends.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Roboto:wght@400;500;700;900&display=swap">
 </head>
 <body>
     <div class="menuOption">
@@ -29,6 +28,6 @@
         </div>
     </div>
     <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
-    <script src='<%=request.getContextPath()%>/js/sidebarGroup.js'></script>
+    <script src='<%=request.getContextPath()%>/js/sidebarFriends.js'></script>
 </body>
 </html>

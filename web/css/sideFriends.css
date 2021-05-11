@@ -18,6 +18,8 @@ body>.menuOption>.menuTitle{
     font-size: 14px;
     font-weight: 700;
     color: rgb(94, 94, 94);
+    border-top-right-radius: 5px;
+    border-top-left-radius: 5px;
     margin: 0;
     display: flex;
     flex-direction: column;
@@ -33,11 +35,11 @@ body>.menuOption>#optionTitle{
 }
 
 body>.menuOption>.menuTitle:hover{
-    background-color: rgb(218, 216, 216);
+    background-color: rgb(218, 216, 216, .2);
 }
 
 body>.menuOption>.menuTitle:active{ 
-    background-color: rgb(224, 224, 224);
+    background-color: rgb(224, 224, 224, .4);
 }
 
 body>.menuOption>.menuSub{
@@ -53,16 +55,16 @@ body>.menuOption>.menuSub>p{
     padding: 15px;
     font-size: 14px;
     font-weight: 500; 
-    background-color: #eee;
-    color: rgb(94, 94, 94); 
+    background-color: rgb(238, 238, 238, .2);
+    color: rgb(94, 94, 94);
     /* display: none; */
     /* border-bottom: 1px solid #eee; */
 }
 
 body>.menuOption>.menuSub>p:hover{
-    background-color: rgb(228, 228, 228);
+    background-color: rgb(228, 228, 228, .4);
 }
 
 body>.menuOption>.menuSub>p:active{   
-    background-color: #eee;
+    background-color: rgb(238, 238, 238, .3);
 }
