@@ -1,45 +1,45 @@
-div.productMusic>img{
+
+/* test img내용  */
+ div.MusicPicture>img{
     width: 150px;
     height: 150px;
-    position: relative;
-    /* left: 10px; */
-
 }
-/* 도토리 액수 */
-div.productMusic>p{
-    position: relative;
-    left: 30px;
-}
-/* 전체움직임*/
-div.productMusic{
-    display: inline-block;
-    margin-left: 90px;
-    margin-bottom: 30px;
-} 
-/* 전체움직임 */
-/* div.productMusic{
+/* 체크박스+내용 */
+div.MusicInfo{
     display: flex;
-    margin-left: 100px;
-    margin-bottom: 30px;
     flex-direction: row;
-    flex-wrap: nowrap;
-} */
-/* 체크박스들크기조정 */
-div.productMusic>br+.shopMusicCheck{
-    width: 20px;
-    height: 20px;
-    position: relative;
-    /* left: 5px; */
-    border: solid 1px black;
+    justify-content: space-between;
+}
+/* 가운데 정렬 밑 오른쪽 체크박스 없애기 */
+div.MusicInfo>input:nth-child(3){
+    opacity: 0;
+}
+/* 체크박스정렬 */
+/* relate빼고 텍스트와 위아래 맞추려면 */
+.MusicInfo>input{
+    width: 18px;
+    height: 18px;
+    
+}
+/* 뮤직 전체 움직임 */
+div.productMusic{
+    border: 2px solid rgb(190, 190, 190);
+    border-radius: 5px;
 }
 
-/* 음반제목 */
-div.productMusic>.MusicTitle{
-    position: relative;
-    /* left: 10px; */
+.MusicInfo> ul{
+    list-style: none;
 }
-/* 음반제목길때 어쩔수 없이 아래로 쓸때 */
-div.productMusic>.MusicTitle2{
-    position: relative;
-    left: 35px;
+/* #MusicTable>table{
+    width: 151;
+    width: 151;
+} */
+/* 뮤직 내용 */
+.MusicInfo{
+    width: 150px;
+    height: 70px;
+}
+/* table 양옆 사이 조정 */
+#MusicTable>tbody tr td{
+    padding: 0 0 40px 40px;   
 }
