@@ -26,21 +26,19 @@
 <body>
     <div class="container">
         <div class="shopTop">
-            <div class="shopTopLeft"></div>
+            <div class="shopTopLeft">
                 <!-- <p>SHOP</p> -->
                 <iframe src="shopSearch.jsp"></iframe>
             </div>
-    
             <div class="shopTopRight">
                  <iframe src="shopTopTap.jsp" class="shopTopTap"></iframe>
             </div> 
         </div>
 
-        <!-- <div class="test2">
+        <div class="test2">
             <iframe src="shopProductMusic.jsp" class="shopProductMusic"></iframe>
-        </div> -->
-    </div>
-    
+        </div>
+    </div>    
     <script src='../js/jquery-3.6.0.min.js'></script>
     <scrip src='../js/contentShopTest.js'></scrip>
 </body>

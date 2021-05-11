@@ -1,3 +1,7 @@
+body{
+    display: flex;
+    justify-content: center;
+}
 
 /* test img내용  */
  div.MusicPicture>img{
