@@ -1,5 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -27,11 +25,11 @@
                 <li>방명록</li>
             </ul>
         </nav>
-        //autoplay disabled
+        <!-- autoplay disabled -->
         <audio src="<%=request.getContextPath()%>/audio/핫 뜨거_원타임.mp3" autoplay muted></audio>
     </div>
     <!-- 외부 js파일 -->
     <script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
-    <script src="<%=request.getContextPath()%>/js/minihome.js"></script>
+    <script src="<%=request.getContextPath()%>/js/minihome.jsp"></script>
 </body>
 </html>

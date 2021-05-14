@@ -24,7 +24,7 @@ $('body>header>.menuBox>.menu>.title').on('click', (e)=>{
             location.assign("<%=request.getContextPath()%>/pageToShop.do");
             break;
         case '':
-            //$('aside').addClass('hide');
+            $('aside').addClass('hide');
             //$('.content>iframe').attr('src', 'minihome/minihome.jsp');
             location.assign("<%=request.getContextPath()%>/pageToMini.do");
             break;

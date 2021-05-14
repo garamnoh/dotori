@@ -18,11 +18,10 @@ public class LoginServlet extends HttpServlet {
 	private MemberService service=new MemberService();
 	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {}
+    public LoginServlet() {super();}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
-		request.setCharacterEncoding("utf-8");
 		String localPart=request.getParameter("localPart");
 		String domain=request.getParameter("domain");
 		String userId=localPart+"@"+domain;

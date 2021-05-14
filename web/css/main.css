@@ -128,12 +128,14 @@ body>.contents{
     position: fixed;
     display: flex;
     justify-content: center;
+    /*border:1px solid red;*/
 }
 
 body>.contents>.contentsSub{
     width: 1200px;
     height: 100%;
     display: flex;
+    border:1px solid orange;
 }
 
 body>.contents>.contentsSub>aside{
@@ -170,6 +172,7 @@ body>.contents>.contentsSub>section>.content{
     height: auto;
     display: flex;
     justify-content: center;
+    border:1px solid black;
 }
 
 body>.contents>.contentsSub>section>.content>iframe{

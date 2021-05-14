@@ -12,7 +12,7 @@
 			case "home":leftFrameSrc=request.getContextPath()+"/views/sidebarMain.jsp";rightFrameSrc=request.getContextPath()+"/views/contentMain.jsp";break;
 			case "friends":leftFrameSrc=request.getContextPath()+"/views/sidebarShop.jsp";rightFrameSrc=request.getContextPath()+"/views/contentShop.jsp";break;
 			case "shop":leftFrameSrc=request.getContextPath()+"/views/sidebarFriends.jsp";rightFrameSrc=request.getContextPath()+"/views/contentFriends.jsp";break;
-			case "minihome":leftFrameSrc="";rightFrameSrc=request.getContextPath()+"/views/minihome/minihome.jsp";break;
+			case "minihome":leftFrameSrc="";rightFrameSrc=request.getContextPath()+"/minihomeFrame.do";break;
 		}
 	}
 %>
@@ -44,9 +44,11 @@
     </header>
     <div class="contents">
         <div class="contentsSub">
+        	<%if(!leftFrameSrc.equals("")) {%>
             <aside>
                 <iframe src="<%=leftFrameSrc%>" frameborder="0"></iframe>
             </aside>
+            <%}%>
             <section>
                 <div class="content">
                     <iframe id="section" src="<%=rightFrameSrc%>" frameborder="0"></iframe>

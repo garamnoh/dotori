@@ -11,12 +11,9 @@ import javax.servlet.http.HttpServletResponse;
 public class PageToHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
-    public PageToHomeServlet() {
-        super();
-    }
+    public PageToHomeServlet() {super();}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("utf-8");
 		request.setAttribute("pageType","home");
 		request.getRequestDispatcher("/views/main.jsp").forward(request,response);
 	}

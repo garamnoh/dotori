@@ -7,15 +7,15 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/pageToFriends.do")
-public class PageToFriendsServlet extends HttpServlet {
+@WebServlet("/minihomeFrame.do")
+public class MinihomeFrameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    public PageToFriendsServlet() {super();}
+
+    public MinihomeFrameServlet() {super();}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setAttribute("pageType","friends");
-		request.getRequestDispatcher("/views/main.jsp").forward(request,response);
+		
+		request.getRequestDispatcher("/views/minihome/minihome.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
