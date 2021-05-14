@@ -37,9 +37,6 @@
 	            <input type="submit" id="login" value="로그인">
             </form>
             
-            
-            
-    
             <p><a href="views/IdpwSearch.jsp">아이디 </a>/<a href="views/IdpwSearch.jsp">비밀번호 찾기</a></p>
        
             <hr>
@@ -65,10 +62,6 @@
                   $("#domain").val($(this).text());     //선택값 입력
                     $("#domain").attr("readonly",true); //읽기전용
                 }
-               
-
-            
-                
             });
         });
      </script>

@@ -1,5 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String leftFrameSrc="";
+	String rightFrameSrc="";
+	String pageType=(String)request.getAttribute("pageType");
+	if(pageType==null){
+		leftFrameSrc=request.getContextPath()+"/views/sidebarMain.jsp";
+		rightFrameSrc=request.getContextPath()+"/views/contentMain.jsp";
+	}else{
+		switch(pageType){
+			case "home":leftFrameSrc=request.getContextPath()+"/views/sidebarMain.jsp";rightFrameSrc=request.getContextPath()+"/views/contentMain.jsp";break;
+			case "friends":leftFrameSrc=request.getContextPath()+"/views/sidebarShop.jsp";rightFrameSrc=request.getContextPath()+"/views/contentShop.jsp";break;
+			case "shop":leftFrameSrc=request.getContextPath()+"/views/sidebarFriends.jsp";rightFrameSrc=request.getContextPath()+"/views/contentFriends.jsp";break;
+			case "minihome":leftFrameSrc="";rightFrameSrc=request.getContextPath()+"/views/minihome/minihome.jsp";break;
+		}
+	}
+%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -29,16 +45,16 @@
     <div class="contents">
         <div class="contentsSub">
             <aside>
-                <iframe src="<%=request.getContextPath()%>/views/sidebarMain.jsp" frameborder="0"></iframe>
+                <iframe src="<%=leftFrameSrc%>" frameborder="0"></iframe>
             </aside>
             <section>
                 <div class="content">
-                    <iframe id="section" src="<%=request.getContextPath()%>/views/contentMain.jsp" frameborder="0"></iframe>
+                    <iframe id="section" src="<%=rightFrameSrc%>" frameborder="0"></iframe>
                 </div>
             </section>
         </div>
     </div>
     <script type="text/javascript" src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
-    <script type="text/javascript" src='<%=request.getContextPath()%>/js/main.js'></script>
+    <script type="text/javascript" src='<%=request.getContextPath()%>/js/main.jsp'></script>
 </body>
 </html>
