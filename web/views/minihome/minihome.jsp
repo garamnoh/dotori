@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.dotori.model.vo.Member"%>
+<%
+	Member loginMember=(Member)session.getAttribute("member");
+%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -13,7 +16,7 @@
         <div class="cover">
             <div class="sheet">
                 <div class="today">TODAY <span id="today">121</span> | TOTAL <span id="total">123904</span></div>
-                <div class="miniTitle">곰돌이 푸의 미니홈피</div>
+                <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
                 <div class="left-page"><iframe src="<%=request.getContextPath()%>/views/minihome/leftpage_home.jsp" class="left-page-frame"></iframe></div>
                 <div class="right-page"><iframe src="<%=request.getContextPath()%>/views/minihome/rightpage_home.jsp" class="right-page-frame"></iframe></div>
             </div>

@@ -32,6 +32,7 @@ public class LoginServlet extends HttpServlet {
 		
 		Member m=service.login(userId,password);
 		System.out.println(m);
+		
 		if(m!=null) {
 			session.setAttribute("member",m);
 			response.sendRedirect(request.getContextPath()+"/views/main.jsp");
