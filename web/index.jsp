@@ -17,14 +17,14 @@
         <div id="title">
    
             <form action="login.do" method="post">
-	            <input type="text" name="localPart" id="localPart" placeholder="username"required >  <label id="gol">@</label> 
-	            <input type="text" name="domain" id="domain"  value=""> 
+	            <input type="text" name="localPart" id="localPart" placeholder="username" required value="admin">  <label id="gol">@</label> 
+	            <input type="text" name="domain" id="domain"  value="gmail.com"> 
 	            <select name='selectEmail' id="selectEmail">
 	                <option value="1">직접입력</option>
 	                <option value="dotori.com">dotori.com</option>
 	                <option value="dreamwiz.com">dreamwiz.com</option> 
 	                <option value="freechal.com">freechal.com</option>
-	                <option value="gmail.com">gmail.com</option> 
+	                <option value="gmail.com" selected>gmail.com</option> 
 	                <option value="hanmail.net">hanmail.net</option>
 	                <option value="korea.com">korea.com</option> 
 	                <option value="lycos.co.kr">lycos.co.kr</option> 
@@ -32,7 +32,7 @@
 	                <option value="naver.com">naver.com</option>
 	                <option value="yahoo.co.kr">yahoo.co.kr</option>
 	            </select>
-	            <input type="password" name="password" id="password" placeholder="*******" required>
+	            <input type="password" name="password" id="password" placeholder="*******" required value="admin">
 	            <img src="<%=request.getContextPath()%>/images/logo_main.png" alt="">
 	            <input type="submit" id="login" value="로그인">
             </form>
