@@ -21,7 +21,7 @@
 
 <div class="container">
     <div class="test2">
-        <iframe src="<%=request.getContextPath()%>/views/shop/shopProductMusic.jsp" class="shopProductMusic"></iframe>
+        <p>임시 텍스트</p>
     </div>
 </div>    
 
