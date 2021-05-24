@@ -35,7 +35,7 @@ public class LoginServlet extends HttpServlet {
 		
 		if(m!=null) {
 			session.setAttribute("member",m);
-			response.sendRedirect(request.getContextPath()+"/views/main.jsp");
+			response.sendRedirect(request.getContextPath()+"/views/main/main.jsp");
 		}else {
 			response.sendRedirect(request.getContextPath());
 		}

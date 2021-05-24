@@ -1,10 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-</head>
-<body>
-    <p>left-page-board</p>
-</body>
-</html>
+
+<p>left-page-board</p>

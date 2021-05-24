@@ -1,23 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="kor">
-<head>
-<meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-    
-    <!-- 외부 스타일시트 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css">
-    <!-- <link rel="stylesheet" href="../css/shopProductMusic.css"> -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shopProductMinimi.css">
-    <!-- 폰트 -->
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
-</head>
-<body>
-	<form>
+<link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMinimi.css">
+	
+<form>
 	<table id="MinimiTable">
         <tr>
             <td>
@@ -145,7 +130,4 @@
             </td>
         </tr>           
     </table>
-    </form>
-
-</body>
-</html>
+</form>

@@ -7,10 +7,8 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOTORI</title>
-   <!--외부 스타일 시트-->
-  <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login.css">
- <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
-  
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/login.css">
+	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
 </head>
 <body>
     <div class="center1">
@@ -37,17 +35,16 @@
 	            <input type="submit" id="login" value="로그인">
             </form>
             
-            <p><a href="views/IdpwSearch.jsp">아이디 </a>/<a href="views/IdpwSearch.jsp">비밀번호 찾기</a></p>
+            <p><a href="views/IdpwSearch.jsp">아이디 </a>/<a href="views/login/IdpwSearch.jsp">비밀번호 찾기</a></p>
        
             <hr>
-            <button id="new" onClick="location.href='views/SignUp.jsp'">새 계정 만들기</button>
+            <button id="new" onClick="location.href='views/login/SignUp.jsp'">새 계정 만들기</button>
         
        
         </div>
     </div>
-     <!-- 외부 js파일 -->
      <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
-     <script src='<%=request.getContextPath()%>/js/main.js'></script>
+     <script src='<%=request.getContextPath()%>/js/main/main.jsp'></script>
      <script>
                         $('#selectEmail').change(function(){
         $("#selectEmail option:selected").each(function () {
