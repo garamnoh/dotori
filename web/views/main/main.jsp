@@ -33,7 +33,7 @@
                 <div id="sideMenuBox"></div>
             </aside>
             <section class="content">
-                <div id="contentBox"></div>
+                <div id="contentBox" style="border:1px solid green"></div>
             </section>
         </div>
     </div>
