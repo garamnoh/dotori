@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.dotori.model.vo.Member"%>
+    pageEncoding="UTF-8" import="com.member.model.vo.Member"%>
+<%
+	Member loginMember=(Member)session.getAttribute("loginMember");
+%>
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -38,9 +41,21 @@
         </div>
     </div>
     
-    <footer>
-    
-    </footer>
+    <button id="toMyMinihome" onclick="fn_toMyMinihome();">미니홈피로 이동!</button>
+    <style>
+    	#toMyMinihome{
+    		position:absolute;
+    		top:100px;
+    		left:50px;
+    	}
+    </style>
+    <script>
+    	const fn_toMyMinihome=()=>{
+    		const status="width=1150px,height=755px";
+    		const url="<%=request.getContextPath()%>/views/minihome/minihome.jsp";
+    		window.open(url,"",status);
+    	}
+    </script>
     
     <script type="text/javascript" src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
     <script type="text/javascript" src='<%=request.getContextPath()%>/js/main/main.jsp'></script>
