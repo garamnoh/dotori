@@ -39,7 +39,6 @@
        
             <hr>
             <button id="new" onClick="location.href='views/login/SignUp.jsp'">새 계정 만들기</button>
-        
        
         </div>
     </div>
