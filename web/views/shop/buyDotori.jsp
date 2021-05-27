@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductDotori.css">
-
+<%@ include file="/views/common/shopheader.jsp"%>
 <form>
 	<table id="DotoriTable">
         <tr>

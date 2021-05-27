@@ -163,6 +163,10 @@ div#searchShop>#searchTap{
     
     border: rgb(190, 190, 190) solid;
 }
+/* 또또 css말썽이네 */
+#shopHeader>div{ 
+	display: flex;   
+}
 
 
 div#shopTopTap>span{

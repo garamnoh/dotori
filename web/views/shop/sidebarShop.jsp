@@ -21,10 +21,6 @@
         <p id='shopMusic'>음악</p>
     </div>
     <div class='menuTitle' id="option3">장바구니</div>
-    <div class="menuSub">
-    	<p id='buyItem'>아이템 구매</p>
-    	<p id='giveItem'>아이템 선물</p>
-	</div>
 </div>
 
 <script src='<%=request.getContextPath()%>/js/shop/sidebarShop.jsp'></script>
