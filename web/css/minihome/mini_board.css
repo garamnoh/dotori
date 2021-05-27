@@ -4,22 +4,39 @@
     display: none;
 } */
 
-#geust_reply_box{
-	height:150px;
-    width:520px;
-    margin-bottom: 20px;
-    margin-left:5px;
-    background-color: white;
-    border: 1px solid;
+#guest_real_reply_box{
+	display: inline-block;
+    height:110px;
+    width:380px;
+    border:1px solid;
+}
+
+#guest_reply_box{
+    display: inline-block;
+    height:110px;
+    width:350px;
+    border:1px solid;
 }
 
 #real_reply{
-	display: block-inline;
-	height:105px;
-	width:350px;
-	float:right;
-	display:flex;	
+    display: block-inline;
+    height:110px;
+    width:325px;
+    margin-right: 20px;
+    margin-top: 0px;
+    float:right;
+    /* display:flex; */	
 }
+
+#reply-btn{
+	margin-right:0px;
+}
+
+#reply{
+    width:425px;
+    margin-left:20px;
+}
+
 
 #geust_box{
     height:180px;
@@ -74,21 +91,9 @@
     display: inline-block;
     height:110px;
     width:100px;
-    margin-top: 10px;
+    margin-top: 3px;
     margin-left: 20px;
     border:1px solid;
-}
-#guest_reply_box{
-    display: inline-block;
-    height:110px;
-    width:350px;
-    margin-left:20px;
-    margin-right:20px;
-    border:1px solid;
-}
-#reply{
-    width:425px;
-    margin-left:20px;
 }
 
 
