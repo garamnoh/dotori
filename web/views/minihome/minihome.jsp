@@ -2,8 +2,7 @@
     pageEncoding="UTF-8" import="com.member.model.vo.Member"%>
 <%
 	Member loginMember=(Member)session.getAttribute("loginMember");
-%>
-    
+%>   
 <!DOCTYPE html>
 <html lang="kor">
 <head>
@@ -13,7 +12,6 @@
     <title><%=loginMember.getNickname()%>님의 미니홈피</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
-	
 </head>
 <body>
     
@@ -21,7 +19,7 @@
     <div class="cover">
         <div class="sheet">
             <div class="today">TODAY <span id="today">121</span> | TOTAL <span id="total">123904</span></div>
-            <div class="miniTitle">님의 미니홈피</div>
+            <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
             <div class="left-page"><iframe src="<%=request.getContextPath()%>/views/minihome/leftpage_home.jsp" class="left-page-frame"></iframe></div>
             <div class="right-page"><iframe src="<%=request.getContextPath()%>/views/minihome/rightpage_home.jsp" class="right-page-frame"></iframe></div>
         </div>
@@ -36,7 +34,7 @@
         </ul>
     </nav>
     <!-- autoplay disabled -->
-    <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" autoplay></audio>
+    <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" autoplay muted></audio>
 </div>
 
 <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
