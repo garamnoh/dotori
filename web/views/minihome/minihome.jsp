@@ -29,26 +29,25 @@
         <div class="sheet">
             <div class="today">TODAY <span id="today">121</span> | TOTAL <span id="total">123904</span></div>
             <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
-            <div class="left-page"><iframe src="<%=request.getContextPath()%>/views/minihome/leftpage_home.jsp" class="left-page-frame"></iframe></div>
-            <div class="right-page"><iframe src="<%=request.getContextPath()%>/views/minihome/rightpage_home.jsp" class="right-page-frame"></iframe></div>
+            <div id="left-page"></div>
+            <div id="right-page"></div>
         </div>
     </div>
     <nav class="miniMenu">
         <ul>
             <li>홈</li>
+            <li>사진첩</li>
             <li>다이어리</li>
             <li>쥬크박스</li>
-            <li>사진첩</li>
-            <li>방명록</li>
         </ul>
     </nav>
     
-    <button onclick="fn_stopBackMusic();">배경음악 멈추기</button>
+    <button onclick="fn_stopBackMusic();" style="position:absolute;top:100px;left:1000px;">배경음악 멈추기</button>
     
     <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" id="backMusic" autoplay></audio>
 </div>
 
 	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
-	<script src="<%=request.getContextPath()%>/js/minihome/minihome.js"></script>
+	<script src="<%=request.getContextPath()%>/js/minihome/minihome.jsp"></script>
 </body>
 </html>

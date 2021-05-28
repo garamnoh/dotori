@@ -51,7 +51,7 @@
     </style>
     <script>
     	const fn_toMyMinihome=()=>{
-    		const status="width=1150px,height=756px";
+    		const status="width=1200px,height=756px";
     		const url="<%=request.getContextPath()%>/views/minihome/minihome.jsp";
     		window.open(url,"",status);
     	}
