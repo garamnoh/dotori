@@ -7,8 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.dotori.service.MemberService;
-import com.dotori.model.vo.Member;
+import com.member.model.vo.Member;
+import com.member.service.MemberService;
+
 
 /**
  * Servlet implementation class CheckDuplicateIdServlet
