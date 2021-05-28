@@ -34,12 +34,11 @@ private Properties prop=new Properties();
 		List<MusicItem> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("musicList"));
-			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				MusicItem m=new MusicItem();
-				m.setMusicNo(rs.getInt("musie_no"));
-				m.setMusicTitle(rs.getString("musie_title"));
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
 				m.setSinger(rs.getString("singer"));
 				m.setFilePath(rs.getString("filepath"));
 				m.setPrice(rs.getInt("price"));

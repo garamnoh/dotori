@@ -8,7 +8,7 @@
 <%@ include file="/views/common/shopheader.jsp"%>
 
 <form action="<%=request.getContextPath()%>/shop/musicTable" method="post">
-	<%if(list!=null&&list.isEmpty()){ %>
+	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
 		<table>
@@ -38,3 +38,4 @@
 	<%} 
 	}%>
 </form>
+
