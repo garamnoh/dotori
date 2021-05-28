@@ -45,8 +45,7 @@ public class DiaryDao {
 				d.setFolderNo(rs.getInt("folder_no"));
 				d.setPostDate(rs.getDate("post_date"));
 				list.add(d);
-			}
-			
+			}			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
@@ -54,5 +53,22 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return list;	
+	}
+	
+	public int selectDiaryCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return result;		
 	}
 }

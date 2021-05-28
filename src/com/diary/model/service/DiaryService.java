@@ -20,4 +20,11 @@ public class DiaryService {
 		return list;
 	}
 	
+	public int selectDiaryCount() {
+		Connection conn=getConnection();
+		int result=dao.selectDiaryCount(conn);
+		close(conn);
+		return result;
+	}
+	
 }

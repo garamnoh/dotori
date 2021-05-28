@@ -15,7 +15,7 @@ import com.diary.model.vo.Diary;
 /**
  * Servlet implementation class DiaryListServlet
  */
-@WebServlet("/diarySelectList")
+@WebServlet("/diary/diarySelectList")
 public class DiaryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -32,8 +32,45 @@ public class DiaryListServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		int cPage;
+		int numPerpage;
+		try { cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) { cPage=1; }		
+		try { numPerpage=Integer.parseInt(request.getParameter("numPerpage")); 
+		}catch(NumberFormatException e) { numPerpage=5; }
+			
 		List<Diary> list=new DiaryService().selectDiaryList();
+		int totalData=new DiaryService().selectDiaryCount();		
 		
+		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		int pageBarSize=5;
+		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
+		int pageEnd=pageNo+pageBarSize-1;
+		
+		String pageBar="";
+		if(pageNo==1) {
+			pageBar+="<span>[이전]</span>";
+		}else {
+			pageBar+="<a href='"+request.getContextPath()
+			+"/diary/diarySelectList?cPage="+(pageNo-1)+"'>[이전]</a>";
+		}		
+		while(!(pageNo>pageEnd || pageNo>totalPage)) {
+			if(cPage==pageNo) {
+				pageBar+="<span>"+pageNo+"</span>";
+			}else {
+				pageBar+="<a href='"+request.getContextPath()
+				+"/diary/diarySelectList?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}
+			pageNo++;
+		}		
+		if(pageNo>totalPage) {
+			pageBar+="<span>[다음]</span>";
+		}else {
+			pageBar+="<a href'"+request.getContextPath()
+			+"/diary/diarySelectList?cPage="+pageNo+"'>[다음]</a>";
+		}
+		
+		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
