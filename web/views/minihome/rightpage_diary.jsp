@@ -15,14 +15,18 @@
 		<button>확인</button>
 	</div>
 	
-	<%for(Diary d : list) {%>
-		<div id="diary_title">
-			<div id="minimi_container">
-				<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">			
-				<div id="diary_user">
-						<%=d.getContent() %>
-				</div>
-			</div>
+	<div id="diary_title">
+		<div id="minimi_container">
+			<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">			
+				<%for(Diary d : list) {%>
+					<div id="diary_user">
+							<%=d.getWriter() %><br>
+							<%=d.getContent() %>
+					</div>
+				<%} %>
 		</div>
-	<%} %>
+	</div>
+	<div id="pageBar">
+    	<%=request.getAttribute("pageBar") %>	
+    </div>
 </div>

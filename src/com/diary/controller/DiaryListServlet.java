@@ -34,15 +34,22 @@ public class DiaryListServlet extends HttpServlet {
 		
 		int cPage;
 		int numPerpage;
-		try { cPage=Integer.parseInt(request.getParameter("cPage"));
-		}catch(NumberFormatException e) { cPage=1; }		
-		try { numPerpage=Integer.parseInt(request.getParameter("numPerpage")); 
-		}catch(NumberFormatException e) { numPerpage=5; }
+		try { 
+			cPage=Integer.parseInt(request.getParameter("cPage"));
+		}catch(NumberFormatException e) { 
+			cPage=1; 
+		}		
+		try { 
+			numPerpage=Integer.parseInt(request.getParameter("numPerpage")); 
+		}catch(NumberFormatException e) { 
+			numPerpage=5; 
+		}
 			
 		List<Diary> list=new DiaryService().selectDiaryList();
 		int totalData=new DiaryService().selectDiaryCount();		
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
+		System.out.println(totalData);//18
 		int pageBarSize=5;
 		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
