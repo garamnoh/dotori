@@ -18,6 +18,8 @@
         </div>   
         <!-- <input type="text" id="reply" style="visibility:hidden;"> --> 
     </div>
+    
+    
 
     <div id="geust_box">
         <div id="guest_info">

@@ -1,8 +1,78 @@
-/*********right_board**********/
-
+/**********right_diary***********/
 /* *::-webkit-scrollbar{
     display: none;
 } */
+
+#diary_content{
+    /* display:inline-block; */
+    height:500px;
+    width:520px;
+    border:1px solid;
+}
+#diary_title{
+	display:flex;
+	position:relative;
+	margin-top:30px;
+    height:80px;
+    width:520px;
+    /* background-color: white; */
+    border:1px solid;
+}
+#minimi_container{
+	position:absolute;
+	display:flex;
+	margin:0 3px 0 3px;
+	/* z-index:10; */
+    height:80px;
+    width:80px;    
+    border:1px solid;
+}
+#minimi_container img{
+	height:80px;
+    width:80px;
+    margin:0 3px 0 3px;
+}
+#diary_user{
+	display:inline-block;		
+	position:absolute;
+	left:100px;
+	width:380px;
+	height:80px;
+	background-color: white;
+	border:1px solid;
+}
+#diary_input_container{
+	display:inline-block;	
+	position:relative;
+    height:110px;
+    width:520px;
+    /* background-color: white; */
+    border:1px solid;
+}
+#input_minimi_container{
+	position:absolute;
+	display:inline-block;	
+	z-index:10;
+    height:110px;
+    width:110px;
+    /* background-color: white; */
+    border:1px solid;
+}
+#diary_input{
+    float: right;
+    margin: 0 15px 0 15px;
+	width:380px;
+	height:110px;
+}
+#input_minimi_container img{
+	height:110px;
+    width:100px;
+    margin: 0 4px 0 4px;
+}
+
+
+/*********right_board**********/
+
 
 #guest_real_reply_box{
 	display: inline-block;
@@ -95,53 +165,3 @@
     margin-left: 20px;
     border:1px solid;
 }
-
-
-/**********right_diary***********/
-#diary_title{
-    display:inline-block;
-    height:55px;
-    width:520px;
-    background-color: white;
-    border:1px solid;
-}
-#diary_title_date{
-    display:inline-block;
-    height:55px;
-    width:80px;
-    background-color: white;
-    border:1px solid;
-}
-#diary_content{
-    display:inline-block;
-    height:500px;
-    width:520px;
-    border:1px solid;
-}
-#diary_date{
-    display:inline-block;
-    height:30px;
-    width:520px;
-    background-color: white;
-    border:1px solid;
-}
-#diary_inner{
-    display:inline-block;
-    height:400px;
-    width:520px;
-    background-color: white;
-    border:1px solid;
-}
-#diary_reply{
-    display:inline-block;
-    text-align: center;
-    height:30px;
-    width:520px;
-    background-color: white;
-    border:1px solid;
-}
-#diary_input{
-    width:300px;
-}
-
-

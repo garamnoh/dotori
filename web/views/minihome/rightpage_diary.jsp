@@ -2,17 +2,18 @@
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_board.css">
 
-
-<!-- <p>right-page-diary</p> -->
-<!-- <div id="right_diary"> -->
-<div id="diary_title">
-    <div id="diary_title_date"></div>
-</div>
 <div id="diary_content">
-    <div id="diary_date"></div>
-    <div id="diary_inner"></div>
-    <div id="diary_reply">
-        댓글<input type="text" id="diary_input">
-        <button>확인</button>
-    </div>
+	<div id="diary_input_container">
+		<div id="input_minimi_container">
+			<img src="<%=request.getContextPath()%>/images/MINIMI/mickey.jpg" alt="나의미니미">
+		</div>
+		<input type="text" id="diary_input">
+	</div>
+	
+	<div id="diary_title">
+		<div id="minimi_container">
+			<img src="<%=request.getContextPath()%>/images/MINIMI/mickey.jpg" alt="미니미">			
+			<div id="diary_user"></div>
+		</div>
+	</div>
 </div>
