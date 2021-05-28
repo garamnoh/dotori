@@ -9,17 +9,20 @@
 <div id="diary_content">
 	<div id="diary_input_container">
 		<div id="input_minimi_container">
-			<img src="<%=request.getContextPath()%>/images/MINIMI/mickey.jpg" alt="나의미니미">
+			<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="나의미니미">
 		</div>
 		<input type="text" id="diary_input">
+		<button>확인</button>
 	</div>
 	
-	<div id="diary_title">
-		<div id="minimi_container">
-			<img src="<%=request.getContextPath()%>/images/MINIMI/mickey.jpg" alt="미니미">			
-			<div id="diary_user">
-				
+	<%for(Diary d : list) {%>
+		<div id="diary_title">
+			<div id="minimi_container">
+				<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">			
+				<div id="diary_user">
+						<%=d.getContent() %>
+				</div>
 			</div>
 		</div>
-	</div>
+	<%} %>
 </div>

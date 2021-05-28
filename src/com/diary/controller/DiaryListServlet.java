@@ -15,7 +15,7 @@ import com.diary.model.vo.Diary;
 /**
  * Servlet implementation class DiaryListServlet
  */
-@WebServlet("/DiaryListServlet")
+@WebServlet("/diarySelectList")
 public class DiaryListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        

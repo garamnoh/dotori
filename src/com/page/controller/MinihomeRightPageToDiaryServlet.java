@@ -17,7 +17,8 @@ public class MinihomeRightPageToDiaryServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request,response);
+//		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request,response);
+		request.getRequestDispatcher("/diarySelectList").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
