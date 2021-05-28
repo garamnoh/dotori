@@ -10,8 +10,7 @@
 		    <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="검색버튼" type="submit" value="검색">
 		</form>
 	</div>
-	<br>
-	
+
 	<div id="shopTopTap">
 		<span class="TopTap">전체</span>
 		<span>  |  </span>
@@ -21,6 +20,5 @@
 		<span>  |  </span>
 		<span class="TopTap">인기순</span>
 	</div>    
-	<br>
 </div>
 <script src='<%=request.getContextPath()%>/js/shop/contentShop.js'></script>

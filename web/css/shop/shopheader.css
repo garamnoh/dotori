@@ -5,25 +5,39 @@
     display: none;
 }
 #searchShop form{
-	padding: 30px 0 0 150px;
+	padding: 30px 0 0 40px;
 	
 }
 #shopTopTap span{
-	margin: 30px 0 0 30px;
+	/* margin: 10px 0 0 10px; */
+	padding: 30px 0 0 40px;
 	
+}  
+
+#shopHeader{
+	display: flex;
+	justify-content: space-between;
 }
+#shopHeader>div{
+	display: flex;
+	justify-content: center;
+} 
 
 
 
 #searchShop img:active{
 	opacity:0.5;
 }
-
+#searchShop>form{
+	display: flex;
+	align-items: center;
+}
 
 #searchShop>form>img{
     background-color: rgb(190, 190, 190);
     height: 24px;
     width: 24px;
+    
     
     /* margin-top:20px ; */
     
@@ -32,9 +46,9 @@
 }
 #searchShop>form>#searchTap{
     width: 250px;
-    height: 5px; 
-    padding-top: 20px;
+    height: 20px; 
     
+    margin-right:10px;
     border: rgb(190, 190, 190) solid;
 }
 /* 또또 css말썽이네 */
