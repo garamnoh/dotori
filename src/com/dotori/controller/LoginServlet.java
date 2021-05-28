@@ -2,6 +2,7 @@ package com.dotori.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -18,10 +19,11 @@ public class LoginServlet extends HttpServlet {
 	private MemberService service=new MemberService();
 	private static final long serialVersionUID = 1L;
 
-    public LoginServlet() {super();}
+    public LoginServlet() {}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session=request.getSession();
+		//request.setCharacterEncoding("utf-8");
 		String localPart=request.getParameter("localPart");
 		String domain=request.getParameter("domain");
 		String userId=localPart+"@"+domain;
@@ -32,13 +34,21 @@ public class LoginServlet extends HttpServlet {
 		
 		Member m=service.login(userId,password);
 		System.out.println(m);
-		
 		if(m!=null) {
 			session.setAttribute("member",m);
 			response.sendRedirect(request.getContextPath()+"/views/main/main.jsp");
 		}else {
-			response.sendRedirect(request.getContextPath());
-		}
+ 			
+ 			String msg="아이디, 비밀번호가 일치하지 않습니다!";
+ 			String loc="/";
+ 			request.setAttribute("msg", msg);
+ 			request.setAttribute("loc", loc);
+ 			
+ 			RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
+ 			rd.forward(request, response);
+ 			
+ 			
+ 		}
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

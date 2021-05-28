@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOTORI</title>
     <!-- 외부 스타일시트 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css"><!-- 초기화 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main/main.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/reset.css"><!-- 초기화 -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/main.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/idpwSearch.css">
     <!-- 폰트 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap">
@@ -21,20 +21,6 @@
     <div class="main">
         <!-- 상단 메뉴 -->
    
-        <div class="bar">
-            <!-- 로고 -->
-            <img src="<%=request.getContextPath()%>/images/logo_main.png" alt="">
-            <!-- 홈 아이콘 -->
-            <img src="<%=request.getContextPath()%>/images/home_b.png" alt="" id='homeBtn' class='btn'>
-            <!-- 친구 관리 아이콘 -->
-            <img src="<%=request.getContextPath()%>/images/group_b.png" alt="" id='groupBtn' class='btn focused'>
-            <!-- 쇼핑 아이콘 -->
-            <img src="<%=request.getContextPath()%>/images/shop_b.png" alt="" id='shopBtn' class='btn focused'>
-            <!-- 미니홈피 아이콘 -->
-            <img src="<%=request.getContextPath()%>/images/logo_minihome.png" alt="" id='miniBtn' class='btn focused'>
-
-            <img src="<%=request.getContextPath()%>/images/logo_main.png" alt="">
-        </div>
 
       <br>
 
@@ -58,6 +44,7 @@
     <div id="id1">
         계정 : <input type="text" name="userId">@
         <input type="text" name="domain" id="domain"  value=""> 
+
         <select name='selectEmail' id="selectEmail">
         
                    <option value="1">직접입력</option>
@@ -74,6 +61,7 @@
    
 
           </select>
+                  <button id=email>이메일인증</button>
                 <br>
         </div>
         <div id="id2">

@@ -1,25 +1,23 @@
 #cancle{
     position: relative;
  margin: 100px;
- left: 100px;
+ left: 650px;
  bottom: 50px;
  
 }
 #okay{
     position: relative;
  margin: 100px;
- left: 100px;
+ left: 500px;
  bottom: 50px;
  background-color:lightgreen;
 
 
 }
 #phone{
- width: 10%;
+ width: 12%;
 }
-#no1{
-  width: 13%;
-}
+
 
 
 #birthday{
@@ -32,7 +30,7 @@
  font-size: 15px;
  margin: 30px;
  padding: 10px;
- border: 1px lightsalmon solid;
+ border: none;
  height: 400px;
  position: relative;
  top :30px;

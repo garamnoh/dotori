@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DOTORI</title>
     <!-- 외부 스타일시트 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/reset.css"><!-- 초기화 -->
-    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/main.css">
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/reset.css"><!-- 초기화 -->
+    <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/main.css">
     <link rel="stylesheet" href="<%=request.getContextPath()%>/css/login/SignUp.css">
     <!-- 폰트 -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap">
@@ -196,13 +196,13 @@
 
             <div style="display: inline-block">
           
-                <button id="cancle" onclick="location.href='../index.jsp'">취소</button>  
+              <button id="cancle" onclick="location.href='<%=request.getContextPath()%>/'">취소</button>  
     			
     			   
 	
                 <button id= "okay">확인</button>     </div>
                     
-               <form action="SignUp1.jsp" id="join"></form>
+                <form action="memberEnroll.jsp" id="join"></form>
         
 </div>
    
