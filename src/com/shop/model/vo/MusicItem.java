@@ -7,18 +7,20 @@ public class MusicItem {
 	private String singer;
 	private String filePath;
 	private int price;
+	private String imgPath;
 	
 	public MusicItem() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public MusicItem(int musicNo, String musicTitle, String singer, String filePath, int price) {
+	public MusicItem(int musicNo, String musicTitle, String singer, String filePath, int price, String imgPath) {
 		super();
 		this.musicNo = musicNo;
 		this.musicTitle = musicTitle;
 		this.singer = singer;
 		this.filePath = filePath;
 		this.price = price;
+		this.imgPath = imgPath;
 	}
 
 	public int getMusicNo() {
@@ -60,6 +62,15 @@ public class MusicItem {
 	public void setPrice(int price) {
 		this.price = price;
 	}
+
+	public String getImgPath() {
+		return imgPath;
+	}
+
+	public void setImgPath(String imgPath) {
+		this.imgPath = imgPath;
+	}
+	
 	
 
 }

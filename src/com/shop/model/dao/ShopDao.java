@@ -42,6 +42,7 @@ private Properties prop=new Properties();
 				m.setSinger(rs.getString("singer"));
 				m.setFilePath(rs.getString("filepath"));
 				m.setPrice(rs.getInt("price"));
+				m.setImgPath(rs.getString("img_path"));
 				list.add(m);
 			}
 		}catch(SQLException e) {
