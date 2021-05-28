@@ -34,10 +34,10 @@ public class ShopMusicTableServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<MusicItem> list=new ShopService().musicList();
 		MusicItem m= new MusicItem();
-		
+		System.out.println(list);
+		System.out.println();
 		request.setAttribute("musicList", list); //data
 		request.setAttribute("music", m); 
-		
 		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
 		
 	}

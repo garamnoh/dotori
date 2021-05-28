@@ -7,17 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/page/shopMusic.do")
-public class ContentToShopMusicServlet extends HttpServlet {
+@WebServlet("/page/minihomeRightPageToHome.do")
+public class MinihomeRightPageToHomeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    public ContentToShopMusicServlet() {
+    public MinihomeRightPageToHomeServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/shop/musicTable").forward(request,response);
+		request.getRequestDispatcher("/views/minihome/rightpage_home.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

@@ -1,8 +1,12 @@
 *::-webkit-scrollbar{
     display: none;
 }
-
+body{
+	padding:0;
+	margin:0;
+}
 .container{
+	margin:0 auto;
     box-sizing:border-box;
     background-image:url("../../images/backgroundImg.png");
     /* 아래와 같이 해주면 투명한 border에서 배경 이미지가 반복되어서 어색해지는 것을 막을 수 있다*/
@@ -11,14 +15,13 @@
     background-origin:border-box;
     border:1px solid transparent;
     width:1200px;
-    height:770px;
-    margin:0;
+    height:755px;
 }
 .cover{
     position:relative;
     background-color:lightsteelblue;
-    margin-top:30px;
-    margin-left:30px;
+    margin-top:25px;
+    margin-left:25px;
     box-sizing:border-box;
     width:900px;
     height:700px;
@@ -58,7 +61,7 @@
     color:cornflowerblue;
     font-weight:bold;
 }
-.left-page{
+#left-page{
     box-sizing:border-box;
     float:left;
     clear:left;
@@ -71,7 +74,7 @@
     height:600px;
     background-color:lightgrey;
 }
-.right-page{
+#right-page{
     box-sizing:border-box;
     float:left;
     margin-left:5px;
@@ -88,7 +91,7 @@
 }
 .miniMenu{
     position:relative;
-    left:890px;
+    left:840px;
     bottom:600px;
 }
 .miniMenu li{
