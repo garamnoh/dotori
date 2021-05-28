@@ -1,0 +1,47 @@
+
+
+
+*::-webkit-scrollbar{
+    display: none;
+}
+#searchShop form{
+	padding: 30px 0 0 150px;
+	
+}
+#shopTopTap span{
+	margin: 30px 0 0 30px;
+	
+}
+#searchShop img:active{
+	opacity:0.5;
+}
+
+
+#searchShop>form>img{
+    background-color: rgb(190, 190, 190);
+    height: 24px;
+    width: 24px;
+    
+    /* margin-top:20px ; */
+    
+    border-radius: 3px;
+    border :rgb(190, 190, 190) solid ;
+}
+#searchShop>form>#searchTap{
+    width: 250px;
+    height: 5px; 
+    padding-top: 20px;
+    
+    border: rgb(190, 190, 190) solid;
+}
+/* 또또 css말썽이네 */
+#shopHeader>div{ 
+	display: flex;   
+}
+
+
+div#shopTopTap>span{
+   
+    font-weight: bold;
+    
+}

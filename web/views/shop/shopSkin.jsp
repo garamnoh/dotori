@@ -1,7 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+
+%>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
-	
+
+<%@ include file="/views/common/shopheader.jsp"%>
 <form>
 	<table id="SkinTable">
         <tr>
@@ -165,3 +169,5 @@
         </tr>           
     </table>
 </form>
+
+	
