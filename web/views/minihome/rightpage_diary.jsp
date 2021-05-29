@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_board.css">
-<%@ page import="com.diary.model.vo.Diary, java.util.List" %>
+<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 %>

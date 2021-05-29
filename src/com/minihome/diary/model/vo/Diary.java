@@ -1,4 +1,4 @@
-package com.diary.model.vo;
+package com.minihome.diary.model.vo;
 
 import java.sql.Date;
 

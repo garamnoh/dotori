@@ -1,4 +1,4 @@
-package com.page.controller;
+package com.minihome.diary.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

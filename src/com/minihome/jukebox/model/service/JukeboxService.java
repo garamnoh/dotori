@@ -1,4 +1,4 @@
-package com.jukebox.model.service;
+package com.minihome.jukebox.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.getConnection;
@@ -6,7 +6,7 @@ import static com.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
-import com.jukebox.model.dao.JukeboxDao;
+import com.minihome.jukebox.model.dao.JukeboxDao;
 import com.shop.model.vo.Music;
 
 public class JukeboxService {

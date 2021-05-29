@@ -1,4 +1,4 @@
-package com.diary.model.service;
+package com.minihome.diary.model.service;
 
 import java.sql.Connection;
 import java.util.List;
@@ -6,8 +6,8 @@ import java.util.List;
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.close;
 
-import com.diary.model.dao.DiaryDao;
-import com.diary.model.vo.Diary;
+import com.minihome.diary.model.dao.DiaryDao;
+import com.minihome.diary.model.vo.Diary;
 
 public class DiaryService {
 

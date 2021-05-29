@@ -1,4 +1,4 @@
-package com.diary.controller;
+package com.minihome.diary.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -9,27 +9,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.diary.model.service.DiaryService;
-import com.diary.model.vo.Diary;
+import com.minihome.diary.model.service.DiaryService;
+import com.minihome.diary.model.vo.Diary;
 
-/**
- * Servlet implementation class DiaryListServlet
- */
 @WebServlet("/page/minihomeRightPageToDiary.do")
-public class DiaryListServlet extends HttpServlet {
+public class MinihomeRightPageToDiary extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public DiaryListServlet() {
+    public MinihomeRightPageToDiary() {
         super();
-        // TODO Auto-generated constructor stub
     }
 
-	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int cPage;
@@ -84,11 +74,7 @@ public class DiaryListServlet extends HttpServlet {
 				
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 

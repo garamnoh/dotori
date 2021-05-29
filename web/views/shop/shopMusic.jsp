@@ -18,7 +18,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 			<td>
 			<div class="productMusic">
 				<div class="MusicPicture">
-					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgPath()%>"> 
+					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="MusicInfo">
@@ -36,7 +36,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 			<td>
 			<div class="productMusic">
 				<div class="MusicPicture">
-					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgPath()%>"> 
+					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="MusicInfo">
@@ -54,7 +54,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 			<td>
 			<div class="productMusic">
 				<div class="MusicPicture">
-					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgPath()%>"> 
+					<img alt="음악사진" src="<%=request.getContextPath()%>/upload/MUSIC/<%=list.get(i).getImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="MusicInfo">

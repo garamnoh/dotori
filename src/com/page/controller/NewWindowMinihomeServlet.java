@@ -10,11 +10,11 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.diary.model.service.DiaryService;
-import com.diary.model.vo.Diary;
-import com.jukebox.model.service.JukeboxService;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
+import com.minihome.diary.model.service.DiaryService;
+import com.minihome.diary.model.vo.Diary;
+import com.minihome.jukebox.model.service.JukeboxService;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 import com.shop.model.vo.Music;

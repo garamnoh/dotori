@@ -1,4 +1,4 @@
-package com.diary.model.dao;
+package com.minihome.diary.model.dao;
 
 import static com.common.JDBCTemplate.close;
 
@@ -12,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import com.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.Diary;
 
 public class DiaryDao {
 

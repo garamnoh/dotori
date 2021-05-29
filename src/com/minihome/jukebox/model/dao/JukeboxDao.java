@@ -1,4 +1,4 @@
-package com.jukebox.model.dao;
+package com.minihome.jukebox.model.dao;
 
 import java.io.File;
 import java.io.FileReader;

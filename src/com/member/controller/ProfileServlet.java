@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.member.model.vo.Member;
-import com.member.service.MemberService;
+import com.member.model.service.MemberService;
 
 /**
  * Servlet implementation class ProfileServlet
