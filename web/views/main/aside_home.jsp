@@ -8,7 +8,7 @@
     <div class="profile">
     	<form id="submitForm" action="" method="post" enctype="multipart/form-data">
 	    	<img src="<%= request.getContextPath() %>/images/profile_img_default.png" alt="">
-	    	<span id="editProfile">MINIMI</span>
+	    	<span id="editMinimi">MINIMI</span>
 	    	<input type="submit" id="submitProfile" value="">
 	    	<input type="file" name="uploadProfile" id="uploadProfile" accept="image/*">
     	</form>
@@ -73,7 +73,7 @@
 		    border-radius: 50%;
 		}
 		
-		.profile>form>span#editProfile{
+		.profile>form>span#editMinimi{
 			position: absolute;
 			font-size: 13px;
 		    color: rgb(94, 94, 94);
@@ -151,7 +151,7 @@
     		$('#section').html('');
     		
     		$.ajax({
-    			url: '<%= request.getContextPath() %>/views/section/section_home_editProfile.jsp',
+    			url: '<%= request.getContextPath() %>/profile',
     			dataType: 'html',
     			success: data=>{
     				$('#section').append(data);
@@ -159,7 +159,17 @@
     		});
     	});
     
-    
+    	$('#editMinimi').on('click', (e)=>{
+    		
+    		$('#section').html('');
+    		
+    		$.ajax({
+    			url: '<%= request.getContextPath() %>/views/main/section_home_editMinimi.jsp',
+    			success: data=>{
+    				$('#section').append(data);
+    			}
+    		});
+    	});
     
     
     

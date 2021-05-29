@@ -21,14 +21,6 @@ public class PageToSidebarMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-//		
-//		HttpSession session = request.getSession();
-//		Member m = (Member)session.getAttribute("loginMember");
-//		
-//		session.setAttribute("loginMember", m);
-//		
-//		System.out.println("페이지전환 : " + m);
-//		
 		request.getRequestDispatcher("/views/main/aside_home.jsp").forward(request,response);
 	}
 

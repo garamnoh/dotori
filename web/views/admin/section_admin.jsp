@@ -13,18 +13,21 @@
             <form action="" method="post">
                 <input type="text" name="searchKeyword" id='typeIdKeyword' placeholder="아이디 검색">
                 <input type="hidden" name="searchType" id='typeId' value="MEMBER_ID">
-                <button type="submit" id='submit_typeId'>search</button>
+                <button type="submit" id='submit_typeId'>id</button>
             </form>
         </div>
         <div id="searchTypeName" class="hide">
             <form action="" method="post">
                 <input type="text" name="searchKeyword" id='typeNameKeyword' placeholder="이름 검색">
                 <input type="hidden" name="searchType" id='typeName' value="MEMBER_NAME">
-                <button type="submit" id='submit_typeName'>search</button>
+                <button type="submit" id='submit_typeName'>name</button>
             </form>
         </div>
     </div>
-	<%@ include file="/views/admin/submitContainer/section_admin_searchList.jsp" %>
+    <div id="searchResult">
+		<%@ include file="/views/admin/submitContainer/section_admin_searchList.jsp" %>
+    </div>
+
 </div>
 
 
@@ -76,7 +79,7 @@
 	}
 	
 	#container_membersList>#searchContainer>#searchTypeId,
-	body>#container_membersList>#searchContainer>#searchTypeName{
+	#container_membersList>#searchContainer>#searchTypeName{
 	    width: 100%;
 	    flex-grow: 1;
 	}
@@ -99,34 +102,7 @@
 	#container_membersList>#searchContainer>#searchType:focus{
 		outline: none;
 	}
-	
-	#container_membersList>#membersListContainer>table{
-	    width: 100%;
-	    border-top: 3px solid #eee;
-	    border-bottom: 3px solid #eee;
-	    border-collapse: collpase;
-	    margin-bottom: 20px;
-	}
-	
-	#container_membersList>#membersListContainer>table th{
-	    height: 40px;
-	    border-bottom: 1px solid #eee;
-	    vertical-align: middle;
-	}
-	
-	#container_membersList>#membersListContainer>table td{
-	    height: 30px;
-	    border-bottom: 1px solid #eee;
-	    vertical-align: middle;
-	}
-	
-	#container_membersList>#membersListContainer>#pageBar span{
-	    margin: 0 10px;
-	}
-	
-	.hide{
-		display: none;
-	}
+
 </style>
 
 <script src='<%=request.getContextPath() %>/js/jquery-3.6.0.min.js'></script>
@@ -171,10 +147,9 @@
 
   	$('#submit_typeId').click(()=>{
  		
-  		console.log($('#searchContainer').next());
-  		$('#searchContainer').next().html('');
+  		$('#searchResult').html('');
  		
- 		console.log($('#typeId').val());
+<%--  		console.log($('#typeId').val());
  		console.log($('#typeIdKeyword').val());
  		
  		$.ajax({
@@ -185,9 +160,9 @@
 			},
  			dataType: 'html',
  			success: data=>{
- 				$('#searchContainer').next().append(data);
+ 				$('#searchResult').append(data);
  			}
- 		});
+ 		}); --%>
  	});
  	
  	$('#submit_typeName').click(()=>{
