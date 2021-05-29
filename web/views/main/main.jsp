@@ -1,8 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.member.model.vo.Member" %>
 <%
-	Member member = (Member)session.getAttribute("loginMember");
+	String admin = (String)session.getAttribute("admin");
 %>
 <!DOCTYPE html>
 <html>
@@ -27,7 +26,7 @@
                 <img src="<%= request.getContextPath() %>/images/logo_main.png" alt="">
             </div>
             <div class="menu">
-            	<% if(member.getMemberId().equals("admin@gmail.com")) { %>
+            	<% if(admin.equals("admin@gmail.com")) { %>
             		<span class='title box'>Admin</span>
 	            	<span class="title box">Home</span>
 	                <span class="title box">Friends</span>
@@ -72,9 +71,6 @@
 	<script>
 		$('.menu').click((e)=>{
 			
-			$('#aside').html('');
-			$('#section').html('');
-			
 			const menu = $(e.target).html();
 			
 			console.log(menu);
@@ -82,6 +78,9 @@
 			switch(menu){
 			
 				case 'Admin' :
+					$('#aside').html('');
+					$('#section').html('');
+					
 					$('#aside').removeClass('hide');
 					
 					$.ajax({
@@ -103,11 +102,13 @@
 					break;
 				
 				case 'Home' :
+					$('#aside').html('');
+					$('#section').html('');
+					
 					$('#aside').removeClass('hide');
 					
 					$.ajax({
 						url: '<%= request.getContextPath() %>/page/sidebarMain',
-						dataType: 'html',
 						success: data=>{
 							$('#aside').append(data);
 						}
@@ -115,7 +116,6 @@
 					
 					$.ajax({
 						url: '<%= request.getContextPath() %>/page/contentMain',
-						dataTypd: 'html',
 						success: data=>{
 							$('#section').append(data);
 						}
@@ -124,6 +124,9 @@
 					break;
 					
 				case 'Friends' :
+					$('#aside').html('');
+					$('#section').html('');
+					
 					$('#aside').removeClass('hide');
 					
 					$.ajax({
@@ -145,6 +148,9 @@
 					break;
 					
 				case 'Shop' :
+					$('#aside').html('');
+					$('#section').html('');
+					
 					$('#aside').removeClass('hide');
 					
 					$.ajax({

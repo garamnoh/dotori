@@ -1,10 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.member.model.vo.Member" %>
+<%
+	Member member = (Member)session.getAttribute("loginMember");
+%>
     
     <div class="profile">
     	<form id="submitForm" action="" method="post" enctype="multipart/form-data">
 	    	<img src="<%= request.getContextPath() %>/images/profile_img_default.png" alt="">
-	    	<span id="editProfile">Edit.</span>
+	    	<span id="editProfile">MINIMI</span>
 	    	<input type="submit" id="submitProfile" value="">
 	    	<input type="file" name="uploadProfile" id="uploadProfile" accept="image/*">
     	</form>
@@ -12,8 +16,8 @@
     
     <div class="info">
         <hr>
-        <div id="userName">user</div>
-        <div id="userEmail">email</div>
+        <div id="userName"><%= member.getNickname() %></div>
+        <div id="userEmail"><%= member.getMemberId() %></div>
         <hr>
         <div id="today">Today : 133</div>
         <div id="total">Total : 323423</div>
@@ -75,8 +79,16 @@
 		    color: rgb(94, 94, 94);
 		    background-color: inherit;
 			top: 190px;
-			left: 170px;
+			left: 150px;
 			cursor: default;
+		}
+		
+		.profile>form>span#editProfile:hover{
+			opacity: .7;
+		}
+		
+		.profile>form>span#editProfile:active{
+			opacity: 1;
 		}
 		
 		.profile>form>input[type=file],
