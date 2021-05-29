@@ -27,6 +27,33 @@ public class DiaryDao {
 		}
 	}
 	
+	public List<Diary> getMyDiaries(Connection conn,String hostMemberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Diary> diaryList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyDiaries"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Diary d=new Diary();
+				d.setDiaryNo(rs.getInt("diary_no"));
+				d.setMemberId(rs.getString("member_id"));
+				d.setWriter(rs.getString("writer"));
+				d.setTitle(rs.getString("title"));
+				d.setContent(rs.getString("content"));
+				d.setFolderNo(rs.getInt("folder_no"));
+				d.setPostDate(rs.getDate("post_date"));
+				diaryList.add(d);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);			
+		}
+		return diaryList;	
+	}
+	
 	public List<Diary> selectDiaryList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

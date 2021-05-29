@@ -13,6 +13,13 @@ public class DiaryService {
 
 	private DiaryDao dao=new DiaryDao();
 	
+	public List<Diary> getMyDiaries(String hostMemberId) {
+		Connection conn=getConnection();
+		List<Diary> diaryList=dao.getMyDiaries(conn,hostMemberId);
+		close(conn);
+		return diaryList;
+	}
+	
 	public List<Diary> selectDiaryList(){
 		Connection conn=getConnection();
 		List<Diary> list=dao.selectDiaryList(conn);

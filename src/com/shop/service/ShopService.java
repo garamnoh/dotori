@@ -7,16 +7,16 @@ import java.sql.Connection;
 import java.util.List;
 
 import com.shop.model.dao.ShopDao;
-import com.shop.model.vo.MusicItem;
+import com.shop.model.vo.Music;
 
 
 public class ShopService {
 	
 private ShopDao dao= new ShopDao();
 	
-	public List<MusicItem> musicList(){
+	public List<Music> musicList(){
 		Connection conn=getConnection();
-		List<MusicItem> list =dao.musicList(conn); 
+		List<Music> list =dao.musicList(conn); 
 		close(conn);
 		return list;
 	}

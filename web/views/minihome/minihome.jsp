@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.member.model.vo.Member,com.minihome.model.vo.Minihome"%>
+    pageEncoding="UTF-8" import="java.util.List,com.member.model.vo.Member,com.minihome.model.vo.Minihome,com.shop.model.vo.Music"%>
 <%
-	Member loginMember=(Member)session.getAttribute("loginMember");
+	Member loginMember=(Member)request.getAttribute("loginMember");
 	Member hostMember=(Member)request.getAttribute("hostMember");
 	Minihome minihome=(Minihome)request.getAttribute("minihome");
-	/* List<MinimiItem> minimiItemList=(List<MinimiItem>)request.getAttribute("minimiItemList");
-	List<SkinItem> skinItemList=(List<SkinItem>)request.getAttribute("skinItemList");
 	List<Music> musicList=(List<Music>)request.getAttribute("musicList");
-	List<Photo> photoList=(List<Photo>)request.getAttribute("photoList");
-	List<Board> boardList=(List<Board>)request.getAttribute("boardList");
-	List<BoardComment> boardCommentList=(List<BoardComment>)request.getAttribute("boardCommentList");
-	List<Diary> diaryList=(List<Diary>)request.getAttribute("diaryList"); */
 %>   
 <!DOCTYPE html>
 <html lang="kor">
@@ -42,7 +36,8 @@
         </ul>
     </nav>
     
-    <button onclick="fn_stopBackMusic();" style="position:absolute;top:100px;left:1000px;">배경음악 멈추기</button>
+    <button onclick="fn_muteBackMusic();" style="position:absolute;top:100px;left:1000px;">음소거/해제</button>
+    <button onclick="fn_stopBackMusic();" style="position:absolute;top:150px;left:1000px;">일시정지/해제</button>
     
     <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" id="backMusic" autoplay></audio>
 </div>

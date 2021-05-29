@@ -11,7 +11,7 @@ $(".menuSub>p").on("click",(e)=>{
         type:"post",
         dataType:"html",
         success:(data)=>{
-            $("#contentBox").html(data);
+            $("#section").html(data);
         }
     });
 });

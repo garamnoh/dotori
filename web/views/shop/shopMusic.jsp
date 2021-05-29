@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.MusicItem"%>
+    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Music"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMusic.css">
 
 <%
-	List<MusicItem> list=(List<MusicItem>)request.getAttribute("musicList");
-	MusicItem m=(MusicItem)request.getAttribute("music");
+List<Music> list=(List<Music>)request.getAttribute("musicList");
+	Music m=(Music)request.getAttribute("music");
 %> 
 <%@ include file="/views/common/shopheader.jsp"%>
 

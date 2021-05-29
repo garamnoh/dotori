@@ -49,6 +49,15 @@ const pagesTo=(menu)=>{
 	});
 };
 
+const fn_muteBackMusic=()=>{
+	$("#backMusic").prop("muted",!$("#backMusic").prop("muted"));
+}
+
 const fn_stopBackMusic=()=>{
-	$("#backMusic").prop("muted",true);
+	let backMusic=document.getElementById("backMusic");
+	if(!backMusic.paused){
+		backMusic.pause();
+	}else{
+		backMusic.play();
+	}
 }

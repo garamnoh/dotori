@@ -1,4 +1,4 @@
-package com.member.service;
+package com.member.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.getConnection;

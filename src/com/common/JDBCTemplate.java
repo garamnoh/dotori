@@ -19,6 +19,8 @@ public class JDBCTemplate {
 			String path=JDBCTemplate.class.getResource("/driver/driver.properties").getPath();
 			prop.load(new FileReader(path));
 			Class.forName(prop.getProperty("driver"));
+			System.out.println(prop.getProperty("driver"));
+			System.out.println(prop.getProperty("url"));
 			conn=DriverManager.getConnection(prop.getProperty("url"),prop.getProperty("user"),prop.getProperty("pwd"));
 			conn.setAutoCommit(false);
 		}catch(ClassNotFoundException e) {

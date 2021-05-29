@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.member.service.MemberService;
 
 @WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
