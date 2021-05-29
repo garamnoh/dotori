@@ -7,7 +7,7 @@
 	<div id='propose'>
 		<p>일촌 신청한 친구</p>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -19,7 +19,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -31,7 +31,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -43,7 +43,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -55,7 +55,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -72,7 +72,7 @@
 	<div id='friends'>
 		<p>친구 추천</p>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>

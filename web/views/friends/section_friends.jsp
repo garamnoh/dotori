@@ -13,7 +13,7 @@
 			<input type='text' name='searchKeyword' id='searchKeyword'>
 		</form>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -25,7 +25,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -37,7 +37,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -49,7 +49,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -61,7 +61,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -73,7 +73,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -85,7 +85,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -97,7 +97,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -109,7 +109,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>
@@ -121,7 +121,7 @@
 			</div>
 		</div>
 		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/resources/img/profile_img_default.png'>
+			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
 			<div id='person'>
 				<span>이름</span>
 				<span>전화번호</span>

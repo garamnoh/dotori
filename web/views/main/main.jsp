@@ -165,8 +165,15 @@
 					
 					break;
 					
+					
 				case '' :
-		    		const status="width=1200px,height=756px";
+
+					const minihomeWidth = 1150;
+					const minihomeHeight = 756;
+					const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+					const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		    		
+					const status="width=1150px,height=756px,left="+xAxis+",top="+yAxis;
 		    		const url="<%=request.getContextPath()%>/views/minihome/minihome.jsp";
 		    		window.open(url,"",status);
 					
