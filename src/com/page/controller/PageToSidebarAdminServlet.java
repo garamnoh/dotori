@@ -7,20 +7,34 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/page/sidebarMain")
-public class PageToSidebarMainServlet extends HttpServlet {
+/**
+ * Servlet implementation class PageToSidebarAdminServlet
+ */
+@WebServlet("/page/sidebarAdmin")
+public class PageToSidebarAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public PageToSidebarMainServlet() {
-    	super();
+       
+    /**
+     * @see HttpServlet#HttpServlet()
+     */
+    public PageToSidebarAdminServlet() {
+        super();
+        // TODO Auto-generated constructor stub
     }
 
+	/**
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/main/aside_home.jsp").forward(request,response);
+		request.getRequestDispatcher("/views/admin/aside_admin.jsp").forward(request,response);
 	}
 
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
 		doGet(request, response);
 	}
 
