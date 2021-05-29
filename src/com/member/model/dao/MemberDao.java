@@ -119,4 +119,34 @@ public class MemberDao {
 		}return result;
 	}
 	
+	public int editProfile(Connection conn, Member member) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("editProfile"));
+			
+			ps.setString(1, member.getMemberName());
+			ps.setString(2, member.getNickname());
+			ps.setString(3, member.getGender());
+			ps.setString(4, member.getPhone());
+			ps.setDate(5, member.getBirthDate());
+			ps.setString(6, member.getAddress());
+			ps.setString(7, member.getMemberId());
+
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			
+			e.printStackTrace();
+			
+		} finally {
+			
+			close(ps);
+			
+		} return result;
+	}
+	
 }
