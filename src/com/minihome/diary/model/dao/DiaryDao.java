@@ -100,4 +100,23 @@ public class DiaryDao {
 		}
 		return result;		
 	}
+	
+	public int insertDiary(Connection conn, Diary d) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertDiary"));
+			pstmt.setString(1, d.getMemberId());
+			pstmt.setString(2, d.getWriter());
+			pstmt.setString(3, d.getTitle());
+			pstmt.setInt(4,  1);
+			pstmt.setString(5, d.getContent());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
+	}
 }
