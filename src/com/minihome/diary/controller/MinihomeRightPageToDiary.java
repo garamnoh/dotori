@@ -35,11 +35,11 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			numPerpage=5; 
 		}
 			
-		List<Diary> list=new DiaryService().selectDiaryList();
 		int totalData=new DiaryService().selectDiaryCount();		
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-		System.out.println(totalData);//18
+//		System.out.println(totalData);//18
+//		System.out.println(totalPage);//4
 		int pageBarSize=5;
 		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
@@ -49,14 +49,14 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			pageBar+="<span>[이전]</span>";
 		}else {
 			pageBar+="<a href='"+request.getContextPath()
-			+"/diary/diarySelectList?cPage="+(pageNo-1)+"'>[이전]</a>";
+			+"/page/minihomeRightPageToDiary.do?cPage="+(pageNo-1)+"'>[이전]</a>";
 		}		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a href='"+request.getContextPath()
-				+"/diary/diarySelectList?cPage="+pageNo+"'>"+pageNo+"</a>";
+				+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}		
@@ -64,8 +64,10 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			pageBar+="<span>[다음]</span>";
 		}else {
 			pageBar+="<a href'"+request.getContextPath()
-			+"/diary/diarySelectList?cPage="+pageNo+"'>[다음]</a>";
+			+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
 		}
+		
+		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage);
 		
 		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
