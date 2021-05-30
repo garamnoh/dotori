@@ -54,13 +54,15 @@ public class DiaryDao {
 		return diaryList;	
 	}
 	
-	public List<Diary> selectDiaryList(Connection conn){
+	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Diary> list=new ArrayList();
 		Diary d=null;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryList"));			
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryList"));
+			pstmt.setInt(1,  (cPage-1)*numPerpage+1);
+			pstmt.setInt(2,  cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				d=new Diary();

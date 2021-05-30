@@ -20,9 +20,9 @@ public class DiaryService {
 		return diaryList;
 	}
 	
-	public List<Diary> selectDiaryList(){
+	public List<Diary> selectDiaryList(int cPage, int numPerpage){
 		Connection conn=getConnection();
-		List<Diary> list=dao.selectDiaryList(conn);
+		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage);
 		close(conn);
 		return list;
 	}
