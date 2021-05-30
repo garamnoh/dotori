@@ -40,7 +40,7 @@
             <span style="display:none;">
                 제목 : <%=musicList.get(i).getMusicTitle()%><br>가수 : <%=musicList.get(i).getSinger()%><br>
             </span>
-            <input type="hidden" id="audioNo" value=<%=i%>>
+            <input type="hidden" value="<%=i%>">
         <%}%>
     </div>
     <button onclick="fn_muteBackMusic();" style="position:absolute;top:100px;left:1000px;">음소거/해제</button>
