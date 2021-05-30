@@ -1,20 +1,24 @@
 package com.minihome.model.vo;
 
+import java.sql.Date;
+
 public class Minihome {
 
 	private String memberId;
 	private int today;
 	private int total;
-	private int skin_item_no;
+	private int skinItemNo;
+	private Date todayDate;
 	
 	public Minihome() {}
 
-	public Minihome(String memberId, int today, int total, int skin_item_no) {
+	public Minihome(String memberId, int today, int total, int skinItemNo, Date todayDate) {
 		super();
 		this.memberId = memberId;
 		this.today = today;
 		this.total = total;
-		this.skin_item_no = skin_item_no;
+		this.skinItemNo = skinItemNo;
+		this.todayDate = todayDate;
 	}
 
 	public String getMemberId() {
@@ -41,18 +45,26 @@ public class Minihome {
 		this.total = total;
 	}
 
-	public int getSkin_item_no() {
-		return skin_item_no;
+	public int getSkinItemNo() {
+		return skinItemNo;
 	}
 
-	public void setSkin_item_no(int skin_item_no) {
-		this.skin_item_no = skin_item_no;
+	public void setSkinItemNo(int skinItemNo) {
+		this.skinItemNo = skinItemNo;
+	}
+
+	public Date getTodayDate() {
+		return todayDate;
+	}
+
+	public void setTodayDate(Date todayDate) {
+		this.todayDate = todayDate;
 	}
 
 	@Override
 	public String toString() {
-		return "Minihome [memberId=" + memberId + ", today=" + today + ", total=" + total + ", skin_item_no="
-				+ skin_item_no + "]";
+		return "Minihome [memberId=" + memberId + ", today=" + today + ", total=" + total + ", skinItemNo=" + skinItemNo
+				+ ", todayDate=" + todayDate + "]";
 	}
-	
+
 }
