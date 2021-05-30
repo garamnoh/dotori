@@ -39,7 +39,8 @@ public class MinihomeDao {
 				minihome.setMemberId(rs.getString("member_id"));
 				minihome.setToday(rs.getInt("today"));
 				minihome.setTotal(rs.getInt("total"));
-				minihome.setSkin_item_no(rs.getInt("skin_item_no"));
+				minihome.setSkinItemNo(rs.getInt("skin_item_no"));
+				minihome.setTodayDate(rs.getDate("today_date"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -47,6 +48,36 @@ public class MinihomeDao {
 			close(rs);close(pstmt);
 		}
 		return minihome;
+	}
+	
+	public int addToday(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		int todayResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("addToday"));
+			pstmt.setString(1,hostMemberId);
+			todayResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return todayResult;
+	}
+	
+	public int todayToTotal(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		int todayToTotalResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("todayToTotal"));
+			pstmt.setString(1,hostMemberId);
+			todayToTotalResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return todayToTotalResult;
 	}
 	
 }

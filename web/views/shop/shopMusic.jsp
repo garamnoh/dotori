@@ -70,7 +70,6 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
                 <input class="shopMusicCheck" type="checkbox">
                 </div>
 			</div>
->>>>>>> ab91a260ef5aa254abbfe2607af4f063aa83f877
 			</td>
 			<%} %>
 		</tr>

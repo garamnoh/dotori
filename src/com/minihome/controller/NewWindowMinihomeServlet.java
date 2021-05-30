@@ -1,10 +1,13 @@
 package com.minihome.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,7 +16,6 @@ import javax.servlet.http.HttpSession;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
 import com.minihome.jukebox.model.service.JukeboxService;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
@@ -48,6 +50,37 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		}
 		hostMemberId=hostMember.getMemberId();
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
+		
+		boolean visitFlag=false;
+		String logString="";
+		Cookie[] cookies=request.getCookies();
+		if(cookies!=null) {
+			for(Cookie c:cookies) {
+				if(c.getName().equals("minihomeVisitLog")) {
+					if(c.getValue().contains("|"+hostMemberId+"|")) visitFlag=true;
+					logString=c.getValue();
+					break;
+				}
+			}
+		}
+		if(!visitFlag) {
+			Cookie c=new Cookie("minihomeVisitLog",logString+"|"+hostMemberId+"|");
+			c.setMaxAge(60*60*24);
+			response.addCookie(c);
+		}
+		
+		SimpleDateFormat sdf=new SimpleDateFormat("yyyy-MM-dd");
+		String today=sdf.format(new Date());
+		int todayResult=0;
+		int todayToTotalResult=0;
+		if(!visitFlag) {
+			if(minihome.getTodayDate().toString().equals(today)) {
+				todayResult=minihomeService.addToday(hostMemberId);
+			}else {
+				todayToTotalResult=minihomeService.todayToTotal(hostMemberId);
+				todayResult=minihomeService.addToday(hostMemberId);
+			}
+		}
 		List<Music> musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
 		
 		request.setAttribute("loginMember",loginMember);
