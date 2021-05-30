@@ -4,7 +4,6 @@
 
 <%
 List<Music> list=(List<Music>)request.getAttribute("musicList");
-	System.out.println("list길이"+list.size());
 	Music m=(Music)request.getAttribute("music");
 %> 
 <%@ include file="/views/common/shopheader.jsp"%>
@@ -13,9 +12,8 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
-		<table>
-		<% for(int i=0;i<list.size()/3+1;i++){%>
-		<%System.out.println("i테스트"+i); %> 
+		<table id=musicTable>
+		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<tr>
 			<td>
 			<div class="productMusic">
