@@ -1,6 +1,12 @@
-body{
+
+/* 가람씨랑 말맞추기 */
+body{ 
     display: flex;
     justify-content: center;
+}
+
+#section{
+	overflow:scroll;
 }
 
 /* test img내용  */
