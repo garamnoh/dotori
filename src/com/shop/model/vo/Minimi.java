@@ -1,7 +1,5 @@
 package com.shop.model.vo;
 
-import java.util.List;
-
 public class Minimi {
 
 	private int itemNo;
@@ -9,7 +7,9 @@ public class Minimi {
 	private int price;
 	private String title;
 	
-	public Minimi() {}
+	public Minimi() {
+		// TODO Auto-generated constructor stub
+	}
 
 	public Minimi(int itemNo, String filepath, int price, String title) {
 		super();
@@ -55,7 +55,6 @@ public class Minimi {
 	public String toString() {
 		return "Minimi [itemNo=" + itemNo + ", filepath=" + filepath + ", price=" + price + ", title=" + title + "]";
 	}
-	
 	
 
 }

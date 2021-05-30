@@ -170,8 +170,8 @@
 
     <script>
 	    $('.contents>.like').on('click', (e)=>{
-	        let unlike = '<%= request.getContextPath() %>/resources/img/unlike.png'
-	        let like = '<%= request.getContextPath() %>/resources/img/like.png'
+	        let unlike = '<%= request.getContextPath() %>/images/unlike.png'
+	        let like = '<%= request.getContextPath() %>/images/like.png'
 	        let src = $(e.target).attr('src');
 	        let newSrc = src==unlike ? like : unlike;
 	        $(e.target).attr('src', newSrc); 

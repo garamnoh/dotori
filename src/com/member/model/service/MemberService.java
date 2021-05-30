@@ -1,14 +1,16 @@
 package com.member.model.service;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
 import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
-import static com.common.JDBCTemplate.commit;
-import java.sql.Connection;
 
+import java.sql.Connection;
+import java.util.ArrayList;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
+import com.shop.model.vo.Minimi;
 
 
 public class MemberService {
@@ -20,6 +22,13 @@ public class MemberService {
 		Member m=dao.login(conn,userId,password);
 		close(conn);
 		return m;
+	}
+	
+	public String profilePath(String memberId) {
+		Connection conn = getConnection();
+		String profilePath = dao.profilePath(conn, memberId);
+		close(conn);
+		return profilePath;
 	}
 	
 	public Member selectMemberId(String userId) {
@@ -39,17 +48,37 @@ public class MemberService {
 		return result;
 	}
 	
-	public int editProfile(Member member) {
-		
-		Connection conn = getConnection();
-		
-		int result = dao.editProfile(conn, member);
-		
+	public int enrollDefaultMinimi(String memberId) {
+		Connection conn=getConnection();
+		int result = dao.enrollDefaultMinimi(conn, memberId);
 		if(result > 0) commit(conn);
 		else rollback(conn);
-		
 		close(conn);
+		return result;
+	}
 	
+	public int editProfile(Member member) {
+		Connection conn = getConnection();
+		int result = dao.editProfile(conn, member);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public ArrayList<Minimi> minimiList(String memberId){
+		Connection conn = getConnection();
+		ArrayList<Minimi> minimiList = dao.minimiList(conn, memberId);
+		close(conn);
+		return minimiList;
+	}
+	
+	public int updateMinimi(String memberId, String updateMinimi) {
+		Connection conn = getConnection();
+		int result = dao.updateMinimi(conn, memberId, updateMinimi);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
 		return result;
 	}
 	

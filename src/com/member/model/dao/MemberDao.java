@@ -9,14 +9,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.Properties;
 
-
-
-
-
-
 import com.member.model.vo.Member;
+import com.shop.model.vo.Minimi;
 
 
 public class MemberDao {
@@ -63,6 +60,26 @@ public class MemberDao {
 			close(rs);close(pstmt);
 		}
 		return m;
+	}
+	
+	public String profilePath(Connection conn, String memberId) {
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String profilePath = null;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("profilePath"));
+			ps.setString(1, memberId);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) profilePath = rs.getString(2);
+		
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return profilePath;
 	}
 	
 	
@@ -119,6 +136,24 @@ public class MemberDao {
 		}return result;
 	}
 	
+	public int enrollDefaultMinimi(Connection conn, String memberId) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("enrollDefaultMinimi"));
+			ps.setString(1, memberId);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
+	
 	public int editProfile(Connection conn, Member member) {
 		
 		PreparedStatement ps = null;
@@ -149,4 +184,56 @@ public class MemberDao {
 		} return result;
 	}
 	
+	public ArrayList<Minimi> minimiList(Connection conn, String memberId){
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Minimi> minimiList = new ArrayList<Minimi>();
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("minimiList"));
+			ps.setString(1, memberId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				
+				Minimi minimi = new Minimi();
+				
+				minimi.setItemNo(rs.getInt("ITEM_NO"));
+				minimi.setFilepath(rs.getString("FILEPATH"));
+				minimi.setPrice(rs.getInt("PRICE"));
+				minimi.setTitle(rs.getString("TITLE"));
+				
+				minimiList.add(minimi);
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return minimiList;
+	}
+	
+	public int updateMinimi(Connection conn, String memberId, String updateMinimi) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("updateMinimi"));
+			ps.setString(1, updateMinimi);
+			ps.setString(2, memberId);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
 }
