@@ -1,4 +1,4 @@
-package com.page.controller;
+package com.minihome.controller;
 
 import java.io.IOException;
 import java.util.List;
@@ -49,18 +49,13 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		hostMemberId=hostMember.getMemberId();
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		List<Music> musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
-		List<Diary> diaryList=diaryService.getMyDiaries(hostMemberId);
-		System.out.println(diaryList);
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);
 		request.setAttribute("minihome",minihome);
 		request.setAttribute("musicList",musicList);
-		request.setAttribute("diaryList",diaryList);
-		
 		
 		request.getRequestDispatcher("/views/minihome/minihome.jsp").forward(request,response);
-				
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

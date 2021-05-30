@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 $(()=>{
 	pagesTo("Home");
+	$("#backgroundMusic").children()[0].autoplay=true;
+	$("#musicInfo").children()[0].style={"display":"inline"};
 });
 let pageNum=0;
 $("nav.miniMenu li").on("click",(e)=>{	
@@ -50,14 +52,78 @@ const pagesTo=(menu)=>{
 };
 
 const fn_muteBackMusic=()=>{
-	$("#backMusic").prop("muted",!$("#backMusic").prop("muted"));
+	$("#backgroundMusic").children().each((i,v)=>{
+		$(v).prop("muted",!$(v).prop("muted"));
+	});
 }
 
-const fn_stopBackMusic=()=>{
-	let backMusic=document.getElementById("backMusic");
-	if(!backMusic.paused){
-		backMusic.pause();
-	}else{
-		backMusic.play();
+let musicList=document.getElementById("backgroundMusic").children;
+let musicInfo=document.getElementById("musicInfo").children;
+
+const fn_pauseBackMusic=()=>{
+	for(let i=0;i<musicList.length;i++){
+		if(!musicList[i].paused) {
+			musicList[i].pause();
+		}
 	}
+}
+
+const fn_replay=()=>{
+	for(let i=0;i<musicList.length;i++){
+		if(!musicList[i].paused) {
+			musicList[i].currentTime=0;
+		}
+	}
+}
+
+const fn_playNext=()=>{
+	for(let i=0;i<musicList.length;i++){
+		if(!musicList[i].paused) {
+			musicList[i].pause();
+			musicList[i].currentTime=0;
+			musicInfo[i].style.display="none";
+			if(i==musicList.length-1){
+				musicList[0].play();
+				musicInfo[0].style.display="inline";
+			}else{
+				musicList[i+1].play();
+				musicInfo[i+1].style.display="inline";
+			}
+			break;
+		}
+	}
+}
+
+const fn_playPrevious=()=>{
+	for(let i=0;i<musicList.length;i++){
+		if(!musicList[i].paused) {
+			musicList[i].pause();
+			musicList[i].currentTime=0;
+			musicInfo[i].style.display="none";
+			console.dir(musicInfo[i]);
+			if(i==0){
+				musicList[musicList.length-1].play();
+				musicInfo[musicList.length-1].style.display="inline";
+			}else{
+				musicList[i-1].play();
+				musicInfo[i-1].style.display="inline";
+			}
+			break;
+		}
+	}
+}
+
+for(let i=0;i<musicList.length;i++) {
+	musicList[i].addEventListener("ended",()=>{
+		musicList[i].pause();
+		musicList[i].currentTime=0;
+		musicInfo[i].style.display="none";
+		if(i==musicList.length-1) {
+			musicList[0].play();
+			musicInfo[0].style.display="inline";
+		}else {
+			musicList[i+1].play();
+			musicInfo[i+1].style.display="inline";
+		}
+	});
 }

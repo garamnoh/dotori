@@ -1,4 +1,4 @@
-package com.page.controller;
+package com.minihome.jukebox.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,18 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/minihomeRightPageToDiary.do")
-public class MinihomeRightPageToDiaryServlet extends HttpServlet {
+@WebServlet("/page/minihomeLeftPageToJukebox.do")
+public class MinihomeLeftPageToJukeboxServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-
-    public MinihomeRightPageToDiaryServlet() {
+      
+    public MinihomeLeftPageToJukeboxServlet() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-//		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request,response);
-		request.getRequestDispatcher("/diary/diarySelectList").forward(request,response);
+		request.getRequestDispatcher("/views/minihome/leftpage_jukebox.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

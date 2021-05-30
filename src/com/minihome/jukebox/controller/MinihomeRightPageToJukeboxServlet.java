@@ -1,4 +1,4 @@
-package com.page.controller;
+package com.minihome.jukebox.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;

@@ -5,7 +5,6 @@
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 %>
-
 <div id="diary_content">
 	<div id="diary_input_container">
 		<div id="input_minimi_container">

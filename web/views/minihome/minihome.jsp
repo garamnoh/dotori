@@ -12,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=loginMember.getNickname()%>님의 미니홈피</title>
+    <title><%=hostMember.getNickname()%>님의 미니홈피</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
 </head>
@@ -35,11 +35,22 @@
             <li>쥬크박스</li>
         </ul>
     </nav>
-    
+    <div id="musicInfo" style="position:absolute;top:50px;left:1000px;background-color:white;font-weight:bolder;font-size:12px">
+        <%for(int i=0;i<musicList.size();i++) {%>
+            <span style="display:none;"> 제목 : <%=musicList.get(i).getMusicTitle()%><br>가수 : <%=musicList.get(i).getSinger()%><br></span>
+        <%}%>
+    </div>
     <button onclick="fn_muteBackMusic();" style="position:absolute;top:100px;left:1000px;">음소거/해제</button>
-    <button onclick="fn_stopBackMusic();" style="position:absolute;top:150px;left:1000px;">일시정지/해제</button>
+    <button onclick="fn_pauseBackMusic();" style="position:absolute;top:150px;left:1000px;">일시정지/해제</button>
+    <button onclick="fn_replay();" style="position:absolute;top:200px;left:1000px;">현재 곡 다시재생</button>
+    <button onclick="fn_playNext();" style="position:absolute;top:250px;left:1000px;">다음 곡 재생</button>
+    <button onclick="fn_playPrevious();" style="position:absolute;top:300px;left:1000px;">이전 곡 재생</button>
     
-    <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" id="backMusic" autoplay></audio>
+    <div id="backgroundMusic">
+    	<%for(int i=0;i<musicList.size();i++) {%>    
+    		<audio src="<%=request.getContextPath()%>/audio/<%=musicList.get(i).getFilepath()%>"></audio>
+		<%} %>
+    </div>
 </div>
 
 	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
