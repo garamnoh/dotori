@@ -81,6 +81,7 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 				todayResult=minihomeService.addToday(hostMemberId);
 			}
 		}
+		minihome=minihomeService.getMinihome(hostMemberId);
 		List<Music> musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
 		
 		request.setAttribute("loginMember",loginMember);
