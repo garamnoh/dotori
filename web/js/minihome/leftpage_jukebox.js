@@ -1,0 +1,11 @@
+document.getElementById("jukeboxMenu").addEventListener("click",(e)=>{
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToJukebox.do",
+        type:"post",
+        dataType:"html",
+        data:{"album":e.target.innerText,"hostMemberId":hostMemberId},
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+});

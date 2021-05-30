@@ -54,4 +54,52 @@ public class JukeboxDao {
 		return musicList;
 	}
 	
+	public List<Music> getMyMusicOnAlbum(Connection conn,String hostMemberId,String album) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Music> musicList=new ArrayList();
+		System.out.println("daodao"+hostMemberId);
+		System.out.println("daodao"+album);
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyMusicOnAlbum"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,album);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m=new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				musicList.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return musicList;
+	}
+	
+	public List<String> getMyAlbums(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<String> albumList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyAlbums"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				albumList.add(rs.getString("album"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return albumList;
+	}
+	
 }

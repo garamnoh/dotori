@@ -20,4 +20,18 @@ public class JukeboxService {
 		return musicList;
 	}
 	
+	public List<Music> getMyMusicOnAlbum(String hostMemberId,String album) {
+		Connection conn=getConnection();
+		List<Music> musicList=jukeboxDao.getMyMusicOnAlbum(conn,hostMemberId,album);
+		close(conn);
+		return musicList;
+	}
+	
+	public List<String> getMyAlbums(String hostMemberId) {
+		Connection conn=getConnection();
+		List<String> albumList=jukeboxDao.getMyAlbums(conn,hostMemberId);
+		close(conn);
+		return albumList;
+	}
+	
 }

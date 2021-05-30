@@ -38,7 +38,6 @@ const pagesTo=(menu)=>{
 		type:"post",
 		dataType:"html",
 		success:(data)=>{
-			console.log(data);
 			$("#left-page").html(data);
 		}
 	});
@@ -72,8 +71,6 @@ const checkCurrentAudio=()=>{
 
 const fn_pauseBackMusic=()=>{
 	checkCurrentAudio();
-	console.log(audioNo);
-	console.log(musicList[audioNo]);
 	if(!musicList[audioNo].paused) {
 		musicList[audioNo].pause();
 	}else{
