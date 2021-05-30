@@ -3,18 +3,59 @@
     display: none;
 }
 
-#diary_content{
-    /* display:inline-block; */
-    height:500px;
-    width:520px;
-    border:1px solid;
+/*********전체 박스**********/
+#diary_content{  
+  height:500px;
+  width:520px;
+  overflow:auto;
+  margin:0 0 0 0;
+  /* border:1px solid; */
 }
-#diary_title{
+/***********************/
+#diary_input_box{
+	display:flex;		
+  height:110px;
+  width:515px; 
+  border:1px solid;
+}
+#input_minimi_container{
+	z-index:10;
+	float:left;
+  height:110px;  
+  width:21%; 
+  border:1px solid;
+}
+#diary_input_container{	
+	border:1px solid red;
+	left:100px;
+	float:left;
+	width:79%;
+	height:100%;
+}
+.diary_title_input{
+	width:345px;
+	height:20px;
+}
+.diary_content_input{
+	width:345px;
+	height:75px;
+}
+#diary_input_container:last-child{
+	float:right;
+	margin-top: 30px;
+} 
+#input_minimi_container>img{
+	height:110px;
+  width:100px;
+  margin: 0 4px 0 4px;
+}
+/***********************/
+#diary_content_box{
 	display:flex;
 	position:relative;
 	margin-top:15px;
   height:80px;
-  width:520px;
+  width:515px;
   /* background-color: white; */
   border:1px solid;
 }
@@ -32,137 +73,18 @@
   width:80px;
   margin:0 3px 0 3px;
 }
-#diary_user{
+#diary_content_list{
 	display:inline-block;		
 	position:absolute;
+	padding: 2px 2px 2px 2px;
 	left:100px;
 	width:380px;
 	height:80px;
 	background-color: white;
 	border:1px solid;
 }
-#diary_input_container{
-	display:inline-block;	
-	position:relative;
-  height:110px;
-  width:520px;
-  /* background-color: white; */
-  border:1px solid;
-}
-#input_minimi_container{
-	position:absolute;
-	display:inline-block;	
-	z-index:10;
-  height:110px;
-  width:110px;
-  /* background-color: white; */
-  border:1px solid;
-}
-#diary_input{
-  float: right;
-  margin: 0 15px 0 15px;
-	width:380px;
-	height:110px;
-}
-#input_minimi_container>img{
-	height:110px;
-  width:100px;
-  margin: 0 4px 0 4px;
-}
-
-
-/*********right_board**********/
- 
-
-#guest_real_reply_box{
-	display: inline-block;
-    height:110px;
-    width:380px;
-    border:1px solid;
-}
-
-#guest_reply_box{
-    display: inline-block;
-    height:110px;
-    width:350px;
-    border:1px solid;
-}
-
-#real_reply{
-    display: block-inline;
-    height:110px;
-    width:325px;
-    margin-right: 20px;
-    margin-top: 0px;
-    float:right;
-    display:flex;	
-}
-
-#reply-btn{
-	margin-right:0px;
-}
-
-#reply{
-    width:425px;
-    margin-left:20px;
-}
-
-
-#geust_box{
-    height:180px;
-    width:520px;
-    margin-bottom: 20px;
-    margin-left:5px;
-    background-color: white;
-    border: 1px solid;
-}
-#guest_info{
-    display: inline-block;
-    height:25px;
-    width:520px;
-    background-color: rgba(117, 122, 126, 0.3);
-    border: 1px solid;
-}
-#guest_no{
-    display: inline-block;
-    float:left;
-    height:25px;
-    width:30px;
-    margin-left: 15px;
-    border:1px solid red;
-    font-weight:bolder;   
-    font-size:18px; 
-}
-#guest_name{
-    display: inline-block;
-    float:left;
-    height:25px;
-    width:55px;
-    margin-left: 8px;
-    border:1px solid red;
-    font-weight:bolder;   
-    font-size:18px;
-}
-#guest_date{
-    display: inline-block;
-    height:25px;
-    width:100px;
-    margin-left: 20px;
-    border:1px solid red;
-}
-#guest_inner{
-    display: inline-block;
-    height:120px;
-    width:520px;
-    border: 1px solid;
-	margin-right:10px;
-}
-#guest_minimi{
-    display: inline-block;
-    height:110px;
-    width:100px;
-    margin-top: 3px;
-    margin-left: 20px;
-    border:1px solid;
+/*******************/
+#pageBar{
+	margin: 0 0 0 0;
 }
 

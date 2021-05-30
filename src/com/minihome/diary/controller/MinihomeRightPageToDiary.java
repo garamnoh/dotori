@@ -8,19 +8,44 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.model.service.MinihomeService;
+import com.minihome.model.vo.Minihome;
 
 @WebServlet("/page/minihomeRightPageToDiary.do")
 public class MinihomeRightPageToDiary extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
+	private MemberService memberService=new MemberService();
+	private MinihomeService minihomeService=new MinihomeService();
+	
     public MinihomeRightPageToDiary() {
         super();
     }
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		HttpSession session=request.getSession(false);
+		//if(session!=null) session.invalidate();
+		if(session==null||session.getAttribute("loginMember")==null) {
+			request.getRequestDispatcher("/views/minihome/errorpage.jsp").forward(request,response);
+			return;
+		}
+		Member loginMember=(Member)session.getAttribute("loginMember");
+		String hostMemberId=request.getParameter("hostMemberId");
+		Member hostMember=null;
+		if(hostMemberId!=null) {
+			hostMember=memberService.selectMemberId(hostMemberId);
+		}else {
+			hostMember=loginMember;
+		}
+		hostMemberId=hostMember.getMemberId();
+		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		int cPage;
 		int numPerpage;
@@ -38,8 +63,6 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		int totalData=new DiaryService().selectDiaryCount();		
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
-//		System.out.println(totalData);//18
-//		System.out.println(totalPage);//4
 		int pageBarSize=5;
 		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
@@ -69,6 +92,8 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		
 		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage);
 		
+		request.setAttribute("loginMember",loginMember);
+		request.setAttribute("hostMember",hostMember);		
 		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
 		
