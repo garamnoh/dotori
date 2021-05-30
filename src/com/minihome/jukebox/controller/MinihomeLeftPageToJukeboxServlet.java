@@ -24,6 +24,12 @@ public class MinihomeLeftPageToJukeboxServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String hostMemberId=request.getParameter("hostMemberId");
 		List<String> albumList=jukeboxService.getMyAlbums(hostMemberId);
+		albumList.add(0,"내 모든 음악");
+		if(albumList.contains("배경음악")) {
+			albumList.remove(albumList.indexOf("배경음악"));
+			albumList.add(0,"배경음악");
+		}
+		
 		request.setAttribute("albumList",albumList);
 		request.getRequestDispatcher("/views/minihome/leftpage_jukebox.jsp").forward(request,response);
 	}

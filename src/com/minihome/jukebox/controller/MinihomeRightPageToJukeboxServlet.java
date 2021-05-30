@@ -24,16 +24,13 @@ public class MinihomeRightPageToJukeboxServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		String hostMemberId=request.getParameter("hostMemberId");
-		System.out.println("호스트 멤버"+hostMemberId);
 		String album=request.getParameter("album");
-		System.out.println("앨범 : "+album);
 		List<Music> musicList=null;
-		if(album==null) {
+		if(album==null||album.equals("내 모든 음악")) {
 			musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
 		}else {
 			musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,album);
 		}
-		System.out.println("뮤직리스트 : "+musicList);
 		request.setAttribute("musicList",musicList);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_jukebox.jsp").forward(request,response);

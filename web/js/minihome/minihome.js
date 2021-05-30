@@ -44,6 +44,7 @@ const pagesTo=(menu)=>{
 	$.ajax({
 		url:contextPath+"/page/minihomeRightPageTo"+menu+".do?hostMemberId="+hostMemberId,
 		type:"post",
+		data:{"album":"배경음악"},
 		dataType:"html",
 		success:(data)=>{
 			$("#right-page").html(data);
