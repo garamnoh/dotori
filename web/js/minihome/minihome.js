@@ -1,5 +1,6 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+let contextPath=$("#contextPath").val();
+let hostMemberId=$("#hostMemberId").val();
+
 $(()=>{
 	pagesTo("Home");
 	$("#backgroundMusic").children()[0].autoplay=true;
@@ -33,7 +34,7 @@ $("nav.miniMenu li").on("click",(e)=>{
 
 const pagesTo=(menu)=>{
 	$.ajax({
-		url:"<%=request.getContextPath()%>/page/minihomeLeftPageTo"+menu+".do",
+		url:contextPath+"/page/minihomeLeftPageTo"+menu+".do?hostMemberId="+hostMemberId,
 		type:"post",
 		dataType:"html",
 		success:(data)=>{
@@ -42,7 +43,7 @@ const pagesTo=(menu)=>{
 		}
 	});
 	$.ajax({
-		url:"<%=request.getContextPath()%>/page/minihomeRightPageTo"+menu+".do",
+		url:contextPath+"/page/minihomeRightPageTo"+menu+".do?hostMemberId="+hostMemberId,
 		type:"post",
 		dataType:"html",
 		success:(data)=>{
@@ -59,39 +60,32 @@ const fn_muteBackMusic=()=>{
 
 let musicList=document.getElementById("backgroundMusic").children;
 let musicInfo=document.getElementById("musicInfo").children;
+let audioNo=window.parseInt($("#audioNo").val());
 
 const fn_pauseBackMusic=()=>{
-	for(let i=0;i<musicList.length;i++){
-		if(!musicList[i].paused) {
-			musicList[i].pause();
-		}
+	if(!musicList[audioNo].paused) {
+		musicList[audioNo].pause();
+	}else{
+		musicList[audioNo].play();
 	}
 }
 
 const fn_replay=()=>{
-	for(let i=0;i<musicList.length;i++){
-		if(!musicList[i].paused) {
-			musicList[i].currentTime=0;
-		}
+	musicList[audioNo].currentTime=0;
+	if(musicList[audioNo].paused) {
+		musicList[audioNo].play();
 	}
 }
 
 const fn_playNext=()=>{
-	for(let i=0;i<musicList.length;i++){
-		if(!musicList[i].paused) {
-			musicList[i].pause();
-			musicList[i].currentTime=0;
-			musicInfo[i].style.display="none";
-			if(i==musicList.length-1){
-				musicList[0].play();
-				musicInfo[0].style.display="inline";
-			}else{
-				musicList[i+1].play();
-				musicInfo[i+1].style.display="inline";
-			}
-			break;
-		}
+	musicList[audioNo].currentTime=0;
+	musicList[audioNo].pause();
+	if(audioNo!=musicList.length-1) {
+		musicList[audioNo+1].play();
+	}else{
+		musicList[0].play();
 	}
+	
 }
 
 const fn_playPrevious=()=>{
