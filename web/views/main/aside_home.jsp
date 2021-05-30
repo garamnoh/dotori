@@ -3,15 +3,12 @@
 <%@ page import="com.member.model.vo.Member" %>
 <%
 	Member member = (Member)session.getAttribute("loginMember");
+	String profilePath = (String)session.getAttribute("profilePath");
 %>
     
     <div class="profile">
-    	<form id="submitForm" action="" method="post" enctype="multipart/form-data">
-	    	<img src="<%= request.getContextPath() %>/images/profile_img_default.png" alt="">
-	    	<span id="editMinimi">MINIMI</span>
-	    	<input type="submit" id="submitProfile" value="">
-	    	<input type="file" name="uploadProfile" id="uploadProfile" accept="image/*">
-    	</form>
+    	<img id='minimi' src="<%= request.getContextPath() %>/upload/MINIMI/<%= profilePath %>" alt="">
+    	<span id="editMinimi">MINIMI</span>
     </div>
     
     <div class="info">
@@ -50,50 +47,36 @@
 		    background-color: inherit;
 		    margin: 30px 0 20px 0;
 		    border-radius: 50%;
-
-		    display: flex;
-		    justify-content: center;
-		    align-items: center;
-		}
-		
-		.profile>form{
-		    height: 200px;
-		    width: 200px;
-		    border-radius: 50%;
 		    display: flex;
 		    justify-content: center;
 		    align-items: center;
 		    position: relative;
 		}
-		
-		.profile>form>img{
+
+		.profile>img{
+			padding: 4px;
 		    height: 200px;
 		    width: 200px;
-   		    border: 2px solid #eee;
+   		    border: 1px solid #eee;
 		    border-radius: 50%;
 		}
 		
-		.profile>form>span#editMinimi{
+		.profile>span#editMinimi{
 			position: absolute;
 			font-size: 13px;
 		    color: rgb(94, 94, 94);
 		    background-color: inherit;
 			top: 190px;
-			left: 150px;
+			left: 165px;
 			cursor: default;
 		}
 		
-		.profile>form>span#editProfile:hover{
+		.profile>span#editProfile:hover{
 			opacity: .7;
 		}
 		
-		.profile>form>span#editProfile:active{
+		.profile>span#editProfile:active{
 			opacity: 1;
-		}
-		
-		.profile>form>input[type=file],
-		.profile>form>input[type=submit]{
-			display: none;
 		}
 		
 		.info{
@@ -164,7 +147,7 @@
     		$('#section').html('');
     		
     		$.ajax({
-    			url: '<%= request.getContextPath() %>/views/main/section_home_editMinimi.jsp',
+    			url: '<%= request.getContextPath() %>/editMinimi',
     			success: data=>{
     				$('#section').append(data);
     			}
