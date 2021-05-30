@@ -21,7 +21,7 @@
 <div class="container">
     <div class="cover">
         <div class="sheet">
-            <div class="today">TODAY <span id="today">121</span> | TOTAL <span id="total">123904</span></div>
+            <div class="today">TODAY <span id="today"><%=minihome.getToday()%></span> | TOTAL <span id="total"><%=minihome.getTotal()%></span></div>
             <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
             <div id="left-page"></div>
             <div id="right-page"></div>
