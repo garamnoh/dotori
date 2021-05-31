@@ -99,7 +99,7 @@ private Properties prop=new Properties();
 		}return list;
 	}
 	
-	public List<String> searchTitle(Connection conn,int cPage,int numPerpage,String type,String keyword){
+	public List<String> searchTitle(Connection conn,String type,String keyword){
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
 		List<String> list =new ArrayList();
@@ -112,35 +112,38 @@ private Properties prop=new Properties();
 //		}
 		String sql=prop.getProperty("searchList");
 		try {
-			if(type=="skin") {
+			if(type.equals("skin")) {
 				//pstmt=conn.prepareStatement(sql.replace("#", type));
-				pstmt.setString(1,"skin");
-				pstmt=conn.prepareStatement(sql.replace("#", "skin_title"));
-				pstmt.setString(2, "%"+keyword+"%");
-				pstmt.setInt(3, (cPage-1)*numPerpage+1);
-				pstmt.setInt(4, cPage*numPerpage);
-					
-			}else if(type=="mini") {
-				pstmt.setString(1,"minimi");
-				pstmt=conn.prepareStatement(sql.replace("#", "title"));
-				pstmt.setString(2, "%"+keyword+"%");
-				pstmt.setInt(3, (cPage-1)*numPerpage+1);
-				pstmt.setInt(4, cPage*numPerpage);
+				sql=sql.replace("#table", "skin");
+				sql=sql.replace("#col1", "skin_title as title");
+				sql=sql.replace("#col", "skin_title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
 				
-			}else if(type=="music") {
-				pstmt.setString(1,"music");
-				pstmt=conn.prepareStatement(sql.replace("#", "music_title"));
-				pstmt.setString(2, "%"+keyword+"%");
-				pstmt.setInt(3, (cPage-1)*numPerpage+1);
-				pstmt.setInt(4, cPage*numPerpage);
+					
+			}else if(type.equals("mini")) {
+				sql=sql.replace("#table", "minimi");
+				sql=sql.replace("#col1", "title as title");
+				sql=sql.replace("#col", "title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				
+				
+			}else if(type.equals("music")) {
+				
+				sql=sql.replace("#table", "music");
+				sql=sql.replace("#col1", "music_title as title");
+				sql=sql.replace("#col", "music_title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				
 					
 			}
 			rs=pstmt.executeQuery();
 			
 			while(rs.next()) {
-				String s= "";
-				System.out.println(rs.getString("title"));
-				rs.getString("title");
+				
+				String s=rs.getString("title");
 				list.add(s);
 			}
 		

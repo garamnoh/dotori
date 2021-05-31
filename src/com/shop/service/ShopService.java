@@ -35,9 +35,9 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return list;
 	}
-	public List<String> searchTitle(int cPage,int numPerpage,String type,String keyword) {
+	public List<String> searchTitle(String type,String keyword) {
 		Connection conn=getConnection();
-		List<String> list=dao.searchTitle(conn,cPage,numPerpage,type,keyword);
+		List<String> list=dao.searchTitle(conn,type,keyword);
 		
 		close(conn);
 		return list;

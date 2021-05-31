@@ -34,8 +34,9 @@ public class ShopSearchListServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		request.setCharacterEncoding("utf-8");
 		String keyword=request.getParameter("keyword");
+		String type=request.getParameter("type");
 		
-		List<String> list=new ShopService().searchTitle(1, 50, "title", keyword);
+		List<String> list=new ShopService().searchTitle(type, keyword);
 		
 		String csv="";
 		for(int i=0;i<list.size();i++) {
