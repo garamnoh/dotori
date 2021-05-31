@@ -2,20 +2,23 @@
     pageEncoding="UTF-8"%>
 
 <div id="diary_folder_box">
-	<ul>
-		<li>diary folder</li>
-		<li id="diary_a">전체공개</li>
-		<li id="diary_b">일촌</li>
-		<li id="diary_c">비공개</li>
-	</ul>
+	<div id="diary_folder_title">Diary folder</div>
+	<div id="diary_folder_list">
+		<ul>		
+			<li class="diary_folder_li">전체공개</li>
+			<li class="diary_folder_li">일촌</li>
+			<li class="diary_folder_li">비공개</li>
+		</ul>
+	</div>
+	
 </div>
 <script>
-	$("#diary_a").click(e=>{
+	$(".diary_folder_li").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/diary/diaryFolder",
 			type:"get",
 			data:{
-				"diary_a":$("#diary_a").text()
+				"diary_folder_li":$(".diary_folder_li").text()
 			},
 			dataType:"html",
 			success:data=>{
