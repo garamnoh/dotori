@@ -32,6 +32,7 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String folderName=request.getParameter("diary_folder_li");
+		System.out.println(folderName);
 		int diaryFolderLevel=2;
 		switch(folderName) {
 			case "전체공개" : diaryFolderLevel=1;

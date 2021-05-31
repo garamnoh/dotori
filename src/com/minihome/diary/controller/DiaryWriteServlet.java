@@ -41,11 +41,22 @@ public class DiaryWriteServlet extends HttpServlet {
 				
 		Diary d=new Diary();
 		d.setMemberId(request.getParameter("hostMemberId"));
-		d.setWriter(request.getParameter("loginMemberId"));
-		d.setTitle(request.getParameter("diary_title_input"));		
-		d.setContent(request.getParameter("diary_content_input"));
-			
+		d.setWriter(request.getParameter("loginMemberId"));		
 		String folder=request.getParameter("diary_folder");
+		
+		String title=request.getParameter("diary_title_input");
+		String content=request.getParameter("diary_content_input");
+		String msg="";
+		if(title!=null && content!=null) {
+			d.setContent(content);
+			d.setTitle(title);
+		}else {
+			/////////////////////////////////////////////
+			msg="내용을 모두 입력하세요.";
+			request.setAttribute("msg", msg);
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);			
+		}
+		
 		switch(folder){
 			case "전체공개" : d.setFolderNo(1);
 			case "일촌공개" : d.setFolderNo(2);

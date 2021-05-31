@@ -6,7 +6,7 @@
 	<div id="diary_folder_list">
 		<ul>		
 			<li class="diary_folder_li">전체공개</li>
-			<li class="diary_folder_li">일촌</li>
+			<li class="diary_folder_li">일촌공개</li>
 			<li class="diary_folder_li">비공개</li>
 		</ul>
 	</div>
