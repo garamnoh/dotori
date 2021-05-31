@@ -5,7 +5,6 @@ $("#changeBtn").click((e)=>{
     $("#jukeboxContainer>input[type=checkbox]").each((i,v)=>{
         if(v.checked) musicNoArray.push($(v).next().val());
     });
-    console.log("test"+musicNoArray.toString());
     $.ajax({
         url:contextPath+"/page/minihomeRightPageToJukebox.do",
         type:"post",

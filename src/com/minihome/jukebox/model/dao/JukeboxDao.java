@@ -104,7 +104,6 @@ public class JukeboxDao {
 		PreparedStatement pstmt=null;
 		int changeFolderResult=0;
 		String sql=prop.getProperty("changeFolder").replace("#","("+musicNoArrayStr+")");
-		System.out.println("testtest "+sql);
 		try {
 			pstmt=conn.prepareStatement(sql);
 			pstmt.setString(1,targetFolder);
@@ -116,6 +115,39 @@ public class JukeboxDao {
 			close(pstmt);
 		}
 		return changeFolderResult;
+	}
+	
+	public int addAlbum(Connection conn,String hostMemberId,String newAlbumTitle) {
+		PreparedStatement pstmt=null;
+		int addAlbumResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("addAlbum"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,newAlbumTitle);
+			addAlbumResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return addAlbumResult;
+	}
+	
+	public int deleteAlbum(Connection conn,String hostMemberId,String albumForDelete) {
+		PreparedStatement pstmt=null;
+		int deleteAlbumResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteAlbum"));
+			pstmt.setString(1,"기본앨범");
+			pstmt.setString(2,hostMemberId);
+			pstmt.setString(3,albumForDelete);
+			deleteAlbumResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return deleteAlbumResult;
 	}
 	
 }

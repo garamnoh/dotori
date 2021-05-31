@@ -22,6 +22,7 @@
 </style>
 
 <p class="music-title">MUSIC</p>
+
 <nav class="albums">
     <ul id="jukeboxMenu">
     	<%for(int i=0;i<albumList.size();i++) {%>
@@ -29,5 +30,15 @@
         <%} %>
     </ul>
 </nav>
+
+<input type="text" id="newAlbumTitle" placeholder="앨범명을 입력하세요"><br>
+<input type="button" id="addAlbum" value="앨범 추가"><br><br>
+<label for="albumForDelete">삭제할 앨범</label>
+<select id="albumForDelete">
+	<%for(int i=0;i<albumList.size();i++) {%>
+		<option value="<%=albumList.get(i)%>"><%=albumList.get(i)%></option>
+	<%} %>
+</select>
+<input type="button" id="deleteAlbum" value="앨범 삭제">
 
 <script src="<%=request.getContextPath()%>/js/minihome/leftpage_jukebox.js"></script>

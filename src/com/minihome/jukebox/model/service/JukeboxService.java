@@ -45,4 +45,22 @@ public class JukeboxService {
 		return changeFolderResult;
 	}
 	
+	public int addAlbum(String hostMemberId,String newAlbumTitle) {
+		Connection conn=getConnection();
+		int addAlbumResult=jukeboxDao.addAlbum(conn,hostMemberId,newAlbumTitle);
+		if(addAlbumResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return addAlbumResult;
+	}
+	
+	public int deleteAlbum(String hostMemberId,String AlbumForDelete) {
+		Connection conn=getConnection();
+		int deleteAlbumResult=jukeboxDao.deleteAlbum(conn,hostMemberId,AlbumForDelete);
+		if(deleteAlbumResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return deleteAlbumResult;
+	}
+	
 }

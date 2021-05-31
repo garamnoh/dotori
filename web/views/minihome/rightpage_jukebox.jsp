@@ -24,7 +24,9 @@
 		<option value="<%=albumList.get(i)%>"><%=albumList.get(i)%></option>
 	<%} %>
 </select>
-<input type="button" id="changeBtn" value="폴더 이동"><br>
+<input type="button" id="changeBtn" value="폴더 이동">
+
+<p>배경음악 앨범에 있는 음악들만 배경음악으로 재생됩니다<p>
 
 <div id="jukeboxContainer">
 	<%if(musicList!=null) {%>
