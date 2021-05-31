@@ -42,7 +42,7 @@
 				<div id="minimi_container">
 					<img src="<%=request.getContextPath()%>/upload/MINIMI/admin_dotori.png" alt="관리자이미지">				
 					<div id="diary_user">							
-						<p>환영합니다. <%=d.getMemberName()%>회원님 <br> <b>-도토리매니저-</b></p>
+						<p>환영합니다. <%=hostMember.getMemberId()%>회원님 <br> <b>-도토리매니저-</b></p>
 					</div>
 				</div>
 			</div>
@@ -55,7 +55,10 @@
 						<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">
 						<div id="diary_content_list">
 							<div id="diary_content_title">
-								<div id="diary_writer_container"><%=d.getWriter() %></div>
+								<div id="diary_writer_container">
+									<%-- <%=d.getWriter() %> --%>
+									<%=d.getMemberName()%>
+								</div>
 									<!-- 해당 아이디의 이름 출력해주기 -->
 								<div id="diary_date_container"><%=d.getPostDate() %></div>
 							</div>
