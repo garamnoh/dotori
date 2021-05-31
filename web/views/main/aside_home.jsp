@@ -16,8 +16,8 @@
         <div id="userName"><%= member.getNickname() %></div>
         <div id="userEmail"><%= member.getMemberId() %></div>
         <hr>
-        <div id="today">Today : 133</div>
-        <div id="total">Total : 323423</div>
+        <div id="today">Today : <span></span>명</div>
+        <div id="total">Total : <span></span>명</div>
         <hr>
         <div id="board">New Feed : 10</div>
         <div id="request">일촌 신청 : 5</div>
@@ -125,9 +125,8 @@
 		}    
     
     </style>
+
     
-    
-<%--     <script src="<%= request.getContextPath() %>/views/main/sideMain.jsp"></script> --%>
     <script>
     	$('#editBtn').on('click', (e)=>{
     		
@@ -154,26 +153,19 @@
     		});
     	});
     
-    
-    
-    
-    
-    
-    
-//    	$('#editProfile').click((e)=>{
-//    		$('#uploadProfile').click();
-//    	});
-//    	
-//    	$('#uploadProfile').change((e)=>{
-//    		const valueA = $('#uploadProfile').val();
-//    		const value = valueA.substring(valueA.lastIndexOf('\\')+1);
-//    		
-//    		$('#submitProfile').val(value);
-//    		$('#submitForm').submit();
-//    		console.log('a', $('#submitProfile').val());
-//    	});
-//    	
-//    	$('#editBtn').on('click', function(e){
-//			$(parent.document).find('#section').attr('src', '<%= request.getContextPath() %>/moveToEditProfile');
-//    	})
+		$(document).ready(function(){
+			
+			const memberId = '<%= member.getMemberId() %>';
+			
+			$.ajax({
+				url: '<%= request.getContextPath() %>/refreshInfo',
+				data: {
+					'memberId': memberId
+				},
+				success: data=>{
+					$('#today').children('span').text(data['today']);
+					$('#total').children('span').text(data['total']);
+				}
+			});
+		});  
     </script>

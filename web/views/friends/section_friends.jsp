@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.friend.model.vo.Friend" %>    
+<%
+	ArrayList<Friend> friendsList = (ArrayList<Friend>)request.getAttribute("friendsList");
+%>
 
 <p id='title'>일촌관리</p>
 
@@ -12,126 +16,23 @@
 			</select>
 			<input type='text' name='searchKeyword' id='searchKeyword'>
 		</form>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>Mini</button>
-				<button id='delete'>일촌끊기</button>
-			</div>
-		</div>
+		<% if(friendsList != null){ %>
+			<% for(Friend f: friendsList){ %>
+				<div id='detail'>
+					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
+					<div id='person'>
+						<span><%=f.getFollowerProfileName() %></span>
+						<span><%=f.getFollowerProfilePhone() %></span>
+						<span><%=f.getFollower() %></span>
+					</div>
+					<div id='buttons'>
+						<input type='hidden' name='hostMemberId' value='<%=f.getFollower() %>'>
+						<button id='minihome'>Mini</button>
+						<button id='delete'>일촌끊기</button>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
 	</div>
 </div>
 
@@ -166,7 +67,6 @@
 	#content1>#administration>form>select{
 		width: 150px;
 		height: 25px;
-		border: none;
 		border-radius: 2px;
 	}
 	
@@ -228,3 +128,22 @@
 	}
 	
 </style>
+
+
+<script>
+	$('#administration button#minihome').on('click', (e)=>{
+		const hostMemberId = $(e.target).prev().val();
+		
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+	});
+</script>

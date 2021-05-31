@@ -1,23 +1,31 @@
-package com.page.controller;
+package com.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
+import com.minihome.model.vo.Minihome;
+
 /**
- * Servlet implementation class pageToContentAdminServlet
+ * Servlet implementation class RefreshInfoServlet
  */
-@WebServlet("/page/contentAdmin")
-public class pageToContentAdminServlet extends HttpServlet {
+@WebServlet("/refreshInfo")
+public class RefreshInfoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public pageToContentAdminServlet() {
+    public RefreshInfoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +34,17 @@ public class pageToContentAdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/admin/section_admin.jsp").forward(request,response);
+		
+		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		Minihome info = new MemberService().refreshInfo(memberId);
+		
+		JSONObject json = new JSONObject();
+		
+		json.put("today", info.getToday());
+		json.put("total", info.getTotal());
+		
+		response.setContentType("application/json;charset=utf-8;");
+		new Gson().toJson(json, response.getWriter());
 	}
 
 	/**

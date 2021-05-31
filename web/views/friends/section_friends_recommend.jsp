@@ -1,71 +1,31 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.friend.model.vo.Friend, java.util.ArrayList" %>
+<%
+	ArrayList<Friend> requestedList = (ArrayList<Friend>)request.getAttribute("requestedList");
+%>
 
 <p id='title'>친구추천</p>
 
 <div id='content1'>
 	<div id='propose'>
 		<p>일촌 신청한 친구</p>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
-		</div>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
-		</div>
+		<% if(requestedList != null){ %>
+			<% for(Friend f : requestedList){ %>
+				<div id='detail'>
+					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
+					<div id='person'>
+						<span><%=f.getFollowerProfileName() %></span>
+						<span><%=f.getFollowerProfilePhone() %></span>
+						<span><%=f.getFollower() %></span>
+					</div>
+					<div id='buttons'>
+						<button id='minihome'>수락</button>
+						<button id='delete'>삭제</button>
+					</div>
+				</div>
+			<% } %>
+		<% } %>
 	</div>
 </div>
 <div id='content2'>

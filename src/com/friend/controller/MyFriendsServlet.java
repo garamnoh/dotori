@@ -1,23 +1,29 @@
-package com.page.controller;
+package com.friend.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.friend.model.service.FriendService;
+import com.friend.model.vo.Friend;
+import com.member.model.vo.Member;
+
 /**
- * Servlet implementation class pageToContentAdminServlet
+ * Servlet implementation class MyFriendsServlet
  */
-@WebServlet("/page/contentAdmin")
-public class pageToContentAdminServlet extends HttpServlet {
+@WebServlet("/friends/myFriends")
+public class MyFriendsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public pageToContentAdminServlet() {
+    public MyFriendsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +32,12 @@ public class pageToContentAdminServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/admin/section_admin.jsp").forward(request,response);
+		
+		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		ArrayList<Friend> friendsList = new FriendService().friendsList(memberId);
+
+		request.setAttribute("friendsList", friendsList);
+		request.getRequestDispatcher("/views/friends/section_friends.jsp").forward(request, response);
 	}
 
 	/**

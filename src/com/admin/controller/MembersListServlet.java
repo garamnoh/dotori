@@ -96,7 +96,7 @@ public class MembersListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("membersList", membersList);
 		
-		request.getRequestDispatcher("/views/admin/section_admin.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/section_admin_memberList.jsp").forward(request, response);
 	}
 
 	/**
