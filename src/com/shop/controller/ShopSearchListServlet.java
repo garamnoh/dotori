@@ -9,20 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shop.model.vo.Music;
+import com.shop.model.vo.Skin;
 import com.shop.service.ShopService;
 
 /**
- * Servlet implementation class ShopMusicTableServlet
+ * Servlet implementation class ShopSearchListServlet
  */
-@WebServlet("/shop/musicTable")
-public class ShopMusicTableServlet extends HttpServlet {
+@WebServlet("/ajax/shopSearch.do")
+public class ShopSearchListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopMusicTableServlet() {
+    public ShopSearchListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,14 +32,19 @@ public class ShopMusicTableServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Music> list=new ShopService().musicList();
-		Music m= new Music();
-		System.out.println(list);
-		System.out.println();
-		request.setAttribute("musicList", list); //data
-		request.setAttribute("type", "music"); 
-		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
+		request.setCharacterEncoding("utf-8");
+		String keyword=request.getParameter("keyword");
 		
+		List<String> list=new ShopService().searchTitle(1, 50, "title", keyword);
+		
+		String csv="";
+		for(int i=0;i<list.size();i++) {
+			if(i!=0) csv+=",";
+			csv+=list.get(i);
+		}
+		response.setContentType("text/csv;charset=utf-8");
+		response.getWriter().print(csv); //csv가 jsp의 success로 보내줌
+	
 	}
 
 	/**

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.member.model.vo.Member;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
 import com.shop.model.vo.Skin;
@@ -97,5 +98,60 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return list;
 	}
+	
+	public List<String> searchTitle(Connection conn,int cPage,int numPerpage,String type,String keyword){
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		List<String> list =new ArrayList();
+//		if(type=="skin") {
+//			String sql=prop.getProperty("searchSkinList");
+//		}else if(type=="mini") {
+//			String sql=prop.getProperty("searchMiniList");	
+//		}else if(type=="music") {
+//			String sql=prop.getProperty("searchMusicList");
+//		}
+		String sql=prop.getProperty("searchList");
+		try {
+			if(type=="skin") {
+				//pstmt=conn.prepareStatement(sql.replace("#", type));
+				pstmt.setString(1,"skin");
+				pstmt=conn.prepareStatement(sql.replace("#", "skin_title"));
+				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+					
+			}else if(type=="mini") {
+				pstmt.setString(1,"minimi");
+				pstmt=conn.prepareStatement(sql.replace("#", "title"));
+				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+				
+			}else if(type=="music") {
+				pstmt.setString(1,"music");
+				pstmt=conn.prepareStatement(sql.replace("#", "music_title"));
+				pstmt.setString(2, "%"+keyword+"%");
+				pstmt.setInt(3, (cPage-1)*numPerpage+1);
+				pstmt.setInt(4, cPage*numPerpage);
+					
+			}
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				String s= "";
+				System.out.println(rs.getString("title"));
+				rs.getString("title");
+				list.add(s);
+			}
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 
 }

@@ -39,7 +39,7 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		System.out.println(list);
 		System.out.println();
 		request.setAttribute("minimiList", list); //data
-		request.setAttribute("minimi", mini); 
+		request.setAttribute("type", "mini"); 
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		
 	

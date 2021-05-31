@@ -6,6 +6,7 @@ import static com.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.List;
 
+import com.member.model.vo.Member;
 import com.shop.model.dao.ShopDao;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
@@ -34,6 +35,14 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return list;
 	}
+	public List<String> searchTitle(int cPage,int numPerpage,String type,String keyword) {
+		Connection conn=getConnection();
+		List<String> list=dao.searchTitle(conn,cPage,numPerpage,type,keyword);
+		
+		close(conn);
+		return list;
+	}
+	
 	
 
 }

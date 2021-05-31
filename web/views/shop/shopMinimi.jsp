@@ -73,3 +73,24 @@ Minimi mini=(Minimi)request.getAttribute("minimi");
 	<%} 
 	}%>
 </form>
+<script>
+function searchKeyup(e){
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopSearch.do",
+		data:{"keyword":$(e.target).val(),"type":"<%=request.getAttribute("type")%>"},
+		success:data=>{
+			$("#list").html(""); 
+			console.log(data);
+			const op=data.split(",");
+			for(let i=0;i<op.length;i++){
+				let option=$("<option>");
+				option.val(op[i]); 
+				option.html(op[i]); 
+				$("#list").append(option);  
+			}
+		}
+		
+	});
+};
+
+</script>
