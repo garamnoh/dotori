@@ -117,4 +117,22 @@
 #pageBar{
 	margin: 0 0 0 0;
 }
+/******************************/
+/*********left_diary***********/
+#diary_folder_box{	
+	height:525px;
+	width:175px;
+	border:1px solid;
+}
+#diary_folder_box ul{	
+	list-style:none;
+	padding-left:20px;
+	font-size: 15px;
+    line-height: 30px;
+}
+#diary_folder_box ul>li:first-child{
+	padding:0 0 5px 0;
+	font-weight:bold;
+	text-align:center;
+}
 

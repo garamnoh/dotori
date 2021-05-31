@@ -22,9 +22,9 @@ public class DiaryService {
 		return diaryList;
 	}
 	
-	public List<Diary> selectDiaryList(int cPage, int numPerpage){
+	public List<Diary> selectDiaryList(int cPage, int numPerpage, int folderLevel){
 		Connection conn=getConnection();
-		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage);
+		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage, folderLevel);
 		close(conn);
 		return list;
 	}

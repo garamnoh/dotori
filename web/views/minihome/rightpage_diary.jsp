@@ -8,7 +8,6 @@
 	Member hostMember=(Member)request.getAttribute("hostMember");
 %>
 <div id="diary_content">
-	<%-- <form action="<%=request.getContextPath()%>/diary/diaryWrite"> --%>
 	<form>
 		<div id="diary_input_box">
 			<div id="input_minimi_container">
@@ -63,8 +62,7 @@
 				</div>
 			</tr>
 		<%} 
-	}%>
-	
+	}%>	
 				
   <div id="pageBar">
   	<%=request.getAttribute("pageBar") %>	
@@ -77,6 +75,7 @@
 		  type:"get",
 		  data:{
 			  "diary_title_input":$(".diary_title_input").val(),
+			  "diary_folder":$("select[name='diary_folder']").val(),
 			  "diary_content_input":$(".diary_content_input").val(),
 			  "loginMemberId":$("input[name='loginMemberId']").val(),
 			  "hostMemberId":$("input[name='hostMemberId']").val()

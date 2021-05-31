@@ -42,13 +42,15 @@ public class DiaryWriteServlet extends HttpServlet {
 		Diary d=new Diary();
 		d.setMemberId(request.getParameter("hostMemberId"));
 		d.setWriter(request.getParameter("loginMemberId"));
-		d.setTitle(request.getParameter("diary_title_input"));
-		//d.setTitle(request.getParameter("folder_no"));
+		d.setTitle(request.getParameter("diary_title_input"));		
 		d.setContent(request.getParameter("diary_content_input"));
-		System.out.println(d.getMemberId());
-		System.out.println(d.getWriter());
-		System.out.println(d.getTitle());
-		System.out.println(d.getContent());		
+			
+		String folder=request.getParameter("diary_folder");
+		switch(folder){
+			case "전체공개" : d.setFolderNo(1);
+			case "일촌공개" : d.setFolderNo(2);
+			case "비공개" : d.setFolderNo(3);
+		}
 		
 		int result=new DiaryService().insertDiary(d);		
 		
