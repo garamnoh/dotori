@@ -54,15 +54,16 @@ public class DiaryDao {
 		return diaryList;	
 	}
 	
-	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage){
+	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage, int folderLevel){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Diary> list=new ArrayList();
 		Diary d=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryList"));
-			pstmt.setInt(1,  (cPage-1)*numPerpage+1);
-			pstmt.setInt(2,  cPage*numPerpage);
+			pstmt.setInt(1,  folderLevel);
+			pstmt.setInt(2,  (cPage-1)*numPerpage+1);
+			pstmt.setInt(3,  cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				d=new Diary();
@@ -109,7 +110,7 @@ public class DiaryDao {
 			pstmt.setString(1, d.getMemberId());
 			pstmt.setString(2, d.getWriter());
 			pstmt.setString(3, d.getTitle());
-			pstmt.setInt(4,  1);
+			pstmt.setInt(4,  d.getFolderNo());
 			pstmt.setString(5, d.getContent());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {

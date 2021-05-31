@@ -8,18 +8,31 @@
 	Member hostMember=(Member)request.getAttribute("hostMember");
 %>
 <div id="diary_content">
-	<form action="<%=request.getContextPath()%>/diary/diaryWrite?hostMemberId="+>
+	<form>
 		<div id="diary_input_box">
 			<div id="input_minimi_container">
 				<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="나의미니미">
 			</div>
 			<div id="diary_input_container">
-				<input type="text" class="diary_title_input">
-				<input type="text" class="diary_content_input">
-				<input type="submit" value="확인">		
+				<div id="diary_title_left">
+					<div id="diary_input_title_box">
+						<select class="diary_folder" name="diary_folder">
+							<option value="전체공개" seleted>전체공개</option>
+							<option value="일촌공개">일촌공개</option>
+							<option value="비공개">비공개</option>
+						</select>
+						<input type="text" class="diary_title_input" name="diary_title_input">
+					</div>
+					<div id="diary_input_content_box">
+						<input type="text" class="diary_content_input" name="diary_content_input">
+					</div>
+				</div>				
+				<div id="diary_input_btn_box">
+					<input type="submit" value="확인" id="diary_input_btn">
+				</div>						
 			</div>
-			<input type="hidden" id="loginMemberId" value="<%=loginMember.getMemberId()%>">
-			<input type="hidden" id="hostMemberId" value="<%=hostMember.getMemberId()%>">
+			<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
+			<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
 		</div>
 	</form>
 	
@@ -28,9 +41,9 @@
 			<div id="diary_content_box">
 				<div id="minimi_container">
 					<img src="<%=request.getContextPath()%>/upload/MINIMI/admin_dotori.png" alt="관리자이미지">				
-						<div id="diary_user">							
-							<p>환영	합니다. <%=hostMember.getMemberId()%>회원님 <br> <b>-도토리매니저-</b></p>
-						</div>
+					<div id="diary_user">							
+						<p>환영합니다. <%=hostMember.getMemberId()%>회원님 <br> <b>-도토리매니저-</b></p>
+					</div>
 				</div>
 			</div>
 		</tr>
@@ -40,20 +53,38 @@
 				<div id="diary_content_box">
 					<div id="minimi_container">
 						<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">
-							<div id="diary_content_list">
-									<%=d.getWriter() %><br> 
-										<!-- 해당 아이디의 이름 출력해주기 -->
-									<%=d.getContent() %><br>
-									<%=d.getPostDate() %>
-							</div>
+						<div id="diary_content_list">
+							<th><pre><%=d.getWriter() %>				<%=d.getPostDate() %></pre></th>
+								<!-- 해당 아이디의 이름 출력해주기 -->
+							<td><%=d.getContent() %></td>							
+						</div>
 					</div>
 				</div>
 			</tr>
 		<%} 
-	}%>
-	
+	}%>	
 				
-	<div id="pageBar">
+  <div id="pageBar">
   	<%=request.getAttribute("pageBar") %>	
   </div>
+  
+  <script>
+  $("#diary_input_btn").click(e=>{
+	  $.ajax({
+		  url:"<%=request.getContextPath()%>/diary/diaryWrite",
+		  type:"get",
+		  data:{
+			  "diary_title_input":$(".diary_title_input").val(),
+			  "diary_folder":$("select[name='diary_folder']").val(),
+			  "diary_content_input":$(".diary_content_input").val(),
+			  "loginMemberId":$("input[name='loginMemberId']").val(),
+			  "hostMemberId":$("input[name='hostMemberId']").val()
+		  },
+		  dataType:"html",
+		  success:data=>{
+			  $("#right-page").html(data);
+		  }
+	  })
+  });
+  </script>
 </div>

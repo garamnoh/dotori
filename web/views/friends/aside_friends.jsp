@@ -100,7 +100,7 @@
 	    	$('#section').html('');
 	    	
 	    	$.ajax({
-	    		url: '<%= request.getContextPath() %>/views/friends/section_friends.jsp',
+	    		url: '<%= request.getContextPath() %>/friends/myFriends',
 	    		dataType: 'html',
 	    		success: data=>{
 	    			$('#section').append(data);
@@ -126,7 +126,7 @@
 	    	$('#section').html('');
 	    	
 	    	$.ajax({
-	    		url: '<%= request.getContextPath() %>/views/friends/section_friends_recommend.jsp',
+	    		url: '<%= request.getContextPath() %>/friends/requestedList',
 	    		dataType: 'html',
 	    		success: data=>{
 	    			$('#section').append(data);

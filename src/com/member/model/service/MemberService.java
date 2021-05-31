@@ -10,6 +10,7 @@ import java.util.ArrayList;
 
 import com.member.model.dao.MemberDao;
 import com.member.model.vo.Member;
+import com.minihome.model.vo.Minihome;
 import com.shop.model.vo.Minimi;
 
 
@@ -82,4 +83,10 @@ public class MemberService {
 		return result;
 	}
 	
+	public Minihome refreshInfo(String memberId) {
+		Connection conn = getConnection();
+		Minihome info = dao.refreshInfo(conn, memberId);
+		close(conn);
+		return info;
+	}
 }

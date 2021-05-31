@@ -10,7 +10,7 @@ Minimi mini=(Minimi)request.getAttribute("minimi");
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
-		<table id=minimiTable>
+		<table id=MinimiTable>
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<tr>
 			<td>

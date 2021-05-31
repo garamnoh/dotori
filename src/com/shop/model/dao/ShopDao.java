@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.Skin;
 
 public class ShopDao {
 private Properties prop=new Properties();
@@ -65,6 +66,29 @@ private Properties prop=new Properties();
 				mini.setPrice(rs.getInt("price"));
 				mini.setTitle(rs.getString("title"));
 				list.add(mini);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}return list;
+	}
+	public List<Skin> skinList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Skin> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("skinList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk=new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setFilepath(rs.getString("filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				list.add(sk);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

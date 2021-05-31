@@ -9,6 +9,7 @@ import java.util.List;
 import com.shop.model.dao.ShopDao;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.Skin;
 
 
 public class ShopService {
@@ -27,5 +28,12 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return list;
 	}
+	public List<Skin> skinList(){
+		Connection conn=getConnection();
+		List<Skin> list =dao.skinList(conn); 
+		close(conn);
+		return list;
+	}
+	
 
 }

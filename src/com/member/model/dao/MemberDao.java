@@ -13,6 +13,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.member.model.vo.Member;
+import com.minihome.model.vo.Minihome;
 import com.shop.model.vo.Minimi;
 
 
@@ -235,5 +236,34 @@ public class MemberDao {
 		} finally {
 			close(ps);
 		} return result;
+	}
+	
+	public Minihome refreshInfo(Connection conn, String memberId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		Minihome info = null;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("refreshInfo"));
+			ps.setString(1, memberId);
+			
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				
+				info = new Minihome();
+				
+				info.setToday(rs.getInt("TODAY"));
+				info.setTotal(rs.getInt("TOTAL"));
+				
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return info;
 	}
 }
