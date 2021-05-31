@@ -109,8 +109,8 @@ public class DiaryDao {
 			pstmt.setString(1, d.getMemberId());
 			pstmt.setString(2, d.getWriter());
 			pstmt.setString(3, d.getTitle());
-			pstmt.setInt(4,  1);
-			pstmt.setString(5, d.getContent());
+			//pstmt.setInt(4,  1);
+			pstmt.setString(4, d.getContent());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
