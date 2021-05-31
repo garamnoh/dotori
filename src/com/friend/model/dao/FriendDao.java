@@ -95,4 +95,25 @@ public class FriendDao {
 			close(ps);
 		} return friendsList;
 	}
+	
+	public int deleteFriend(Connection conn, String followee, String follower) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("deleteFriend"));
+			ps.setString(1, followee);
+			ps.setString(2, follower);
+			ps.setString(3, follower);
+			ps.setString(4, followee);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
 }

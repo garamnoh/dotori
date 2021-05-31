@@ -146,4 +146,33 @@
 		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
 		window.open(url,"",status);
 	});
+	
+	$('#administration button#delete').on('click', (e)=>{
+		const follower = $(e.target).prev().prev().val();
+		console.log(follower);
+		
+		if(confirm('일촌을 끊으시겠습니까?')){
+			
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/deleteFriend',
+				data: {
+					'follower': follower
+				},
+				success: data=>{
+					const result = data['result'];
+					console.log(result);
+					if(result > 0){
+						alert('일촌 삭제 성공');
+						$(e.target).parent().parent().html("<p style='text-align:center;color:tomato;'>일촌이 삭제되었습니다</p><style>#delP{text-align:center}</style>");
+					}
+					else alert('일촌 삭제 실패');
+				},
+				error: (r,s,m)=>{
+					console.log(r);
+					console.log(s);
+				}
+			});
+		}
+		
+	});
 </script>

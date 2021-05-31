@@ -26,4 +26,11 @@ public class FriendService {
 		close(conn);
 		return friendsList;
 	}
+	
+	public int deleteFriend(String followee, String follower) {
+		Connection conn = getConnection();
+		int result = dao.deleteFriend(conn, followee, follower);
+		close(conn);
+		return result;
+	}
 }
