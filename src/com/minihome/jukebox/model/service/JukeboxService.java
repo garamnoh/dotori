@@ -2,6 +2,8 @@ package com.minihome.jukebox.model.service;
 
 import static com.common.JDBCTemplate.close;
 import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -32,6 +34,15 @@ public class JukeboxService {
 		List<String> albumList=jukeboxDao.getMyAlbums(conn,hostMemberId);
 		close(conn);
 		return albumList;
+	}
+	
+	public int changeFolder(String hostMemberId,String targetFolder,String musicNoArrayStr) {
+		Connection conn=getConnection();
+		int changeFolderResult=jukeboxDao.changeFolder(conn,hostMemberId,targetFolder,musicNoArrayStr);
+		if(changeFolderResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return changeFolderResult;
 	}
 	
 }

@@ -25,12 +25,22 @@ public class MinihomeRightPageToJukeboxServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String hostMemberId=request.getParameter("hostMemberId");
 		String album=request.getParameter("album");
+		String targetFolder=request.getParameter("targetFolder");
+		String musicNoArrayStr=request.getParameter("musicNoArray");
+		
+		if(musicNoArrayStr!=null) {
+			int changeFolderResult=jukeboxService.changeFolder(hostMemberId,targetFolder,musicNoArrayStr);
+		}
+		
+		List<String> albumList=jukeboxService.getMyAlbums(hostMemberId);
 		List<Music> musicList=null;
 		if(album==null||album.equals("내 모든 음악")) {
 			musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
 		}else {
 			musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,album);
 		}
+		request.setAttribute("albumList",albumList);
+		request.setAttribute("album",album);
 		request.setAttribute("musicList",musicList);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_jukebox.jsp").forward(request,response);

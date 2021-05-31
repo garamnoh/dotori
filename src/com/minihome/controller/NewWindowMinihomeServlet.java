@@ -82,7 +82,7 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 			}
 		}
 		minihome=minihomeService.getMinihome(hostMemberId);
-		List<Music> musicList=jukeboxService.getMyMusicOnJukebox(hostMemberId);
+		List<Music> musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,"배경음악");
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);

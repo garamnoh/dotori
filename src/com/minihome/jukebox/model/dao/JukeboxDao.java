@@ -58,8 +58,6 @@ public class JukeboxDao {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Music> musicList=new ArrayList();
-		System.out.println("daodao"+hostMemberId);
-		System.out.println("daodao"+album);
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("getMyMusicOnAlbum"));
 			pstmt.setString(1,hostMemberId);
@@ -100,6 +98,24 @@ public class JukeboxDao {
 			close(rs);close(pstmt);
 		}
 		return albumList;
+	}
+	
+	public int changeFolder(Connection conn,String hostMemberId,String targetFolder,String musicNoArrayStr) {
+		PreparedStatement pstmt=null;
+		int changeFolderResult=0;
+		String sql=prop.getProperty("changeFolder").replace("#","("+musicNoArrayStr+")");
+		System.out.println("testtest "+sql);
+		try {
+			pstmt=conn.prepareStatement(sql);
+			pstmt.setString(1,targetFolder);
+			pstmt.setString(2,hostMemberId);
+			changeFolderResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return changeFolderResult;
 	}
 	
 }
