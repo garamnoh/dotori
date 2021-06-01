@@ -34,6 +34,16 @@
 		</div>
 		<div style="border:1px solid black;padding:20px 20px;width:400px;display:none;">
 			<%for(int j=0;j<commentList.size();j++) {%>
+				
+			
+			
+			
+			
+			
+			
+			
+			
+			
 				<%if(commentList.get(j).getCommentLevel()==1&&albumList.get(i).getImgNo()==commentList.get(j).getAlbumRef()) {%>
 					<div style="font-size:12px;text-align:left;">
 						레벨 : <%=commentList.get(j).getCommentLevel()%> / 
@@ -52,6 +62,17 @@
 							<%=commentList.get(k).getCommentContent()%>
 							<%=commentList.get(k).getCommentDate()%>
 						</div>
+					<%} %>
+					<%for(int l=0;l<commentList.size();l++) {%>
+						<%if(commentList.get(l).getCommentLevel()==3&&albumList.get(i).getImgNo()==commentList.get(l).getAlbumRef()&&commentList.get(l).getAlbumCommentRef()==commentList.get(k).getCommentNo()) {%>
+							<div style="font-size:12px;text-align:right;">
+								레벨 : <%=commentList.get(l).getCommentLevel()%> / 
+								cr : <%=commentList.get(l).getAlbumCommentRef()%> / 
+								<%=commentList.get(l).getCommentWriter()%>
+								<%=commentList.get(l).getCommentContent()%>
+								<%=commentList.get(l).getCommentDate()%>
+							</div>
+						<%} %>
 					<%} %>
 				<%} %>
 			<%} %>
