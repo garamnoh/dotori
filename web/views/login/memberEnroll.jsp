@@ -47,7 +47,7 @@
         
         
         
-        <button type="button" id= "IdCheck" onclick="fn_duplicateId();">중복확인</button>   
+        <button type="button" id= "IdCheck" onclick="fn_duplicateId();" >확인</button>   
        
         <div id="pwd" >비밀번호  
         <br>  
@@ -67,7 +67,8 @@
     </div>
 
 	  <div id="ninkname">
-        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최대 10글자" name="nickname"> <button type="button" id= "ninknameck">중복확인</button>  
+        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최대 10글자" name="nickname"> 
+        <button type="button" id= "ninknameck" onclick="fn_duplicateNickname();">확인</button>  
     </div>
 	<br>
     <div id="no">
@@ -106,6 +107,10 @@
         <button id= "okay">등록</button>    
 
  </form> 
+ 
+ <form name="duplicateFrm" action="" method="post">
+  	<input type="hidden" name="memberId">
+  </form>
 </section>
     </div>
       
@@ -153,7 +158,8 @@
                 
                 const fn_id_invalidate=()=>{
             	
-            		const userId=$("#email1").val();
+            		const userId=$("#email1").val()+$("#domain").val();
+            		console.log(userId);
             		if(userId.trim().length<5){
             			alert("계정명은 5글자 이상으로 작성하세요");
             			$("#email1").focus();
@@ -163,21 +169,45 @@
             		
             	}      
                 //계정명 중복체크
-    <%--             const fn_duplicateId=()=>{
+               const fn_duplicateId=()=>{
              		const status="width=300px,height=200px,left=500px,top=500px";
              		const title="duplicateId";
              		const url="<%=request.getContextPath()%>/checkDuplicateId";
              		
              		open("",title,status);
              		
-             		console.log(duplicateFrm);
-             		duplicateFrm.memberId.value=$("#memberId").val();
+             		console.log($("#email1").val()+"@"+$("#domain").val());
+     				/* console.log(duplicateFrm); */
+             		duplicateFrm.memberId.value=$("#email1").val()+"@"+$("#domain").val();
              		duplicateFrm.target=title;
              		duplicateFrm.action=url;
-             		duplicateFrm.submit();
-             	} --%>
+             		duplicateFrm.submit();  
+             	} 
+               
+               const fn_duplicateNinkname=()=>{
+            	   
+            	   
+            	   
+               }
        
-                
+               
+               $("#ninknameck").keyup(e=>{
+					if($(e.target).val().length>=4){
+						$.ajax({
+							url:"<%=request.getContextPath()%>/ajax/duplicateNickname",
+							data:{"ninckName":$(e.target).val()},
+							success:data=>{
+								console.log(data);
+								$("#ninckName+span").remove();
+								if(data){
+									$("#ninknameck").after("<span style='color:green;'>사용가능한 아이디입니다</span>");
+								}else{
+									$("#ninknameck").after("<span style='color:red;'>중복된 아이디입니다</span>");
+								}
+							}
+						})
+					}
+				})
                 
                
                

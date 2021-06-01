@@ -1,7 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
 <%
 	boolean result=(boolean)request.getAttribute("result");
+	String memberId=request.getParameter("memberId");
+	String localPart=memberId.substring(0,memberId.indexOf("@"));
+	String domain=memberId.substring(memberId.indexOf("@")+1);
+	/* String selectEmail=request.getParameter("selectEmail"); */
 %>    
 <!DOCTYPE html>
 <html>
@@ -15,30 +20,37 @@
 	span#duplicated{
 	color:red; font-weight:bold;
 	}
+	span#duplicated1{
+	color:green; font-weight:bold;
+	}
 
 </style>
 </head>
 <body>
 	<div id="checkId-container">
 		<%if(result){ %>
-			[<span><%=request.getParameter("memberId") %></span>]는 사용가능합니다.	
+			[<span id="duplicated1"><%=request.getParameter("memberId") %></span>]는 사용가능합니다.	
 			<br><br>
-			<button type="button" onclick="fn_close();">닫기</button>
+		<button type="button" onclick="fn_close();">닫기</button>
 		<%}else{ %>
 			[<span id="duplicated"><%=request.getParameter("memberId") %></span>]는 사용중입니다.
 			<br><br>
+			
 			<!-- 아이디 재입력창 구성 -->
 			<form action="<%=request.getContextPath() %>/checkDuplicateId" method="post">
-				<input type="text" name="memberId" id="userId">
-				<input type="submit" value="중복검사" >
+				<input type="text" name="memberId" id="memberId" placeholder='이메일 형식으로 입력하세요'>
+				
+				<input type="submit" value="중복검사">
 			</form>
 		<%} %>
 	</div>
-	
 	<script>
 	 const fn_close=()=>{
-	opener.document.getElementById("userId_").value='<%=request.getParameter("memberId")%>';
-	opener.document.getElementById("password").focus();
+	
+	opener.document.getElementById("email1").value="<%=localPart%>";
+	opener.document.getElementById("domain").value="<%=domain%>";  
+	
+	//opener.document.getElementById("password").focus();
 	window.close(); /* 윈도우 닫기 */
 		 
 	 }

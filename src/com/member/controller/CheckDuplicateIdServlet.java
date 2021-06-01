@@ -31,10 +31,13 @@ public class CheckDuplicateIdServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//클라이언트가 보낸 userId값이 DB Member 테이블에 있는지 확인
-		String localPart=request.getParameter("memberId");
-		String domain=request.getParameter("domain");//
-		
-		String memberId=localPart+"@"+domain;
+		/*
+		 * String localPart=request.getParameter("memberId"); String
+		 * domain=request.getParameter("domain");//
+		 */
+		//String memberId=localPart+"@"+domain;
+		String memberId=request.getParameter("memberId");
+		System.out.println(memberId);
 		
 		Member m =new MemberService().selectMemberId(memberId);
 		//m이 null 이면 중복값이 없다.
