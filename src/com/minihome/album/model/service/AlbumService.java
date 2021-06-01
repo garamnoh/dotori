@@ -45,4 +45,22 @@ public class AlbumService {
 		return changeFolderResult;
 	}
 	
+	public int addFolder(String hostMemberId,String addFolderTitle) {
+		Connection conn=getConnection();
+		int addFolderResult=albumDao.addFolder(conn,hostMemberId,addFolderTitle);
+		if(addFolderResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return addFolderResult;
+	}
+	
+	public int deleteFolder(String hostMemberId,String deleteFolderTarget) {
+		Connection conn=getConnection();
+		int deleteFolderResult=albumDao.deleteFolder(conn,hostMemberId,deleteFolderTarget);
+		if(deleteFolderResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return deleteFolderResult;
+	}
+	
 }

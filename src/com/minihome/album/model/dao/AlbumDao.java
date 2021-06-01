@@ -125,4 +125,37 @@ public class AlbumDao {
 		return changeFolderResult;
 	}
 	
+	public int addFolder(Connection conn,String hostMemberId,String addFolderTitle) {
+		PreparedStatement pstmt=null;
+		int addFolderResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("addFolder"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,addFolderTitle);
+			addFolderResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return addFolderResult;
+	}
+	
+	public int deleteFolder(Connection conn,String hostMemberId,String deleteFolderTarget) {
+		PreparedStatement pstmt=null;
+		int deleteFolderResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteFolder"));
+			pstmt.setString(1,"기본폴더");
+			pstmt.setString(2,hostMemberId);
+			pstmt.setString(3,deleteFolderTarget);
+			deleteFolderResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return deleteFolderResult;
+	}
+	
 }
