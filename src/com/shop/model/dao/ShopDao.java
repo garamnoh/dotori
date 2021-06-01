@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.member.model.vo.Member;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
 import com.shop.model.vo.Skin;
@@ -97,5 +98,63 @@ private Properties prop=new Properties();
 			close(pstmt);
 		}return list;
 	}
+	
+	public List<String> searchTitle(Connection conn,String type,String keyword){
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		List<String> list =new ArrayList();
+//		if(type=="skin") {
+//			String sql=prop.getProperty("searchSkinList");
+//		}else if(type=="mini") {
+//			String sql=prop.getProperty("searchMiniList");	
+//		}else if(type=="music") {
+//			String sql=prop.getProperty("searchMusicList");
+//		}
+		String sql=prop.getProperty("searchList");
+		try {
+			if(type.equals("skin")) {
+				//pstmt=conn.prepareStatement(sql.replace("#", type));
+				sql=sql.replace("#table", "skin");
+				sql=sql.replace("#col1", "skin_title as title");
+				sql=sql.replace("#col", "skin_title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				
+					
+			}else if(type.equals("mini")) {
+				sql=sql.replace("#table", "minimi");
+				sql=sql.replace("#col1", "title as title");
+				sql=sql.replace("#col", "title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				
+				
+			}else if(type.equals("music")) {
+				
+				sql=sql.replace("#table", "music");
+				sql=sql.replace("#col1", "music_title as title");
+				sql=sql.replace("#col", "music_title");
+				pstmt=conn.prepareStatement(sql);
+				pstmt.setString(1, "%"+keyword+"%");
+				
+					
+			}
+			rs=pstmt.executeQuery();
+			
+			while(rs.next()) {
+				
+				String s=rs.getString("title");
+				list.add(s);
+			}
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return list;
+	}
+	
 
 }

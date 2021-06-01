@@ -11,7 +11,7 @@
 	<form>
 		<div id="diary_input_box">
 			<div id="input_minimi_container">
-				<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="나의미니미">
+				<img src="<%=request.getContextPath()%>/upload/MINIMI/brown.png" alt="나의미니미">
 			</div>
 			<div id="diary_input_container">
 				<div id="diary_title_left">
@@ -52,11 +52,17 @@
 			<tr>
 				<div id="diary_content_box">
 					<div id="minimi_container">
-						<img src="<%=request.getContextPath()%>/upload/MINIMI/mickey.jpg" alt="미니미">
+						<img src="<%=request.getContextPath()%>/upload/MINIMI/selly.png" alt="미니미">
 						<div id="diary_content_list">
-							<th><pre><%=d.getWriter() %>				<%=d.getPostDate() %></pre></th>
-								<!-- 해당 아이디의 이름 출력해주기 -->
-							<td><%=d.getContent() %></td>							
+							<div id="diary_content_title">
+								<div id="diary_writer_container"><%=d.getMemberName()%></div>									
+								<div id="diary_date_container"><%=d.getPostDate() %></div>
+								<div id="diary_btn_container">
+									<p id="diary_up_btn">수정</p>
+									<p id="diary_del_btn">삭제</p>
+								</div>
+							</div>
+							<div id="diary_content_content"><%=d.getContent() %></div>							
 						</div>
 					</div>
 				</div>

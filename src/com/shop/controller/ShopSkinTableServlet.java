@@ -35,7 +35,7 @@ public class ShopSkinTableServlet extends HttpServlet {
 		List<Skin> list=new ShopService().skinList();
 		Skin s= new Skin();
 		request.setAttribute("skinList", list); //data
-		request.setAttribute("skin", s); 
+		request.setAttribute("type", "skin"); 
 		request.getRequestDispatcher("/views/shop/shopSkin.jsp").forward(request, response);
 		
 	}
