@@ -28,7 +28,7 @@
           <form action="<%=request.getContextPath()%>/memberEnrollEnd" method="post" onsubmit="return fn_id_invalidate();" >
        <p style="font-weight: bold; text-align: center;">회원가입</p>
        
-        계정  <br><input type="text"  placeholder="5글자이상" name="memberId" id="email1"required>  @ 
+        계정  <br><input type="text" name="memberId" id="email1"required>  @ 
         <input type="text" name="domain" id="domain"  value=""> 
         <select name='selectEmail' id="selectEmail" >
              		<option value="1">직접입력</option>
@@ -47,7 +47,7 @@
         
         
         
-        <button type="button" id= "IdCheck" onclick="fn_duplicateId();" >확인</button>   
+        <button type="button" id= "IdCheck" onclick="fn_duplicateId();">확인</button>   
        
         <div id="pwd" >비밀번호  
         <br>  
@@ -63,12 +63,12 @@
         </div> 
        
     <div id="name">
-        이름 <br>	 <input type="text" required name="memberName"> 
+        이름 <br>	 <input type="text" required name="memberName" id=memberName> 
     </div>
 
-	  <div id="ninkname">
-        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최대 10글자" name="nickname"> 
-        <button type="button" id= "ninknameck" onclick="fn_duplicateNickname();">확인</button>  
+	  <div id="ninkname1">
+        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최대 10글자" name="nickname" id= "nickname" > 
+        <button type="button" onclick="fn_duplicateNickname();">확인</button>  
     </div>
 	<br>
     <div id="no">
@@ -111,6 +111,9 @@
  <form name="duplicateFrm" action="" method="post">
   	<input type="hidden" name="memberId">
   </form>
+   <form name="duplicateFrm1" action="" method="post">
+  	<input type="hidden" name="nickname">
+  </form>
 </section>
     </div>
       
@@ -143,72 +146,145 @@
                     let ck=$(e.target).val();
                     console.log(pw);
                     console.log(ck);
-                    if(ck.length>4){
-                        if(ck==pw){
+                   
+                        
+                   
+                    	if(pw==ck){
                             $(e.target).next().html("비밀번호가 일치합니다.").css("color","green");
                         }else{
                             $(e.target).next().html("비밀번호가 일치하지 않습니다.").css("color","red");
-                           alert("비밀번호를 다시 입력해주세요");
+                          
                            $(e.target).focus();
                         }
-                    }
+                    
                 });
-                   
-                   
+             
                 
+                	
+                	 $("#pw").blur((e)=>{ 
+                		 
+                		 let pw=$(e.target).parent().prev().children("input").val();
+                         let ck=$(e.target).val();
+                         if(ck.length<5){  
+                        	  alert("비밀번호를 5자리이상 입력해주세요");
+    
+                        	return false;
+                         }
+                		  
+                	 
+        				});
+                //등록
                 const fn_id_invalidate=()=>{
             	
-            		const userId=$("#email1").val()+$("#domain").val();
+            		const userId=$("#email1").val();/* +$("#domain").val() */
+            
             		console.log(userId);
-            		if(userId.trim().length<5){
-            			alert("계정명은 5글자 이상으로 작성하세요");
+            		if(userId.trim().length<2){
+            			alert("계정명은 2글자 이상으로 작성하세요");
             			$("#email1").focus();
             			return false;
             		}
             		
+       
             		
             	}      
                 //계정명 중복체크
                const fn_duplicateId=()=>{
-             		const status="width=300px,height=200px,left=500px,top=500px";
+             		
+            	   
+           		
+            	   
+            		const userId=$("#email1").val();/* +$("#domain").val() */
+            		const userId2=$("#domain").val();
+            		const email=$("#email1").val()+"@"+$("#domain").val();
+            		const regExp = /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
+            		
+            		
+            		
+            		if(userId.trim().length<2){
+            			alert("계정명은 2글자 이상으로 작성하세요");
+            			$("#email1").focus();
+            			return false;
+            		}
+            		
+       
+            		
+            		if(regExp.test(email)==false){
+
+            			//이메일 형식이 알파벳+숫자@알파벳+숫자.알파벳+숫자 형식이 아닐 경우
+
+            			alert("이메일 형식이 올바르지 않습니다.");
+            			
+            			return false;
+
+            			}
+            		
+            		if(userId2.replace(/\s|　/gi,'').length==0){
+            			alert("이메일을 입력해주세요");
+            			$("#domain").focus();
+            			return false;
+            		}
+            		
+            
+           
+            	   
+            	   const status="width=300px,height=200px,left=500px,top=500px";
              		const title="duplicateId";
              		const url="<%=request.getContextPath()%>/checkDuplicateId";
              		
              		open("",title,status);
              		
-             		console.log($("#email1").val()+"@"+$("#domain").val());
+             	//	console.log($("#email1").val()+"@"+$("#domain").val());
      				/* console.log(duplicateFrm); */
              		duplicateFrm.memberId.value=$("#email1").val()+"@"+$("#domain").val();
              		duplicateFrm.target=title;
              		duplicateFrm.action=url;
              		duplicateFrm.submit();  
+
+             		
+             		
+             		
              	} 
                
-               const fn_duplicateNinkname=()=>{
+               //이름 잠시 보류
+
+   /*             $("#memberName").blur((e)=>{ 
+               const name=$(e.target).val();
+               const regExpName =/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+           		if(regExpName.test(name)==false){
+
+    			alert("이름이 올바르지 않습니다.");
+    			$("#memberName").focus();
+    			return false;
+           		}
+    			
+	
+    			
+           		}); */
+           		
+               
+               const fn_duplicateNickname=()=>{
             	   
+            	   const nickname=$("#nickname").val();
             	   
+            	   const status="width=300px,height=200px,left=500px,top=500px";
+            		const title="duplicatenickname";
+            		const url="<%=request.getContextPath()%>/checkDuplicatenickname";
+            		
+            		open("",title,status);
+            		
+            	//	console.log($("#email1").val()+"@"+$("#domain").val());
+    				/* console.log(duplicateFrm); */
+            		duplicateFrm1.nickname.value=$("#nickname").val();
+            		duplicateFrm1.target=title;
+            		duplicateFrm1.action=url;
+            		duplicateFrm1.submit();  
+
             	   
                }
        
                
-               $("#ninknameck").keyup(e=>{
-					if($(e.target).val().length>=4){
-						$.ajax({
-							url:"<%=request.getContextPath()%>/ajax/duplicateNickname",
-							data:{"ninckName":$(e.target).val()},
-							success:data=>{
-								console.log(data);
-								$("#ninckName+span").remove();
-								if(data){
-									$("#ninknameck").after("<span style='color:green;'>사용가능한 아이디입니다</span>");
-								}else{
-									$("#ninknameck").after("<span style='color:red;'>중복된 아이디입니다</span>");
-								}
-							}
-						})
-					}
-				})
-                
+    
                
                
                 

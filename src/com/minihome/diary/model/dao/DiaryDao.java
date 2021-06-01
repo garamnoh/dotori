@@ -135,4 +135,21 @@ public class DiaryDao {
 		return result;	
 	}
 	
+	public int updateDiary(Connection conn, Diary d) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateDiary"));
+			pstmt.setInt(1,  d.getFolderNo());
+			pstmt.setString(2, d.getContent());
+			pstmt.setInt(3, d.getDiaryNo());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
 }

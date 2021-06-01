@@ -1,49 +1,46 @@
-package com.minihome.diary.controller;
+package com.member.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
+
 
 /**
- * Servlet implementation class DiaryDeleteServlet
+ * Servlet implementation class CheckDuplicateIdServlet
  */
-@WebServlet("/diary/diaryDelete")
-public class DiaryDeleteServlet extends HttpServlet {
+@WebServlet("/checkDuplicatenickname")
+public class CheckDuplicatenicknameServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryDeleteServlet() {
-        super();
-        // TODO Auto-generated constructor stub
+    public CheckDuplicatenicknameServlet() {
+        
+    	
     }
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		Diary d=new Diary();
-		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		System.out.println(diaryNo);
-		String id=request.getParameter("loginMemberId");
-		d.setDiaryNo(diaryNo);
-		d.setWriter(id);
 
-		int result=new DiaryService().deleteDiary(d);		
+		String nickname=request.getParameter("nickname");
+		System.out.println(nickname);
 		
-		if(result>0) {
-			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
-		}	
+		Member m =new MemberService().selectNickname(nickname);
+
 		
+		request.setAttribute("result", m==null?true:false);
+		request.setAttribute("nickname", nickname);
+		request.getRequestDispatcher("/views/login/checkDuplicatenickname.jsp")
+		.forward(request, response);
 	}
 
 	/**

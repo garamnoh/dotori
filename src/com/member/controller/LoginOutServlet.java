@@ -1,27 +1,29 @@
-package com.minihome.diary.controller;
+package com.member.controller;
 
 import java.io.IOException;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DiaryDeleteServlet
+ * Servlet implementation class LoginServlet
  */
-@WebServlet("/diary/diaryDelete")
-public class DiaryDeleteServlet extends HttpServlet {
+@WebServlet("/memberLogout")
+public class LoginOutServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryDeleteServlet() {
+    public LoginOutServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,24 +33,22 @@ public class DiaryDeleteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Diary d=new Diary();
-		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		System.out.println(diaryNo);
-		String id=request.getParameter("loginMemberId");
-		d.setDiaryNo(diaryNo);
-		d.setWriter(id);
-
-		int result=new DiaryService().deleteDiary(d);		
+		//로그아웃-> session 값을 삭제 invalidate();
+		HttpSession session=request.getSession(false);
+		if(session!=null) {
+			session.invalidate();
+		}
+ 		response.sendRedirect(request.getContextPath());
+ 		
 		
-		if(result>0) {
-			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
-		}	
-		
+	
+	
+	
+	
+	
 	}
 
-	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
-	 */
+	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		doGet(request, response);
