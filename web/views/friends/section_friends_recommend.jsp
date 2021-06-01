@@ -17,11 +17,11 @@
 					<div id='person'>
 						<span><%=f.getFollowerProfileName() %></span>
 						<span><%=f.getFollowerProfilePhone() %></span>
-						<span><%=f.getFollower() %></span>
+						<span id='followerId'><%=f.getFollower() %></span>
 					</div>
 					<div id='buttons'>
-						<button id='minihome'>수락</button>
-						<button id='delete'>삭제</button>
+						<button id='accept'>수락</button>
+						<button id='delete'>거절</button>
 					</div>
 				</div>
 			<% } %>
@@ -129,3 +129,49 @@
 	}
 	
 </style>
+
+<script>
+	$('#propose #accept').on('click', (e)=>{
+		const follower = $(e.target).parent().prev().children('span#followerId').text();
+		
+ 		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/acceptFriend',
+			data: {
+				'follower': follower
+			},
+			success: data=>{
+				const result = data['result'];
+				console.log(result);
+				if(result > 0){
+					alert('일촌 수락 완료');
+					$(e.target).parent().parent().html("<p id='delP'>일촌이 수락완료</p><style>#delP{margin: 12px 0;width:100%;text-align:center;color:teal;font-size:14px;}</style>");
+					setTimeout(()=>{
+						$('#delP').parent().animate({height:0,opacity:0}, 500);
+						$('#delP').animate({opacity:0}, 500);
+					}, 2000);
+				}
+				else alert('일촌 수락 실패');
+			},
+			error: (r,s,m)=>{
+				console.log(r);
+				console.log(s);
+			}
+		});
+	});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

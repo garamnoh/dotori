@@ -33,4 +33,11 @@ public class FriendService {
 		close(conn);
 		return result;
 	}
+	
+	public int acceptFriend(String followee, String follower) {
+		Connection conn = getConnection();
+		int result = dao.acceptFriend(conn, followee, follower);
+		close(conn);
+		return result;
+	}
 }

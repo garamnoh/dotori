@@ -126,7 +126,6 @@
 	#content1>#administration>#detail>#buttons>button:active{
 		opacity: 1;
 	}
-	
 </style>
 
 
@@ -163,7 +162,11 @@
 					console.log(result);
 					if(result > 0){
 						alert('일촌 삭제 성공');
-						$(e.target).parent().parent().html("<p style='text-align:center;color:tomato;'>일촌이 삭제되었습니다</p><style>#delP{text-align:center}</style>");
+						$(e.target).parent().parent().html("<p id='delP'>일촌이 삭제되었습니다</p><style>#delP{margin: 12px 0;width:100%;text-align:center;color:tomato;font-size:14px;}</style>");
+						setTimeout(()=>{
+							$('#delP').parent().animate({height:0,opacity:0}, 500);
+							$('#delP').animate({opacity:0}, 500);
+						}, 2000);
 					}
 					else alert('일촌 삭제 실패');
 				},

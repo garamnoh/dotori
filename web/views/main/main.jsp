@@ -138,7 +138,7 @@
 					});
 					
 					$.ajax({
-						url: '<%= request.getContextPath() %>/page/contentFriends',
+						url: '<%= request.getContextPath() %>/friends/myFriends',
 						dataTypd: 'html',
 						success: data=>{
 							$('#section').append(data);

@@ -116,4 +116,38 @@ public class FriendDao {
 			close(ps);
 		} return result;
 	}
+	
+	public int acceptFriend(Connection conn, String followee, String follower) {
+		
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		int result = 0;
+		
+		try {
+			ps1 = conn.prepareStatement(prop.getProperty("acceptFriend"));
+			ps1.setString(1, "일촌");
+			ps1.setString(2, followee);
+			ps1.setString(3, follower);
+			
+			result = ps1.executeUpdate();
+			
+			if(result > 0) {
+				
+				ps2 = conn.prepareStatement(prop.getProperty("addFollowerRow"));
+				ps2.setString(1, follower);
+				ps2.setString(2, followee);
+				ps2.setString(3, "일촌");
+				
+				result = ps2.executeUpdate();
+			} else {
+				result = 0;
+			}
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps1);
+			close(ps2);
+		} return result;
+	}
 }
