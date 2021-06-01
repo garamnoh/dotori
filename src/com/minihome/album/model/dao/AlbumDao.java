@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.minihome.album.model.vo.Album;
+import com.minihome.album.model.vo.AlbumComment;
 
 public class AlbumDao {
 
@@ -156,6 +157,33 @@ public class AlbumDao {
 			close(pstmt);
 		}
 		return deleteFolderResult;
+	}
+	
+	public List<AlbumComment> getMyComments(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<AlbumComment> commentList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyComments"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				AlbumComment c=new AlbumComment();
+				c.setCommentNo(rs.getInt("comment_no"));
+				c.setCommentLevel(rs.getInt("comment_level"));
+				c.setCommentWriter(rs.getString("comment_writer"));
+				c.setCommentContent(rs.getString("comment_content"));
+				c.setAlbumRef(rs.getInt("album_ref"));
+				c.setAlbumCommentRef(rs.getInt("album_comment_ref"));
+				c.setCommentDate(rs.getDate("comment_date"));
+				commentList.add(c);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return commentList;
 	}
 	
 }
