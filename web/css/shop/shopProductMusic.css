@@ -1,6 +1,12 @@
-body{
+
+/* 가람씨랑 말맞추기 */
+body{ 
     display: flex;
     justify-content: center;
+}
+
+#section{
+	overflow:scroll;
 }
 
 /* test img내용  */
@@ -45,5 +51,6 @@ div.productMusic{
 }
 /* table 양옆 사이 조정 */
 #MusicTable>tbody tr td{
-    padding: 0 0 40px 40px;   
+	
+    padding: 40px 0 40px 40px;   
 }

@@ -7,8 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.member.service.MemberService;
 
 
 /**

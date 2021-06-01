@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.member.service.MemberService;
 
 
 /**
@@ -69,6 +69,9 @@ public class MemberEnrollEndServlet extends HttpServlet {
 		
 		if(result>0) {
 			//회원가입 성공
+			int enroll = new MemberService().enrollDefaultMinimi(memberId);
+			if(enroll > 0) System.out.println("회원가입 성공 - 기본프로필 등록 성공");
+			else System.out.println("회원가입 성공 - 기본프로필 등록 실패");
 			msg="회원가입 성공!";
 			loc="/";
 		}else {

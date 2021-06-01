@@ -17,7 +17,7 @@ public class ContentToShopSkinServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/shop/shopSkin.jsp").forward(request,response);
+		request.getRequestDispatcher("/shop/skinTable").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

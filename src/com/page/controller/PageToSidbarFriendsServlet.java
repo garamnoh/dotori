@@ -7,7 +7,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet("/page/sidebarFriends.do")
+@WebServlet("/page/sidebarFriends")
 public class PageToSidbarFriendsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -17,7 +17,7 @@ public class PageToSidbarFriendsServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/friends/sidebarFriends.jsp").forward(request,response);
+		request.getRequestDispatcher("/views/friends/aside_friends.jsp").forward(request,response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

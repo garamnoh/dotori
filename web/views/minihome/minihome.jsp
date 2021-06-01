@@ -1,16 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.member.model.vo.Member,com.minihome.model.vo.Minihome"%>
+    pageEncoding="UTF-8" import="java.util.List,com.member.model.vo.Member,com.minihome.model.vo.Minihome,com.shop.model.vo.Music"%>
 <%
-	Member loginMember=(Member)session.getAttribute("loginMember");
+	Member loginMember=(Member)request.getAttribute("loginMember");
 	Member hostMember=(Member)request.getAttribute("hostMember");
 	Minihome minihome=(Minihome)request.getAttribute("minihome");
-	/* List<MinimiItem> minimiItemList=(List<MinimiItem>)request.getAttribute("minimiItemList");
-	List<SkinItem> skinItemList=(List<SkinItem>)request.getAttribute("skinItemList");
 	List<Music> musicList=(List<Music>)request.getAttribute("musicList");
-	List<Photo> photoList=(List<Photo>)request.getAttribute("photoList");
-	List<Board> boardList=(List<Board>)request.getAttribute("boardList");
-	List<BoardComment> boardCommentList=(List<BoardComment>)request.getAttribute("boardCommentList");
-	List<Diary> diaryList=(List<Diary>)request.getAttribute("diaryList"); */
 %>   
 <!DOCTYPE html>
 <html lang="kor">
@@ -18,7 +12,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title><%=loginMember.getNickname()%>님의 미니홈피</title>
+    <title><%=hostMember.getNickname()%>님의 미니홈피</title>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
 </head>
@@ -27,7 +21,7 @@
 <div class="container">
     <div class="cover">
         <div class="sheet">
-            <div class="today">TODAY <span id="today">121</span> | TOTAL <span id="total">123904</span></div>
+            <div class="today">TODAY <span id="today"><%=minihome.getToday()%></span> | TOTAL <span id="total"><%=minihome.getTotal()%></span></div>
             <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
             <div id="left-page"></div>
             <div id="right-page"></div>
@@ -41,13 +35,31 @@
             <li>쥬크박스</li>
         </ul>
     </nav>
+    <div id="musicInfo" style="position:absolute;top:50px;left:1000px;background-color:white;font-weight:bolder;font-size:12px">
+        <%for(int i=0;i<musicList.size();i++) {%>
+            <span style="display:none;">
+                제목 : <%=musicList.get(i).getMusicTitle()%><br>가수 : <%=musicList.get(i).getSinger()%><br>
+            </span>
+            <input type="hidden" value="<%=i%>">
+        <%}%>
+    </div>
+    <button onclick="fn_muteBackMusic();" style="position:absolute;top:100px;left:1000px;">음소거/해제</button>
+    <button onclick="fn_pauseBackMusic();" style="position:absolute;top:150px;left:1000px;">일시정지/해제</button>
+    <button onclick="fn_replay();" style="position:absolute;top:200px;left:1000px;">현재 곡 다시재생</button>
+    <button onclick="fn_playNext();" style="position:absolute;top:250px;left:1000px;">다음 곡 재생</button>
+    <button onclick="fn_playPrevious();" style="position:absolute;top:300px;left:1000px;">이전 곡 재생</button>
     
-    <button onclick="fn_stopBackMusic();" style="position:absolute;top:100px;left:1000px;">배경음악 멈추기</button>
-    
-    <audio src="<%=request.getContextPath()%>/audio/Please Tell Me Why_프리스타일.mp3" id="backMusic" autoplay></audio>
+    <div id="backgroundMusic">
+    	<%for(int i=0;i<musicList.size();i++) {%>    
+    		<audio src="<%=request.getContextPath()%>/audio/<%=musicList.get(i).getFilepath()%>"></audio>
+		<%} %>
+    </div>
 </div>
 
+	<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">
+	<input type="hidden" id="hostMemberId" value="<%=hostMember.getMemberId()%>">
+
 	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
-	<script src="<%=request.getContextPath()%>/js/minihome/minihome.jsp"></script>
+	<script src="<%=request.getContextPath()%>/js/minihome/minihome.js"></script>
 </body>
 </html>

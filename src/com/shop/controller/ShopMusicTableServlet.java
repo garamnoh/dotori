@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.shop.model.vo.MusicItem;
+import com.shop.model.vo.Music;
 import com.shop.service.ShopService;
 
 /**
@@ -32,12 +32,12 @@ public class ShopMusicTableServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<MusicItem> list=new ShopService().musicList();
-		MusicItem m= new MusicItem();
+		List<Music> list=new ShopService().musicList();
+		Music m= new Music();
 		System.out.println(list);
 		System.out.println();
 		request.setAttribute("musicList", list); //data
-		request.setAttribute("music", m); 
+		request.setAttribute("type", "music"); 
 		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
 		
 	}

@@ -10,8 +10,9 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.member.service.MemberService;
+import com.member.model.vo.ProfilePath;
 
 @WebServlet("/login.do")
 public class LoginServlet extends HttpServlet {
@@ -33,12 +34,15 @@ public class LoginServlet extends HttpServlet {
 		System.out.println(password);
 		
 		Member m=service.login(userId,password);
+		String profilePath = service.profilePath(userId);
+		
 		System.out.println(m);
 		if(m!=null) {
+			session.setAttribute("profilePath", profilePath);
 			session.setAttribute("loginMember",m);
+			session.setAttribute("admin", m.getMemberId());
 			response.sendRedirect(request.getContextPath()+"/views/main/main.jsp");
 		}else {
- 			
  			String msg="아이디, 비밀번호가 일치하지 않습니다!";
  			String loc="/";
  			request.setAttribute("msg", msg);
@@ -46,8 +50,6 @@ public class LoginServlet extends HttpServlet {
  			
  			RequestDispatcher rd=request.getRequestDispatcher("/views/common/msg.jsp");
  			rd.forward(request, response);
- 			
- 			
  		}
 	}
 
