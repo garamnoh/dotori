@@ -3,16 +3,13 @@
     
 <%
 	boolean result=(boolean)request.getAttribute("result");
-	String memberId=request.getParameter("memberId");
-	String localPart=memberId.substring(0,memberId.indexOf("@"));
-	String domain=memberId.substring(memberId.indexOf("@")+1);
-	String selectEmail=request.getParameter("selectEmail"); 
+	String nickname=(String)request.getAttribute("nickname");
 %>    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>아이디 중복확인</title>
+<title>닉네임 중복확인</title>
 <style>
 	div#checkid-container{
 		text-align:center;padding-top:50px;
@@ -29,16 +26,16 @@
 <body>
 	<div id="checkId-container">
 		<%if(result){ %>
-			[<span id="duplicated1"><%=request.getParameter("memberId") %></span>]는 사용가능합니다.	
+			[<span id="duplicated1"><%=nickname%></span>]는 사용가능합니다.	
 			<br><br>
 		<button type="button" onclick="fn_close();">닫기</button>
 		<%}else{ %>
-			[<span id="duplicated"><%=request.getParameter("memberId") %></span>]는 사용중입니다.
+			[<span id="duplicated"><%=nickname %></span>]는 사용중입니다.
 			<br><br>
 			
 			<!-- 아이디 재입력창 구성 -->
-			<form action="<%=request.getContextPath() %>/checkDuplicateId" method="post">
-				<input type="text" name="memberId" id="memberId" placeholder='이메일 형식으로 입력하세요'>
+			<form action="<%=request.getContextPath() %>/checkDuplicatenickname" method="post">
+				<input type="text" name="nickname" id="nickname" placeholder='최대 10글자 입력'>
 				
 				
 				<input type="submit" value="중복검사" >
@@ -51,9 +48,8 @@
 	<script>
 	 const fn_close=()=>{
 	
-	opener.document.getElementById("email1").value="<%=localPart%>";
-	opener.document.getElementById("domain").value="<%=domain%>";  
-	opener.document.getElementById("selectEmail").value=opener.document.getElementById("domain").value; 
+	opener.document.getElementById("nickname").value="<%=nickname%>";
+
 	
 <%-- 	if(<%=domain%>==<%=selectEmail%>!){
 		opener.document.getElementById("selectEmail").value="1";

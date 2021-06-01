@@ -32,8 +32,9 @@
    
 
    
-        주민등록번호 :<input type="text" maxlength="6" size="10">-
-        <input type="password" maxlength="7"  id="no1">
+   <!--      주민등록번호 :<input type="text" maxlength="6" size="10">-
+        <input type="password" maxlength="7"  id="no1"> -->
+        핸드폰번호 : <input type="tel" placeholder="(-없이)01012345678" maxlength="11" required>
         <button id="ok">확인</button>
     </div> 
 </div>
@@ -47,7 +48,7 @@
 
         <select name='selectEmail' id="selectEmail">
         
-                   <option value="1">직접입력</option>
+            <option value="1">직접입력</option>
             <option value='dotori.com'>dotori.com</option>
             <option value="dreamwiz.com">dreamwiz.com</option> 
             <option value="freechal.com">freechal.com</option>
@@ -69,8 +70,7 @@
  
 
  
-      주민등록번호 :<input type="text" maxlength="6" size="10">-
-        <input type="password" maxlength="7" id="no1">
+       핸드폰번호 : <input type="tel" placeholder="(-없이)01012345678" maxlength="11" required>
       <button id="ok">확인</button>
   </div> 
 </div>

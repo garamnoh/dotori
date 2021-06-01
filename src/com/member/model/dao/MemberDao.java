@@ -115,6 +115,28 @@ public class MemberDao {
 	}
 	
 	
+	public Member selectNickname(Connection conn, String nickname) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectNickname"));
+			pstmt.setString(1, nickname);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setNickname(rs.getString("nickname"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;
