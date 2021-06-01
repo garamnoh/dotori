@@ -40,7 +40,6 @@ public class DiaryDao {
 				d.setDiaryNo(rs.getInt("diary_no"));
 				d.setMemberId(rs.getString("member_id"));
 				d.setWriter(rs.getString("writer"));
-				d.setTitle(rs.getString("title"));
 				d.setContent(rs.getString("content"));
 				d.setFolderNo(rs.getInt("folder_no"));
 				d.setPostDate(rs.getDate("post_date"));
@@ -70,7 +69,6 @@ public class DiaryDao {
 				d.setDiaryNo(rs.getInt("diary_no"));
 				d.setMemberId(rs.getString("member_id"));
 				d.setWriter(rs.getString("writer"));
-				d.setTitle(rs.getString("title"));
 				d.setContent(rs.getString("content"));
 				d.setFolderNo(rs.getInt("folder_no"));
 				d.setPostDate(rs.getDate("post_date"));
@@ -110,9 +108,8 @@ public class DiaryDao {
 			pstmt=conn.prepareStatement(prop.getProperty("insertDiary"));
 			pstmt.setString(1, d.getMemberId());
 			pstmt.setString(2, d.getWriter());
-			pstmt.setString(3, d.getTitle());
-			pstmt.setInt(4,  d.getFolderNo());
-			pstmt.setString(5, d.getContent());
+			pstmt.setInt(3,  d.getFolderNo());
+			pstmt.setString(4, d.getContent());
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -121,4 +118,21 @@ public class DiaryDao {
 		}
 		return result;	
 	}
+	
+	public int deleteDiary(Connection conn, Diary d) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteDiary"));	
+			pstmt.setInt(1,  d.getDiaryNo());
+			pstmt.setString(2, d.getWriter());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
+	}
+	
 }

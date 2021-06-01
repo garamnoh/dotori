@@ -42,14 +42,13 @@
 				<div id="minimi_container">
 					<img src="<%=request.getContextPath()%>/upload/MINIMI/admin_dotori.png" alt="관리자이미지">				
 					<div id="diary_user">							
-						<p>환영합니다. <%=hostMember.getMemberId()%>회원님 <br> <b>-도토리매니저-</b></p>
+						<%=hostMember.getMemberId()%>회원님 환영합니다*^^*<br> <b>-도토리매니저-</b>
 					</div>
 				</div>
 			</div>
 		</tr>
 	<%} else{ %>
-		<%for(Diary d : list) {%>
-			<tr>
+		<%for(Diary d : list) {%>			
 				<div id="diary_content_box">
 					<div id="minimi_container">
 						<img src="<%=request.getContextPath()%>/upload/MINIMI/selly.png" alt="미니미">
@@ -58,15 +57,15 @@
 								<div id="diary_writer_container"><%=d.getMemberName()%></div>									
 								<div id="diary_date_container"><%=d.getPostDate() %></div>
 								<div id="diary_btn_container">
-									<p id="diary_up_btn">수정</p>
-									<p id="diary_del_btn">삭제</p>
+									<div id="diary_up_btn">수정</div>
+									<div id="diary_del_btn">삭제</div>
 								</div>
-							</div>
+							</div>							
 							<div id="diary_content_content"><%=d.getContent() %></div>							
+							<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
 						</div>
 					</div>
-				</div>
-			</tr>
+				</div>			
 		<%} 
 	}%>	
 				
@@ -78,9 +77,8 @@
   $("#diary_input_btn").click(e=>{
 	  $.ajax({
 		  url:"<%=request.getContextPath()%>/diary/diaryWrite",
-		  type:"get",
-		  data:{
-			  "diary_title_input":$(".diary_title_input").val(),
+		  type:"post",
+		  data:{			  
 			  "diary_folder":$("select[name='diary_folder']").val(),
 			  "diary_content_input":$(".diary_content_input").val(),
 			  "loginMemberId":$("input[name='loginMemberId']").val(),
@@ -91,6 +89,22 @@
 			  $("#right-page").html(data);
 		  }
 	  })
+  });
+  
+  $("#diary_del_btn").click(e => {
+	 $.ajax({
+		 url:"<%=request.getContextPath()%>/diary/diaryDelete",
+		 type:"post",
+		 data:{
+		 	"diary_no":$("input[name='diary_no']").val(),
+		 	"loginMemberId":$("input[name='loginMemberId']").val()		 	
+		 },
+		 dataType:"html",
+		 success:data=>{
+			 console.log(data);
+			 $("#right-page").html(data);
+		 }
+	 }) 
   });
   </script>
 </div>
