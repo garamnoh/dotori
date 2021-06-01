@@ -1,0 +1,14 @@
+document.getElementById("albumMenu").addEventListener("click",(e)=>{
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "folder":e.target.innerText
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+});

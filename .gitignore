@@ -6,4 +6,4 @@
 .settings
 */target/*
 /web/WEB-INF/classes/
-/resources/
+/resources/driver/

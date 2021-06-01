@@ -27,6 +27,7 @@
 <input type="button" id="changeBtn" value="폴더 이동">
 
 <p>배경음악 앨범에 있는 음악들만 배경음악으로 재생됩니다<p>
+<p>삭제된 앨범 안의 음악들은 모두 '기본앨범'으로 이동합니다</p>
 
 <div id="jukeboxContainer">
 	<%if(musicList!=null) {%>
