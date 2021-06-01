@@ -5,19 +5,19 @@
 
 /*********전체 박스**********/
 #diary_content{  
-  height:500px;
-  width:520px;
-  overflow:auto;
-  margin:0 0 0 0;
-  background-color:white;
-  /* border:1px solid; */
+	height:500px;
+	width:520px;
+	overflow:auto;
+	margin:0 0 0 0;
+	background-color:white;
+	/* border:1px solid; */
 }
 /***********************/
 #diary_input_box{
 	display:flex;		
-  height:110px;
-  width:515px; 
-  border:1px solid;
+	height:110px;
+	width:515px; 
+	border:1px solid;
 }
 #input_minimi_container{
 	z-index:10;
@@ -36,7 +36,7 @@
 }
 #diary_input_title_box{
 	text-align:center;
-	width:345px;
+	width:85px;
 	height:25px;
 }
 #diary_input_content_box{
@@ -59,7 +59,8 @@
 	background-color:#8C8C8C;
 }
 .diary_folder{
-	width:80px;
+	display:inline-block;	
+	width:85px;
 	height:25px;
 	margin: 0 0 0 -10;
 }
@@ -81,6 +82,7 @@
 	width:110px;
 	border-radius: 40%;
 }
+
 /***********************/
 #diary_content_box{
 	display:flex;
@@ -88,7 +90,6 @@
 	margin-top:15px;
 	height:85px;
 	width:515px;
-	/* overflow:auto; */
 	border:1px solid;	
 }
 #minimi_container{
@@ -106,7 +107,6 @@
 #diary_user{
 	display:inline-block;
 	width:200px;
-	border:1px solid;
 }
 #diary_content_list{	
 	position:absolute;
@@ -137,6 +137,18 @@
 	font-size: 12px;
 	color: #999999;
 }
+.diary_folder_up{
+	position:absolute;
+	display:inline-block;	
+	width:85px;
+	height:25px;
+	margin: 0 0 0 -10;
+}
+.diary_content_up_input{
+	width:336px;
+	height:75px;
+	margin-top:25px;
+}
 #diary_btn_container{
 	margin:0 0 0 0;
 	width:55px;
@@ -162,7 +174,31 @@
 	font-size: 13px;
 	margin:0 5px 0 5px;
 }
-
+#diary_content_update{
+	display:flex;		
+	width:410px;
+	height:110px;
+	border:1px solid;
+}
+#diary_update_btn_box{
+	margin:85px 0 0 5px;
+	width:60px;
+	height:20px;
+	font-weight:bold;
+	font-size: 12px;
+}
+#diary_update_btn{
+	display:inline-block;
+	margin:0 0 0 0 ;	
+	cursor:pointer;
+	font-size: 12px;
+}
+#diary_cancel_btn{
+	display:inline-block;
+	margin:0 0 0 5px;	
+	cursor:pointer;
+	font-size: 12px;
+}
 /*******************/
 #pageBar{
 	margin:15px 0 0 0;
