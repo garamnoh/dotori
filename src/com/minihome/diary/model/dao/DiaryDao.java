@@ -118,4 +118,21 @@ public class DiaryDao {
 		}
 		return result;	
 	}
+	
+	public int deleteDiary(Connection conn, Diary d) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deleteDiary"));	
+			pstmt.setInt(1,  d.getDiaryNo());
+			pstmt.setString(2, d.getWriter());
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
+	}
+	
 }

@@ -148,11 +148,13 @@
 	display:inline-block;
 	margin:0 0 0 0 ;	
 	cursor:pointer;
+	font-size: 12px;
 }
 #diary_del_btn{
 	display:inline-block;
 	margin:0 0 0 0 ;	
 	cursor:pointer;
+	font-size: 12px;
 }
 #diary_content_content{
 	width:400px;
