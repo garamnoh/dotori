@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.album.model.service.AlbumService;
 import com.minihome.album.model.vo.Album;
+import com.minihome.album.model.vo.AlbumComment;
 
 @WebServlet("/page/minihomeRightPageToAlbum.do")
 public class MinihomeRightPageToAlbumServlet extends HttpServlet {
@@ -40,10 +41,12 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		}
 		List<String> folderList=albumService.getMyFolders(hostMemberId);
 		
+		List<AlbumComment> commentList=albumService.getMyComments(hostMemberId);
 
 		request.setAttribute("folderList",folderList);
 		request.setAttribute("albumList",albumList);
 		request.setAttribute("folder",folder);
+		request.setAttribute("commentList",commentList);
 		
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_album.jsp").forward(request,response);

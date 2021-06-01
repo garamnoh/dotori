@@ -23,9 +23,27 @@ public class MinihomeLeftPageToAlbumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		
-		String hostMemberId=(String)request.getParameter("hostMemberId");
+		String hostMemberId=request.getParameter("hostMemberId");
+		String addFolderTitle=request.getParameter("addFolderTitle");
+		String deleteFolderTarget=request.getParameter("deleteFolderTarget");
+		
+		if(addFolderTitle!=null) {
+			int addFolderResult=albumService.addFolder(hostMemberId,addFolderTitle);
+		}
+		
+		if(deleteFolderTarget!=null) {
+			int deleteFolderResult=albumService.deleteFolder(hostMemberId,deleteFolderTarget);
+		}
 		
 		List<String> folderList=albumService.getMyFolders(hostMemberId);
+		
+		if(folderList.contains("기본폴더")) {
+			folderList.remove(folderList.indexOf("기본폴더"));
+			folderList.add(folderList.size(),"기본폴더");
+		}else {
+			int addDefaultFolderResult=albumService.addFolder(hostMemberId,"기본폴더");
+			folderList.add(folderList.size(),"기본폴더");
+		}
 		
 		request.setAttribute("folderList",folderList);
 		

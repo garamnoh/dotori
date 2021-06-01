@@ -21,3 +21,12 @@ $("#changeFolderBtn").click((e)=>{
         }
     });
 });
+
+const fn_openCommentBox=(event)=>{
+    let commentBox=$(event.target).parent().next();
+    if(commentBox.css("display")=="none") {
+        commentBox.css("display","block");
+    }else {
+        commentBox.css("display","none");
+    }
+};

@@ -1,8 +1,8 @@
 package com.minihome.album.model.service;
 
 import static com.common.JDBCTemplate.close;
-import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.minihome.album.model.dao.AlbumDao;
 import com.minihome.album.model.vo.Album;
+import com.minihome.album.model.vo.AlbumComment;
 
 public class AlbumService {
 	
@@ -43,6 +44,31 @@ public class AlbumService {
 		else rollback(conn);
 		close(conn);
 		return changeFolderResult;
+	}
+	
+	public int addFolder(String hostMemberId,String addFolderTitle) {
+		Connection conn=getConnection();
+		int addFolderResult=albumDao.addFolder(conn,hostMemberId,addFolderTitle);
+		if(addFolderResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return addFolderResult;
+	}
+	
+	public int deleteFolder(String hostMemberId,String deleteFolderTarget) {
+		Connection conn=getConnection();
+		int deleteFolderResult=albumDao.deleteFolder(conn,hostMemberId,deleteFolderTarget);
+		if(deleteFolderResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return deleteFolderResult;
+	}
+	
+	public List<AlbumComment> getMyComments(String hostMemberId) {
+		Connection conn=getConnection();
+		List<AlbumComment> commentList=albumDao.getMyComments(conn,hostMemberId);
+		close(conn);
+		return commentList;
 	}
 	
 }

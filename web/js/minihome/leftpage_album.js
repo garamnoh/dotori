@@ -12,3 +12,33 @@ document.getElementById("albumMenu").addEventListener("click",(e)=>{
         }
     });
 });
+
+$("#addFolderBtn").click((e)=>{
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "addFolderTitle":$("#addFolderTitle").val()
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
+        }
+    });
+});
+
+$("#deleteFolderBtn").click((e)=>{
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "deleteFolderTarget":$("#deleteFolderTarget").val()
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
+        }
+    });
+});
