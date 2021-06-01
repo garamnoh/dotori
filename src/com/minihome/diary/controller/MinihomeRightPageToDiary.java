@@ -93,13 +93,13 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		int diaryFolderLevel;
 		try {		
 			diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
-			//System.out.println(diaryFolderLevel);
+			System.out.println("파라미터"+diaryFolderLevel);
 		}catch(NullPointerException e) {
 			diaryFolderLevel=3;
+			System.out.println("트라이캐치"+diaryFolderLevel);
 		}
 		
 		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);		
-		System.out.println(diaryFolderLevel);
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
