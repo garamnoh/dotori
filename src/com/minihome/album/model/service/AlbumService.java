@@ -71,4 +71,33 @@ public class AlbumService {
 		return commentList;
 	}
 	
+	public int insertComment(String commentLevel,String loginMemberId,String commentContent,String albumRef,String albumCommentRef) {
+		Connection conn=getConnection();
+		int insertCommentResult=albumDao.insertComment(conn,commentLevel,loginMemberId,commentContent,albumRef,albumCommentRef);
+		if(insertCommentResult>0) commit(conn);
+		else rollback(conn);
+		return insertCommentResult;
+	}
+	
+	public int albumCount(String hostMemberId,String folder) {
+		Connection conn=getConnection();
+		int totalData=albumDao.albumCount(conn,hostMemberId,folder);
+		close(conn);
+		return totalData;
+	}
+	
+	public List<Album> getMyPagingPhotosOnFolder(int cPage,int numPerPage,String hostMemberId,String folder) {
+		Connection conn=getConnection();
+		List<Album> albumList=albumDao.getMyPagingPhotosOnFolder(conn,cPage,numPerPage,hostMemberId,folder);
+		close(conn);
+		return albumList;
+	}
+	
+	public List<Album> getMyPagingPhotos(int cPage,int numPerPage,String hostMemberId) {
+		Connection conn=getConnection();
+		List<Album> albumList=albumDao.getMyPagingPhotos(conn,cPage,numPerPage,hostMemberId);
+		close(conn);
+		return albumList;
+	}
+	
 }

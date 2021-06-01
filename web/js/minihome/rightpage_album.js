@@ -22,11 +22,25 @@ $("#changeFolderBtn").click((e)=>{
     });
 });
 
-const fn_openCommentBox=(event)=>{
-    let commentBox=$(event.target).parent().next();
-    if(commentBox.css("display")=="none") {
-        commentBox.css("display","block");
-    }else {
-        commentBox.css("display","none");
-    }
-};
+document.querySelectorAll("#pageBar>a").forEach((v,i)=>{
+    $(v).click((e)=>{
+        let strArr=v.id.split("/");
+        let cPage=strArr[0];
+        let numPerPage=strArr[1];
+        console.log(cPage,numPerPage);
+        $.ajax({
+            url:contextPath+"/page/minihomeRightPageToAlbum.do",
+            type:"post",
+            data:{
+                "hostMemberId":hostMemberId,
+                "folder":$("#currentFolder").val(),
+                "cPage":cPage,
+                "numPerPage":numPerPage
+            },
+            dataType:"html",
+            success:(data)=>{
+                $("#right-page").html(data);
+            }
+        });
+    });
+});

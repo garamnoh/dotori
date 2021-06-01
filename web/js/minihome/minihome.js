@@ -1,4 +1,5 @@
 let contextPath=$("#contextPath").val();
+let loginMemberId=$("#loginMemberId").val();
 let hostMemberId=$("#hostMemberId").val();
 
 $(()=>{
@@ -129,4 +130,42 @@ for(let i=0;i<musicList.length;i++) {
 			musicInfo[i+1].style.display="inline";
 		}
 	});
+}
+
+
+
+//////right-page
+
+
+let fn_openCommentBox=(event)=>{
+	console.log("test");
+    let commentBox=$(event.target).parent().next();
+    if(commentBox.css("display")=="none") {
+        commentBox.css("display","block");
+    }else {
+        commentBox.css("display","none");
+    }
+};
+
+let fn_insertComment=(event)=>{
+    let albumRef=$(event.target).next().val();
+    let albumCommentRef=$(event.target).next().next().val();
+    let commentLevel=$(event.target).next().next().next().val();
+    let commentContent=$(event.target).prev().val();
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "loginMemberId":loginMemberId,
+            "albumRef":albumRef,
+            "albumCommentRef":albumCommentRef,
+            "commentLevel":commentLevel,
+            "commentContent":commentContent
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
 }

@@ -57,6 +57,7 @@
 </div>
 
 	<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">
+	<input type="hidden" id="loginMemberId" value="<%=loginMember.getMemberId()%>">
 	<input type="hidden" id="hostMemberId" value="<%=hostMember.getMemberId()%>">
 
 	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
