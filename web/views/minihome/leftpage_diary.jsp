@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.minihome.diary.model.vo.DiaryFolder, java.util.List, com.member.model.vo.Member" %>
+<%
+	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
+%>
 
 <div id="diary_folder_box">
 	<div id="diary_folder_title">Diary folder</div>
-	<div id="diary_folder_list">
-		<ul>		
-			<li class="diary_folder_li">전체공개</li>
-			<li class="diary_folder_li">일촌공개</li>
-			<li class="diary_folder_li">비공개</li>
+	<div id="diary_folder_list">		
+		<ul>
+			<%for(DiaryFolder df : list) {%>		
+				<li><%=df.getFolderName() %></li>
+			<%} %>
 		</ul>
 	</div>
 	

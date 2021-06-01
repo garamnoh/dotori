@@ -93,7 +93,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		int diaryFolderLevel;
 		try {		
 			diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
-			System.out.println(diaryFolderLevel);
+			//System.out.println(diaryFolderLevel);
 		}catch(NullPointerException e) {
 			diaryFolderLevel=3;
 		}
