@@ -32,6 +32,8 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		response.setContentType("text/html;charset=utf-8");
+		
 		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
 		
 		request.setAttribute("FolderLevel", diaryFolderLevel);

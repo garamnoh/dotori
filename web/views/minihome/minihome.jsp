@@ -55,6 +55,19 @@
     <button onclick="fn_playNext();" style="position:absolute;top:250px;left:1000px;">다음 곡 재생</button>
     <button onclick="fn_playPrevious();" style="position:absolute;top:300px;left:1000px;">이전 곡 재생</button>
     
+    <div id="WeatherBox" style="border:1px solid black;position:absolute;left:1000px;top:550px;background-color:white;font-size:11px;">
+    	
+    	<ul style="list-style-type:none;position:relative;left:-30px;">
+    		<li><img src="" id="weather_icon" width="20px"></li>
+    		<li id="weather_main"></li>
+    		<li id="weather_description"></li>
+    		<li id="feels_like"></li>
+    		<li id="temp"></li>
+    		<li id="temp_max"></li>
+    		<li id="temp_min"></li>
+    	</ul>
+    </div>
+    
     <div id="backgroundMusic">
     	<%for(int i=0;i<musicList.size();i++) {%>    
     		<audio src="<%=request.getContextPath()%>/audio/<%=musicList.get(i).getFilepath()%>"></audio>
