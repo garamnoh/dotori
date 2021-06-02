@@ -73,4 +73,11 @@ public class DiaryService {
 		return list;
 	}
 	
+	public int selectDiaryFolderCount() {
+		Connection conn=getConnection();
+		int result=dao.selectDiaryFolderCount(conn);
+		close(conn);
+		return result;
+	}
+	
 }

@@ -153,6 +153,8 @@ public class DiaryDao {
 		return result;
 	}
 	
+	/////////////////////left_page_folder///////////////////////////
+	
 	public List<DiaryFolder> selectFolderList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
@@ -175,6 +177,23 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return list;
+	}
+	
+	public int selectDiaryFolderCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryFolderCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return result;
 	}
 	
 }

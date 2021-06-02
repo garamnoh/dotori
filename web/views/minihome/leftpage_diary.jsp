@@ -5,6 +5,7 @@
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
+	int count=(int)request.getAttribute("count");
 %>
 
 <div id="diary_folder_box">
@@ -12,7 +13,7 @@
 	<div id="diary_folder_list">		
 		<%for(DiaryFolder df : list) {%>		
 			<ul>
-				<li id="folderLevel"><%=df.getFolderName() %></li>
+				<li class="folderLevel"><%=df.getFolderName()%> ()</li>
 			</ul>
 			<input type="hidden" name="diaryFolderLevel" value="<%=df.getFolderNo()%>">
 		<%} %>
@@ -21,9 +22,9 @@
 	<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
 </div>
 <script>		
-	$("#folderLevel").click(e=>{
+	$(".folderLevel").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/diary/diaryFolder",
+			url:"<%=request.getContextPath()%>/page/minihomeRightPageToDiary.do",
 			type:"post",
 			data:{
 				"diaryFolderLevel":$("input[name='diaryFolderLevel']").val(),
@@ -31,8 +32,7 @@
 				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
 			dataType:"html",
-			success:data=>{
-				console.log(data);
+			success:data=>{				
 				$("left-page").html(data);
 			}
 		})
