@@ -1,8 +1,11 @@
 package com.friend.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.FileReader;
 import java.io.IOException;
 import java.sql.Connection;
+import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -10,8 +13,8 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.friend.model.vo.Friend;
-
-import static com.common.JDBCTemplate.close;
+import com.friend.model.vo.SearchF;
+import com.member.model.vo.Member;
 
 public class FriendDao {
 	
@@ -150,4 +153,114 @@ public class FriendDao {
 			close(ps2);
 		} return result;
 	}
+	
+	public ArrayList<SearchF> searchList(Connection conn, String myId, String searchKeyword){
+		
+		PreparedStatement ps = null;
+		PreparedStatement ps2 = null;
+		PreparedStatement ps3 = null;
+		ResultSet rs = null;
+		ResultSet rs1 = null;
+		ArrayList<SearchF> searchList = new ArrayList<SearchF>();
+		ArrayList<SearchF> resultList = new ArrayList<SearchF>();
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("searchList"));
+			ps.setString(1, "%"+searchKeyword+"%");
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				SearchF mId = new SearchF();
+				
+				mId.setMemberId(rs.getString("MEMBER_ID"));
+				searchList.add(mId);
+			}
+			
+			if(searchList != null) {
+				
+				ps2 = conn.prepareStatement(prop.getProperty("resultList1"));
+				ps3 = conn.prepareStatement(prop.getProperty("resultList2"));
+				for(SearchF list : searchList) {
+					ps2.setString(1, myId);
+					ps2.setString(2, list.getMemberId());
+					rs = ps2.executeQuery();
+					
+					if(rs.next()) {
+						SearchF m = new SearchF();
+						
+						m.setMemberId(rs.getString("MEMBER_ID"));
+						m.setMemberName(rs.getString("MEMBER_NAME"));
+						m.setNickname(rs.getString("NICKNAME"));
+						m.setBirth(rs.getDate("BIRTH_DATE"));
+						m.setGender(rs.getString("GENDER"));
+						m.setAddress(rs.getString("ADDRESS"));
+						m.setPhone(rs.getString("PHONE"));
+						m.setProfilePath(rs.getString("PROFILE_PATH"));
+						m.setFriendship(rs.getString("FRIENDSHIP_NAME"));
+						
+						resultList.add(m);
+					} else {
+						ps3.setString(1, list.getMemberId());
+						rs1 = ps3.executeQuery();
+						
+						if(rs1.next()) {
+							
+							SearchF m = new SearchF();
+							
+							m.setMemberId(rs1.getString("MEMBER_ID"));
+							m.setMemberName(rs1.getString("MEMBER_NAME"));
+							m.setNickname(rs1.getString("NICKNAME"));
+							m.setBirth(rs1.getDate("BIRTH_DATE"));
+							m.setGender(rs1.getString("GENDER"));
+							m.setAddress(rs1.getString("ADDRESS"));
+							m.setPhone(rs1.getString("PHONE"));
+							m.setProfilePath(rs1.getString("PROFILE_PATH"));
+							m.setFriendship("");
+							
+							resultList.add(m);
+						}
+					}
+				}
+			}
+			for(SearchF list : resultList) System.out.println("두번쨰 검색 : " + list);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(rs1);
+			close(ps);
+			close(ps2);
+			close(ps3);
+		} return resultList;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
