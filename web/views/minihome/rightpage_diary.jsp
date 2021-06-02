@@ -75,9 +75,9 @@
 						</div>	
 						<div id="diary_content_update" style="display:none">
 							<select class="diary_folder_up" name="diary_folder_up">
-								<option value="전체공개" <%=d.getFolderNo()==1?"seleted":""%>>전체공개</option>
-								<option value="일촌공개" <%=d.getFolderNo()==2?"seleted":""%>>일촌공개</option>
-								<option value="비공개" <%=d.getFolderNo()==3?"seleted":""%>>비공개</option>
+								<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>
+								<option value="일촌공개" <%=d.getFolderNo()==2?"selected":""%>>일촌공개</option>
+								<option value="비공개" <%=d.getFolderNo()==3?"selected":""%>>비공개</option>
 							</select>
 							<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
 							<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">

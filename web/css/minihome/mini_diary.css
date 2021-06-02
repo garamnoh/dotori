@@ -5,7 +5,7 @@
 
 /*********전체 박스**********/
 #diary_content{  
-	height:500px;
+	height:530px;
 	width:520px;
 	overflow:auto;
 	margin:0 0 0 0;
@@ -15,7 +15,7 @@
 /***********************/
 #diary_input_box{
 	display:flex;		
-	height:110px;
+	height:115px;
 	width:515px; 
 	border:1px solid;
 }
@@ -24,6 +24,7 @@
 	float:left;
 	height:110px;  
 	width:110px; 
+	margin:0 3px 0 0;
 }
 #diary_input_container{	
 	display:flex;
@@ -38,6 +39,7 @@
 	text-align:center;
 	width:85px;
 	height:25px;
+	margin:5px 0 0 0;
 }
 #diary_input_content_box{
 	width:345px;
@@ -46,7 +48,7 @@
 #diary_input_btn_box{	
 	width:40px;
 	height:105px;
-	margin: 0 0 0 0;
+	margin: 0 0 0 3px;
 }
 #diary_input_btn{
 	margin-top:80px;
@@ -63,6 +65,7 @@
 	width:85px;
 	height:25px;
 	margin: 0 0 0 -10;
+	border-radius:5px;
 }
 .diary_title_input{
 	width:250px;
@@ -72,6 +75,8 @@
 .diary_content_input{
 	width:336px;
 	height:75px;
+	resize:none;
+	border-radius:5px;
 }
 #diary_input_container:last-child{
 	float:right;
@@ -81,6 +86,7 @@
 	height:110px;
 	width:110px;
 	border-radius: 40%;
+	margin:3px 0 3px 3px;
 }
 /***********************/
 #diary_admin{
@@ -97,7 +103,7 @@
 	margin-top:15px;
 	height:85px;
 	width:515px;
-	border:1px solid;	
+	border:1px solid;
 }
 #minimi_container{
 	display:flex;	
@@ -123,13 +129,13 @@
 	position:absolute;
     overflow: auto;
 	left:85px;
-	width:415px;
+	width:420px;
 	height:80px;
 	background-color: white;
 }
 #diary_content_title{
 	display:flex;	
-	width:415px;
+	width:420px;
 	height:20px;
 	margin:5px 0 5px 0;
 }
@@ -182,7 +188,7 @@
 	display:flex;		
 	width:410px;
 	height:110px;
-	border:1px solid;
+	/* border:1px solid; */
 }
 .diary_folder_up{
 	position:absolute;
@@ -190,11 +196,14 @@
 	width:85px;
 	height:25px;
 	margin: 0 0 0 -10;
+	border-radius:5px;
 }
 .diary_content_up_input{
 	width:336px;
 	height:75px;
 	margin-top:25px;
+	resize:none;
+	border-radius:5px;
 }
 #diary_update_btn_box{
 	margin:85px 0 0 5px;
@@ -217,7 +226,7 @@
 }
 .diary_update_btn:hover, .diary_cancel_btn:hover{
 	color:#747474;
-	cursor:pointer;
+	cursor:pointer;	
 }
 /*******************/
 #pageBar{
@@ -225,14 +234,19 @@
 	width: 515px;
     height: 30px;
     text-align: center;    
-	font-size:13px
+	font-size:13px;
 } 
+#pageBar span:nth-child(2){
+	text-decoration:underline;
+}
 #pageBar a, #pageBar span{
 	margin:0 5px 0 5px;
+	font-weight:bold;
 }
 #pageBar a:hover{
 	color:#747474;
 	cursor:pointer;
+	font-weight:bolder;
 }
 /******************************/
 /*********left_diary***********/

@@ -34,10 +34,14 @@ $(".diary_del_btn").click(e => {
   
 $(".diary_up_btn").click(e=>{
 	$(e.target).parent().parent().next().next().show();
-	$(e.target).parent().parent().next().hide();
-	$("#diary_content_box").css("height", "100px");///////////////이거 왜 안바뀔까
-	//$(e.target).parent().parent().parent().parent().parent().css("height", "100px");
-	//$(e.target).parents("#diary_content_box").attr("style", "height:100px");
+	$(e.target).parent().parent().next().hide();	
+	$(e.target).parent().parent().parent().parent().parent().css("height", "150px");
+	$(e.target).parent().parent().parent().css("height", "145px");
+});
+
+$(".diary_cancel_btn").click(e=>{
+	$(e.target).parent().parent().next().next().hide();
+	$(e.target).parent().parent().next().show();	
 });
 
 $(".diary_update_btn").click(e=>{
@@ -45,9 +49,12 @@ $(".diary_update_btn").click(e=>{
 		url:"<%=request.getContextPath()%>/diary/diaryUpdate",
 		type:"post",
 		data:{				
-			"diary_no":$(e.target).parent().prev().val(),
+			/*"diary_no":$(e.target).parent().prev().val(),
 			"diary_folder":$(e.target).parent().prev().prev().prev().child().val(),
-			"diary_content_input":$(e.target).parent().prev().prev().val(),
+			"diary_content_input":$(e.target).parent().prev().prev().val(),*/
+			"diary_no":$("input[name='diary_no']"),
+			"diary_folder":$("select[name='diary_folder_up']"),
+			"diary_content_input":$(".diary_content_input").val()
 		},
 		dataType:"html",
 		success:data=>{			
@@ -57,12 +64,10 @@ $(".diary_update_btn").click(e=>{
 });	
 
 document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
-	$(v).click((e)=>{
-		//console.log($("#currentFolder").val());
+	$(v).click((e)=>{		
 		let strArr=v.id.split("/");
 		let cPage=strArr[0];
-		let numPerpage=strArr[1];
-		//console.log(cPage,numPerpage);
+		let numPerpage=strArr[1];		
 		$.ajax({
 			url:contextPath+"/page/minihomeRightPageToDiary.do",
 			type:"post",
