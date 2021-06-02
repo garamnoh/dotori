@@ -82,8 +82,14 @@
 	width:110px;
 	border-radius: 40%;
 }
-
 /***********************/
+#diary_admin{
+	display:flex;	
+	width:415px;
+	height:20px;
+	margin:5px 0 5px 0;
+	border:1px solid;
+}
 /***********************/
 #diary_content_box{
 	display:flex;
@@ -218,7 +224,15 @@
 	margin:15px 0 0 0;
 	width: 515px;
     height: 30px;
-    text-align: center;
+    text-align: center;    
+	font-size:13px
+} 
+#pageBar a, #pageBar span{
+	margin:0 5px 0 5px;
+}
+#pageBar a:hover{
+	color:#747474;
+	cursor:pointer;
 }
 /******************************/
 /*********left_diary***********/

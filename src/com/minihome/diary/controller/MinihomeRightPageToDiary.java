@@ -71,23 +71,23 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
 		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/page/minihomeRightPageToDiary.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+			//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+			pageBar+="<a id='"+(pageNo-1)+"/"+numPerpage+"'>[이전]</a>";
 		}		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+				pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}		
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
 		}else {
-			pageBar+="<a href'"+request.getContextPath()
-			+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
+			//pageBar+="<a href'"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
+			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
 		}
 		
 		///////////////////folder/////////////////////
@@ -95,11 +95,11 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		List<Diary> list=null;
 		try {		
 			diaryFolderLevel=(int)request.getAttribute("FolderLevel");
-			System.out.println("파라미터"+diaryFolderLevel);
+			//System.out.println("파라미터"+diaryFolderLevel);
 			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
 		}catch(NullPointerException e) {
-			diaryFolderLevel=3;
-			System.out.println("트라이캐치"+diaryFolderLevel);
+			diaryFolderLevel=1; //처음엔 전체공개인 다이어리폴더의 게시물들만 보이게
+			//System.out.println("트라이캐치"+diaryFolderLevel);
 			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
 		}
 		///////////////////////////////////////////////			
