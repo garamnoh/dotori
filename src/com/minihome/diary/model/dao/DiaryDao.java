@@ -168,6 +168,7 @@ public class DiaryDao {
 				df.setMemberId(rs.getString("member_id"));
 				df.setFolderName(rs.getString("folder_name"));
 				df.setShareLevel(rs.getString("share_level"));
+				df.setDiaryCount(rs.getInt("diarycount"));
 				list.add(df);
 			}			
 		}catch(SQLException e) {

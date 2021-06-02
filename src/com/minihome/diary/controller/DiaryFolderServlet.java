@@ -31,10 +31,11 @@ public class DiaryFolderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
+		
 		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
 		
 		request.setAttribute("FolderLevel", diaryFolderLevel);
+		
 		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 	}
 
