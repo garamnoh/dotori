@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryFolder;
 
 public class DiaryDao {
 
@@ -147,6 +148,49 @@ public class DiaryDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
+	/////////////////////left_page_folder///////////////////////////
+	
+	public List<DiaryFolder> selectFolderList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryFolder> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectFolderList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryFolder df=new DiaryFolder();
+				df.setFolderNo(rs.getInt("folder_no"));
+				df.setMemberId(rs.getString("member_id"));
+				df.setFolderName(rs.getString("folder_name"));
+				df.setShareLevel(rs.getString("share_level"));
+				list.add(df);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
+	}
+	
+	public int selectDiaryFolderCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryFolderCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
 			close(pstmt);			
 		}
 		return result;

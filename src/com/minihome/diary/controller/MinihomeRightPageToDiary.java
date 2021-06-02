@@ -90,21 +90,23 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
 		}
 		
+		///////////////////folder/////////////////////
 		int diaryFolderLevel;
 		try {		
 			diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
-			System.out.println(diaryFolderLevel);
+			System.out.println("파라미터"+diaryFolderLevel);
 		}catch(NullPointerException e) {
 			diaryFolderLevel=3;
+			System.out.println("트라이캐치"+diaryFolderLevel);
 		}
+		///////////////////////////////////////////////
 		
 		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);		
-		System.out.println(diaryFolderLevel);
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
 		request.setAttribute("pageBar", pageBar);	
-		request.setAttribute("list", list);
+		request.setAttribute("list", list);		
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				

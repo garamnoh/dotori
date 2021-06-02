@@ -43,7 +43,7 @@ public class DiaryWriteServlet extends HttpServlet {
 		d.setMemberId(request.getParameter("hostMemberId"));
 		d.setWriter(request.getParameter("loginMemberId"));		
 		String folder=request.getParameter("diary_folder");
-				
+		System.out.println(folder);
 		String content=request.getParameter("diary_content_input");
 		String msg="";
 		if(content!=null) {

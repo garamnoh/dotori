@@ -84,7 +84,7 @@
 }
 
 /***********************/
-#diary_content_box{
+.diary_content_box{
 	display:flex;
 	position:relative;
 	margin-top:15px;
@@ -156,25 +156,29 @@
 	font-weight:bold;
 	font-size: 12px;
 }
-#diary_up_btn{
+.diary_up_btn{
 	display:inline-block;
 	margin:0 0 0 0 ;	
 	cursor:pointer;
 	font-size: 12px;
 }
-#diary_del_btn{
+.diary_up_btn:hover, .diary_del_btn:hover{
+	color:#747474;
+	cursor:pointer;
+}
+.diary_del_btn{
 	display:inline-block;
 	margin:0 0 0 0 ;	
 	cursor:pointer;
 	font-size: 12px;
 }
-#diary_content_content{
+.diary_content_content{
 	width:400px;
 	height:35px;
 	font-size: 13px;
 	margin:0 5px 0 5px;
 }
-#diary_content_update{
+.diary_content_update{
 	display:flex;		
 	width:410px;
 	height:110px;
@@ -187,17 +191,21 @@
 	font-weight:bold;
 	font-size: 12px;
 }
-#diary_update_btn{
+.diary_update_btn{
 	display:inline-block;
 	margin:0 0 0 0 ;	
 	cursor:pointer;
 	font-size: 12px;
 }
-#diary_cancel_btn{
+.diary_cancel_btn{
 	display:inline-block;
 	margin:0 0 0 5px;	
 	cursor:pointer;
 	font-size: 12px;
+}
+.diary_update_btn:hover, .diary_cancel_btn:hover{
+	color:#747474;
+	cursor:pointer;
 }
 /*******************/
 #pageBar{
@@ -225,9 +233,13 @@
 }
 #diary_folder_box ul{	
 	list-style:none;
+	/* cursor:pointer; */
+	padding-left:10px;
+	font-size: 12px;
+    line-height: 25px;
+}
+div ul li:hover{
+	color:#5D5D5D;
 	cursor:pointer;
-	padding-left:20px;
-	font-size: 15px;
-    line-height: 30px;
 }
 

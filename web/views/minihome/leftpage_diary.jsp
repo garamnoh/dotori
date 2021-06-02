@@ -1,29 +1,40 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.minihome.diary.model.vo.DiaryFolder, java.util.List, com.member.model.vo.Member" %>
+<%
+	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
+	Member loginMember=(Member)request.getAttribute("loginMember");	
+	Member hostMember=(Member)request.getAttribute("hostMember");
+	int count=(int)request.getAttribute("count");
+%>
 
 <div id="diary_folder_box">
 	<div id="diary_folder_title">Diary folder</div>
-	<div id="diary_folder_list">
-		<ul>		
-			<li class="diary_folder_li">전체공개</li>
-			<li class="diary_folder_li">일촌공개</li>
-			<li class="diary_folder_li">비공개</li>
-		</ul>
+	<div id="diary_folder_list">		
+		<%for(DiaryFolder df : list) {%>		
+			<ul>
+				<li class="folderLevel"><%=df.getFolderName()%> ()</li>
+			</ul>
+			<input type="hidden" name="diaryFolderLevel" value="<%=df.getFolderNo()%>">
+		<%} %>
 	</div>
-	
+	<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
+	<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
 </div>
-<script>
-	$(".diary_folder_li").click(e=>{
+<script>		
+	$(".folderLevel").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/diary/diaryFolder",
-			type:"get",
+			url:"<%=request.getContextPath()%>/page/minihomeRightPageToDiary.do",
+			type:"post",
 			data:{
-				"diary_folder_li":$(".diary_folder_li").text()
+				"diaryFolderLevel":$("input[name='diaryFolderLevel']").val(),
+				"loginMemberId":$("input[name='loginMemberId']").val(),
+				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
 			dataType:"html",
-			success:data=>{
+			success:data=>{				
 				$("left-page").html(data);
 			}
 		})
-	});	
+	});		
 </script>

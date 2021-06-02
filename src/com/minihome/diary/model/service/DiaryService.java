@@ -1,20 +1,22 @@
 package com.minihome.diary.model.service;
 
+import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
+
 import java.sql.Connection;
 import java.util.List;
 
-import static com.common.JDBCTemplate.getConnection;
-import static com.common.JDBCTemplate.close;
-import static com.common.JDBCTemplate.commit;
-import static com.common.JDBCTemplate.rollback;
-
 import com.minihome.diary.model.dao.DiaryDao;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryFolder;
 
 public class DiaryService {
 
 	private DiaryDao dao=new DiaryDao();
 	
+	///////////////////right_diary_page/////////////////////
 	public List<Diary> getMyDiaries(String hostMemberId) {
 		Connection conn=getConnection();
 		List<Diary> diaryList=dao.getMyDiaries(conn,hostMemberId);
@@ -59,6 +61,21 @@ public class DiaryService {
 		int result=dao.updateDiary(conn, d);
 		if(result>0) commit(conn);
 		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	///////////////////////left_folder///////////////////
+	public List<DiaryFolder> selectFolderList(){
+		Connection conn=getConnection();
+		List<DiaryFolder> list=dao.selectFolderList(conn);
+		close(conn);
+		return list;
+	}
+	
+	public int selectDiaryFolderCount() {
+		Connection conn=getConnection();
+		int result=dao.selectDiaryFolderCount(conn);
 		close(conn);
 		return result;
 	}
