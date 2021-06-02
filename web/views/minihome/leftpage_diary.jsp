@@ -5,14 +5,13 @@
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
-	int count=(int)request.getAttribute("count");
+	//int count=(int)request.getAttribute("count");
 %>
 
 <div id="diary_folder_box">
 	<div id="diary_folder_title">Diary folder</div>
 	<div id="diary_folder_list">		
-		<%for(DiaryFolder df : list) {%>
-		<%-- <%for(int i=1; i<list.size(); i++) {%> --%>	
+		<%for(DiaryFolder df : list) {%>			
 			<ul>
 				<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>
 			</ul>
@@ -34,7 +33,7 @@
 			},
 			dataType:"html",
 			success:data=>{				
-				$("left-page").html(data);
+				$("#right-page").html(data);
 			}
 		})
 	});		

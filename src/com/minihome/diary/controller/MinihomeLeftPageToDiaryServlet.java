@@ -49,13 +49,11 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		List<DiaryFolder> list=new DiaryService().selectFolderList();
-		int count=new DiaryService().selectDiaryFolderCount();
-		
+				
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);	
 		request.setAttribute("list", list);		
-		request.setAttribute("count", count);
-		
+				
 		request.getRequestDispatcher("/views/minihome/leftpage_diary.jsp").forward(request,response);
 	}
 

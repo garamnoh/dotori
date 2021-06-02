@@ -24,9 +24,9 @@ public class DiaryService {
 		return diaryList;
 	}
 	
-	public List<Diary> selectDiaryList(int cPage, int numPerpage, int folderLevel){
+	public List<Diary> selectDiaryList(int cPage, int numPerpage, int diaryFolderLevel){
 		Connection conn=getConnection();
-		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage, folderLevel);
+		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage, diaryFolderLevel);
 		close(conn);
 		return list;
 	}
