@@ -20,8 +20,7 @@
 							<option value="전체공개" seleted>전체공개</option>
 							<option value="일촌공개">일촌공개</option>
 							<option value="비공개">비공개</option>
-						</select>
-						<!-- <input type="text" class="diary_title_input" name="diary_title_input"> -->
+						</select>						
 					</div>
 					<div id="diary_input_content_box">						
 						<textarea class="diary_content_input" placeholder="다이어리를 작성해주세요."></textarea>
@@ -49,7 +48,7 @@
 		</tr>
 	<%} else{ %>
 		<%for(Diary d : list) {%>			
-				<div class="diary_content_box">
+				<div id="diary_content_box">
 					<div id="minimi_container">
 						<img src="<%=request.getContextPath()%>/upload/MINIMI/selly.png" alt="미니미">
 						<div id="diary_content_list">
@@ -65,22 +64,22 @@
 									<%} %>
 								</div>
 							</div>							
-							<div class="diary_content_content">
+							<div id="diary_content_content">
 								<%=d.getContent() %>
 							</div>	
-							<div class="diary_content_update" style="display:none">
-								<select class="diary_folder_up" name="diary_folder">
+							<div id="diary_content_update" style="display:none">
+								<select class="diary_folder_up" name="diary_folder_up">
 									<option value="전체공개" <%=d.getFolderNo()==1?"seleted":""%>>전체공개</option>
 									<option value="일촌공개" <%=d.getFolderNo()==2?"seleted":""%>>일촌공개</option>
 									<option value="비공개" <%=d.getFolderNo()==3?"seleted":""%>>비공개</option>
 								</select>
 								<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
+								<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
 								<div id="diary_update_btn_box">
 									<div class="diary_update_btn">저장</div>
 									<div class="diary_cancel_btn">취소</div>
 								</div>
 							</div>						
-							<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
 						</div>
 					</div>
 				</div>			
@@ -135,18 +134,18 @@
 	});
   
 	$(".diary_up_btn").click(e=>{
-		$(".diary_content_update").show();
-		$(".diary_content_content").hide();
-		$(".diary_content_box").attr("height", "100px");///////////////이거 왜 안바뀔까
+		$("#diary_content_update").show();
+		$("#diary_content_content").hide();
+		$("#diary_content_box").attr("height", "100px");///////////////이거 왜 안바뀔까
 	});
 	
 	$(".diary_update_btn").click(e=>{
 		$.ajax({
 			url:"<%=request.getContextPath()%>/diary/diaryUpdate",
 			type:"post",
-			data:{
-				"diary_no":$("input[name='diary_no']").val(),
-				"diary_folder":$("select[name='diary_folder']").val(),
+			data:{				
+				"diary_no":$(e.target).parent().prev().val(),
+				"diary_folder":$("select[name='diary_folder_up']").val(),
 				"diary_content_input":$(".diary_content_up_input").val(),
 		  	},
 			dataType:"html",
