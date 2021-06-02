@@ -101,7 +101,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}
 		///////////////////////////////////////////////
 		
-		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);		
+		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		

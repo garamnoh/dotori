@@ -34,7 +34,8 @@
 			},
 			dataType:"html",
 			success:data=>{				
-				$("left-page").html(data);
+				console.log(data);
+				$("#right-page").html(data);
 			}
 		})
 	});		

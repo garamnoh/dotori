@@ -3,7 +3,7 @@
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_diary.css">
 <%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.Member" %>
 <%
-	List<Diary> list=(List<Diary>)request.getAttribute("list");	
+	List<Diary> list=(List<Diary>)request.getAttribute("list");
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
 %>
@@ -104,7 +104,14 @@
 				},
 				dataType:"html",
 				success:data=>{
+					console.log("test");
+					console.log(data);
 					$("#right-page").html(data);
+				},
+				error:(r,m,s)=>{
+					console.log(r);
+					console.log(m);
+					console.log(s);
 				}
 			})
 		});
