@@ -195,7 +195,8 @@ public class AlbumDao {
 			pstmt.setString(2,loginMemberId);
 			pstmt.setString(3,commentContent);
 			pstmt.setString(4,albumRef);
-			pstmt.setString(5,albumCommentRef=="0"?null:albumCommentRef);
+			System.out.println("dao테스트 : "+albumCommentRef);
+			pstmt.setString(5,albumCommentRef.equals("0")?null:albumCommentRef);
 			insertCommentResult=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -205,12 +206,12 @@ public class AlbumDao {
 		return insertCommentResult;
 	}
 	
-	public int albumCount(Connection conn,String hostMemberId,String folder) {
+	public int albumCountOnFolder(Connection conn,String hostMemberId,String folder) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int totalData=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("albumCount"));
+			pstmt=conn.prepareStatement(prop.getProperty("albumCountOnFolder"));
 			pstmt.setString(1,hostMemberId);
 			pstmt.setString(2,folder);
 			rs=pstmt.executeQuery();
@@ -218,7 +219,24 @@ public class AlbumDao {
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
-			close(conn);
+			close(rs);close(pstmt);
+		}
+		return totalData;
+	}
+	
+	public int albumCount(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int totalData=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("albumCount"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) totalData=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
 		}
 		return totalData;
 	}
@@ -282,6 +300,26 @@ public class AlbumDao {
 			close(pstmt);
 		}
 		return albumList;
+	}
+	
+	public int uploadPhoto(Connection conn,Album l) {
+		PreparedStatement pstmt=null;
+		int uploadResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("uploadPhoto"));
+			pstmt.setString(1,l.getMemberId());
+			pstmt.setString(2,l.getTitle());
+			pstmt.setString(3,l.getFilepath());
+			pstmt.setString(4,l.getFolder());
+			pstmt.setString(5,l.getHashTag());
+			pstmt.setString(6,l.getContent());
+			uploadResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return uploadResult;
 	}
 	
 }

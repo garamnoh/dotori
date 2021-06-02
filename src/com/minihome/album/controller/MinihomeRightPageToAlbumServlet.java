@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
+
 import com.minihome.album.model.service.AlbumService;
 import com.minihome.album.model.vo.Album;
 import com.minihome.album.model.vo.AlbumComment;
@@ -36,6 +38,8 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		String commentLevel=request.getParameter("commentLevel");
 		String commentContent=request.getParameter("commentContent");
 		
+		if(folder==null) System.out.println("폴더는 널입니다!!!!");
+		else System.out.println("폴더는 널이 아닙니다!!!!");
 		
 		
 		int cPage;
@@ -51,7 +55,12 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 			numPerPage=2;
 		}
 		
-		int totalData=albumService.albumCount(hostMemberId,folder);
+		int totalData=0;
+		if(folder==null||folder.equals("null")) {
+			totalData=albumService.albumCount(hostMemberId);
+		}else {
+			totalData=albumService.albumCountOnFolder(hostMemberId,folder);
+		}
 		int totalPage=(int)Math.ceil((double)totalData/numPerPage);
 		
 		int pageBarSize=5;
@@ -94,7 +103,7 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		}
 		
 		List<Album> albumList=null;
-		if(folder==null) {
+		if(folder==null||folder.equals("null")) {
 			albumList=albumService.getMyPagingPhotos(cPage,numPerPage,hostMemberId);
 		}else {
 			albumList=albumService.getMyPagingPhotosOnFolder(cPage,numPerPage,hostMemberId,folder);

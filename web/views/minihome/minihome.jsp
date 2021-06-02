@@ -13,8 +13,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=hostMember.getNickname()%>님의 미니홈피</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_home.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_album.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_album.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
 </head>
 <body>
     
@@ -60,7 +66,8 @@
 	<input type="hidden" id="loginMemberId" value="<%=loginMember.getMemberId()%>">
 	<input type="hidden" id="hostMemberId" value="<%=hostMember.getMemberId()%>">
 
-	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/minihome/minihome.js"></script>
+	
 </body>
 </html>

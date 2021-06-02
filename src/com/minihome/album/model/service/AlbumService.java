@@ -79,9 +79,16 @@ public class AlbumService {
 		return insertCommentResult;
 	}
 	
-	public int albumCount(String hostMemberId,String folder) {
+	public int albumCountOnFolder(String hostMemberId,String folder) {
 		Connection conn=getConnection();
-		int totalData=albumDao.albumCount(conn,hostMemberId,folder);
+		int totalData=albumDao.albumCountOnFolder(conn,hostMemberId,folder);
+		close(conn);
+		return totalData;
+	}
+	
+	public int albumCount(String hostMemberId) {
+		Connection conn=getConnection();
+		int totalData=albumDao.albumCount(conn,hostMemberId);
 		close(conn);
 		return totalData;
 	}
@@ -98,6 +105,15 @@ public class AlbumService {
 		List<Album> albumList=albumDao.getMyPagingPhotos(conn,cPage,numPerPage,hostMemberId);
 		close(conn);
 		return albumList;
+	}
+	
+	public int uploadPhoto(Album l) {
+		Connection conn=getConnection();
+		int uploadResult=albumDao.uploadPhoto(conn,l);
+		if(uploadResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return uploadResult;
 	}
 	
 }
