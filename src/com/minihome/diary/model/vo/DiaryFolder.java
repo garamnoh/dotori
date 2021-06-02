@@ -5,15 +5,17 @@ public class DiaryFolder {
 	private String memberId;
 	private String folderName;
 	private String shareLevel;
+	private int diaryCount;
 	
 	public DiaryFolder() {}
 
-	public DiaryFolder(int folderNo, String memberId, String folderName, String shareLevel) {
+	public DiaryFolder(int folderNo, String memberId, String folderName, String shareLevel, int diaryCount) {
 		super();
 		this.folderNo = folderNo;
 		this.memberId = memberId;
 		this.folderName = folderName;
 		this.shareLevel = shareLevel;
+		this.diaryCount = diaryCount;
 	}
 	
 	public int getFolderNo() {return folderNo;}
@@ -24,11 +26,13 @@ public class DiaryFolder {
 	public void setFolderName(String folderName) {this.folderName = folderName;}
 	public String getShareLevel() {return shareLevel;}
 	public void setShareLevel(String shareLevel) {this.shareLevel = shareLevel;}
+	public int getDiaryCount() {return diaryCount;}
+	public void setDiaryCount(int diaryCount) {this.diaryCount = diaryCount;}
 
 	@Override
 	public String toString() {
 		return "DiaryFolder [folderNo=" + folderNo + ", memberId=" + memberId + ", folderName=" + folderName
-				+ ", shareLevel=" + shareLevel + "]";
+				+ ", shareLevel=" + shareLevel + diaryCount+"]";
 	}
 	
 }

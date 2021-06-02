@@ -1,7 +1,7 @@
-package com.minihome.diary.controller;
+package com.friend.controller;
 
 import java.io.IOException;
-import java.util.List;
+import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,20 +9,22 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
+import com.friend.model.service.FriendService;
+import com.friend.model.vo.Friend;
+import com.friend.model.vo.SearchF;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DiaryFolder
+ * Servlet implementation class SearchFriendServlet
  */
-@WebServlet(name = "DiaryFolderServlet", urlPatterns = { "/diary/diaryFolder" })
-public class DiaryFolderServlet extends HttpServlet {
+@WebServlet("/friends/searchSomeone")
+public class SearchSomeoneServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderServlet() {
+    public SearchSomeoneServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +34,15 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
+		String searchKeyword = request.getParameter("searchKeyword");
+		String myId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
-		request.setAttribute("FolderLevel", diaryFolderLevel);
+		ArrayList<SearchF> resultList = new FriendService().searchList(myId, searchKeyword);
 		
-		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		for(SearchF s : resultList) System.out.println(s);
+		
+		request.setAttribute("resultList", resultList);
+		request.getRequestDispatcher("/views/friends/sub/searchSomeone.jsp").forward(request, response);;
 	}
 
 	/**

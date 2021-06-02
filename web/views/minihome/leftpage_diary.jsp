@@ -11,9 +11,10 @@
 <div id="diary_folder_box">
 	<div id="diary_folder_title">Diary folder</div>
 	<div id="diary_folder_list">		
-		<%for(DiaryFolder df : list) {%>		
+		<%for(DiaryFolder df : list) {%>
+		<%-- <%for(int i=1; i<list.size(); i++) {%> --%>	
 			<ul>
-				<li class="folderLevel"><%=df.getFolderName()%> ()</li>
+				<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>
 			</ul>
 			<input type="hidden" name="diaryFolderLevel" value="<%=df.getFolderNo()%>">
 		<%} %>
@@ -24,10 +25,10 @@
 <script>		
 	$(".folderLevel").click(e=>{
 		$.ajax({
-			url:"<%=request.getContextPath()%>/page/minihomeRightPageToDiary.do",
+			url:"<%=request.getContextPath()%>/diary/diaryFolder",
 			type:"post",
 			data:{
-				"diaryFolderLevel":$("input[name='diaryFolderLevel']").val(),
+				"diaryFolderLevel":$(e.target).parent().next().val(),
 				"loginMemberId":$("input[name='loginMemberId']").val(),
 				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
