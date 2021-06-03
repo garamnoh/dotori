@@ -9,8 +9,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import com.minihome.album.model.vo.Album;
+import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
 
@@ -136,6 +140,60 @@ public class MinihomeDao {
 			close(pstmt);
 		}
 		return changeFeelingResult;
+	}
+	
+	public List<Album> getLatestAlbum(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Album> latestAlbumList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getLatestAlbum"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Album l=new Album();
+				l.setImgNo(rs.getInt("img_no"));
+				l.setMemberId(rs.getString("member_id"));
+				l.setTitle(rs.getString("title"));
+				l.setFilepath(rs.getString("filepath"));
+				l.setFolder(rs.getString("folder"));
+				l.setPostDate(rs.getDate("post_date"));
+				l.setHashTag(rs.getString("post_date"));
+				l.setContent(rs.getString("content"));
+				latestAlbumList.add(l);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return latestAlbumList;
+	}
+	
+	public List<Diary> getLatestDiary(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Diary> latestDiaryList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getLatestDiary"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Diary d=new Diary();
+				d.setDiaryNo(rs.getInt("diary_no"));
+				d.setMemberId(rs.getString("member_id"));
+				d.setWriter(rs.getString("writer"));
+				d.setFolderNo(rs.getInt("folder_no"));
+				d.setContent(rs.getString("content"));
+				d.setPostDate(rs.getDate("post_date"));
+				latestDiaryList.add(d);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return latestDiaryList;
 	}
 	
 }

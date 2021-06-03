@@ -6,7 +6,10 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
+import com.minihome.album.model.vo.Album;
+import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.dao.MinihomeDao;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
@@ -61,6 +64,20 @@ public class MinihomeService {
 		else rollback(conn);
 		close(conn);
 		return changeFeelingResult;
+	}
+	
+	public List<Album> getLatestAlbum(String hostMemberId) {
+		Connection conn=getConnection();
+		List<Album> latestAlbumList=minihomeDao.getLatestAlbum(conn,hostMemberId);
+		close(conn);
+		return latestAlbumList;
+	}
+	
+	public List<Diary> getLatestDiary(String hostMemberId) {
+		Connection conn=getConnection();
+		List<Diary> latestDiaryList=minihomeDao.getLatestDiary(conn,hostMemberId);
+		close(conn);
+		return latestDiaryList;
 	}
 	
 }
