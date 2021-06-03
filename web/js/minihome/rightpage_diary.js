@@ -49,15 +49,16 @@ $(".diary_update_btn").click(e=>{
 		url:"<%=request.getContextPath()%>/diary/diaryUpdate",
 		type:"post",
 		data:{				
-			/*"diary_no":$(e.target).parent().prev().val(),
-			"diary_folder":$(e.target).parent().prev().prev().prev().child().val(),
-			"diary_content_input":$(e.target).parent().prev().prev().val(),*/
-			"diary_no":$("input[name='diary_no']"),
+			"diary_no":$(e.target).parent().prev().val(),			
+			"diary_folder":$(e.target).parent().prev().prev().prev().val(),
+			"diary_content_input":$(e.target).parent().prev().prev().val()
+			/*"diary_no":$("input[name='diary_no']"),
 			"diary_folder":$("select[name='diary_folder_up']"),
-			"diary_content_input":$(".diary_content_input").val()
+			"diary_content_input":$(".diary_content_input").val()*/
 		},
 		dataType:"html",
-		success:data=>{			
+		success:data=>{	
+			console.log(data);
 			$("#right-page").html(data);
 	 	}
 	})

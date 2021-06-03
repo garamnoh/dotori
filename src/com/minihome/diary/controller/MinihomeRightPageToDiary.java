@@ -49,6 +49,8 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		
 		int cPage;
 		int numPerpage;
+		
+		
 		try { 
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) { 
@@ -58,9 +60,22 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage")); 
 		}catch(NumberFormatException e) { 
 			numPerpage=5; 
-		}
-			
-		int totalData=new DiaryService().selectDiaryCount();		
+		}	
+		
+		System.out.println("테스트"+cPage);
+		System.out.println("text"+numPerpage);
+		
+		int diaryFolderLevel;
+		List<Diary> list=null;
+		try {		
+			diaryFolderLevel=(int)request.getAttribute("FolderLevel");			
+			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+		}catch(NullPointerException e) {
+			diaryFolderLevel=1; //처음엔 전체공개인 다이어리폴더의 게시물들만 보이게			
+			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+		}				
+		
+		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -70,42 +85,25 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
-		}else {
-			//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+		}else {			
 			pageBar+="<a id='"+(pageNo-1)+"/"+numPerpage+"'>[이전]</a>";
 		}		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}else {		
+				System.out.println("이거 찍혀?"+pageNo);
 				pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}		
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
-		}else {
-			//pageBar+="<a href'"+request.getContextPath()+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
+		}else {			
 			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
-		}
-		
-		///////////////////folder/////////////////////
-		int diaryFolderLevel;
-		List<Diary> list=null;
-		try {		
-			diaryFolderLevel=(int)request.getAttribute("FolderLevel");
-			//System.out.println("파라미터"+diaryFolderLevel);
-			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
-		}catch(NullPointerException e) {
-			diaryFolderLevel=1; //처음엔 전체공개인 다이어리폴더의 게시물들만 보이게
-			//System.out.println("트라이캐치"+diaryFolderLevel);
-			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
-		}
-		///////////////////////////////////////////////			
+		}				
 		
 		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
-
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		

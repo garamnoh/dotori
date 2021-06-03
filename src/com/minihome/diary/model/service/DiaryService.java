@@ -31,9 +31,9 @@ public class DiaryService {
 		return list;
 	}
 	
-	public int selectDiaryCount() {
+	public int selectDiaryCount(int diaryFolderLevel) {
 		Connection conn=getConnection();
-		int result=dao.selectDiaryCount(conn);
+		int result=dao.selectDiaryCount(conn, diaryFolderLevel);
 		close(conn);
 		return result;
 	}

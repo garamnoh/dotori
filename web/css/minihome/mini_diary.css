@@ -108,7 +108,7 @@
 #minimi_container{
 	display:flex;	
     height:80px;
-    width:80px;  
+    width:90px;  
     margin-top:2px; 
 }
 #minimi_container img{	
@@ -183,11 +183,12 @@
 	font-size: 13px;
 	margin:0 5px 0 5px;
 }
-/* update */
+/******** update ************/
 #diary_content_update{
 	display:flex;		
 	width:410px;
 	height:110px;
+	margin:0 0 0 10px;
 	/* border:1px solid; */
 }
 .diary_folder_up{
@@ -206,7 +207,7 @@
 	border-radius:5px;
 }
 #diary_update_btn_box{
-	margin:85px 0 0 5px;
+	margin:85px 0 0 10px;
 	width:60px;
 	height:20px;
 	font-weight:bold;

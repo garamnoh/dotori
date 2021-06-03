@@ -85,12 +85,13 @@ public class DiaryDao {
 		return list;	
 	}
 	
-	public int selectDiaryCount(Connection conn) {
+	public int selectDiaryCount(Connection conn, int diaryFolderLevel) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCount"));
+			pstmt.setInt(1,  diaryFolderLevel);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {

@@ -30,8 +30,10 @@ public class DiaryUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Diary d=new Diary();		
-		d.setDiaryNo(Integer.parseInt(request.getParameter("diary_no")));
+		Diary d=new Diary();	
+		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
+		System.out.println(diaryNo);
+		d.setDiaryNo(diaryNo);
 		String folder=request.getParameter("diary_folder");
 		System.out.println(folder);
 		switch(folder){
