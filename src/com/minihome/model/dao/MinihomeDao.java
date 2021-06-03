@@ -1,5 +1,7 @@
 package com.minihome.model.dao;
 
+import static com.common.JDBCTemplate.close;
+
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
@@ -10,7 +12,7 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.minihome.model.vo.Minihome;
-import static com.common.JDBCTemplate.close;
+import com.minihome.model.vo.ProfileImg;
 
 public class MinihomeDao {
 
@@ -41,6 +43,9 @@ public class MinihomeDao {
 				minihome.setTotal(rs.getInt("total"));
 				minihome.setSkinItemNo(rs.getInt("skin_item_no"));
 				minihome.setTodayDate(rs.getDate("today_date"));
+				minihome.setProfileImgNo(rs.getInt("profile_img_no"));
+				minihome.setProfileContent(rs.getString("profile_content"));
+				minihome.setFeeling(rs.getString("feeling"));
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -78,6 +83,59 @@ public class MinihomeDao {
 			close(pstmt);
 		}
 		return todayToTotalResult;
+	}
+	
+	public ProfileImg getMyProfileImg(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		ProfileImg profileImg=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMyProfileImg"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				profileImg=new ProfileImg();
+				profileImg.setMemberId(rs.getString("member_id"));
+				profileImg.setFilepath(rs.getString("filepath"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return profileImg;
+	}
+	
+	public int updateProfileContent(Connection conn,String hostMemberId,String profileContent) {
+		PreparedStatement pstmt=null;
+		int updateProfileContentResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateProfileContent"));
+			pstmt.setString(1,profileContent);
+			pstmt.setString(2,hostMemberId);
+			updateProfileContentResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return updateProfileContentResult;
+	}
+	
+	public int changeFeeling(Connection conn,String hostMemberId,String changeFeeling) {
+		PreparedStatement pstmt=null;
+		int changeFeelingResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("changeFeeling"));
+			pstmt.setString(1,changeFeeling);
+			pstmt.setString(2,hostMemberId);
+			changeFeelingResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return changeFeelingResult;
 	}
 	
 }

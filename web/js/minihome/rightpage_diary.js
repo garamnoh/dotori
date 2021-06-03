@@ -68,14 +68,15 @@ document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 	$(v).click((e)=>{		
 		let strArr=v.id.split("/");
 		let cPage=strArr[0];
-		let numPerpage=strArr[1];		
+		let numPerpage=strArr[1];
+		console.log(cPage,numPerpage);		
 		$.ajax({
 			url:contextPath+"/page/minihomeRightPageToDiary.do",
 			type:"post",
 			data:{
 				//"hostMemberId":hostMemberId,
 				"cPage":cPage,
-				"numPerpage":numPerpage				
+				"numPerpage":numPerpage			
 			},
 			dataType:"html",
 			success:data=>{
