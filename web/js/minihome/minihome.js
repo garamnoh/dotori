@@ -150,4 +150,6 @@ var fn_weather=()=>{
 window.setTimeout(fn_weather,0);
 window.setInterval(fn_weather,60000);
 
-
+$(".miniMenu ul:nth-child(3)").click(e=>{
+	$(".folderLevel").css("text-decoration","underline");
+});

@@ -91,4 +91,13 @@ public class DiaryService {
 		return result;
 	}
 	
+	//public List<DiaryComment> selectDiaryCommentList(int ref){
+	public List<DiaryComment> selectDiaryCommentList(){
+		Connection conn=getConnection();
+		//List<DiaryComment> list=dao.selectDiaryCommentList(conn, ref);
+		List<DiaryComment> list=dao.selectDiaryCommentList(conn);
+		close(conn);
+		return list;
+	}
+	
 }

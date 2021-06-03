@@ -11,11 +11,12 @@ public class DiaryComment {
 	private int diaryRef;
 	private int diaryCommentRef;
 	private Date commentDate;
+	private String writerName;
 	
 	public DiaryComment() {}
 
 	public DiaryComment(int commentNo, int commentLevel, String commentWriter, String commentContent, int diaryRef,
-			int diaryCommentRef, Date commentDate) {
+			int diaryCommentRef, Date commentDate, String writerName) {
 		super();
 		this.commentNo = commentNo;
 		this.commentLevel = commentLevel;
@@ -24,6 +25,7 @@ public class DiaryComment {
 		this.diaryRef = diaryRef;
 		this.diaryCommentRef = diaryCommentRef;
 		this.commentDate = commentDate;
+		this.writerName=writerName;
 	}
 
 	public int getCommentNo() {return commentNo;}
@@ -40,12 +42,14 @@ public class DiaryComment {
 	public void setDiaryCommentRef(int diaryCommentRef) {this.diaryCommentRef = diaryCommentRef;}
 	public Date getCommentDate() {return commentDate;}
 	public void setCommentDate(Date commentDate) {this.commentDate = commentDate;}
+	public String getWriterName() {return writerName;}
+	public void setWriterName(String writerName) {this.writerName = writerName;}
 
 	@Override
 	public String toString() {
 		return "DiaryComment [commentNo=" + commentNo + ", commentLevel=" + commentLevel + ", commentWriter="
 				+ commentWriter + ", commentContent=" + commentContent + ", diaryRef=" + diaryRef + ", diaryCommentRef="
-				+ diaryCommentRef + ", commentDate=" + commentDate + "]";
+				+ diaryCommentRef + ", commentDate=" + commentDate + writerName +"]";
 	}
 	
 	

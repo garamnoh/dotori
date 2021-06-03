@@ -14,6 +14,7 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 
@@ -61,9 +62,6 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			numPerpage=5; 
 		}	
 		
-		System.out.println("테스트"+cPage); //2
-		System.out.println("text"+numPerpage); //5
-		
 		int diaryFolderLevel;
 		List<Diary> list=null;
 		try {		
@@ -90,8 +88,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
-			}else {		
-				System.out.println("이거 찍혀?"+pageNo);
+			}else {				
 				pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
@@ -102,12 +99,16 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
 		}				
 		
-		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
+		//list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
+		
+		//int ref=Integer.parseInt(request.getParameter("diary_no"));
+		List<DiaryComment>cList=new DiaryService().selectDiaryCommentList();
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
 		request.setAttribute("pageBar", pageBar);	
-		request.setAttribute("list", list);		
+		request.setAttribute("list", list);
+		request.setAttribute("cList", cList);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				

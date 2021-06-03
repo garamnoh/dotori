@@ -32,12 +32,20 @@ public class DiaryCommentWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		DiaryComment dc=new DiaryComment();
-		dc.setCommentLevel(Integer.parseInt(request.getParameter("comment_level")));
-		dc.setCommentWriter(request.getParameter("loginMemberId"));
-		dc.setDiaryRef(Integer.parseInt(request.getParameter("diary_no")));
-		dc.setDiaryCommentRef(Integer.parseInt(request.getParameter("diary_comment_ref")));			
+		int level=Integer.parseInt(request.getParameter("comment_level"));
+		System.out.println("level"+level);
+		dc.setCommentLevel(level);
+		String id=request.getParameter("loginMemberId");
+		System.out.println("id"+id);
+		dc.setCommentWriter(id);
+		int no=Integer.parseInt(request.getParameter("diary_no"));
+		System.out.println("no"+no);
+		dc.setDiaryRef(no);
+		int ref=Integer.parseInt(request.getParameter("diary_comment_ref"));
+		System.out.println("ref"+ref);
+		dc.setDiaryCommentRef(ref);
 		String comment=request.getParameter("diary_comment");		
-		
+		System.out.println(comment);
 		String msg="";
 		if(comment!=null) {
 			dc.setCommentContent(comment);
