@@ -150,6 +150,8 @@ private Properties prop=new Properties();
 			close(rs);
 			close(pstmt);
 		}
+		
+		
 		return list;
 	}
 	public int updateShoppingList(Connection conn,List<String> itemNums,String type){
