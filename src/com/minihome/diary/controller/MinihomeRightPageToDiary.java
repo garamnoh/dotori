@@ -48,8 +48,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		int cPage;
-		int numPerpage;
-		
+		int numPerpage;		
 		
 		try { 
 			cPage=Integer.parseInt(request.getParameter("cPage"));
@@ -62,8 +61,8 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			numPerpage=5; 
 		}	
 		
-		System.out.println("테스트"+cPage);
-		System.out.println("text"+numPerpage);
+		System.out.println("테스트"+cPage); //2
+		System.out.println("text"+numPerpage); //5
 		
 		int diaryFolderLevel;
 		List<Diary> list=null;
@@ -79,7 +78,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
-		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		String pageBar="";

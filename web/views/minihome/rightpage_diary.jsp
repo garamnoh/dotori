@@ -1,12 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_diary.css">
-<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.Member" %>
+<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List" %>
+<%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
 	String pageBar=(String)request.getAttribute("pageBar");
+	List<DiaryComment> list=(List<DiaryComment>)request.getAttribute("list");
 %>
 <div id="diary_content">
 	<form>
@@ -68,10 +70,17 @@
 									<div class="diary_up_btn">수정</div>
 									<div class="diary_del_btn">삭제</div>
 								<%} %>
+								<div class="diary_com_btn">댓글</div>
 							</div>
 						</div>							
 						<div id="diary_content_content">
 							<%=d.getContent() %>
+						</div>
+						<div id="diary_comment_box" style="display:none">
+							<label>댓글</label>
+							<input type="hidden">
+							<input type="text" class="diary_comment" name="diary_comment">
+							<button class="diary_comment_btn">확인</button>
 						</div>	
 						<div id="diary_content_update" style="display:none">
 							<select class="diary_folder_up" name="diary_folder_up">

@@ -10,6 +10,7 @@ import java.util.List;
 
 import com.minihome.diary.model.dao.DiaryDao;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
 
 public class DiaryService {
@@ -76,6 +77,16 @@ public class DiaryService {
 	public int selectDiaryFolderCount() {
 		Connection conn=getConnection();
 		int result=dao.selectDiaryFolderCount(conn);
+		close(conn);
+		return result;
+	}
+	
+	////////////////////comment////////////////////////
+	public int insertComment(DiaryComment dc) {
+		Connection conn=getConnection();
+		int result=dao.insertComment(conn, dc);
+		if(result>0) commit(conn);
+		else rollback(conn);
 		close(conn);
 		return result;
 	}
