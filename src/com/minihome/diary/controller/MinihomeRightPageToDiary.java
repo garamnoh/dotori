@@ -73,6 +73,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}				
 		
 		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
+		System.out.println(diaryFolderLevel+"/"+totalData);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
@@ -85,6 +86,9 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}else {			
 			pageBar+="<a id='"+(pageNo-1)+"/"+numPerpage+"'>[이전]</a>";
 		}		
+		
+		System.out.println(pageNo+"/"+pageEnd+"/"+totalPage);
+		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
