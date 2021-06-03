@@ -1,12 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Minimi"%>
+    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Minimi,com.member.model.vo.Member"%>
 <%
 List<Minimi> list=(List<Minimi>)request.getAttribute("minimiList");
 Minimi mini=(Minimi)request.getAttribute("minimi");
+Member id=(Member)request.getAttribute("memberId");
 %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMinimi.css">
+
 <%@ include file="/views/common/shopheader.jsp"%>
-<form action="<%=request.getContextPath()%>/shop/minimiTable" method="post">
+
+<form id="AllMinimiForm" action="<%=request.getContextPath()%>/shop/minimiTable" method="post">
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
@@ -20,13 +23,14 @@ Minimi mini=(Minimi)request.getAttribute("minimi");
 				</div>
 				<br>
                 <div class="MinimiInfo">
-                <input class="shopMinimiCheck" type="checkbox">
-                <ul>
-                    <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
-                    <li><b><%=list.get(3*i).getTitle() %></b></li>
-                    <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
-                </ul>
-                <input class="shopMinimiCheck" type="checkbox">
+	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
+	                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
+		            <ul>
+		                <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
+		                <li><b><%=list.get(3*i).getTitle() %></b></li>
+		                <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
+		            </ul>
+	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -38,13 +42,14 @@ Minimi mini=(Minimi)request.getAttribute("minimi");
 				</div>
 				<br>
                 <div class="MinimiInfo">
-                <input class="shopMinimiCheck" type="checkbox">
-                <ul>
-                    <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
-                    <li><b><%=list.get(3*i+1).getTitle() %></b></li>
-                    <li><b>도토리 <%=list.get(3*i+1).getPrice() %>개</b></li>
-                </ul>
-                <input class="shopMinimiCheck" type="checkbox">
+	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
+	                <input type="hidden" value="<%=list.get(3*i+1).getItemNo() %>">
+		                <ul>
+		                    <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
+		                    <li><b><%=list.get(3*i+1).getTitle() %></b></li>
+		                    <li><b>도토리 <%=list.get(3*i+1).getPrice() %>개</b></li>
+		                </ul>
+	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -57,13 +62,14 @@ Minimi mini=(Minimi)request.getAttribute("minimi");
 				</div>
 				<br>
                 <div class="MinimiInfo">
-                <input class="shopMinimiCheck" type="checkbox">
-                <ul>
-                    <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
-                    <li><b><%=list.get(3*i+2).getTitle() %></b></li>
-                    <li><b>도토리 <%=list.get(3*i+2).getPrice() %>개</b></li>
-                </ul>
-                <input class="shopMinimiCheck" type="checkbox">
+	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
+	                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
+		                <ul>
+		                    <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
+		                    <li><b><%=list.get(3*i+2).getTitle() %></b></li>
+		                    <li><b>도토리 <%=list.get(3*i+2).getPrice() %>개</b></li>
+		                </ul>
+	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -92,5 +98,31 @@ function searchKeyup(e){
 		
 	});
 };
+
+
+const getbasket=()=>{
+	let arr=new Array();
+	document.querySelectorAll(".shopMinimiCheck").forEach((v,i)=>{
+		console.dir(v);
+		if($(v).prop("checked")) arr.push($(v).next().val());
+	});
+	
+	console.log(arr.toString());
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/shop/shopBasketUpdate.do",
+		type:"get",
+		data:{"memberId":id,"itemNums":arr.toString(),"type":"minimi"},
+		success:data=>{
+			if(result>0){
+				alert("장바구니에 담겼습니다!");
+			}else{
+				alert("장바구니에 담기 실패 담당자에게 문의하세요:(");
+			}
+		}
+		
+	});
+}
+
 
 </script>

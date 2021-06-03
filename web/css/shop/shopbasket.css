@@ -1,19 +1,140 @@
+/* 장바구니 헤더 */
 .basketheader{
-	background-color: rgb(190, 190, 190);
-	height:50px;
+	
+	border: 1px solid #c0c0c0;
+	font-size:20px;
+	height:30px;
 	/* padding: 0 0 0 40px; */
+	/* position:fixed;
+	top:0; */
+	width:60%; 
+	display:flex;
+	justify-content: space-between;
+	
 }
-.mybasketlist{
+.basketheader>button{
+	
+}
+
+.basketheader
+/* 카테고리별 */
+.basketCols{
+	margin:20px 0 20px 0;
+}
+/* 체크박스 */
+.basketCheck{
+	display:flex;
+	align-items: center;
+}
+.basketCheck>input{
+	width:20px;
+	height:20px;
+}
+
+.basketImg>img{
+	height:50px;
+	width:50px; 
+	background-color:white; 
+}
+/* 도토리 개 색칠 */
+.basketInfo>ul>li:nth-child(3){
+	color:orange;
+}
+.basketInfo>ul>li{
+	padding:0 0 0 40px;
+	/* display:flex;
+	justify-content: space-between; */
+}
+.basketInfo{
+	display:flex;
+	align-items: center;
+}
+.basketselectCount{
+	display:flex;
+	align-items: center;
+}
+/* 구입할 수량 박스 */
+.basketselectCount>input{
+	width:30px;
+
+}
+.basketselectCount{
+	padding:0 0 0 40px;
+}
+
+/* 도토리 타입 전체 info */
+.mybasketDotori{
 	display: flex;
+	border: 1px solid #c0c0c0;
+    border-radius: 5px;	
+}
+
+/* 미니미 타입 전체 info */
+.mybasketMinimi{
+	display: flex;
+	margin:20px 0 20px 0;
+	border: 1px solid #c0c0c0;
+    border-radius: 5px;	
+}
+
+/* 스킨 타입 전체 info */
+.mybasketSkin{
+	display: flex;
+	margin:20px 0 20px 0;
+	border: 1px solid #c0c0c0;
+    border-radius: 5px;	
+}
+/* 뮤직 타입 전체 info */
+.mybasketMusic{
+	display: flex;
+	margin:20px 0 20px 0;
+	border: 1px solid #c0c0c0;
+    border-radius: 5px;
+}
+
+
+.basketCount{
+	border: 1px solid #c0c0c0;
+	height:80px;
+	margin:0 0 40px 0;
 	
 }
-ul{
-	
+.basketCount>p{
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	padding:20px 0 0 0;
+}
+.basketInfo>ul{
+	display: flex;
 	list-style:none;
 }
 
-.myItem{
-	background-color: rgb(190, 190, 190);
-	height:150px;
-	width:150px;
+/* 전체 */
+.Allbasket{
+	width:60%;
+	border: 1px solid  #c0c0c0;
+	/* min-width:60px; */ 
+}
+.basketButtons{
+	display: flex;
+	justify-content: space-between;
+	border: 1px solid #c0c0c0;
+	padding: 0 30px 0 30px;
+	height: 42px;
+	align-items: center;
+
+}
+.basketButtons>button{
+	width:130px;
+	height: 30px;
+	
+}
+.basketfooter{
+	/* position:fixed;
+	bottom:0; */
+}
+.basketbody{
+	/* position:absolute;
+	top:30px; */
 }

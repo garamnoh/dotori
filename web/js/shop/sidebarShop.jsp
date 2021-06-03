@@ -30,4 +30,18 @@ $("#option3").on("click",(e)=>{
             $("#section").html(data);
         }
     });
+   
+});
+$("#option1").on("click",(e)=>{
+	let menuTitle=e.target.id;
+	console.log(menuTitle);
+	 $.ajax({
+        url:"<%=request.getContextPath()%>/page/"+menuTitle+".do",
+        type:"post",
+        dataType:"html",
+        success:(data)=>{
+            $("#section").html(data);
+        }
+    });
+   
 });

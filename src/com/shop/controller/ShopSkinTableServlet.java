@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.vo.Member;
 import com.shop.model.vo.Skin;
 import com.shop.service.ShopService;
 
@@ -34,8 +35,10 @@ public class ShopSkinTableServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<Skin> list=new ShopService().skinList();
 		Skin s= new Skin();
+		Member m =new Member(); //장바구니에 memberId를 넣어줘서 구별
 		request.setAttribute("skinList", list); //data
 		request.setAttribute("type", "skin"); 
+		request.setAttribute("memberId", m.getMemberId());
 		request.getRequestDispatcher("/views/shop/shopSkin.jsp").forward(request, response);
 		
 	}

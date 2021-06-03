@@ -7,7 +7,7 @@ Skin s=(Skin)request.getAttribute("skin");
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
 <%@ include file="/views/common/shopheader.jsp"%>
-<form action="<%=request.getContextPath()%>/shop/skinTable" method="post">
+<form id="AllSkinForm" action="<%=request.getContextPath()%>/shop/skinTable" method="post">
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
@@ -22,6 +22,7 @@ Skin s=(Skin)request.getAttribute("skin");
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i).getSkinTitle() %></b></li>
@@ -40,6 +41,7 @@ Skin s=(Skin)request.getAttribute("skin");
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*1+1).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+1).getSkinTitle() %></b></li>
@@ -59,6 +61,7 @@ Skin s=(Skin)request.getAttribute("skin");
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*1+2).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+2).getSkinTitle() %></b></li>
@@ -92,7 +95,26 @@ function searchKeyup(e){
 		}
 		
 	});
+	
 };
+function getbasket=()=>{
+	let arr=new Array();
+	document.querySelectorAll(".shopSkinCheck").forEach((v,i)=>{
+		if($(v).attr("checked")) arr.push($(v).next().val());
+	});
+	$.ajax({
+		url:"<%=request.getContextPath()%>/shop/shopBasketSearch.do",
+		type:"get",
+		data:{"itemNo":arr,"type":"skin"},
+		success:data=>{
+			if(response){
+				alert("장바구니에 담겼습니다!");
+			}else{
+				alert("장바구니에 담기 실패 담당자에게 문의하세요:(");
+			}
+		}
+		
+	});
 
 </script>
 	

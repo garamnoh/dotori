@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.vo.Member;
 import com.shop.model.vo.Minimi;
-import com.shop.model.vo.Music;
 import com.shop.service.ShopService;
 
 /**
@@ -38,8 +38,11 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		Minimi mini= new Minimi();
 		System.out.println(list);
 		System.out.println();
+		Member m =new Member(); //장바구니에 memberId를 넣어줘서 구별
+		
 		request.setAttribute("minimiList", list); //data
 		request.setAttribute("type", "mini"); 
+		request.setAttribute("memberId", m.getMemberId());
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		
 	
