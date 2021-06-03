@@ -14,6 +14,7 @@ import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 
@@ -48,7 +49,8 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		int cPage;
-		int numPerpage;
+		int numPerpage;		
+		
 		try { 
 			cPage=Integer.parseInt(request.getParameter("cPage"));
 		}catch(NumberFormatException e) { 
@@ -58,53 +60,59 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			numPerpage=Integer.parseInt(request.getParameter("numPerpage")); 
 		}catch(NumberFormatException e) { 
 			numPerpage=5; 
-		}
-			
-		int totalData=new DiaryService().selectDiaryCount();		
+		}	
+		
+		int diaryFolderLevel;
+		List<Diary> list=null;
+		try {		
+			diaryFolderLevel=(int)request.getAttribute("FolderLevel");			
+			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+		}catch(NullPointerException e) {
+			diaryFolderLevel=1; //처음엔 전체공개인 다이어리폴더의 게시물들만 보이게			
+			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+		}				
+		
+		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
+		System.out.println(diaryFolderLevel+"/"+totalData);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);
 		int pageBarSize=5;
-		int pageNo=((cPage-1)*pageBarSize)*pageBarSize+1;
+		int pageNo=((cPage-1)/pageBarSize)*pageBarSize+1;
 		int pageEnd=pageNo+pageBarSize-1;
 		
 		String pageBar="";
 		if(pageNo==1) {
 			pageBar+="<span>[이전]</span>";
-		}else {
-			pageBar+="<a href='"+request.getContextPath()
-			+"/page/minihomeRightPageToDiary.do?cPage="+(pageNo-1)+"'>[이전]</a>";
+		}else {			
+			pageBar+="<a id='"+(pageNo-1)+"/"+numPerpage+"'>[이전]</a>";
 		}		
+		
+		System.out.println(pageNo+"/"+pageEnd+"/"+totalPage);
+		
 		while(!(pageNo>pageEnd || pageNo>totalPage)) {
 			if(cPage==pageNo) {
 				pageBar+="<span>"+pageNo+"</span>";
-			}else {
-				pageBar+="<a href='"+request.getContextPath()
-				+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>"+pageNo+"</a>";
+			}else {				
+				pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}		
 		if(pageNo>totalPage) {
 			pageBar+="<span>[다음]</span>";
-		}else {
-			pageBar+="<a href'"+request.getContextPath()
-			+"/page/minihomeRightPageToDiary.do?cPage="+pageNo+"'>[다음]</a>";
-		}
+		}else {			
+			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
+		}				
 		
-		int diaryFolderLevel;
-		try {		
-			diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
-			System.out.println(diaryFolderLevel);
-		}catch(NullPointerException e) {
-			diaryFolderLevel=1;
-		}
+		//list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
 		
-		List<Diary> list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);		
-		System.out.println(diaryFolderLevel);
+		//int ref=Integer.parseInt(request.getParameter("diary_no"));
+		List<DiaryComment>cList=new DiaryService().selectDiaryCommentList();
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
 		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
+		request.setAttribute("cList", cList);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				

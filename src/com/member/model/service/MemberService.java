@@ -39,6 +39,14 @@ public class MemberService {
 		return m;
 	}
 	
+	
+	public Member selectNickname(String nickname) {
+		Connection conn=getConnection();
+		Member m=dao.selectNickname(conn,nickname);
+		close(conn);
+		return m;
+	}
+	
 	public int insertMember(Member m) {
 		Connection conn=getConnection();
 		int result=dao.insertMember(conn,m);

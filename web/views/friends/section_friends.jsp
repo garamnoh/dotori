@@ -169,13 +169,8 @@
 						}, 2000);
 					}
 					else alert('일촌 삭제 실패');
-				},
-				error: (r,s,m)=>{
-					console.log(r);
-					console.log(s);
 				}
 			});
 		}
-		
 	});
 </script>

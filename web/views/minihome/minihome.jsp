@@ -13,8 +13,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=hostMember.getNickname()%>님의 미니홈피</title>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_home.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_album.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_album.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
 </head>
 <body>
     
@@ -49,6 +55,19 @@
     <button onclick="fn_playNext();" style="position:absolute;top:250px;left:1000px;">다음 곡 재생</button>
     <button onclick="fn_playPrevious();" style="position:absolute;top:300px;left:1000px;">이전 곡 재생</button>
     
+    <div id="WeatherBox" style="border:1px solid black;position:absolute;left:1000px;top:550px;background-color:white;font-size:11px;">
+    	
+    	<ul style="list-style-type:none;position:relative;left:-30px;">
+    		<li><img src="" id="weather_icon" width="20px"></li>
+    		<li id="weather_main"></li>
+    		<li id="weather_description"></li>
+    		<li id="feels_like"></li>
+    		<li id="temp"></li>
+    		<li id="temp_max"></li>
+    		<li id="temp_min"></li>
+    	</ul>
+    </div>
+    
     <div id="backgroundMusic">
     	<%for(int i=0;i<musicList.size();i++) {%>    
     		<audio src="<%=request.getContextPath()%>/audio/<%=musicList.get(i).getFilepath()%>"></audio>
@@ -57,9 +76,11 @@
 </div>
 
 	<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">
+	<input type="hidden" id="loginMemberId" value="<%=loginMember.getMemberId()%>">
 	<input type="hidden" id="hostMemberId" value="<%=hostMember.getMemberId()%>">
 
-	<script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
+	<script src="<%=request.getContextPath()%>/js/jquery-3.6.0.min.js"></script>
 	<script src="<%=request.getContextPath()%>/js/minihome/minihome.js"></script>
+	
 </body>
 </html>

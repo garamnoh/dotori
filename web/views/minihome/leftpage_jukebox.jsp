@@ -3,7 +3,6 @@
 <%
 	List<String> albumList=(List<String>)request.getAttribute("albumList");
 %>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
 <style>
     .music-title{
         /* border:1px solid black; */

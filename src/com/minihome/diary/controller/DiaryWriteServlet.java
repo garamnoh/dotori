@@ -43,7 +43,12 @@ public class DiaryWriteServlet extends HttpServlet {
 		d.setMemberId(request.getParameter("hostMemberId"));
 		d.setWriter(request.getParameter("loginMemberId"));		
 		String folder=request.getParameter("diary_folder");
-				
+		System.out.println(folder); //이건 잘 찍힘		
+		switch(folder){
+			case "전체공개" : d.setFolderNo(1); break;
+			case "일촌공개" : d.setFolderNo(2); break;
+			case "비공개" : d.setFolderNo(3); break;
+		}		
 		String content=request.getParameter("diary_content_input");
 		String msg="";
 		if(content!=null) {
@@ -54,13 +59,7 @@ public class DiaryWriteServlet extends HttpServlet {
 			request.setAttribute("msg", msg);
 			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
 			///////////////////////////////////////////////
-		}
-		
-		switch(folder){
-			case "전체공개" : d.setFolderNo(1);
-			case "일촌공개" : d.setFolderNo(2);
-			case "비공개" : d.setFolderNo(3);
-		}
+		}		
 		
 		int result=new DiaryService().insertDiary(d);		
 		

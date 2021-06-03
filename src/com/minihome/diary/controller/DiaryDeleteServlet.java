@@ -37,8 +37,8 @@ public class DiaryDeleteServlet extends HttpServlet {
 		String id=request.getParameter("loginMemberId");
 		d.setDiaryNo(diaryNo);
 		d.setWriter(id);
-		
-		int result=new DiaryService().deleteDiary(d);
+
+		int result=new DiaryService().deleteDiary(d);		
 		
 		if(result>0) {
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);

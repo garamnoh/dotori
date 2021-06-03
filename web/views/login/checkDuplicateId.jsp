@@ -6,7 +6,7 @@
 	String memberId=request.getParameter("memberId");
 	String localPart=memberId.substring(0,memberId.indexOf("@"));
 	String domain=memberId.substring(memberId.indexOf("@")+1);
-	/* String selectEmail=request.getParameter("selectEmail"); */
+	String selectEmail=request.getParameter("selectEmail"); 
 %>    
 <!DOCTYPE html>
 <html>
@@ -40,8 +40,12 @@
 			<form action="<%=request.getContextPath() %>/checkDuplicateId" method="post">
 				<input type="text" name="memberId" id="memberId" placeholder='이메일 형식으로 입력하세요'>
 				
-				<input type="submit" value="중복검사">
+				
+				<input type="submit" value="중복검사" >
 			</form>
+				
+				
+			
 		<%} %>
 	</div>
 	<script>
@@ -49,10 +53,14 @@
 	
 	opener.document.getElementById("email1").value="<%=localPart%>";
 	opener.document.getElementById("domain").value="<%=domain%>";  
+	opener.document.getElementById("selectEmail").value=opener.document.getElementById("domain").value; 
 	
-	//opener.document.getElementById("password").focus();
+<%-- 	if(<%=domain%>==<%=selectEmail%>!){
+		opener.document.getElementById("selectEmail").value="1";
+		
+	} --%>
 	window.close(); /* 윈도우 닫기 */
-		 
+	
 	 }
 	
 	</script>
