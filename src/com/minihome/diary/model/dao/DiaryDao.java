@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
 
 public class DiaryDao {
@@ -196,6 +197,27 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return result;
+	}
+	
+	////////////////////////////comment////////////////////
+	public int insertComment(Connection conn, DiaryComment dc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String ref=Integer.toString(dc.getDiaryCommentRef());
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setInt(1, dc.getCommentLevel());
+			pstmt.setString(2, dc.getCommentWriter());
+			pstmt.setString(3,  dc.getCommentContent());
+			pstmt.setInt(4, dc.getDiaryRef());
+			pstmt.setString(5, ref.equals("0")?null:ref);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
 	}
 	
 }

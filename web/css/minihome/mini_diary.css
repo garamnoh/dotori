@@ -129,18 +129,18 @@
 	position:absolute;
     overflow: auto;
 	left:85px;
-	width:420px;
+	width:425px;
 	height:80px;
 	background-color: white;
 }
 #diary_content_title{
 	display:flex;	
-	width:420px;
+	width:425px;
 	height:20px;
 	margin:5px 0 5px 0;
 }
 #diary_writer_container{
-	width:280px;
+	width:260px;
 	height:20px;
 	margin-left:10px;
 	font-weight:bolder;
@@ -148,7 +148,7 @@
 	cursor:pointer;
 }
 #diary_date_container{
-	width:80px;
+	width:75px;
 	height:20px;
 	font-weight:bold;
 	font-size: 12px;
@@ -156,7 +156,7 @@
 }
 #diary_btn_container{
 	margin:0 0 0 0;
-	width:55px;
+	width:81px;
 	height:20px;
 	font-weight:bold;
 	font-size: 12px;
@@ -183,6 +183,21 @@
 	font-size: 13px;
 	margin:0 5px 0 5px;
 }
+#diary_comment_box{
+	margin-top: 10px;	
+	/* border:1px solid; */
+}
+#diary_comment_box label{
+	font-size: 13px;
+}
+.diary_comment{
+	width:330px;
+}
+.diary_com_btn{
+	 border-radius: 5px; 
+	 margin: 0 0 0 5px;
+}
+
 /******** update ************/
 #diary_content_update{
 	display:flex;		
@@ -224,6 +239,12 @@
 	margin:0 0 0 5px;	
 	cursor:pointer;
 	font-size: 12px;
+}
+.diary_com_btn{
+	display: inline-block;
+    margin: 0 0 0 0;
+    cursor: pointer;
+    font-size: 12px;
 }
 .diary_update_btn:hover, .diary_cancel_btn:hover{
 	color:#747474;
