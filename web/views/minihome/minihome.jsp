@@ -19,13 +19,13 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>">
 	
 	
-	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css"> --%>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_album.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_album.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css"> --%>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
 </head>
 <body>
     
