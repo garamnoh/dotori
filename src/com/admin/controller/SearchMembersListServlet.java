@@ -64,7 +64,7 @@ public class SearchMembersListServlet extends HttpServlet {
 		if(pageStartFrom == 1) {
 			pageBar += "<span>[이전]</span>";
 		} else {
-			pageBar += "<a href='" +  request.getContextPath() + "/admin/membersList?currentPage=" + (pageStartFrom - 1) + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword + "'>[이전]</a>";
+			pageBar += "<a id='" + (pageStartFrom - 1) + "'>[이전]</a>";
 		}
 		
 		while(!(pageStartFrom > pageEndTo || pageStartFrom > totalPage)) {
@@ -74,7 +74,7 @@ public class SearchMembersListServlet extends HttpServlet {
 				
 			} else {
 				
-				pageBar += "<a href='" + request.getContextPath() + "/admin/membersList?currentPage=" + pageStartFrom + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword + "'>" + pageStartFrom + "</a>";
+				pageBar += "<a id='" + pageStartFrom + "'>" + pageStartFrom + "</a>";
 				
 			}
 			pageStartFrom++; // pageStart : 6, 11, 16, 21
@@ -86,7 +86,7 @@ public class SearchMembersListServlet extends HttpServlet {
 			
 		} else {
 			
-			pageBar += "<a href='" + request.getContextPath() + "/admin/membersList?currentPage=" + pageStartFrom + "&searchType=" + searchType + "&searchKeyword=" + searchKeyword + "'>[다음]</a>";
+			pageBar += "<a id='" + pageStartFrom + "'>[다음]</a>";
 			
 		}
 		
