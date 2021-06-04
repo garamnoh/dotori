@@ -87,7 +87,7 @@ private Properties prop=new Properties();
 				sk.setItemNo(rs.getInt("item_no"));
 				sk.setSkinTitle(rs.getString("skin_title"));
 				sk.setPrice(rs.getInt("price"));
-				sk.setFilepath(rs.getString("filepath"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
 				sk.setCssFilepath(rs.getString("css_filepath"));
 				list.add(sk);
 			}
@@ -167,7 +167,6 @@ private Properties prop=new Properties();
 				pstmt.setString(2, (type.equals("music")? itemNums.get(i):null));
 				pstmt.setString(3, (type.equals("minimi")? itemNums.get(i):null));
 				pstmt.setString(4, (type.equals("skin")? itemNums.get(i):null));
-				pstmt.setString(5, (type.equals("dotori")? itemNums.get(i):null));
 				result=pstmt.executeUpdate();
 			}
 			
