@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.model.service.MinihomeService;
+import com.minihome.model.vo.Minihome;
 import com.shop.model.vo.Skin;
 
 @WebServlet("/page/minihomeRightPageToSettings.do")
@@ -26,8 +27,10 @@ public class MinihomeRightPageToSettingsServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		
 		List<Skin> skinList=minihomeService.getMySkins(hostMemberId);
+		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		request.setAttribute("skinList",skinList);
+		request.setAttribute("minihome",minihome);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_settings.jsp").forward(request,response);
 	}
