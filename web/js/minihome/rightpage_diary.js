@@ -100,6 +100,7 @@ document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 			type:"post",
 			data:{
 				//"hostMemberId":hostMemberId,
+				//"folderNo":$(e.target).parent()//여기하면됨
 				"cPage":cPage,
 				"numPerpage":numPerpage			
 			},

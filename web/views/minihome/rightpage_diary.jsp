@@ -82,6 +82,12 @@
 									<div class="diary_comment_user"><%= dc.getWriterName()%></div>
 									<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
 								</div>
+								
+								<!--  -->
+								<input type="hidden" name="folderNo" value="<%=d.getFolderNo()%>">
+								<!--  -->
+								
+								
 							<%} %>
 						<%} %>	
 						<div id="diary_comment_box" style="display:none">
@@ -105,12 +111,14 @@
 						</div>						
 					</div>
 				</div>
-			</div>			
+			</div>	
+						
 		<%} 
 	}%>	
 				
   <div id="pageBar">
-  	<%=pageBar %>	
+  	<%=pageBar %>
+  	
   </div> 
 	
 </div>
