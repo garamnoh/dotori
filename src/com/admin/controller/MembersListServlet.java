@@ -59,7 +59,7 @@ public class MembersListServlet extends HttpServlet {
 		if(pageStartFrom == 1) {
 			pageBar += "<span>[이전]</span>";
 		} else {
-			pageBar += "<a href='" +  request.getContextPath() + "/admin/membersList?currentPage=" + (pageStartFrom - 1) + "'>[이전]</a>";
+			pageBar += "<a id='"+(pageStartFrom - 1)+"'>[이전]</a>";
 		}
 		
 		while(!(pageStartFrom > pageEndTo || pageStartFrom > totalPage)) {
@@ -69,7 +69,7 @@ public class MembersListServlet extends HttpServlet {
 				
 			} else {
 				
-				pageBar += "<a href='" + request.getContextPath() + "/admin/membersList?currentPage=" + pageStartFrom + "'>" + pageStartFrom + "</a>";
+				pageBar += "<a id='" + pageStartFrom + "'>" + pageStartFrom + "</a>";
 				
 			}
 			pageStartFrom++; // pageStart : 6, 11, 16, 21
@@ -81,7 +81,7 @@ public class MembersListServlet extends HttpServlet {
 			
 		} else {
 			
-			pageBar += "<a href='" + request.getContextPath() + "/admin/membersList?currentPage=" + pageStartFrom + "'>[다음]</a>";
+			pageBar += "<a'" + pageStartFrom + "'>[다음]</a>";
 			
 		}
 		
@@ -96,7 +96,7 @@ public class MembersListServlet extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);
 		request.setAttribute("membersList", membersList);
 		
-		request.getRequestDispatcher("/views/admin/section_admin_memberList.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/admin/submitContainer/section_admin_searchList.jsp").forward(request, response);
 	}
 
 	/**
