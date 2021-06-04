@@ -6,9 +6,9 @@
 /*********전체 박스**********/
 #diary_content{  
 	height:530px;
-	width:520px;
+	width:550px;
 	overflow:auto;
-	margin:0 0 0 0;
+	margin:auto;
 	background-color:white;
 	/* border:1px solid; */
 }
@@ -103,7 +103,7 @@
 	position:relative;
 	margin-top:15px;
 	/* height:85px; */
-	overflow:hidden;
+	overflow:auto;
 	height:auto;
 	width:515px;
 	border:1px solid;
@@ -188,17 +188,17 @@
 	font-size: 13px;
 	margin:0 5px 0 5px;
 }
-
-.diary_comment_list{
+/*******comment********/
+.diary_comment_list{	
 	display:flex;
-	/* position:inline-block; */	
 	width:400px;
 	/* height:35px; */
 	height:auto;
 	font-size: 13px;
+	margin:0 5px 0 5px;
 	border:1px solid;
 }
-.diary_comment_user{
+.diary_comment_user{	
 	width:130px;
 	height:20px;
 	border:1px solid;
@@ -231,6 +231,7 @@
 	width:410px;
 	height:110px;
 	margin:0 0 0 10px;
+	z-index:10;
 	/* border:1px solid; */
 }
 .diary_folder_up{
