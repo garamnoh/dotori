@@ -220,4 +220,34 @@ public class DiaryDao {
 		return result;	
 	}
 	
+	//public List<DiaryComment> selectDiaryCommentList(Connection conn, int diaryRef){
+	public List<DiaryComment> selectDiaryCommentList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryComment> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));
+			//pstmt.setInt(1, diaryRef);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryComment dc=new DiaryComment();
+				dc.setCommentNo(rs.getInt("comment_no"));
+				dc.setCommentLevel(rs.getInt("comment_level"));
+				dc.setCommentWriter(rs.getString("comment_writer"));
+				dc.setCommentContent(rs.getString("comment_content"));
+				dc.setDiaryRef(rs.getInt("diary_ref"));
+				dc.setDiaryCommentRef(rs.getInt("diary_comment_ref"));
+				dc.setCommentDate(rs.getDate("comment_date"));
+				dc.setWriterName(rs.getString("member_name"));
+				list.add(dc);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
+	}
+	
 }

@@ -59,8 +59,8 @@ $(".diary_comment_btn").click(e=>{
 		data:{
 			"comment_level":1,
 			"loginMemberId":$("input[name='loginMemberId']").val(),	
-			"diary_comment":$(e.target).prev().val(),
-			"diary_no":$("input[name='diary_no']").val(),
+			"diary_comment":$(e.target).prev().prev().val(),
+			"diary_no":$(e.target).prev().val(),
 			"diary_comment_ref":0
 		},
 		dataType:"html",
