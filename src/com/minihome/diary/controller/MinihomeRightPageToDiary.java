@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
+import com.member.model.vo.ProfilePath;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
@@ -65,12 +66,11 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		int diaryFolderLevel;
 		List<Diary> list=null;
 		try {		
-			diaryFolderLevel=(int)request.getAttribute("FolderLevel");			
-			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+			diaryFolderLevel=(int)request.getAttribute("FolderLevel");					
 		}catch(NullPointerException e) {
-			diaryFolderLevel=1; //처음엔 전체공개인 다이어리폴더의 게시물들만 보이게			
-			list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+			diaryFolderLevel=1; //처음엔 전체공개폴더의 게시물들만 보이게			
 		}				
+		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
 		
 		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
 		System.out.println(diaryFolderLevel+"/"+totalData);
@@ -101,18 +101,18 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			pageBar+="<span>[다음]</span>";
 		}else {			
 			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
-		}				
+		}
 		
-		//list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);
-		
-		//int ref=Integer.parseInt(request.getParameter("diary_no"));
-		List<DiaryComment>cList=new DiaryService().selectDiaryCommentList();
+		List<DiaryComment> cList=new DiaryService().selectDiaryCommentList();
+		String profilePath=new MemberService().profilePath(loginMember.getMemberId());
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
 		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
 		request.setAttribute("cList", cList);
+		request.setAttribute("profilePath", profilePath);
+		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				

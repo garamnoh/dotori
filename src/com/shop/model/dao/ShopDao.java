@@ -160,7 +160,8 @@ private Properties prop=new Properties();
 			pstmt=conn.prepareStatement(prop.getProperty("insertShoppingList"));
 			//pstmt.setString(1, m.getPassword());
 			//아이템 타입마다 들어갈 ? 가 다르다
-			
+			System.out.println("멤버아이디 : "+id);
+			System.out.println("dao테스트 타입: "+type);
 			for(int i=0;i<itemNums.size();i++) {
 				pstmt.setString(1, id);
 				pstmt.setString(2, (type.equals("music")? itemNums.get(i):null));
@@ -168,6 +169,7 @@ private Properties prop=new Properties();
 				pstmt.setString(4, (type.equals("skin")? itemNums.get(i):null));
 				result=pstmt.executeUpdate();
 			}
+			
 			
 			
 		}catch(SQLException e) {

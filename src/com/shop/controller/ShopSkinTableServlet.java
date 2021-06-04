@@ -35,10 +35,10 @@ public class ShopSkinTableServlet extends HttpServlet {
 		// TODO Auto-generated method stub
 		List<Skin> list=new ShopService().skinList();
 		Skin s= new Skin();
-	
+		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		request.setAttribute("skinList", list); //data
 		request.setAttribute("type", "skin"); 
-		
+		request.setAttribute("memberId", memberId); 
 		request.getRequestDispatcher("/views/shop/shopSkin.jsp").forward(request, response);
 		
 	}

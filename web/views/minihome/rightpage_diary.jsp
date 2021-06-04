@@ -1,20 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_diary.css">
-<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List" %>
+<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.ProfilePath" %>
 <%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
+	String profilePath=(String)request.getAttribute("profilePath");
 	String pageBar=(String)request.getAttribute("pageBar");
 	List<DiaryComment> cList=(List<DiaryComment>)request.getAttribute("cList");
+	int diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
 %>
 <div id="diary_content">
 	<form>
 		<div id="diary_input_box">
 			<div id="input_minimi_container">
-				<img src="<%=request.getContextPath()%>/upload/MINIMI/brown.png" alt="나의미니미">
+				<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=profilePath %>" alt="나의미니미">
 			</div>
 			<div id="diary_input_container">
 				<div id="diary_title_left">
@@ -58,68 +60,63 @@
 		<%for(Diary d : list) {%>					
 			<div id="diary_content_box">
 				<div id="minimi_container">
-					<img src="<%=request.getContextPath()%>/upload/MINIMI/selly.png" alt="미니미">
-					<div id="diary_content_list">
-						<div id="diary_content_title">
-							<div id="diary_writer_container"><%=d.getMemberName()%></div>									
-							<div id="diary_date_container"><%=d.getPostDate() %></div>
-							<div id="diary_btn_container">
-								<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
-										|| loginMember.getMemberId().equals("admin@gmail.com")
-										|| loginMember.getMemberId().equals(d.getWriter())) {%>
-									<div class="diary_up_btn">수정</div>
-									<div class="diary_del_btn">삭제</div>
-								<%} %>
-								<div class="diary_com_btn">댓글</div>
-							</div>
-						</div>							
-						<div id="diary_content_content">
-							<%=d.getContent() %>
-						</div>
-						<%for(DiaryComment dc : cList) {%>
-							<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
-								<div class="diary_comment_list">						
-									<div class="diary_comment_user"><%= dc.getWriterName()%></div>
-									<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
-								</div>
-								
-								<!--  -->
-								<input type="hidden" name="folderNo" value="<%=d.getFolderNo()%>">
-								<!--  -->
-								
-								
+					<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=d.getProfilePath() %>" alt="미니미">
+				</div>
+				<div id="diary_content_list">
+					<div id="diary_content_title">
+						<div id="diary_writer_container"><%=d.getMemberName()%></div>									
+						<div id="diary_date_container"><%=d.getPostDate() %></div>
+						<div id="diary_btn_container">
+							<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
+									|| loginMember.getMemberId().equals("admin@gmail.com")
+									|| loginMember.getMemberId().equals(d.getWriter())) {%>
+								<div class="diary_up_btn">수정</div>
+								<div class="diary_del_btn">삭제</div>
 							<%} %>
-						<%} %>	
-						<div id="diary_comment_box" style="display:none">
-							<label>댓글</label>							
-							<input type="text" class="diary_comment" name="diary_comment">
-							<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
-							<button class="diary_comment_btn">확인</button>
-						</div>	
-						<div id="diary_content_update" style="display:none">
-							<select class="diary_folder_up" name="diary_folder_up">
-								<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>
-								<option value="일촌공개" <%=d.getFolderNo()==2?"selected":""%>>일촌공개</option>
-								<option value="비공개" <%=d.getFolderNo()==3?"selected":""%>>비공개</option>
-							</select>
-							<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
-							<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
-							<div id="diary_update_btn_box">
-								<div class="diary_update_btn">저장</div>
-								<div class="diary_cancel_btn">취소</div>
-							</div>
-						</div>						
+							<div class="diary_com_btn">댓글</div>
+						</div>
+					</div>							
+					<div id="diary_content_content">
+						<%=d.getContent() %>
 					</div>
+					<%for(DiaryComment dc : cList) {%>
+						<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
+							<div class="diary_comment_list">						
+								<div class="diary_comment_user"><%= dc.getWriterName()%></div>
+								<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
+							</div>
+						<%} %>
+					<%} %>	
+					<div id="diary_comment_box" style="display:none">
+						<label>댓글</label>							
+						<input type="text" class="diary_comment" name="diary_comment">
+						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
+						<button class="diary_comment_btn">확인</button>
+					</div>	
+					<div id="diary_content_update" style="display:none">
+						<select class="diary_folder_up" name="diary_folder_up">
+							<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>
+							<option value="일촌공개" <%=d.getFolderNo()==2?"selected":""%>>일촌공개</option>
+							<option value="비공개" <%=d.getFolderNo()==3?"selected":""%>>비공개</option>
+						</select>
+						<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
+						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
+						<div id="diary_update_btn_box">
+							<div class="diary_update_btn">저장</div>
+							<div class="diary_cancel_btn">취소</div>
+						</div>
+					</div>						
 				</div>
 			</div>	
-						
 		<%} 
 	}%>	
 				
-  <div id="pageBar">
-  	<%=pageBar %>
-  	
-  </div> 
+	<input type="hidden" name="folderNo" value="<%=diaryFolderLevel%>">
+											
+	<div id="pageBar">
+		<%=pageBar %>
+		
+	</div> 
 	
 </div>
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>

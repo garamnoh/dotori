@@ -15,73 +15,8 @@
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%>
 	<div class="basketbody">
-		<%if(type.equals("dotori")) {%>
-		<div class="basketCols">
-			<div class="mybasketDotori">
-				<div class="basketCheck">
-					<input class="shopbasketCheck" type="checkbox">
-				</div>
-				<div class="basketImg">
-					<img alt="내가고른아이템사진" src="<%=request.getContextPath() %>/images/shopDOTORI.png" class="myItem">
-				</div>
-				<div class="basketInfo">
-					<ul>
-						<li><b>테스트</b></li>
-				        <li><b>테스트</b></li>
-				        <li><b>도토리 개</b>
-				        </li>
-					</ul>
-				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input type="number">
-				</div>
-			</div>
-			
-			<div class="mybasketDotori">
-				<div class="basketCheck">
-					<input class="shopbasketCheck" type="checkbox">
-				</div>
-				<div class="basketImg">
-					<img alt="내가고른아이템사진" src="<%=request.getContextPath() %>/images/shopDOTORI.png" class="myItem">
-				</div>
-				<div class="basketInfo">
-					<ul>
-						<li><b>테스트</b></li>
-				        <li><b>테스트</b></li>
-				        <li><b>도토리 개</b>
-				        </li>
-					</ul>
-				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input type="number">
-				</div>
-			</div>
-			<div class="mybasketDotori">
-				<div class="basketCheck">
-					<input class="shopbasketCheck" type="checkbox">
-				</div>
-				<div class="basketImg">
-					<img alt="내가고른아이템사진" src="<%=request.getContextPath() %>/images/shopDOTORI.png" class="myItem">
-				</div>
-				<div class="basketInfo">
-					<ul>
-						<li><b>테스트</b></li>
-				        <li><b>테스트</b></li>
-				        <li><b>도토리 개</b>
-				        </li>
-					</ul>
-				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input type="number">
-				</div>
-			</div>
-		</div>
-		<%} %>
 		<%if(type.equals("minimi")) {%>
-			
+		<%for(int i=0;i<a.size();i++){ %>
 		<div class="basketCols">
 			<div class="mybasketMinimi">
 				<div class="basketCheck">
@@ -104,9 +39,10 @@
 				</div>
 			</div>
 		</div>
-		<%} %>
+		<%} 
+		}%>
 		<%if(type.equals("skin")) { %>
-			
+		<%for(int i=0;i<b.size();i++){ %>	
 		<div class="basketCols">
 			<div class="mybasketSkin">
 				<div class="basketCheck">
@@ -129,13 +65,10 @@
 			</div>	
 		</div>
 		
-		<%} %>
-		<%if(type.equals("skin")) { %>
-		<%} %>
-		
-		
-		
-		
+		<%} 
+		}%>
+		<%if(type.equals("music")) { %>
+		<%for(int i=0;i<c.size();i++){ %>
 		<div class="basketCols">
 			<div class="mybasketMusic">
 				<div class="basketCheck">
@@ -158,6 +91,12 @@
 			</div>	
 		</div>
 	</div>
+		<%} 
+		}%>
+		
+		
+		
+		
 	
 	<%} %>
 	
