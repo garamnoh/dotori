@@ -81,13 +81,7 @@
 		</div>
 		<%} %>
 		<%if(type.equals("minimi")) {%>
-		<%} %>
-		<%if(type.equals("skin")) { %>
-		<%} %>
-		<%if(type.equals("skin")) { %>
-		<%} %>
-		
-		
+			
 		<div class="basketCols">
 			<div class="mybasketMinimi">
 				<div class="basketCheck">
@@ -110,8 +104,9 @@
 				</div>
 			</div>
 		</div>
-		
-		
+		<%} %>
+		<%if(type.equals("skin")) { %>
+			
 		<div class="basketCols">
 			<div class="mybasketSkin">
 				<div class="basketCheck">
@@ -133,6 +128,13 @@
 				</div>
 			</div>	
 		</div>
+		
+		<%} %>
+		<%if(type.equals("skin")) { %>
+		<%} %>
+		
+		
+		
 		
 		<div class="basketCols">
 			<div class="mybasketMusic">

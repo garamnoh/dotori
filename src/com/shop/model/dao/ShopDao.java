@@ -154,20 +154,23 @@ private Properties prop=new Properties();
 		
 		return list;
 	}
-	public int updateShoppingList(Connection conn,List<String> itemNums,String type){
+	public int insertShoppingList(Connection conn,String id,List<String> itemNums,String type){
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("updateShoppingList"));
+			pstmt=conn.prepareStatement(prop.getProperty("insertShoppingList"));
 			//pstmt.setString(1, m.getPassword());
 			//아이템 타입마다 들어갈 ? 가 다르다
-			pstmt.setString(1, n.getNoticeTitle());
-			pstmt.setString(2, n.getNoticeWriter());
-			pstmt.setString(3, n.getFilePath());
-			pstmt.setString(4, n.getNoticeContent());
-			pstmt.setInt(5, n.getNoticeNo());
 			
-			result=pstmt.executeUpdate();
+			for(int i=0;i<itemNums.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, (type.equals("music")? itemNums.get(i):null));
+				pstmt.setString(3, (type.equals("minimi")? itemNums.get(i):null));
+				pstmt.setString(4, (type.equals("skin")? itemNums.get(i):null));
+				pstmt.setString(5, (type.equals("dotori")? itemNums.get(i):null));
+				result=pstmt.executeUpdate();
+			}
+			
 			
 		}catch(SQLException e) {
 			e.printStackTrace();

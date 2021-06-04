@@ -36,13 +36,12 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		List<Minimi> list=new ShopService().minimiList();
 		Minimi mini= new Minimi();
-		System.out.println(list);
-		System.out.println();
-		Member m =new Member(); //장바구니에 memberId를 넣어줘서 구별
+		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
 		request.setAttribute("minimiList", list); //data
 		request.setAttribute("type", "mini"); 
-		request.setAttribute("memberId", m.getMemberId());
+		request.setAttribute("memberId", memberId); 
+		
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		
 	

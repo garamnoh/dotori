@@ -43,9 +43,9 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return list;
 	}
-	public int updateShoppingList(String id,List<String> itemNums,String type){
+	public int insertShoppingList(String id,List<String> itemNums,String type){
 		Connection conn=getConnection();
-		int result=dao.updateShoppingList(conn,itemNums,type);
+		int result=dao.insertShoppingList(conn,id,itemNums,type);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

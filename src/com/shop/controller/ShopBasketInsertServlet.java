@@ -16,14 +16,14 @@ import com.shop.service.ShopService;
 /**
  * Servlet implementation class ShopBasketUpdateServlet
  */
-@WebServlet("/shop/shopBasketUpdate.do")
-public class ShopBasketUpdateServlet extends HttpServlet {
+@WebServlet("/shop/shopBasketInsert.do")
+public class ShopBasketInsertServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopBasketUpdateServlet() {
+    public ShopBasketInsertServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +34,29 @@ public class ShopBasketUpdateServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
+		//List<Integer> itemNums=new ArrayList();
+		//itemNums.add(Integer.parseInt(request.getParameter("itemNums")));
+		response.setContentType("text/html;charset=utf-8");
 		List<String> itemNums=new ArrayList();
-		itemNums.add(request.getParameter("itemNums"));
+		String temp1=request.getParameter("itemNums");  
+		String[] temp2=temp1.split(",");
+		
+		for(int i=0;i<temp2.length;i++) {
+			itemNums.add((temp2[i]));
+			
+		}
+		
 		String type=request.getParameter("type");
 		String id =request.getParameter("memberId");
 		
-		int result =new ShopService().updateShoppingList(id,itemNums,type);
+		int result =new ShopService().insertShoppingList(id,itemNums,type);
 		
 		request.setAttribute("result", result); //data
 		request.setAttribute("type", type);
+		System.out.println(id);
 		
-		//response.setContentType("text/html;charset=utf-8");
-		request.getRequestDispatcher("/views/shop/shopBasket.jsp").forward(request, response);
+		//result 따라 message 창 띄우기 
+		request.getRequestDispatcher("/shop/minimiTable").forward(request, response);
 	}
 
 	/**

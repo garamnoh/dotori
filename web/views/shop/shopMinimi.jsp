@@ -3,14 +3,14 @@
 <%
 List<Minimi> list=(List<Minimi>)request.getAttribute("minimiList");
 Minimi mini=(Minimi)request.getAttribute("minimi");
-Member id=(Member)request.getAttribute("memberId");
+String id=(String)request.getAttribute("memberId"); 
 %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMinimi.css">
 
 <%@ include file="/views/common/shopheader.jsp"%>
 
 <form id="AllMinimiForm" action="<%=request.getContextPath()%>/shop/minimiTable" method="post">
-	<%if(list==null&&list.isEmpty()){ %>
+	<%if(list!=null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
 		<table id=MinimiTable>
@@ -78,6 +78,7 @@ Member id=(Member)request.getAttribute("memberId");
 		
 	<%} 
 	}%>
+	
 </form>
 <script>
 function searchKeyup(e){
@@ -110,15 +111,14 @@ const getbasket=()=>{
 	console.log(arr.toString());
 	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/shop/shopBasketUpdate.do",
+		url:"<%=request.getContextPath()%>/shop/shopBasketInsert.do",
 		type:"get",
-		data:{"memberId":id,"itemNums":arr.toString(),"type":"minimi"},
+		data:{"memberId": "<%=id%>","itemNums":arr.toString(),"type":"minimi"},
+		dataType:"html",
 		success:data=>{
-			if(result>0){
-				alert("장바구니에 담겼습니다!");
-			}else{
-				alert("장바구니에 담기 실패 담당자에게 문의하세요:(");
-			}
+			
+			
+			$("#section").html(data);
 		}
 		
 	});
