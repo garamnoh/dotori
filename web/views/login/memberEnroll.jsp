@@ -67,7 +67,7 @@
     </div>
 
 	  <div id="ninkname1">
-        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최대 10글자" name="nickname" id= "nickname" > 
+        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최소 2글자 ~최대 10글자" name="nickname" id= "nickname" > 
         <button type="button" onclick="fn_duplicateNickname();">확인</button>  
     </div>
 	<br>
@@ -248,37 +248,58 @@
                
                //이름 잠시 보류
 
-   /*             $("#memberName").blur((e)=>{ 
-               const name=$(e.target).val();
-               const regExpName =/^[가-힣]{2,4}|[a-zA-Z]{2,10}\s[a-zA-Z]{2,10}$/;
+               $("#memberName").blur((e)=>{ 
+               const name=$("#memberName").val();
+               const regExpName =/^[가-힣a-zA-Z]+$/;
+            
+           
            		if(regExpName.test(name)==false){
 
     			alert("이름이 올바르지 않습니다.");
-    			$("#memberName").focus();
+    		
     			return false;
            		}
     			
 	
     			
-           		}); */
+           		}); 
            		
                
                const fn_duplicateNickname=()=>{
             	   
             	   const nickname=$("#nickname").val();
             	   
+            /* 	   	if(nickname.replace(/\s|  /gi,"").length==0){
+            	   		alert("내용을 입력해주세요");
+            	   	} */
+            		
+            	    var str_space = /\s/;  // 공백체크
+            	    if(str_space.exec(nickname)) { //공백 체크
+            	        alert("해당 항목에는 공백을 사용할수 없습니다.");
+            	        
+            	      
+            	        return false;
+            	    }
+            	   
+            	   
+             		if(nickname.trim().length<2){
+            			alert("닉네임은 2글자 이상으로 작성하세요");
+            			
+            			return false;
+            		}
             	   const status="width=300px,height=200px,left=500px,top=500px";
             		const title="duplicatenickname";
             		const url="<%=request.getContextPath()%>/checkDuplicatenickname";
             		
             		open("",title,status);
-            		
+            	
             	//	console.log($("#email1").val()+"@"+$("#domain").val());
     				/* console.log(duplicateFrm); */
             		duplicateFrm1.nickname.value=$("#nickname").val();
             		duplicateFrm1.target=title;
             		duplicateFrm1.action=url;
             		duplicateFrm1.submit();  
+            		
 
             	   
                }
