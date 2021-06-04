@@ -1,7 +1,7 @@
 /**********right_diary***********/
-*::-webkit-scrollbar{
+/* *::-webkit-scrollbar{
     display: none;
-}
+} */
 
 /*********전체 박스**********/
 #diary_content{  
@@ -17,6 +17,7 @@
 	height:115px;
 	width:515px; 
 	border:1px solid;
+	padding:5px;
 }
 #input_minimi_container{
 	z-index:10;
@@ -47,10 +48,10 @@
 #diary_input_btn_box{	
 	width:40px;
 	height:105px;
-	margin: 0 0 0 3px;
+	margin-left:-1px;
 }
 #diary_input_btn{
-	margin-top:80px;
+	margin-top:85px;
     border-radius: 5px;    
 }
 #diary_input_btn:hover{
@@ -88,22 +89,14 @@
 	margin:3px 0 3px 3px;
 }
 /***********************/
-#diary_admin{
-	display:flex;	
-	width:415px;
-	/* height:20px; */
-	height:auto;
-	margin:5px 0 5px 0;
-	border:1px solid;
-}
-/***********************/
 #diary_content_box{
 	display:flex;
 	position:relative;
 	margin-top:15px;
-	/* height:85px; */
+	padding: 5px;
 	overflow:auto;
-	height:auto;
+	height:100px;
+	/* height:auto; */
 	width:515px;
 	border:1px solid;
 }
@@ -141,6 +134,7 @@
 	width:425px;
 	height:20px;
 	margin:5px 0 5px 0;
+	/* background-color:#F0F0F0; */
 }
 #diary_writer_container{
 	width:260px;
@@ -182,10 +176,10 @@
 }
 #diary_content_content{
 	width:400px;
-	/* height:35px; */
-	height:auto;
+	height:35px;
+	/* height:auto; */
 	font-size: 13px;
-	margin:0 5px 0 5px;
+	margin:5px 5px 0 10px;
 }
 /*******comment********/
 .diary_comment_list{	
@@ -194,30 +188,32 @@
 	/* height:35px; */
 	height:auto;
 	font-size: 13px;
-	margin:0 5px 0 5px;
-	border:1px solid;
+	margin:0 5px 5px 5px;
+	/* border:1px solid; */
 }
 .diary_comment_user{	
-	width:130px;
-	height:20px;
-	border:1px solid;
+	width:70px;
+	height:22px;	
+	text-align:center;
+	padding-top:5px;
+	font-weight:bold;
+	background-color:#DBDBDB;
 }
 .diary_comment_content{
-	width:350px;
-	height:20px;
-	border:1px solid;
+	width:320px;
+	height:20px;	
+	padding:5px 0 0 5px;	
 }
-
-#diary_comment_box{
-	margin-top: 10px;	
+#diary_comment_box{	
+	margin:10px 0 10px 10px;	
 	z-index:10;
 	/* border:1px solid; */
 }
 #diary_comment_box label{
 	font-size: 13px;
 }
-.diary_comment{
-	width:330px;
+.diary_comment{	
+	width:300px;
 }
 .diary_com_btn{
 	 border-radius: 5px; 
@@ -307,8 +303,10 @@
 #diary_folder_title{
 	width:175px;
 	height: 30px;
-	font-weight:bold;
+	font-weight:bolder;
+	color:#67A3AD;
 	text-align:center;	
+	argin-top: 5px;
 }
 #diary_folder_list{
 	width:175px;

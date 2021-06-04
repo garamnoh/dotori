@@ -32,7 +32,7 @@
 					</div>
 				</div>				
 				<div id="diary_input_btn_box">
-					<input type="submit" value="확인" id="diary_input_btn">
+					<input type="submit" value="저장" id="diary_input_btn">
 				</div>									
 			</div>
 			<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
@@ -79,20 +79,29 @@
 					<div id="diary_content_content">
 						<%=d.getContent() %>
 					</div>
-					<%for(DiaryComment dc : cList) {%>
-						<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
-							<div class="diary_comment_list">						
-								<div class="diary_comment_user"><%= dc.getWriterName()%></div>
-								<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
-							</div>
-						<%} %>
-					<%} %>	
 					<div id="diary_comment_box" style="display:none">
+					<!-- <div id="diary_comment_box"> -->
 						<label>댓글</label>							
 						<input type="text" class="diary_comment" name="diary_comment">
 						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
 						<button class="diary_comment_btn">확인</button>
+					</div>
+					<div class="diary_comment_list_box">
+						<%for(DiaryComment dc : cList) {%>
+							<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
+								<div class="diary_comment_list">						
+									<div class="diary_comment_user"><%= dc.getWriterName()%></div>
+									<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
+								</div>
+							<%} %>
+						<%} %>
 					</div>	
+					<%-- <div id="diary_comment_box" style="display:none">
+						<label>댓글</label>							
+						<input type="text" class="diary_comment" name="diary_comment">
+						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
+						<button class="diary_comment_btn">확인</button>
+					</div> --%>	
 					<div id="diary_content_update" style="display:none">
 						<select class="diary_folder_up" name="diary_folder_up">
 							<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>

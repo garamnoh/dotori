@@ -33,14 +33,15 @@ $(".diary_del_btn").click(e => {
 });
 
 $(".diary_com_btn").click(e=>{
-	$(e.target).parent().parent().next().next().next().show();//diary_comment_box보이게
+	$(e.target).parent().parent().next().next().show();//diary_comment_box보이게
 	$(e.target).parent().parent().parent().parent().css("height", "110px");//diary_content_box
-	$(e.target).parent().parent().parent().css("height", "105px");//diary_content_list
+	$(e.target).parent().parent().parent().css("height", "105px");//diary_content_list	
 });
 
 $(".diary_up_btn").click(e=>{
-	$(e.target).parent().parent().next().next().next().show();//diary_content_update보이게
 	$(e.target).parent().parent().next().hide();//diary_content_content숨기게	
+	$(e.target).parent().parent().next().next().next().hide();//diary_comment_box숨기기	
+	$(e.target).parent().parent().next().next().next().next().show();//diary_content_update보이게
 	$(e.target).parent().parent().parent().parent().css("height", "150px");//diary_content_box
 	$(e.target).parent().parent().parent().css("height", "145px");//diary_content_list
 });
