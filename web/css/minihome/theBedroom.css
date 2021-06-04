@@ -112,14 +112,15 @@ body{
 }
 .miniMenu li{
     color:white;
+    font-size:15px;
     font-weight:bold;
     box-sizing:border-box;
     margin-bottom:10px;
     list-style-type:none;
-    width:80px;
+    width:75px;
     height:35px;
     text-align:center;
-    padding-top:5px;
+    padding-top:7px;
     border-top-right-radius:5px;
     border-bottom-right-radius:5px;
 }
