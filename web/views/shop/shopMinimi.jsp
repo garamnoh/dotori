@@ -101,7 +101,7 @@ function searchKeyup(e){
 };
 
 
-const getbasket=()=>{
+var getbasket=()=>{
 	let arr=new Array();
 	document.querySelectorAll(".shopMinimiCheck").forEach((v,i)=>{
 		console.dir(v);

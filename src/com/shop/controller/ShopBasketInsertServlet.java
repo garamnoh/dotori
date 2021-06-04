@@ -46,16 +46,20 @@ public class ShopBasketInsertServlet extends HttpServlet {
 			
 		}
 		
+		
 		String type=request.getParameter("type");
 		String id =request.getParameter("memberId");
+		
+		System.out.println("테스트 "+id);
+		System.out.println("테스트 "+type);
 		
 		int result =new ShopService().insertShoppingList(id,itemNums,type);
 		
 		request.setAttribute("result", result); //data
 		request.setAttribute("type", type);
-		System.out.println(id);
 		
 		//result 따라 message 창 띄우기 
+		
 		request.getRequestDispatcher("/shop/minimiTable").forward(request, response);
 	}
 

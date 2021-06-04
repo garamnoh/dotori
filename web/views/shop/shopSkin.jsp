@@ -3,6 +3,7 @@
 <%
 List<Skin> list=(List<Skin>)request.getAttribute("skinList");
 Skin s=(Skin)request.getAttribute("skin");
+String id=(String)request.getAttribute("memberId"); 
 %>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
@@ -97,24 +98,29 @@ function searchKeyup(e){
 	});
 	
 };
-function getbasket=()=>{
+var getbasket=()=>{
 	let arr=new Array();
 	document.querySelectorAll(".shopSkinCheck").forEach((v,i)=>{
-		if($(v).attr("checked")) arr.push($(v).next().val());
+		console.dir(v);
+		if($(v).prop("checked")) arr.push($(v).next().val());
 	});
+	
+	console.log(arr.toString());
+	
 	$.ajax({
-		url:"<%=request.getContextPath()%>/shop/shopBasketSearch.do",
+		url:"<%=request.getContextPath()%>/shop/shopBasketInsert.do",
 		type:"get",
-		data:{"itemNo":arr,"type":"skin"},
+		data:{"memberId": "<%=id%>","itemNums":arr.toString(),"type":"skin"},
+		dataType:"html",
 		success:data=>{
-			if(response){
-				alert("장바구니에 담겼습니다!");
-			}else{
-				alert("장바구니에 담기 실패 담당자에게 문의하세요:(");
-			}
+			
+			
+			$("#section").html(data);
 		}
 		
 	});
+}
+			
 
 </script>
 	

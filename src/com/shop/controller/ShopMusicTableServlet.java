@@ -37,10 +37,10 @@ public class ShopMusicTableServlet extends HttpServlet {
 		//Music m= new Music();
 		System.out.println(list);
 		System.out.println();
-		
+		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		request.setAttribute("musicList", list); //data
 		request.setAttribute("type", "music");
-		
+		request.setAttribute("memberId", memberId); 
 		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
 		
 	}
