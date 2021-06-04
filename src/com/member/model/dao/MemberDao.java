@@ -288,4 +288,6 @@ public class MemberDao {
 			close(ps);
 		} return info;
 	}
+	
+	
 }
