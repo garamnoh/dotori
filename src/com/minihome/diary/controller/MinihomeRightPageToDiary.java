@@ -112,6 +112,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("cList", cList);
 		request.setAttribute("profilePath", profilePath);
+		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				
