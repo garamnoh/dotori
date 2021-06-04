@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_diary.css">
-<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List" %>
+<%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.ProfilePath" %>
 <%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
+	String profilePath=(String)request.getAttribute("profilePath");
 	String pageBar=(String)request.getAttribute("pageBar");
 	List<DiaryComment> cList=(List<DiaryComment>)request.getAttribute("cList");
 %>
@@ -14,7 +15,7 @@
 	<form>
 		<div id="diary_input_box">
 			<div id="input_minimi_container">
-				<img src="<%=request.getContextPath()%>/upload/MINIMI/brown.png" alt="나의미니미">
+				<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=profilePath %>" alt="나의미니미">
 			</div>
 			<div id="diary_input_container">
 				<div id="diary_title_left">
@@ -58,7 +59,7 @@
 		<%for(Diary d : list) {%>					
 			<div id="diary_content_box">
 				<div id="minimi_container">
-					<img src="<%=request.getContextPath()%>/upload/MINIMI/selly.png" alt="미니미">
+					<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=d.getProfilePath() %>" alt="미니미">
 					<div id="diary_content_list">
 						<div id="diary_content_title">
 							<div id="diary_writer_container"><%=d.getMemberName()%></div>									
@@ -82,6 +83,12 @@
 									<div class="diary_comment_user"><%= dc.getWriterName()%></div>
 									<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
 								</div>
+								
+								<!--  -->
+								<input type="hidden" name="folderNo" value="<%=d.getFolderNo()%>">
+								<!--  -->
+								
+								
 							<%} %>
 						<%} %>	
 						<div id="diary_comment_box" style="display:none">
@@ -105,12 +112,14 @@
 						</div>						
 					</div>
 				</div>
-			</div>			
+			</div>	
+						
 		<%} 
 	}%>	
 				
   <div id="pageBar">
-  	<%=pageBar %>	
+  	<%=pageBar %>
+  	
   </div> 
 	
 </div>

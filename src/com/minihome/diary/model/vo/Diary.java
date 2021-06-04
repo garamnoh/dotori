@@ -10,11 +10,12 @@ public class Diary {
 	private String content;
 	private Date postDate;
 	private String memberName;
+	private String profilePath;
 	
 	public Diary() {}
 
 	public Diary(int diaryNo, String memberId, String writer, int folderNo, String content,
-			Date postDate, String memberName) {
+			Date postDate, String memberName, String profilePath) {
 		super();
 		this.diaryNo = diaryNo;
 		this.memberId = memberId;
@@ -23,6 +24,7 @@ public class Diary {
 		this.content = content;
 		this.postDate = postDate;
 		this.memberName=memberName;
+		this.profilePath=profilePath;
 	}
 
 	public int getDiaryNo() {return diaryNo;}
@@ -39,10 +41,12 @@ public class Diary {
 	public void setPostDate(Date postDate) {this.postDate = postDate;}
 	public String getMemberName() {return memberName;}
 	public void setMemberName(String memberName) {this.memberName = memberName;}	
+	public String getProfilePath() {return profilePath;}
+	public void setProfilePath(String profilePath) {this.profilePath = profilePath;}
 	
 	@Override
 	public String toString() {
 		return "Diary [diaryNo=" + diaryNo + ", memberId=" + memberId + ", writer=" + writer
-				+ ", folderNo=" + folderNo + ", content=" + content + ", postDate=" + postDate + "]";
+				+ ", folderNo=" + folderNo + ", content=" + content + ", postDate=" + postDate +memberName+profilePath+ "]";
 	}	
 }

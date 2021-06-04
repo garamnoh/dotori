@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.member.model.vo.Member;
 import com.shop.model.vo.Minimi;
-import com.shop.model.vo.Music;
 import com.shop.service.ShopService;
 
 /**
@@ -36,10 +36,12 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		List<Minimi> list=new ShopService().minimiList();
 		Minimi mini= new Minimi();
-		System.out.println(list);
-		System.out.println();
+		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		
 		request.setAttribute("minimiList", list); //data
 		request.setAttribute("type", "mini"); 
+		request.setAttribute("memberId", memberId); 
+		
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		
 	

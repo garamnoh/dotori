@@ -42,4 +42,10 @@
 #no1{
     width: 13%;
 }
-
+#homebutton{
+	text-align: center;
+	
+	 position: relative;
+   left: 400px;
+ 
+}

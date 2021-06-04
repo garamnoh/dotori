@@ -10,10 +10,7 @@
     	<p id='saleItem'>세일 아이템</p>
     </div>
     <div class='menuTitle' id="option1">도토리</div>
-    <div class="menuSub">
-        <p id='buyDotori'>도토리 충전</p>
-        <p id='giveDotori'>도토리 선물</p>
-    </div>
+    
     <div class='menuTitle' id="option2">아이템</div>
     <div class="menuSub">
         <p id='shopMinimi'>미니미</p>
@@ -21,10 +18,6 @@
         <p id='shopMusic'>음악</p>
     </div>
     <div class='menuTitle' id="option3">장바구니</div>
-    
-        
-    </div>
-    
 </div>
 
 <script src='<%=request.getContextPath()%>/js/shop/sidebarShop.jsp'></script>

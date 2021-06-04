@@ -31,7 +31,7 @@ public class MemberService {
 		close(conn);
 		return profilePath;
 	}
-	
+	//id조회
 	public Member selectMemberId(String userId) {
 		Connection conn=getConnection();
 		Member m=dao.selectMemberId(conn,userId);
@@ -46,6 +46,23 @@ public class MemberService {
 		close(conn);
 		return m;
 	}
+	
+	//아이디 찾기
+	public Member idSearch(String memberName,String phone) {
+		Connection conn=getConnection();
+		Member m=dao.idSearch(conn,memberName,phone);
+		close(conn);
+		return m;
+	}
+	
+	//비밀번호 찾기
+	public Member pwSearch(String memberId,String memberName,String phone) {
+		Connection conn=getConnection();
+		Member m=dao.pwSearch(conn,memberId,memberName,phone);
+		close(conn);
+		return m;
+	}
+	
 	
 	public int insertMember(Member m) {
 		Connection conn=getConnection();
