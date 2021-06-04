@@ -6,7 +6,10 @@
     height: 150px;
 }
 
-#section{
+/*#section{
+	overflow:scroll;
+}*/
+#AllMinimiForm{
 	overflow:scroll;
 }
 

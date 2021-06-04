@@ -5,10 +5,11 @@
 <%
 List<Music> list=(List<Music>)request.getAttribute("musicList");
 	Music m=(Music)request.getAttribute("music");
+	String id=(String)request.getAttribute("memberId"); 
 %> 
 <%@ include file="/views/common/shopheader.jsp"%>
 
-<form action="<%=request.getContextPath()%>/shop/musicTable" method="post">
+<form id="AllMusicForm" action="<%=request.getContextPath()%>/shop/musicTable" method="post">
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
@@ -23,6 +24,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				<br>
                 <div class="MusicInfo">
                 <input class="shopMusicCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i).getMusicNo() %>">
                 <ul>
                     <li><b>[<%=list.get(3*i).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i).getMusicTitle() %></b></li>
@@ -41,6 +43,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				<br>
                 <div class="MusicInfo">
                 <input class="shopMusicCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i+1).getMusicNo() %>">
                 <ul>
                     <li><b>[<%=list.get(3*i+1).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i+1).getMusicTitle() %></b></li>
@@ -60,6 +63,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				<br>
                 <div class="MusicInfo">
                 <input class="shopMusicCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i+2).getMusicNo() %>">
                 <ul>
                     <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i+2).getMusicTitle() %></b></li>
@@ -93,6 +97,30 @@ function searchKeyup(e){
 		}
 		
 	});
+	
 };
+
+var getbasket=()=>{
+	let arr=new Array();
+	document.querySelectorAll(".shopMusicCheck").forEach((v,i)=>{
+		console.dir(v);
+		if($(v).prop("checked")) arr.push($(v).next().val());
+	});
+	
+	console.log(arr.toString());
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/shop/shopBasketInsert.do",
+		type:"get",
+		data:{"memberId": "<%=id%>","itemNums":arr.toString(),"type":"music"},
+		dataType:"html",
+		success:data=>{
+			
+			
+			$("#section").html(data);
+		}
+		
+	});
+}
 
 </script>

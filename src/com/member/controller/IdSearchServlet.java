@@ -1,7 +1,6 @@
-package com.shop.controller;
+package com.member.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,23 +8,28 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.shop.model.vo.Music;
-import com.shop.service.ShopService;
+
 
 /**
- * Servlet implementation class ShopMusicTableServlet
+ * Servlet implementation class IdSearchServlet
  */
-@WebServlet("/shop/musicTable")
-public class ShopMusicTableServlet extends HttpServlet {
+@WebServlet("/IdSearch")
+public class IdSearchServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopMusicTableServlet() {
+    public IdSearchServlet() {
         super();
         // TODO Auto-generated constructor stub
+        
     }
 
 	/**
@@ -33,17 +37,23 @@ public class ShopMusicTableServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		List<Music> list=new ShopService().musicList();
-		//Music m= new Music();
-		System.out.println(list);
-		System.out.println();
-		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
-		request.setAttribute("musicList", list); //data
-		request.setAttribute("type", "music");
-		request.setAttribute("memberId", memberId); 
-		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
+	
+	
+		String memberName=request.getParameter("memberName");
+		String phone =request.getParameter("phone");
+		Member m =new MemberService().idSearch(memberName, phone);
+		
+		JSONObject json = new JSONObject();
+		if(m!=null) {
+		json.put("memberId","계정명 : "+ m.getMemberId());
+		}else {
+		json.put("memberId", "일치하는 데이터가 없습니다. 다시 입력해주세요.");
+		}
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(json,response.getWriter());
 		
 	}
+
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)

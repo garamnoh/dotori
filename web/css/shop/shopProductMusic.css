@@ -1,11 +1,11 @@
 
 /* 가람씨랑 말맞추기 */
-body{ 
+/*body{ 
     display: flex;
     justify-content: center;
-}
+}*/
 
-#section{
+#AllMusicForm{
 	overflow:scroll;
 }
 

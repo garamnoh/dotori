@@ -137,6 +137,60 @@ public class MemberDao {
 	}
 	
 	
+	
+	public Member idSearch(Connection conn, String memberName, String phone) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("idSearch"));
+			pstmt.setString(1, memberName);
+			pstmt.setString(2, phone);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberId(rs.getString("member_Id"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
+	
+	
+	
+	public Member pwSearch(Connection conn, String memberId ,String memberName, String phone) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Member m=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("pwSerach"));
+			pstmt.setString(1, memberId);
+			pstmt.setString(2, memberName);
+			pstmt.setString(3, phone);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				m=new Member();
+				m.setMemberPwd(rs.getString("member_pwd"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return m;
+	}
+	
+	
+	
+	
+	
 	public int insertMember(Connection conn, Member m) {
 		PreparedStatement pstmt=null;
 		int result=0;

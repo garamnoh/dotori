@@ -35,7 +35,7 @@
 			
 			<!-- 아이디 재입력창 구성 -->
 			<form action="<%=request.getContextPath() %>/checkDuplicatenickname" method="post">
-				<input type="text" name="nickname" id="nickname" placeholder='최대 10글자 입력'>
+				<input type="text" name="nickname" id="nickname" placeholder='최소 2글자 ~ 최대 10글자 입력'>
 				
 				
 				<input type="submit" value="중복검사" >

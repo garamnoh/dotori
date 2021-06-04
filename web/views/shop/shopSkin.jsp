@@ -3,11 +3,12 @@
 <%
 List<Skin> list=(List<Skin>)request.getAttribute("skinList");
 Skin s=(Skin)request.getAttribute("skin");
+String id=(String)request.getAttribute("memberId"); 
 %>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
 <%@ include file="/views/common/shopheader.jsp"%>
-<form action="<%=request.getContextPath()%>/shop/skinTable" method="post">
+<form id="AllSkinForm" action="<%=request.getContextPath()%>/shop/skinTable" method="post">
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
@@ -17,11 +18,12 @@ Skin s=(Skin)request.getAttribute("skin");
 			<td>
 			<div class="productSkin">
 				<div class="SkinPicture">
-					<img alt="스킨사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i).getFilepath()%>"> 
+					<img alt="스킨사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i).getPreviewImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i).getSkinTitle() %></b></li>
@@ -35,11 +37,12 @@ Skin s=(Skin)request.getAttribute("skin");
 			<td>
 			<div class="productSkin">
 				<div class="SkinPicture">
-					<img alt="스킨사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i+1).getFilepath()%>"> 
+					<img alt="스킨사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i+1).getPreviewImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*i+1).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+1).getSkinTitle() %></b></li>
@@ -54,11 +57,12 @@ Skin s=(Skin)request.getAttribute("skin");
 			<%if(3*i+2<list.size()) {%>
 			<div class="productSkin">
 				<div class="SkinPicture">
-					<img alt="미니미사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i+2).getFilepath()%>"> 
+					<img alt="미니미사진" src="<%=request.getContextPath()%>/upload/SKIN_ITEM/<%=list.get(3*i+2).getPreviewImgFilepath()%>"> 
 				</div>
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
+                <input type="hidden" value="<%=list.get(3*1+2).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+2).getSkinTitle() %></b></li>
@@ -92,7 +96,31 @@ function searchKeyup(e){
 		}
 		
 	});
+	
 };
+var getbasket=()=>{
+	let arr=new Array();
+	document.querySelectorAll(".shopSkinCheck").forEach((v,i)=>{
+		console.dir(v);
+		if($(v).prop("checked")) arr.push($(v).next().val());
+	});
+	
+	console.log(arr.toString());
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/shop/shopBasketInsert.do",
+		type:"get",
+		data:{"memberId": "<%=id%>","itemNums":arr.toString(),"type":"skin"},
+		dataType:"html",
+		success:data=>{
+			
+			
+			$("#section").html(data);
+		}
+		
+	});
+}
+			
 
 </script>
 	
