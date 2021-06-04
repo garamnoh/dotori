@@ -9,7 +9,6 @@
 	width:550px;
 	overflow:auto;
 	margin:auto;
-	background-color:white;
 	/* border:1px solid; */
 }
 /***********************/
@@ -135,7 +134,7 @@
 	width:425px;
 	/* height:80px; */
 	height:auto;
-	background-color: white;
+	/* background-color: white; */
 }
 #diary_content_title{
 	display:flex;	

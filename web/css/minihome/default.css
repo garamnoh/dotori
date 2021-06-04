@@ -23,8 +23,8 @@ body{
 }
 .cover{
     position:relative;
-    background-color:rgba(132, 156, 194, 1);
-    /* background-color:#99AACF; */
+    /* background-color:rgba(132, 156, 194, 1); */
+    background-color:#ACD3DE;
     margin-top:25px;
     margin-left:25px;
     box-sizing:border-box;
@@ -32,17 +32,19 @@ body{
     height:700px;
     padding:25px 25px;
     border-radius:20px;
-    border:1px solid;
+    border:1.5px solid #7F979F;
 }
 .sheet{
-    background-color:#BFD0E4;
+    background-color:#F0F0F0;
    /*  background-color:#B2CCFF; */
+   	/* position:relative; */
     box-sizing:border-box;
     width:850px;
     height:650px;
     font-size:13px;
     border-radius:20px;
-   	border: 2px dashed #B8B8B8;
+   	border: 2px dashed #8098A0;
+   	z-index:50;
 }
 .today{
     position:absolute;
@@ -80,10 +82,8 @@ body{
     height:590px;
     border:none;
     overflow:scroll;
+    border:1px solid #B6B6B6;
 }
-/* #left-page:hover{
-    background-color:rgba(242, 242, 242,0.7);
-} */
 #right-page{
     position:absolute;
     top:75px;
@@ -99,10 +99,8 @@ body{
     height:590px;
     border:none;
     overflow:scroll;
+    border:1px solid #B6B6B6;    
 }
-/* #right-page:hover{
-    background-color:rgba(242, 242, 242,0.7);
-} */
 #today{
     color:red;
 }
@@ -113,6 +111,7 @@ body{
 }
 .miniMenu li{
     /* color:white; */
+    position:relative;
     font-weight:bold;
     box-sizing:border-box;
     margin-bottom:10px;
@@ -122,18 +121,20 @@ body{
     text-align:center;
     padding-top:8px;    
     border-top-right-radius:5px;
-    border-bottom-right-radius:5px;
+    border-bottom-right-radius:5px;    
+    border: solid 1px black;
+    z-index:1;
 }
 .unselected{
-    background-color:#5F99C9;
+    background-color:#248DB5;
     color:white;
 }
 .selected{
-    background-color:#BFD0E4;
+    background-color:white;
     color:black;   
 }
 .miniMenu li:hover{
-    background-color:rgba(153,170,207,.7);
+    background-color:#1E7FA2;
     cursor:pointer;
 }
 
