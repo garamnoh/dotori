@@ -1,14 +1,17 @@
 let contextPath=$("#contextPath").val();
+let loginMemberId=$("#loginMemberId").val();
 let hostMemberId=$("#hostMemberId").val();
 
 $(()=>{
 	pagesTo("Home");
+	$("nav.miniMenu li:first-of-type").removeClass("unselected").addClass("selected");
 	$("#backgroundMusic").children()[0].autoplay=true;
 	$("#musicInfo").children()[0].style={"display":"inline"};
 });
 let pageNum=0;
 $("nav.miniMenu li").on("click",(e)=>{	
 	$(e.target).parent().children().each((i,v)=>{
+		$(v).removeClass("selected").addClass("unselected");
 		if(v==e.target) pageNum=i;
 	});
 	
@@ -16,20 +19,11 @@ $("nav.miniMenu li").on("click",(e)=>{
 		case 0:pagesTo("Home");break;
 		case 1:pagesTo("Album");break;
 		case 2:pagesTo("Diary");break;
-		case 3:pagesTo("Jukebox");
+		case 3:pagesTo("Jukebox");break;
+		case 4:pagesTo("Settings");
 	}
 
-    $(e.target).parent().children().css("background-color","skyblue");
-    $(e.target).css("background-color","powderblue");
-    $(e.target).parent().children().hover((i)=>{
-        $(i.target).css("background-color","steelblue");
-    },(i)=>{
-        if(e.target==i.target){
-            $(i.target).css("background-color","powderblue");
-        }else{
-            $(i.target).css("background-color","skyblue");
-        }
-    });
+	$(e.target).removeClass("unselected").addClass("selected");
 });
 
 const pagesTo=(menu)=>{
@@ -130,3 +124,21 @@ for(let i=0;i<musicList.length;i++) {
 		}
 	});
 }
+
+var fn_weather=()=>{
+	$.getJSON("http://api.openweathermap.org/data/2.5/weather?id=1835848&appid=73edd4b639013a97891b5aa23d7d5d0d&units=metric",function(data){
+		console.log(data.coord);
+		console.log(data.weather);
+		console.log(data.main);
+		$("#weather_main").text("날씨 : "+data.weather[0].main);
+		$("#weather_description").text("설명 : "+data.weather[0].description);
+		$("#weather_icon").attr("src","http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png");
+		$("#feels_like").text("체감온도 : "+data.main.feels_like);
+		$("#temp").text("현재온도 : "+data.main.temp);
+		$("#temp_max").text("최고기온 : "+data.main.temp_max);
+		$("#temp_min").text("최저기온 : "+data.main.temp_min);
+	});
+} 
+
+window.setTimeout(fn_weather,0);
+window.setInterval(fn_weather,60000);

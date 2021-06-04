@@ -21,7 +21,7 @@
 					</div>
 					<div id='buttons'>
 						<button id='accept'>수락</button>
-						<button id='delete'>거절</button>
+						<button id='reject'>거절</button>
 					</div>
 				</div>
 			<% } %>
@@ -151,10 +151,6 @@
 					}, 2000);
 				}
 				else alert('일촌 수락 실패');
-			},
-			error: (r,s,m)=>{
-				console.log(r);
-				console.log(s);
 			}
 		});
 	});

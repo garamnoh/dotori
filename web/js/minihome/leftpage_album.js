@@ -42,3 +42,18 @@ $("#deleteFolderBtn").click((e)=>{
         }
     });
 });
+
+$("#uploadPhotoBtn").click((e)=>{
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToUpdateAlbum.do",
+        type:"post",
+        data:{
+            "loginMemberId":loginMemberId,
+            "hostMemberId":hostMemberId
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+});

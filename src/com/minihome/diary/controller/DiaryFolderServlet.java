@@ -31,15 +31,13 @@ public class DiaryFolderServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String folderName=request.getParameter("diary_folder_li");
-		System.out.println(folderName);
-		int diaryFolderLevel=2;
-		switch(folderName) {
-			case "전체공개" : diaryFolderLevel=1;
-			case "일촌공개" : diaryFolderLevel=2;
-			case "비공개" : diaryFolderLevel=3;
-		}
+		
+		response.setContentType("text/html;charset=utf-8");
+		
+		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
+		
 		request.setAttribute("FolderLevel", diaryFolderLevel);
+		
 		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 	}
 

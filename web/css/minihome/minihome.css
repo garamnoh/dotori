@@ -6,20 +6,32 @@ body{
 	margin:0;
 }
 .container{
-	margin:0 auto;
+	margin:0;
     box-sizing:border-box;
-    background-image:url("../../images/backgroundImg.png");
-    /* 아래와 같이 해주면 투명한 border에서 배경 이미지가 반복되어서 어색해지는 것을 막을 수 있다*/
-    /* background-clip:padding-box; */
-    /* 아래와 같은 해법도 있다. 사실 이 해법이 더 정공법이라고 할 수 있다 */
+    /* background-image:url("../../upload/SKIN_ITEM/The Bedroom.jpg");
+    background-repeat:no-repeat;
+    background-size:cover; */
     background-origin:border-box;
     border:1px solid transparent;
     width:1200px;
     height:755px;
 }
+.container:before{
+    content: '  ';
+    display:block;
+    position:absolute;
+    left:0;
+    top:0;
+    width:100%;
+    height:100%;
+    opacity:1;
+    background-image:url("../../upload/SKIN_ITEM/The Bedroom.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+}
 .cover{
     position:relative;
-    background-color:lightsteelblue;
+    background-color:rgba(255, 224, 179, 0.3);
     margin-top:25px;
     margin-left:25px;
     box-sizing:border-box;
@@ -27,71 +39,86 @@ body{
     height:700px;
     padding:25px 25px;
     border-radius:20px;
-    /* border:1px solid black; */
+}
+.cover:hover{
+    background-color:rgba(255, 224, 179, 0.4);
 }
 .sheet{
-    background-color:white;
+    background-color:rgba(255, 255, 128,0.2);
     box-sizing:border-box;
     width:850px;
     height:650px;
     border-radius:20px;
-    /* border:1px solid black; */
+}
+.sheet:hover{
+    background-color:rgba(255, 255, 128,0.4);
 }
 .today{
-    /* border:1px solid black; */
+    position:absolute;
+    top:55px;
+    left:50px;
     box-sizing:border-box;
     width:200px;
     height:25px;
-    float:left;
     font-size:15px;
-    margin-left:30px;
-    margin-top:15px;
+    /* font-weight:bolder; */
     text-align:center;
-    
 }
 .miniTitle{
-    /* border:1px solid black; */
+    position:absolute;
+    top:50px;
+    left:300px;
     box-sizing:border-box;
     width:400px;
     height:30px;
-    float:left;
     font-size:20px;
-    margin-left:70px;
-    margin-top:10px;
-    color:cornflowerblue;
+    color:black;
     font-weight:bold;
 }
 #left-page{
+    position:absolute;
+    top:90px;
+    left:35px;
     box-sizing:border-box;
-    float:left;
-    clear:left;
-    margin-left:5px;
-    margin-top:5px;
-    /* border:1px solid black; */
     border-radius:20px;
     box-sizing:border-box;
     width:250px;
     height:600px;
-    background-color:lightgrey;
+    background-color:rgba(255,255,240,0.5);
+    padding:20px;
+    width:225px;
+    height:575px;
+    border:none;
+    overflow:scroll;
+}
+#left-page:hover{
+    background-color:rgba(255,255,240,0.9);
 }
 #right-page{
+    position:absolute;
+    top:90px;
+    left:265px;
     box-sizing:border-box;
-    float:left;
-    margin-left:5px;
-    margin-top:5px;
-    /* border:1px solid black; */
     border-radius:20px;
     box-sizing:border-box;
-    width:585px;
+    width:350px;
     height:600px;
-    background-color:lightgrey;
+    background-color:rgba(255,255,240,0.5);
+    padding:20px;
+    width:600px;
+    height:575px;
+    border:none;
+    overflow:scroll;
+}
+#right-page:hover{
+    background-color:rgba(255,255,240,0.9);
 }
 #today{
     color:red;
 }
 .miniMenu{
     position:relative;
-    left:840px;
+    left:855px;
     bottom:600px;
 }
 .miniMenu li{
@@ -111,28 +138,9 @@ body{
 }
 .miniMenu li:first-of-type{
     background-color:powderblue;
+    /* background-color:yellow; */
 }
 .miniMenu li:hover{
     background-color:steelblue;
     cursor:pointer;
-}
-#left-page{
-	padding:20px;
-    width:225px;
-    height:575px;
-    margin-top:10px;
-    margin-left:10px;
-    border:none;
-    border:3px solid black;
-    overflow:scroll;
-}
-#right-page{
-	padding:20px;
-    width:560px;
-    height:575px;
-    margin-top:10px;
-    margin-left:10px;
-    border:none;
-    border:3px solid black;
-    overflow:scroll;
 }

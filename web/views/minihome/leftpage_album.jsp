@@ -12,6 +12,8 @@
 	<%} %>
 </ul>
 
+<input type="button" id="uploadPhotoBtn" value="새로운 사진 올리기"><br><br>
+
 <input type="text" id="addFolderTitle" placeholder="추가할 폴더명을 입력하세요">
 <input type="button" id="addFolderBtn" value="폴더 추가"><br><br>
 

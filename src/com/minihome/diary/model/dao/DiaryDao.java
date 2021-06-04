@@ -13,6 +13,8 @@ import java.util.List;
 import java.util.Properties;
 
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryComment;
+import com.minihome.diary.model.vo.DiaryFolder;
 
 public class DiaryDao {
 
@@ -53,14 +55,14 @@ public class DiaryDao {
 		return diaryList;	
 	}
 	
-	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage, int folderLevel){
+	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage, int diaryFolderLevel){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Diary> list=new ArrayList();
 		Diary d=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryList"));
-			pstmt.setInt(1,  folderLevel);
+			pstmt.setInt(1,  diaryFolderLevel);
 			pstmt.setInt(2,  (cPage-1)*numPerpage+1);
 			pstmt.setInt(3,  cPage*numPerpage);
 			rs=pstmt.executeQuery();
@@ -84,12 +86,13 @@ public class DiaryDao {
 		return list;	
 	}
 	
-	public int selectDiaryCount(Connection conn) {
+	public int selectDiaryCount(Connection conn, int diaryFolderLevel) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCount"));
+			pstmt.setInt(1,  diaryFolderLevel);
 			rs=pstmt.executeQuery();
 			if(rs.next()) result=rs.getInt(1);
 		}catch(SQLException e) {
@@ -150,6 +153,101 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return result;
+	}
+	
+	/////////////////////left_page_folder///////////////////////////
+	
+	public List<DiaryFolder> selectFolderList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryFolder> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectFolderList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryFolder df=new DiaryFolder();
+				df.setFolderNo(rs.getInt("folder_no"));
+				df.setMemberId(rs.getString("member_id"));
+				df.setFolderName(rs.getString("folder_name"));
+				df.setShareLevel(rs.getString("share_level"));
+				df.setDiaryCount(rs.getInt("diarycount"));
+				list.add(df);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
+	}
+	
+	public int selectDiaryFolderCount(Connection conn) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryFolderCount"));
+			rs=pstmt.executeQuery();
+			if(rs.next()) result=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return result;
+	}
+	
+	////////////////////////////comment////////////////////
+	public int insertComment(Connection conn, DiaryComment dc) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		String ref=Integer.toString(dc.getDiaryCommentRef());
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertComment"));
+			pstmt.setInt(1, dc.getCommentLevel());
+			pstmt.setString(2, dc.getCommentWriter());
+			pstmt.setString(3,  dc.getCommentContent());
+			pstmt.setInt(4, dc.getDiaryRef());
+			pstmt.setString(5, ref.equals("0")?null:ref);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
+	}
+	
+	//public List<DiaryComment> selectDiaryCommentList(Connection conn, int diaryRef){
+	public List<DiaryComment> selectDiaryCommentList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryComment> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));
+			//pstmt.setInt(1, diaryRef);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryComment dc=new DiaryComment();
+				dc.setCommentNo(rs.getInt("comment_no"));
+				dc.setCommentLevel(rs.getInt("comment_level"));
+				dc.setCommentWriter(rs.getString("comment_writer"));
+				dc.setCommentContent(rs.getString("comment_content"));
+				dc.setDiaryRef(rs.getInt("diary_ref"));
+				dc.setDiaryCommentRef(rs.getInt("diary_comment_ref"));
+				dc.setCommentDate(rs.getDate("comment_date"));
+				dc.setWriterName(rs.getString("member_name"));
+				list.add(dc);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
 	}
 	
 }

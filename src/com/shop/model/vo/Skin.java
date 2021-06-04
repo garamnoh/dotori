@@ -6,17 +6,17 @@ public class Skin {
 	private int itemNo;
 	private String skinTitle;
 	private int price;
-	private String filepath;
+	private String previewImgFilepath;
 	private String cssFilepath;
 	
 	public Skin() {}
 
-	public Skin(int itemNo, String skinTitle, int price, String filepath, String cssFilepath) {
+	public Skin(int itemNo, String skinTitle, int price, String previewImgFilepath, String cssFilepath) {
 		super();
 		this.itemNo = itemNo;
 		this.skinTitle = skinTitle;
 		this.price = price;
-		this.filepath = filepath;
+		this.previewImgFilepath = previewImgFilepath;
 		this.cssFilepath = cssFilepath;
 	}
 
@@ -44,12 +44,12 @@ public class Skin {
 		this.price = price;
 	}
 
-	public String getFilepath() {
-		return filepath;
+	public String getPreviewImgFilepath() {
+		return previewImgFilepath;
 	}
 
-	public void setFilepath(String filepath) {
-		this.filepath = filepath;
+	public void setPreviewImgFilepath(String previewImgFilepath) {
+		this.previewImgFilepath = previewImgFilepath;
 	}
 
 	public String getCssFilepath() {
@@ -62,8 +62,8 @@ public class Skin {
 
 	@Override
 	public String toString() {
-		return "Skin [itemNo=" + itemNo + ", skinTitle=" + skinTitle + ", price=" + price + ", filepath=" + filepath
-				+ ", cssFilepath=" + cssFilepath + "]";
+		return "Skin [itemNo=" + itemNo + ", skinTitle=" + skinTitle + ", price=" + price + ", previewImgFilepath="
+				+ previewImgFilepath + ", cssFilepath=" + cssFilepath + "]";
 	}
-	
+
 }
