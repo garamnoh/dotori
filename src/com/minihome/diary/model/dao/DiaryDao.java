@@ -75,6 +75,7 @@ public class DiaryDao {
 				d.setFolderNo(rs.getInt("folder_no"));
 				d.setPostDate(rs.getDate("post_date"));
 				d.setMemberName(rs.getString("member_name"));
+				d.setProfilePath(rs.getString("profile_path"));
 				list.add(d);
 			}			
 		}catch(SQLException e) {
