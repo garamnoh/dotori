@@ -6,7 +6,7 @@
 <div id="shopHeader">
 	<div id="searchShop">
 		<form>
-		    <input id="searchTap" type="text" onkeyup="searchKeyup(event);">
+		    <input id="searchTap" type="text" onkeyup="searchKeyup(event);" list="list">
 		    <datalist id="list">
 			</datalist>
 		    <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="검색버튼" type="submit" value="검색">
@@ -21,7 +21,8 @@
 		<span class="TopTap">가격순</span>
 		<span>  |  </span>
 		<span class="TopTap">인기순</span>
-	</div>    
+	</div> 
+	<button onclick="getbasket();">장바구니에 담기</button> 
 </div>
 
 
