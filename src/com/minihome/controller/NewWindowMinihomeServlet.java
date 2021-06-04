@@ -20,6 +20,7 @@ import com.minihome.jukebox.model.service.JukeboxService;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.Skin;
 
 @WebServlet("/page/minihome.do")
 public class NewWindowMinihomeServlet extends HttpServlet {
@@ -42,6 +43,12 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		}
 		Member loginMember=(Member)session.getAttribute("loginMember");
 		String hostMemberId=request.getParameter("hostMemberId");
+		String changeSkinItemNo=request.getParameter("changeSkinItemNo");
+		
+		if(changeSkinItemNo!=null) {
+			int changeSkinResult=minihomeService.changeSkin(hostMemberId,Integer.parseInt(changeSkinItemNo));
+		}
+				
 		Member hostMember=null;
 		if(hostMemberId!=null) {
 			hostMember=memberService.selectMemberId(hostMemberId);
@@ -82,12 +89,21 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 			}
 		}
 		minihome=minihomeService.getMinihome(hostMemberId);
+		
+		Skin mySkin=null;
+		if(minihome!=null&&minihome.getSkinItemNo()!=0) {
+			mySkin=minihomeService.getMySkin(minihome.getSkinItemNo());
+		}
+		
 		List<Music> musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,"배경음악");
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);
 		request.setAttribute("minihome",minihome);
 		request.setAttribute("musicList",musicList);
+		request.setAttribute("mySkin",mySkin);
+		
+		System.out.println("서블릿 스킨 테스트 : "+mySkin);
 		
 		request.getRequestDispatcher("/views/minihome/minihome.jsp").forward(request,response);
 	}

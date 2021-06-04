@@ -13,6 +13,7 @@ import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.dao.MinihomeDao;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
+import com.shop.model.vo.Skin;
 
 public class MinihomeService {
 	
@@ -78,6 +79,28 @@ public class MinihomeService {
 		List<Diary> latestDiaryList=minihomeDao.getLatestDiary(conn,hostMemberId);
 		close(conn);
 		return latestDiaryList;
+	}
+	
+	public Skin getMySkin(int itemNo) {
+		Connection conn=getConnection();
+		Skin mySkin=minihomeDao.getMySkin(conn,itemNo);
+		close(conn);
+		return mySkin;
+	}
+	
+	public List<Skin> getMySkins(String hostMemberId) {
+		Connection conn=getConnection();
+		List<Skin> skinList=minihomeDao.getMySkins(conn,hostMemberId);
+		close(conn);
+		return skinList;
+	}
+	
+	public int changeSkin(String hostMemberId,int changeSkinItemNo) {
+		Connection conn=getConnection();
+		int changeSkinResult=minihomeDao.changeSkin(conn,hostMemberId,changeSkinItemNo);
+		if(changeSkinResult>0) commit(conn);
+		else rollback(conn);
+		return changeSkinResult;
 	}
 	
 }

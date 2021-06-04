@@ -4,12 +4,14 @@ let hostMemberId=$("#hostMemberId").val();
 
 $(()=>{
 	pagesTo("Home");
+	$("nav.miniMenu li:first-of-type").removeClass("unselected").addClass("selected");
 	$("#backgroundMusic").children()[0].autoplay=true;
 	$("#musicInfo").children()[0].style={"display":"inline"};
 });
 let pageNum=0;
 $("nav.miniMenu li").on("click",(e)=>{	
 	$(e.target).parent().children().each((i,v)=>{
+		$(v).removeClass("selected").addClass("unselected");
 		if(v==e.target) pageNum=i;
 	});
 	
@@ -17,20 +19,11 @@ $("nav.miniMenu li").on("click",(e)=>{
 		case 0:pagesTo("Home");break;
 		case 1:pagesTo("Album");break;
 		case 2:pagesTo("Diary");break;
-		case 3:pagesTo("Jukebox");
+		case 3:pagesTo("Jukebox");break;
+		case 4:pagesTo("Settings");
 	}
 
-    $(e.target).parent().children().css("background-color","skyblue");
-    $(e.target).css("background-color","powderblue");
-    $(e.target).parent().children().hover((i)=>{
-        $(i.target).css("background-color","steelblue");
-    },(i)=>{
-        if(e.target==i.target){
-            $(i.target).css("background-color","powderblue");
-        }else{
-            $(i.target).css("background-color","skyblue");
-        }
-    });
+	$(e.target).removeClass("unselected").addClass("selected");
 });
 
 const pagesTo=(menu)=>{
@@ -149,5 +142,3 @@ var fn_weather=()=>{
 
 window.setTimeout(fn_weather,0);
 window.setInterval(fn_weather,60000);
-
-

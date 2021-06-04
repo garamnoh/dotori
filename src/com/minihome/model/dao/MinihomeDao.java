@@ -17,6 +17,7 @@ import com.minihome.album.model.vo.Album;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
+import com.shop.model.vo.Skin;
 
 public class MinihomeDao {
 
@@ -194,6 +195,71 @@ public class MinihomeDao {
 			close(rs);close(pstmt);
 		}
 		return latestDiaryList;
+	}
+	
+	public Skin getMySkin(Connection conn,int itemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Skin skin=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMySkin"));
+			pstmt.setInt(1,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				skin=new Skin();
+				skin.setItemNo(rs.getInt("item_no"));
+				skin.setSkinTitle(rs.getString("skin_title"));
+				skin.setPrice(rs.getInt("price"));
+				skin.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				skin.setCssFilepath(rs.getString("css_filepath"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return skin;
+	}
+	
+	public List<Skin> getMySkins(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Skin> skinList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getMySkins"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin skin=new Skin();
+				skin.setItemNo(rs.getInt("item_no"));
+				skin.setSkinTitle(rs.getString("skin_title"));
+				skin.setPrice(rs.getInt("price"));
+				skin.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				skin.setCssFilepath(rs.getString("css_filepath"));
+				skinList.add(skin);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return skinList;
+	}
+	
+	public int changeSkin(Connection conn,String hostMemberId,int changeSkinItemNo) {
+		PreparedStatement pstmt=null;
+		int changeSkinResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("changeSkin"));
+			pstmt.setInt(1,changeSkinItemNo);
+			pstmt.setString(2,hostMemberId);
+			changeSkinResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return changeSkinResult;
 	}
 	
 }
