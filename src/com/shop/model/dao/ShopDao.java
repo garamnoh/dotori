@@ -14,7 +14,6 @@ import java.util.Properties;
 
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
-import com.shop.model.vo.ShoppingList;
 import com.shop.model.vo.Skin;
 
 public class ShopDao {
