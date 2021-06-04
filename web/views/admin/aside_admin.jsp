@@ -6,18 +6,18 @@
     <div class='menuTitle' id="option1">회원관리</div>
     <div class="menuSub">
     	<p id='member'>회원정보 조회</p>
-<!--         <p id='memberOption'>option1</p> -->
+        <p id='memberOption'>option1</p>
     </div>
     <div class='menuTitle' id="option2">게시글관리</div>
     <div class="menuSub">
         <p id='board'>게시물 조회 및 관리</p>
-        <p id='notice'>공지사항 조회 및 관리</p>
-<!--         <p id='boardOption2'>option2</p> -->
+        <p id='boardOption1'>공지사항 조회 및 관리</p>
+        <p id='boardOption2'>option2</p>
     </div>
     <div class='menuTitle' id="option3">상품관리</div>
     <div class="menuSub">
-        <p id='searchItem'>상품조회 및 삭제</p>
-        <p id='enrollItem'>상품 등록</p>
+        <p id='notice'>상품조회 및 삭제</p>
+        <p id='noticeOption'>상품 등록</p>
     </div>
 </div>
 
@@ -103,34 +103,11 @@
 		$('#section').html('');
 		
 		$.ajax({
-			url: '<%= request.getContextPath() %>/views/admin/section_admin_memberList.jsp',
+			url: '<%= request.getContextPath() %>/admin/membersList',
 			dataType: 'html',
 			success: data=>{
 				$('#section').append(data);
 			}
 		});
-		
-		$('#searchResult').html('');
-		
- 		$.ajax({
-			url: '<%= request.getContextPath() %>/admin/membersList',
-			dataType: 'html',
-			success: data=>{
-				$('#section #searchResult').append(data);
-			}
-		});
 	});
-	
-	$('.menuSub p').on('click', (e)=>{
-		
-		switch(e.target.id){
-			case 'enrollItem':
-				$.ajax({
-					url: '<%=request.getContextPath() %>/'
-				});
-		
-		}
-	});
-	
-	
 </script>

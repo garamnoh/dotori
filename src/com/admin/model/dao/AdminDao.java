@@ -108,6 +108,8 @@ public class AdminDao {
 		ResultSet rs = null;
 		int result = 0;
 		
+		System.out.println("dao : " + searchType);
+		
 		try {
 			
 			ps = conn.prepareStatement(prop.getProperty("searchMembersCount").replace("val", searchType));
@@ -139,6 +141,8 @@ public class AdminDao {
 		try {
 			
 			String a= prop.getProperty("searchMembersList").replace("val", searchType);
+			
+			System.out.println("2 : " + a);
 			
 			ps = conn.prepareStatement(prop.getProperty("searchMembersList").replace("val", searchType));
 			

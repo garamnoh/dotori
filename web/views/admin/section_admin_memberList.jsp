@@ -1,9 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%
-	String pageBar = (String)request.getAttribute("pageBar");
-%>
 
 <div id="container_membersList">
     <div id="title"><p>회원정보 조회</p></div>
@@ -14,21 +10,24 @@
             <option value="MEMBER_NAME" id="typeName">NAME</option>
         </select>
         <div id="searchTypeId">
-            <div>
+            <form action="" method="post">
                 <input type="text" name="searchKeyword" id='typeIdKeyword' placeholder="아이디 검색">
                 <input type="hidden" name="searchType" id='typeId' value="MEMBER_ID">
                 <button type="submit" id='submit_typeId'>id</button>
-            </div>
+            </form>
         </div>
         <div id="searchTypeName" class="hide">
-            <div>
+            <form action="" method="post">
                 <input type="text" name="searchKeyword" id='typeNameKeyword' placeholder="이름 검색">
                 <input type="hidden" name="searchType" id='typeName' value="MEMBER_NAME">
                 <button type="submit" id='submit_typeName'>name</button>
-            </div>
+            </form>
         </div>
     </div>
-    <div id="searchResult"></div>
+    <div id="searchResult">
+		<%@ include file="/views/admin/submitContainer/section_admin_searchList.jsp" %>
+    </div>
+
 </div>
 
 
@@ -85,8 +84,8 @@
 	    flex-grow: 1;
 	}
 	
-	#container_membersList>#searchContainer>#searchTypeId>div,
-	#container_membersList>#searchContainer>#searchTypeName>div{
+	#container_membersList>#searchContainer>#searchTypeId>form,
+	#container_membersList>#searchContainer>#searchTypeName>form{
 	    display: flex;
 	    flex-grow: 1;
 	}
@@ -103,9 +102,7 @@
 	#container_membersList>#searchContainer>#searchType:focus{
 		outline: none;
 	}
-	.hide{
-		display: none;
-	}
+
 </style>
 
 <script src='<%=request.getContextPath() %>/js/jquery-3.6.0.min.js'></script>
@@ -126,9 +123,34 @@
 		$('[name=searchKeyword]').val('');
 	});
 	
+	const searchType = '<%= searchType %>';
+	const searchKeyword = '<%= searchKeyword %>';
+ 	
+ 	if(searchKeyword != 'null'){
+ 		
+	$('#typeId').attr('selected', false);
+	$('#typeName').attr('selected', false);
+ 		
+ 		switch(searchType){
+ 			case 'MEMBER_ID' : $('#typeId').attr('selected', true); break;
+ 			case 'MEMBER_NAME' : $('#typeName').attr('selected', true); break;
+ 		}
+ 		
+ 		$('[name=searchKeyword]').val(searchKeyword);
+ 		
+ 	} else {
+ 		
+ 		$('[name=searchKeyword]').val('');
+ 		
+ 	}
+ 	
+
   	$('#submit_typeId').click(()=>{
  		
   		$('#searchResult').html('');
+ 		
+<%--  		console.log($('#typeId').val());
+ 		console.log($('#typeIdKeyword').val());
  		
  		$.ajax({
  			url: '<%= request.getContextPath() %>/admin/searchMembersList',
@@ -140,7 +162,7 @@
  			success: data=>{
  				$('#searchResult').append(data);
  			}
- 		});
+ 		}); --%>
  	});
  	
  	$('#submit_typeName').click(()=>{
@@ -159,4 +181,6 @@
  			}
  		});
  	});
+ 	
+ 	
  </script>
