@@ -36,7 +36,7 @@ public class DiaryFolderServlet extends HttpServlet {
 		
 		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
 		
-		request.setAttribute("FolderLevel", diaryFolderLevel);
+		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
 		
 		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 	}

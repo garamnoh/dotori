@@ -96,11 +96,11 @@ document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 		let numPerpage=strArr[1];
 		console.log(cPage,numPerpage);		
 		$.ajax({
-			url:contextPath+"/page/minihomeRightPageToDiary.do",
+			url:contextPath+"/diary/diaryFolder",
 			type:"post",
 			data:{
 				//"hostMemberId":hostMemberId,
-				"folderNo":$(e.target).parent().prev().val(),
+				"diaryFolderLevel":$(e.target).parent().prev().val(),
 				"cPage":cPage,
 				"numPerpage":numPerpage			
 			},

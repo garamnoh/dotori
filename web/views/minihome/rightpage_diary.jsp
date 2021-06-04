@@ -111,7 +111,7 @@
 		<%} 
 	}%>	
 				
-	<input type="hidden" name="folderNo" value="<%=diaryFolderLevel%>">
+	<input type="hidden" name="diaryFolderLevel" value="<%=diaryFolderLevel%>">
 											
 	<div id="pageBar">
 		<%=pageBar %>
