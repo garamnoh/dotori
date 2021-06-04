@@ -87,7 +87,7 @@
        
     <div >
         핸드폰번호 <br><input type="tel" placeholder="(-없이)01012345678" name="phone" id="phone" maxlength="11" required
-     size="150"><br>
+     size="150" ><br>
     </div>
 	<br>
 	<div>주소
@@ -282,12 +282,17 @@
 
             	   
                }
-       
+                        /*     $("#phone").blur((e)=>{ 
                
-    
-               
-               
-                
+	 		const phone =$("#phone").val();
+  			const regExphone = /^\d{3}\d{3,4}\d{4}$/;
+  			if(!regExphone.test($("input[id='phone']").val())) {
+  				alert("전화번호 형식이 올바르지 않습니다.");
+  				
+  			}; 
+             }); */
+  			
+			
    </script>
    <!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
    <script>
