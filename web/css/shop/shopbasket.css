@@ -15,6 +15,9 @@
 .basketheader>button{
 	
 }
+#section{
+	overflow:scroll;
+}
 
 .basketheader
 /* 카테고리별 */

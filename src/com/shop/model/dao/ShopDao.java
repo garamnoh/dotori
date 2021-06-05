@@ -9,7 +9,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -181,83 +180,86 @@ private Properties prop=new Properties();
 		return result;
 	}
 	
-	public HashMap<String,List> shoppingList(Connection conn){
+	public List<Minimi> shoppingList1(Connection conn,String memberId){
 		PreparedStatement pstmt=null;
-		ResultSet rs =null;
-		HashMap<String,List> map =new HashMap<String,List>();
-		//ArrayList<Object> inBasket=new ArrayList();
+		ResultSet rs=null;
+		List<Minimi> a=new ArrayList();
 		
-		String sql=prop.getProperty("shoppingList");
 		try {
-//			 String t=null;
-//			 for(int i =0; i <itemNums.size(); i++){
-//				 if(itemNums.size()==1) {
-//					 //사용자가 아이템을 하나만 선택시
-//					 t= (String)itemNums.get(i);
-//				 }else {
-//					 //사용자가 아이템을 다중선택
-//					if(i<itemNums.size()) {
-//							 t = itemNums.get(i)+","+"";  
-//					}else if(i==itemNums.size()) {
-//							 t= itemNums.get(i);
-//					}
-//				 }
-//			}
-
-			if(type.equals("skin")) {
-				
-				sql=sql.replace("#table", "skin");
-				sql=sql.replace("#item", "item_no");
-				sql=sql.replace("#itemNums", t);
-				
-				pstmt=conn.prepareStatement(sql);
-			}else if(type.equals("minimi")) {
-				sql=sql.replace("#table", "minimi");
-				sql=sql.replace("#col", "item_no");
-				sql=sql.replace("#itemNums", t);
-				pstmt=conn.prepareStatement(sql);
-				
-			}else if(type.equals("music")) {
-				
-				sql=sql.replace("#table", "music");
-				sql=sql.replace("#col", "music_no");
-				sql=sql.replace("#itemNums", t);
-				pstmt=conn.prepareStatement(sql);
-			}
+			pstmt=conn.prepareStatement(prop.getProperty("shoppingList1"));
+			pstmt.setString(1,memberId);
 			rs=pstmt.executeQuery();
-			
-		while(rs.next()) {
-				//장바구니에 타입(카테고리)마다 가져와야할 데이터가 다르다
-			if(type.equals("skin")) {
-				//String[] inBasket="";
-				inBasket.add(rs.getInt("item_no"));
-				inBasket.add(rs.getString("skin_title"));
-				inBasket.add(rs.getInt("price"));
-				inBasket.add(rs.getString("filepath"));
-				inBasket.add(rs.getString("css_filepath"));
-			}else if(type.equals("minimi")) {
-				inBasket.add(rs.getInt("item_no"));
-				inBasket.add(rs.getString("filepath"));
-				inBasket.add(rs.getInt("price"));
-				inBasket.add(rs.getString("title"));
-			}else if(type.equals("music")) {
-				inBasket.add(rs.getInt("music_no"));
-				inBasket.add(rs.getString("music_title"));
-				inBasket.add(rs.getString("singer"));
-				inBasket.add(rs.getString("filepath"));
-				inBasket.add(rs.getInt("price"));
-				inBasket.add(rs.getString("img_filepath"));
+			while(rs.next()) {
+				Minimi mini= new Minimi();
+				mini.setItemNo(rs.getInt("item_no"));
+				mini.setFilepath(rs.getString("filepath"));
+				mini.setTitle(rs.getString("title"));
+				mini.setPrice(rs.getInt("price"));
+				a.add(mini);
 			}
-		}
-		
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(rs);
 			close(pstmt);
 		}
-		return inBasket;
+		return a;
 	}
+	public List<Skin> shoppingList2(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Skin> b=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("shoppingList2"));
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk=new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				b.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return b;
+	}
+	public List<Music> shoppingList3(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Music> c=new ArrayList();
+		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("shoppingList3"));
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setImgFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				c.add(m);
+			}
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return c;
+	}
+	
 	
 
 }
