@@ -226,8 +226,7 @@ public class DiaryDao {
 		ResultSet rs=null;
 		List<DiaryComment> list=new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));
-			//pstmt.setInt(1, diaryRef);
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));			
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DiaryComment dc=new DiaryComment();
@@ -248,6 +247,22 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return list;
+	}
+	
+	public int commentDelete(Connection conn, int commentNo, String commentWriter) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("commentDelete"));	
+			pstmt.setInt(1,  commentNo);
+			pstmt.setString(2, commentWriter);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
 	}
 	
 }
