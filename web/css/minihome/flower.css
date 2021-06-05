@@ -1,0 +1,158 @@
+@charset "UTF-8";
+/* main */
+*::-webkit-scrollbar{
+    display: none;
+}
+* {
+	font-size:13px;
+}
+body{
+	padding:0;
+	margin:0;
+}
+.container{
+	margin:0;
+    box-sizing:border-box;
+    background-image:url("../../upload/SKIN_ITEM/flower.jpg");
+    background-repeat:no-repeat;
+    background-size:cover;
+    background-origin:border-box;
+    border:1px solid transparent;
+    width:1200px;
+    height:755px;
+}
+.cover{
+    position:relative;
+    background-color:rgba(224, 178, 167, 0.9);
+    /* background-color:#E0B2A7; */
+    margin-top:25px;
+    margin-left:25px;
+    box-sizing:border-box;
+    width:900px;
+    height:700px;
+    padding:25px 25px;
+    border-radius:20px;
+    border:1.5px solid #7F979F;
+}
+.sheet{
+    /* background-color:#BAB4B6; */
+    background-color:#C8C0C5;
+   	/* position:relative; */
+    box-sizing:border-box;
+    width:850px;
+    height:650px;
+    font-size:13px;
+    border-radius:20px;
+   	border: 2px dashed #F8F8F8;
+   	z-index:50;
+}
+.today{
+    position:absolute;
+    top:45px;
+    left:50px;
+    box-sizing:border-box;
+    width:200px;
+    height:25px;
+    font-size:15px;
+    text-align:center;
+}
+.miniTitle{
+    position:absolute;
+    top:43px;
+    left:290px;
+    box-sizing:border-box;
+    width:380px;
+    height:30px;
+    font-size:18px;
+    color:black;
+    font-weight:bold;
+}
+#left-page{
+    position:absolute;
+    top:75px;
+    left:35px;
+    box-sizing:border-box;
+    border-radius:20px;
+    box-sizing:border-box;
+    width:250px;
+    height:600px;
+    background-color:rgba(255, 255, 255, 0.6);
+    padding:20px;
+    width:225px;
+    height:590px;
+    border:none;
+    overflow:scroll;
+    border:1px solid #B6B6B6;
+}
+#right-page{
+    position:absolute;
+    top:75px;
+    left:265px;
+    box-sizing:border-box;
+    border-radius:20px;
+    box-sizing:border-box;
+    width:350px;
+    height:600px;
+    background-color:rgba(255, 255, 255, 0.6);
+    padding:20px;
+    width:600px;
+    height:590px;
+    border:none;
+    overflow:scroll;
+    border:1px solid #B6B6B6;    
+}
+#today{
+    color:red;
+}
+.miniMenu{
+    position:relative;
+    left:855px;
+    bottom:600px;
+}
+.miniMenu li{
+    /* color:white; */
+    position:relative;
+    font-weight:bold;
+    box-sizing:border-box;
+    margin-bottom:10px;
+    list-style-type:none;
+    width:80px;
+    height:35px;
+    text-align:center;
+    padding-top:8px;    
+    border-top-right-radius:5px;
+    border-bottom-right-radius:5px;    
+    border: solid 1px black;
+    z-index:1;
+}
+.unselected{
+    background-color:#C7D5E3;
+    color:white;
+}
+.selected{
+    background-color:#C8C0C5;
+    color:black;   
+}
+.miniMenu li:hover{
+    background-color:#BABAC1;
+    cursor:pointer;
+}
+
+/* home left-page */
+
+/* home right-page */
+
+/* album left-page */
+
+/* album right-page */
+
+/* diary left-page */
+
+/* diary right-page */
+
+/* jukebox left-page */
+#jukeboxMenu>li{
+    cursor:pointer;
+}
+
+/* jukebox right-page */

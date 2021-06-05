@@ -18,6 +18,7 @@
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
 	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>"> --%>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/default.css">
+	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/flower.css"> --%>
 	
 	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
