@@ -66,7 +66,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		int diaryFolderLevel;
 		List<Diary> list=null;
 		try {		
-			diaryFolderLevel=(int)request.getAttribute("FolderLevel");					
+			diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");					
 		}catch(NullPointerException e) {
 			diaryFolderLevel=1; //처음엔 전체공개폴더의 게시물들만 보이게			
 		}				
@@ -112,6 +112,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		request.setAttribute("list", list);
 		request.setAttribute("cList", cList);
 		request.setAttribute("profilePath", profilePath);
+		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_diary.jsp").forward(request, response);
 				

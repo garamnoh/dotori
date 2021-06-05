@@ -221,7 +221,6 @@ public class DiaryDao {
 		return result;	
 	}
 	
-	//public List<DiaryComment> selectDiaryCommentList(Connection conn, int diaryRef){
 	public List<DiaryComment> selectDiaryCommentList(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

@@ -5,11 +5,11 @@
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
-	//int count=(int)request.getAttribute("count");
+	
 %>
 
 <div id="diary_folder_box">
-	<div id="diary_folder_title">Diary folder</div>
+	<div id="diary_folder_title">DIARY</div>
 	<div id="diary_folder_list">		
 		<%for(DiaryFolder df : list) {%>			
 			<ul>
@@ -22,7 +22,8 @@
 	<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
 </div>
 <script>		
-	$(".folderLevel").click(e=>{
+	$(".folderLevel").click(e=>{		
+		$(e.target).siblings().css("text-decoration", "none");
 		$.ajax({
 			url:"<%=request.getContextPath()%>/diary/diaryFolder",
 			type:"post",
@@ -35,6 +36,15 @@
 			success:data=>{				
 				$("#right-page").html(data);
 			}
-		})
-	});		
+		});
+		$(e.target).css("text-decoration", "underline");
+			
+	});	
+	 $(document).ready(function(){
+		$("ul").children().first().css("text-decoration", "underline");
+	});
+	/* $(".folderLevel").click(e=>{
+		$(li).siblings().css("text-decoration", "none");		
+		$(e.target).css("text-decoration", "underline");
+	}); */
 </script>
