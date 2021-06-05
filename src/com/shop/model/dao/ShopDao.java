@@ -9,12 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
-import com.shop.model.vo.ShoppingList;
 import com.shop.model.vo.Skin;
 
 public class ShopDao {
@@ -181,14 +181,14 @@ private Properties prop=new Properties();
 		return result;
 	}
 	
-//	public List<ShoppingList> shoppingList(Connection conn,List<String> itemNums,String type){
-//		PreparedStatement pstmt=null;
-//		ResultSet rs =null;
-//		List<String> list =new ArrayList();
-//		//ArrayList<Object> inBasket=new ArrayList();
-//		
-//		String sql=prop.getProperty("shoppingList");
-//		try {
+	public HashMap<String,List> shoppingList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		HashMap<String,List> map =new HashMap<String,List>();
+		//ArrayList<Object> inBasket=new ArrayList();
+		
+		String sql=prop.getProperty("shoppingList");
+		try {
 //			 String t=null;
 //			 for(int i =0; i <itemNums.size(); i++){
 //				 if(itemNums.size()==1) {
@@ -203,61 +203,61 @@ private Properties prop=new Properties();
 //					}
 //				 }
 //			}
-//
-//			if(type.equals("skin")) {
-//				
-//				sql=sql.replace("#table", "skin");
-//				sql=sql.replace("#col", "item_no");
-//				sql=sql.replace("#itemNums", t);
-//				
-//				pstmt=conn.prepareStatement(sql);
-//			}else if(type.equals("minimi")) {
-//				sql=sql.replace("#table", "minimi");
-//				sql=sql.replace("#col", "item_no");
-//				sql=sql.replace("#itemNums", t);
-//				pstmt=conn.prepareStatement(sql);
-//				
-//			}else if(type.equals("music")) {
-//				
-//				sql=sql.replace("#table", "music");
-//				sql=sql.replace("#col", "music_no");
-//				sql=sql.replace("#itemNums", t);
-//				pstmt=conn.prepareStatement(sql);
-//			}
-//			rs=pstmt.executeQuery();
-//			
-//		while(rs.next()) {
-//				//장바구니에 타입(카테고리)마다 가져와야할 데이터가 다르다
-//			if(type.equals("skin")) {
-//				//String[] inBasket="";
-//				inBasket.add(rs.getInt("item_no"));
-//				inBasket.add(rs.getString("skin_title"));
-//				inBasket.add(rs.getInt("price"));
-//				inBasket.add(rs.getString("filepath"));
-//				inBasket.add(rs.getString("css_filepath"));
-//			}else if(type.equals("minimi")) {
-//				inBasket.add(rs.getInt("item_no"));
-//				inBasket.add(rs.getString("filepath"));
-//				inBasket.add(rs.getInt("price"));
-//				inBasket.add(rs.getString("title"));
-//			}else if(type.equals("music")) {
-//				inBasket.add(rs.getInt("music_no"));
-//				inBasket.add(rs.getString("music_title"));
-//				inBasket.add(rs.getString("singer"));
-//				inBasket.add(rs.getString("filepath"));
-//				inBasket.add(rs.getInt("price"));
-//				inBasket.add(rs.getString("img_filepath"));
-//			}
-//		}
-//		
-//		}catch(SQLException e) {
-//			e.printStackTrace();
-//		}finally {
-//			close(rs);
-//			close(pstmt);
-//		}
-//		return inBasket;
-//	}
+
+			if(type.equals("skin")) {
+				
+				sql=sql.replace("#table", "skin");
+				sql=sql.replace("#item", "item_no");
+				sql=sql.replace("#itemNums", t);
+				
+				pstmt=conn.prepareStatement(sql);
+			}else if(type.equals("minimi")) {
+				sql=sql.replace("#table", "minimi");
+				sql=sql.replace("#col", "item_no");
+				sql=sql.replace("#itemNums", t);
+				pstmt=conn.prepareStatement(sql);
+				
+			}else if(type.equals("music")) {
+				
+				sql=sql.replace("#table", "music");
+				sql=sql.replace("#col", "music_no");
+				sql=sql.replace("#itemNums", t);
+				pstmt=conn.prepareStatement(sql);
+			}
+			rs=pstmt.executeQuery();
+			
+		while(rs.next()) {
+				//장바구니에 타입(카테고리)마다 가져와야할 데이터가 다르다
+			if(type.equals("skin")) {
+				//String[] inBasket="";
+				inBasket.add(rs.getInt("item_no"));
+				inBasket.add(rs.getString("skin_title"));
+				inBasket.add(rs.getInt("price"));
+				inBasket.add(rs.getString("filepath"));
+				inBasket.add(rs.getString("css_filepath"));
+			}else if(type.equals("minimi")) {
+				inBasket.add(rs.getInt("item_no"));
+				inBasket.add(rs.getString("filepath"));
+				inBasket.add(rs.getInt("price"));
+				inBasket.add(rs.getString("title"));
+			}else if(type.equals("music")) {
+				inBasket.add(rs.getInt("music_no"));
+				inBasket.add(rs.getString("music_title"));
+				inBasket.add(rs.getString("singer"));
+				inBasket.add(rs.getString("filepath"));
+				inBasket.add(rs.getInt("price"));
+				inBasket.add(rs.getString("img_filepath"));
+			}
+		}
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return inBasket;
+	}
 	
 
 }

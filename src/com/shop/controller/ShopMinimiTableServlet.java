@@ -37,10 +37,12 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		List<Minimi> list=new ShopService().minimiList();
 		Minimi mini= new Minimi();
 		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		String result=(String)request.getAttribute("result");
 		
 		request.setAttribute("minimiList", list); //data
 		request.setAttribute("type", "mini"); 
-		request.setAttribute("memberId", memberId); 
+		request.setAttribute("memberId", memberId);
+		request.setAttribute("result",result);
 		
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		

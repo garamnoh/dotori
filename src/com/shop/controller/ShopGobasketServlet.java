@@ -1,7 +1,7 @@
 package com.shop.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -40,24 +40,11 @@ public class ShopGobasketServlet extends HttpServlet {
 		//itemNo.add(Integer.parseInt(request.getParameter("itemNo").split(",",itemNo.size()));
 		
 		//------여기서부터 시작
+		//List<ShoppingList> list =new ShopService().shoppingList(itemNums,type);
+		HashMap<String,List> map1 =new ShopService().shoppingList();
 		
-		//List<Integer> itemNums=new ArrayList();
-		List<String> itemNums=new ArrayList();
-		
-		//itemNums.add(Integer.parseInt(request.getParameter("itemNums")));
-		itemNums.add(request.getParameter("itemNums"));
-		//지금 string값을 1,2,3,4를 list<String>에 대입
-		
-		String type=request.getParameter("type");
-		
-		//---가져올땐 그 아이템의 전부를 가져와야하는데..
-		//ArrayList<Object> inBasket=new ShopService().shoppingList(itemNums,type);
-		//request.setAttribute("inBasket", inBasket); //data
-		
-		List<ShoppingList> list =new ShopService().shoppingList(itemNums,type);
-		
-		request.setAttribute("inBasket", list); //data
-		request.setAttribute("type", type);
+		request.setAttribute("inBasket", map); //data
+		//request.setAttribute("type", type); map으로 분할할꺼임
 		
 		//response.setContentType("text/html;charset=utf-8");
 		request.getRequestDispatcher("/views/shop/shopBasket.jsp").forward(request, response);

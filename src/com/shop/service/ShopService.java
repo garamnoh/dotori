@@ -6,12 +6,12 @@ import static com.common.JDBCTemplate.getConnection;
 import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
 
 import com.shop.model.dao.ShopDao;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
-import com.shop.model.vo.ShoppingList;
 import com.shop.model.vo.Skin;
 
 
@@ -52,12 +52,12 @@ private ShopDao dao= new ShopDao();
 		return result;
 		
 	}
-//	public List<ShoppingList> shoppingList(List<String> itemNums,String type){
-//		Connection conn=getConnection();
-//		List<ShoppingList> list=dao.shoppingList(conn,itemNums,type);
-//		close(conn);
-//		return list;
-//	}
+	public HashMap<String,List> shoppingList(List<String> itemNums,String type){
+		Connection conn=getConnection();
+		HashMap<String,List> map=dao.shoppingList(conn);
+		close(conn);
+		return ;
+	}
 	
 	
 

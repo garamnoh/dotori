@@ -6,6 +6,7 @@
 List<Music> list=(List<Music>)request.getAttribute("musicList");
 	Music m=(Music)request.getAttribute("music");
 	String id=(String)request.getAttribute("memberId"); 
+	String result=(String)request.getAttribute("result");
 %> 
 <%@ include file="/views/common/shopheader.jsp"%>
 
@@ -122,5 +123,9 @@ var getbasket=()=>{
 		
 	});
 }
+<%if(result!=null){%>
+	alert("<%=result%>");
+<%}%>
+
 
 </script>

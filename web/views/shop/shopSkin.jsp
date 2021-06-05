@@ -4,6 +4,7 @@
 List<Skin> list=(List<Skin>)request.getAttribute("skinList");
 Skin s=(Skin)request.getAttribute("skin");
 String id=(String)request.getAttribute("memberId"); 
+String result=(String)request.getAttribute("result"); 
 %>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
@@ -120,6 +121,9 @@ var getbasket=()=>{
 		
 	});
 }
+<%if(result!=null){%>
+alert("<%=result%>");
+<%}%>
 			
 
 </script>

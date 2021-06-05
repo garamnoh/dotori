@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List" import="java.util.ArrayList,java.util.String"%>
+    pageEncoding="UTF-8" import="java.util.List" import="com.shop.model.vo.ShoppingList,java.util.String"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopbasket.css">
 
 <%
-	ArrayList<Object> list=(ArrayList<Object>)request.getAttribute("inBasket");
+	//List<ShoppingList> list=(List<ShoppingList>)request.getAttribute("inBasket");
+	
 	String type=(String)request.getAttribute("type");
 %>
+<form id="AllBasketForm" action="" method="post">
 <div class="Allbasket">
 	<div class="basketheader">
 		<p>장바구니</p>
@@ -94,10 +96,6 @@
 		<%} 
 		}%>
 		
-		
-		
-		
-	
 	<%} %>
 	
 	<div class="basketfooter">
@@ -112,5 +110,13 @@
 	</div>
 	
 </div>
+</form>
+
+
+<script>
+
+</script>
+
+
 
 	
