@@ -34,6 +34,8 @@ public class ShopMusicTableServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		List<Music> list=new ShopService().musicList();
+		String result=(String)request.getAttribute("result");
+		
 		//Music m= new Music();
 		System.out.println(list);
 		System.out.println();
@@ -41,6 +43,7 @@ public class ShopMusicTableServlet extends HttpServlet {
 		request.setAttribute("musicList", list); //data
 		request.setAttribute("type", "music");
 		request.setAttribute("memberId", memberId); 
+		request.setAttribute("result", result); 
 		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
 		
 	}

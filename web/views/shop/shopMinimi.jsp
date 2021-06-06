@@ -4,6 +4,8 @@
 List<Minimi> list=(List<Minimi>)request.getAttribute("minimiList");
 Minimi mini=(Minimi)request.getAttribute("minimi");
 String id=(String)request.getAttribute("memberId"); 
+String result=(String)request.getAttribute("result");
+
 %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMinimi.css">
 
@@ -123,6 +125,11 @@ var getbasket=()=>{
 		
 	});
 }
+
+
+<%if(result!=null){%>
+alert("<%=result%>");
+<%}%>
 
 
 </script>

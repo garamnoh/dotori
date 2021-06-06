@@ -12,12 +12,17 @@
 	List<DiaryComment> cList=(List<DiaryComment>)request.getAttribute("cList");
 	int diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
 %>
+
+<script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>
+
 <div id="diary_content">
 	<form>
 		<div id="diary_input_box">
+			<!-- 미니홈피 방문자(로그인한사람) 미니미출력 -->
 			<div id="input_minimi_container">
 				<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=profilePath %>" alt="나의미니미">
 			</div>
+			<!-- 다이어리 작성 박스 -->
 			<div id="diary_input_container">
 				<div id="diary_title_left">
 					<div id="diary_input_title_box">
@@ -32,7 +37,7 @@
 					</div>
 				</div>				
 				<div id="diary_input_btn_box">
-					<input type="submit" value="확인" id="diary_input_btn">
+					<input type="submit" value="저장" id="diary_input_btn">
 				</div>									
 			</div>
 			<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
@@ -63,6 +68,8 @@
 					<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=d.getProfilePath() %>" alt="미니미">
 				</div>
 				<div id="diary_content_list">
+				
+					<!-- 댓글작성자, 날짜, 버튼박스 -->
 					<div id="diary_content_title">
 						<div id="diary_writer_container"><%=d.getMemberName()%></div>									
 						<div id="diary_date_container"><%=d.getPostDate() %></div>
@@ -75,24 +82,16 @@
 							<%} %>
 							<div class="diary_com_btn">댓글</div>
 						</div>
-					</div>							
+					</div>	
+					
+					<!-- 댓글내용 -->						
 					<div id="diary_content_content">
 						<%=d.getContent() %>
 					</div>
-					<%for(DiaryComment dc : cList) {%>
-						<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
-							<div class="diary_comment_list">						
-								<div class="diary_comment_user"><%= dc.getWriterName()%></div>
-								<div class="diary_comment_content"><%=dc.getCommentContent() %></div>									
-							</div>
-						<%} %>
-					<%} %>	
-					<div id="diary_comment_box" style="display:none">
-						<label>댓글</label>							
-						<input type="text" class="diary_comment" name="diary_comment">
-						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
-						<button class="diary_comment_btn">확인</button>
-					</div>	
+					
+					<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">					
+					
+					<!-- 댓글수정박스 -->			
 					<div id="diary_content_update" style="display:none">
 						<select class="diary_folder_up" name="diary_folder_up">
 							<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>
@@ -100,23 +99,67 @@
 							<option value="비공개" <%=d.getFolderNo()==3?"selected":""%>>비공개</option>
 						</select>
 						<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
-						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">
 						<div id="diary_update_btn_box">
 							<div class="diary_update_btn">저장</div>
 							<div class="diary_cancel_btn">취소</div>
 						</div>
-					</div>						
+					</div>	
+					
+					<!-- 댓글달기 -->
+					<div id="diary_comment_box" style="display:none">
+						<label>댓글</label>							
+						<input type="text" class="diary_comment" name="diary_comment">
+						<button class="diary_comment_btn">확인</button>						
+					</div>					
+					
+					<!-- 댓글출력박스 -->
+					<div class="diary_comment_list_box">
+						<%for(DiaryComment dc : cList) {%>
+							<%if(d.getDiaryNo()==dc.getDiaryRef()) {%>
+								<%if(dc.getCommentLevel()==1) {%>
+									<input type="hidden" name="diary_comment_ref" value="<%=dc.getCommentNo()%>">
+									<input type="hidden" name="diary_com_no" value="<%=d.getDiaryNo()%>">										
+									<div class="diary_comment_list">						
+										<div class="diary_comment_user"><%= dc.getWriterName()%></div>
+										<div class="diary_comment_content"><%=dc.getCommentContent() %></div>
+										<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
+											|| loginMember.getMemberId().equals("admin@gmail.com")
+											|| loginMember.getMemberId().equals(dc.getCommentWriter())) {%>
+											<div class="diary_co_del_btn">삭제</div>
+										<%} %>									
+										<div class="diary_co_com_btn">댓글</div>
+											
+									</div>
+								<%} else if(dc.getCommentLevel()==2) {%>									
+									<div class="diary_reply_list">										
+										<div class="diary_reply_user"><%= dc.getWriterName()%></div>
+										<div class="diary_reply_content"><%=dc.getCommentContent() %></div>	
+										<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
+											|| loginMember.getMemberId().equals("admin@gmail.com")
+											|| loginMember.getMemberId().equals(dc.getCommentWriter())) {%>
+											<div class="diary_reply_btn">삭제</div>	
+										<%} %>																		
+									</div>
+								<%} %>										
+							<%} %>
+						<%} %>
+					</div>
+						
+					<!-- 대댓글달기 / 원글 댓글창 닫기-->
+					<div id="diary_co_comment_box" style="display:none">
+						<label>대댓글</label>							
+						<input type="text" class="diary_co_comment" name="diary_co_comment">				
+						<button class="diary_co_comment_btn">확인</button>
+					</div>	
+									
 				</div>
 			</div>	
 		<%} 
 	}%>	
 				
-	<input type="hidden" name="folderNo" value="<%=diaryFolderLevel%>">
+	<input type="hidden" name="diaryFolderLevel" value="<%=diaryFolderLevel%>">
 											
 	<div id="pageBar">
-		<%=pageBar %>
-		
-	</div> 
-	
+		<%=pageBar %>		
+	</div> 	
 </div>
-<script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>

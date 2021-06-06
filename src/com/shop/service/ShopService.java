@@ -11,7 +11,6 @@ import java.util.List;
 import com.shop.model.dao.ShopDao;
 import com.shop.model.vo.Minimi;
 import com.shop.model.vo.Music;
-import com.shop.model.vo.ShoppingList;
 import com.shop.model.vo.Skin;
 
 
@@ -52,12 +51,24 @@ private ShopDao dao= new ShopDao();
 		return result;
 		
 	}
-//	public List<ShoppingList> shoppingList(List<String> itemNums,String type){
-//		Connection conn=getConnection();
-//		List<ShoppingList> list=dao.shoppingList(conn,itemNums,type);
-//		close(conn);
-//		return list;
-//	}
+	public List<Minimi> shoppingList1(String memberId){
+		Connection conn=getConnection();
+		List<Minimi> a=dao.shoppingList1(conn,memberId);
+		close(conn);
+		return a;
+	}
+	public List<Skin> shoppingList2(String memberId){
+		Connection conn=getConnection();
+		List<Skin> b=dao.shoppingList2(conn,memberId);
+		close(conn);
+		return b;
+	}
+	public List<Music> shoppingList3(String memberId){
+		Connection conn=getConnection();
+		List<Music> c=dao.shoppingList3(conn,memberId);
+		close(conn);
+		return c;
+	}
 	
 	
 

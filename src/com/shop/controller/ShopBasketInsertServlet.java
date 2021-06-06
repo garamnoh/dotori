@@ -58,9 +58,46 @@ public class ShopBasketInsertServlet extends HttpServlet {
 		request.setAttribute("result", result); //data
 		request.setAttribute("type", type);
 		
-		//result 따라 message 창 띄우기 
+		//result 따라 message 창 띄우기  왜안돼지.ㅎ.ㅎ.ㅎ.ㅎ
 		
-		request.getRequestDispatcher("/shop/minimiTable").forward(request, response);
+		String view="";
+		if(result>0) {
+			//request.setAttribute("msg2", "장바구니에 담기 성공");
+			
+			if(type.equals("minimi")) {
+				//request.setAttribute("loc", "/shop/minimiTable");
+				//request.setAttribute("loc", "/page/shopMinimi.do");
+				//request.setAttribute("loc", "/views/main/main.jsp");
+				//request.setAttribute("loc", "/views/shop/shopMinimi.jsp");
+				request.setAttribute("result","성공하셨습니다");
+				view="/shop/minimiTable";
+			}else if(type.equals("skin")) {
+				//request.setAttribute("loc", "/shop/skinTable");
+				//request.setAttribute("loc", "/page/shopSkin.do");
+				request.setAttribute("result","성공하셨습니다");
+				view="/shop/skinTable";
+			}else if(type.equals("music")) {
+				//request.setAttribute("loc", "/shop/musicTable");
+				//request.setAttribute("loc", "/page/shopMusic.do");
+				request.setAttribute("result","성공하셨습니다");
+				view="/shop/musicTable";
+			}
+			
+		}else {
+			//request.setAttribute("msg2", "장바구니에 담기 실패 관리자에게 문의해주세요:(");
+			
+			if(type.equals("minimi")) {
+				view="/views/shop/shopMinimi.jsp";
+			}else if(type.equals("skin")) {
+				view="/views/shop/shopSkin.jsp";
+			}else if(type.equals("music")) {
+				view="/views/shop/shopMusic.jsp";
+			}
+		}
+		request.getRequestDispatcher(view).forward(request, response);
+	
+		
+		//request.getRequestDispatcher("/shop/minimiTable").forward(request, response);
 	}
 
 	/**

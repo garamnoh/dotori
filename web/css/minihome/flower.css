@@ -13,7 +13,7 @@ body{
 .container{
 	margin:0;
     box-sizing:border-box;
-    background-image:url("../../upload/SKIN_ITEM/default.png");
+    background-image:url("../../upload/SKIN_ITEM/flower.jpg");
     background-repeat:no-repeat;
     background-size:cover;
     background-origin:border-box;
@@ -23,8 +23,8 @@ body{
 }
 .cover{
     position:relative;
-    /* background-color:rgba(132, 156, 194, 1); */
-    background-color:#ACD3DE;
+    background-color:rgba(224, 178, 167, 0.9);
+    /* background-color:#E0B2A7; */
     margin-top:25px;
     margin-left:25px;
     box-sizing:border-box;
@@ -35,15 +35,15 @@ body{
     border:1.5px solid #7F979F;
 }
 .sheet{
-    background-color:#F0F0F0;
-   /*  background-color:#B2CCFF; */
+    /* background-color:#BAB4B6; */
+    background-color:#C8C0C5;
    	/* position:relative; */
     box-sizing:border-box;
     width:850px;
     height:650px;
     font-size:13px;
     border-radius:20px;
-   	border: 2px dashed #8098A0;
+   	border: 2px dashed #F8F8F8;
    	z-index:50;
 }
 .today{
@@ -110,30 +110,31 @@ body{
     bottom:600px;
 }
 .miniMenu li{
+    /* color:white; */
     position:relative;
     font-weight:bold;
     box-sizing:border-box;
     margin-bottom:10px;
     list-style-type:none;
-    width:75px;
+    width:80px;
     height:35px;
     text-align:center;
-    padding-top:8px;
+    padding-top:8px;    
     border-top-right-radius:5px;
     border-bottom-right-radius:5px;    
     border: solid 1px black;
     z-index:1;
 }
 .unselected{
-    background-color:#248DB5;
+    background-color:#C7D5E3;
     color:white;
 }
 .selected{
-    background-color:white;
+    background-color:#C8C0C5;
     color:black;   
 }
 .miniMenu li:hover{
-    background-color:#1E7FA2;
+    background-color:#BABAC1;
     cursor:pointer;
 }
 

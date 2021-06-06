@@ -90,14 +90,21 @@ public class DiaryService {
 		close(conn);
 		return result;
 	}
-	
-	//public List<DiaryComment> selectDiaryCommentList(int ref){
+		
 	public List<DiaryComment> selectDiaryCommentList(){
-		Connection conn=getConnection();
-		//List<DiaryComment> list=dao.selectDiaryCommentList(conn, ref);
+		Connection conn=getConnection();	
 		List<DiaryComment> list=dao.selectDiaryCommentList(conn);
 		close(conn);
 		return list;
+	}
+	
+	public int commentDelete(int commentNo, String commentWriter) {
+		Connection conn=getConnection();
+		int result=dao.commentDelete(conn, commentNo, commentWriter);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
 	}
 	
 }

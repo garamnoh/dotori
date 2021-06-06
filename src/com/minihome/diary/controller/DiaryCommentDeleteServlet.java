@@ -1,7 +1,6 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
 
 /**
- * Servlet implementation class DiaryFolder
+ * Servlet implementation class DiaryCommentDeleteServlet
  */
-@WebServlet(name = "DiaryFolderServlet", urlPatterns = { "/diary/diaryFolder" })
-public class DiaryFolderServlet extends HttpServlet {
+@WebServlet("/diary/commentDelete")
+public class DiaryCommentDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderServlet() {
+    public DiaryCommentDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,13 +30,16 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html;charset=utf-8");
+		int commentNo=Integer.parseInt(request.getParameter("commentNo"));
+		String commentWriter=request.getParameter("commentWriter");
+		System.out.println(commentNo+" /// "+commentWriter);
 		
-		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
+		int result=new DiaryService().commentDelete(commentNo, commentWriter);
 		
-		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
+		if(result>0) {
+			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		}		
 		
-		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 	}
 
 	/**
