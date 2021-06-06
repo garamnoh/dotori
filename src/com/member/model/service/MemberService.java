@@ -115,5 +115,11 @@ public class MemberService {
 		return info;
 	}
 	
+	public String getProfilePath(String myId) {
+		Connection conn = getConnection();
+		String profilePath = dao.getProfilePath(conn, myId);
+		close(conn);
+		return profilePath;
+	}
 
 }

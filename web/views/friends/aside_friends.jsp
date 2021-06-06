@@ -3,17 +3,15 @@
     
     <div class="menuOption">
         <div id="optionTitle">Friend</div>
-        <div class="menuTitle" id="option1">친구관리</div>
+        <div class="menuTitle abc" id="administrationFriends">친구관리</div>
         <div class="menuSub">
             <p id="menu1">일촌관리</p>
+            <p id="menu3">신청현황</p> 
             <p id="menu2">친구찾기</p>
-            <p id="menu3">친구추천</p> 
         </div>
-        <div class="menuTitle" id="option1">현재 접속중인 친구</div>
-        <div class="menuSub">
-            <p id="menu4">친구1</p>
-            <p id="menu5">친구2</p>
-            <p id="menu6">친구3</p> 
+        <div class="menuTitle" id="logedInFriends">현재 접속중인 친구</div>
+        <div class="menuSub logedInMember">
+
         </div>
     </div>
     
@@ -90,8 +88,13 @@
     
     
     <script>
-	    $('.menuOption>.menuTitle').on('click', (e)=>{
+	    $('.menuOption>.abc').on('click', (e)=>{
 	        $(e.target).next().slideToggle();
+	        $('.menuOption>.menuTitle').not($(e.target)).next().slideUp();
+	    });
+	    
+	    $('#logedInFriends').on('click', (e)=>{
+	    	$(e.target).next().slideDown();
 	        $('.menuOption>.menuTitle').not($(e.target)).next().slideUp();
 	    });
 	    
@@ -133,4 +136,69 @@
 	    		}
 	    	});
 	    });
+	    
+	    var isData;
+	    
+	    $('#logedInFriends').on('click', (e)=>{
+			
+	    	$('div.logedInMember').html('');
+	    	$.ajax({
+	    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
+	    		success: (data)=>{
+	    			isData = data['logedList'].length;
+	    			if(data['logedList'].length!=0){
+						$.each(data, (i, v)=>{
+							$.each(v, (i, v)=>{
+								const p = $('<p>').text(v.memberName);
+								$('div.logedInMember').append(p);
+							});							
+						});
+	    			} else {
+	    				console.log('no result');
+	    				const p = $('<p>').text('접속중인 친구가 없습니다.');
+	    				$('div.logedInMember').append(p);
+	    				
+	    			}
+	    		}
+	    	});
+	    });
+	    
+	    
+	    
+	    $('div.logedInMember').on('click', (e)=>{
+	    	
+	    	console.log(isData);
+	    	if(isData!=0){
+	    		
+	    		$('#section').html('');
+		    	$.ajax({
+		    		url: '<%= request.getContextPath() %>/chat/chatScreen',
+		    		success: data=>{
+		    			console.log('socket : success');
+		    			$('#section').append(data);
+		    		}
+		    	}).done(()=>{
+		    		
+			    	const receiverName = $(e.target).text();
+			    	console.log(receiverName);
+		    		
+			    	$.ajax({
+			    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
+			    		success: (data)=>{
+			    			$.each(data, (i,v)=>{
+				    			if(v[0].memberName==receiverName) {
+				    				 const filePath = v[0].profilePath;
+				    				 $('#receiverProfilePath').val(filePath);
+				    			}
+			    			});
+			    		}
+			    	});
+			    	$('#receiver').val(receiverName);
+			    	$('#receiver').next().focus();
+			    });
+	    	}
+    	});
+	    	
+
+	    
     </script>

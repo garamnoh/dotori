@@ -3,6 +3,7 @@
 <%@ page import='com.friend.model.vo.SearchF, com.friend.model.vo.Friend, java.util.ArrayList' %>
 <%
 	ArrayList<SearchF> resultList = (ArrayList<SearchF>)request.getAttribute("resultList");
+	String myId = (String)request.getAttribute("myId");
 %>
 
 <div id='tempBox'>
@@ -23,93 +24,71 @@
 					</div>
 				</div>
 			<% } else if(list.getFriendship().equals("신청")) { %>
-				<div id='detail'>
-					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
-					<div id='person'>
-						<span><%=list.getMemberName() %></span>
-						<span><%=list.getPhone() %></span>
-						<span><%=list.getMemberId() %></span>
+				<% if(list.getFollower().equals(list.getMemberId())){ %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
+						<div id='person'>
+							<span><%=list.getMemberName() %></span>
+							<span><%=list.getPhone() %></span>
+							<span><%=list.getMemberId() %></span>
+						</div>
+						<div id='buttons'>
+							<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
+							<button id='minihome'>Mini</button>
+							<button id='accept'>수락</button>
+							<button id='reject'>거부</button>
+						</div>
 					</div>
-					<div id='buttons'>
-						<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
-						<button id='accept'>수락</button>
-						<button id='reject'>거부</button>
-					</div>
-				</div>
-			<% } else { %>
-				<div id='detail'>
-					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
-					<div id='person'>
+				<% } else { %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
+						<div id='person'>
 						<span><%=list.getMemberName() %></span>
 						<span><%=list.getGender() %></span>
 						<span><%=list.getBirth() %></span>
 						<span><%=list.getAddress().substring(0, 2) %></span>
+						</div>
+						<div id='buttons'>
+							<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
+							<button id='minihome'>Mini</button>
+							<button id='cancel'>신청중</button>
+						</div>
 					</div>
-					<div id='buttons'>
-						<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
-						<button id='minihome'>Mini</button>
-						<button id='requestTo'>일촌신청</button>
+				<% } %>
+			<% } else { %>
+				<% if(list.getMemberId().equals(myId)){ %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
+						<div id='person'>
+							<span>내 계정</span>
+						</div>
+						<div id='buttons'>
+							<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
+							<button id='minihome'>Mini</button>
+						</div>
 					</div>
-				</div>
+				<% } else { %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
+						<div id='person'>
+							<span><%=list.getMemberName() %></span>
+							<span><%=list.getGender() %></span>
+							<span><%=list.getBirth() %></span>
+							<span><%=list.getAddress().substring(0, 2) %></span>
+						</div>
+						<div id='buttons'>
+							<input type='hidden' name='hostMemberId' value='<%=list.getMemberId()%>'>
+							<button id='minihome'>Mini</button>
+							<button id='requestTo'>일촌신청</button>
+						</div>
+					</div>
+				<% } %>
 			<% } %>
 		<% } %>
 	<% } else { %>
 			<p style='width:100%;text-align:center;'></p>
 	<% } %>
 </div>
-
-
-
-<%-- 			<% for(Friend cList : compareList) { %>
-				<% if(!cList.getFollowee().contains(sList.getMemberId()) && !cList.getFollower().contains(sList.getMemberId())){ %>
-					<div id='detail'>
-						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=sList.getProfilePath() %>'>
-						<div id='person'>
-							<span><%=sList.getMemberName() %></span>
-							<span><%=sList.getGender() %></span>
-							<span><%=sList.getBirth() %></span>
-							<span><%=sList.getAddress().substring(0, sList.getAddress().indexOf(" ")) %></span>
-						</div>
-						<div id='buttons'>
-							<input type='hidden' name='hostMemberId' value='<%=sList.getMemberId()%>'>
-							<button id='minihome'>Mini</button>
-							<button id='requestTo'>일촌신청</button>
-						</div>
-					</div>
-				<% } else if((cList.getFollowee().equals(sList.getMemberId()) && cList.getFriendshipName().equals("일촌"))) { %>
-					<div id='detail'>
-						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=sList.getProfilePath() %>'>
-						<div id='person'>
-							<span><%=sList.getMemberName() %></span>
-							<span><%=sList.getGender() %></span>
-							<span><%=sList.getBirth() %></span>
-							<span><%=sList.getAddress().substring(0, sList.getAddress().indexOf(" ")) %></span>
-						</div>
-						<div id='buttons'>
-							<input type='hidden' name='hostMemberId' value='<%=sList.getMemberId()%>'>
-							<button id='minihome'>Mini</button>
-							<button id='delete'>일촌끊기</button>
-						</div>
-					</div>
-				<% } else if((cList.getFollowee().equals(sList.getMemberId()) && cList.getFriendshipName().equals("신청"))) { %>
-					<div id='detail'>
-						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=sList.getProfilePath() %>'>
-						<div id='person'>
-							<span><%=sList.getMemberName() %></span>
-							<span><%=sList.getGender() %></span>
-							<span><%=sList.getBirth() %></span>
-							<span><%=sList.getAddress().substring(0, sList.getAddress().indexOf(" ")) %></span>
-						</div>
-						<div id='buttons'>
-							<input type='hidden' name='hostMemberId' value='<%=sList.getMemberId()%>'>
-							<button id='accept'>수락</button>
-							<button id='reject'>거절</button>
-						</div>
-					</div>
-				<% } %>
-			<% } %> --%>
-
-
 
 
 <style>
@@ -147,8 +126,14 @@
 		font-weight: 700;
 	}
 	
-	#detail>#buttons>#delete{
+	#detail>#buttons>#delete,
+	#detail>#buttons>#reject,
+	#detail>#buttons>#cancel{
 		background-color: tomato;
+	}
+	
+	#detail>#buttons>#requestTo{
+		background-color: teal;
 	}
 	
 	#detail>#buttons>button:hover{
@@ -194,11 +179,10 @@
 					console.log(result);
 					if(result > 0){
 						alert('일촌 삭제 성공');
-						$(e.target).parent().parent().html("<p id='delP'>일촌이 삭제되었습니다</p><style>#delP{margin: 12px 0;width:100%;text-align:center;color:tomato;font-size:14px;}</style>");
+						$(e.target).parent().parent().css('border', '1px solid red');
 						setTimeout(()=>{
-							$('#delP').parent().animate({height:0,opacity:0}, 500);
-							$('#delP').animate({opacity:0}, 500);
-						}, 2000);
+							$(e.target).parent().parent().slideUp(500);
+						}, 1000);
 					}
 					else alert('일촌 삭제 실패');
 				}
@@ -207,7 +191,7 @@
 	});
 	
 	$('#tempBox #accept').on('click', (e)=>{
-		const follower = $(e.target).prev().val();
+		const follower = $(e.target).prev().prev().val();
 		
  		$.ajax({
 			url: '<%=request.getContextPath() %>/friends/acceptFriend',
@@ -219,13 +203,86 @@
 				console.log(result);
 				if(result > 0){
 					alert('일촌 수락 완료');
-					$(e.target).parent().parent().html("<p id='delP'>일촌이 수락완료</p><style>#delP{margin: 12px 0;width:100%;text-align:center;color:teal;font-size:14px;}</style>");
+					$(e.target).parent().parent().css('border', '1px solid teal');
 					setTimeout(()=>{
-						$('#delP').parent().animate({height:0,opacity:0}, 500);
-						$('#delP').animate({opacity:0}, 500);
-					}, 2000);
+						$(e.target).parent().parent().slideUp(500);
+					}, 1000);
 				}
 				else alert('일촌 수락 실패');
+			}
+		});
+	});
+	
+	$('#tempBox #requestTo').on('click', (e)=>{
+		const requestTo = $(e.target).prev().prev().val();
+		
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/requestTo',
+			data: {
+				'requestTo': requestTo,
+			},
+			success: data=>{
+				const result = data['result'];
+				if(result > 0){
+					$(e.target).parent().parent().css('border', '1px solid teal');
+					$(e.target).css('background-color', 'tomato');
+					$(e.target).text('신청중');
+					$(e.target).attr('id', 'cancel');
+					
+					setTimeout(()=>{
+						$('#find #searchBtn').trigger('click');
+					}, 500);
+				}
+				else alert('일촌 신청 실패');
+			}
+		});
+	});
+	
+	$('#tempBox #reject').on('click', (e)=>{
+		const reject = $(e.target).prev().prev().prev().val();
+		
+		if(confirm('일촌신청을 거절하시겠습니까?')){
+			
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/reject',
+				data: {
+					'reject': reject,
+				},
+				success: (data)=>{
+					const result = data['result'];
+					if(result > 0){
+						$(e.target).parent().parent().css('border', '1px solid tomato');
+						setTimeout(()=>{
+							$(e.target).parent().parent().slideUp(500);
+						}, 1000);
+					}
+					else alert('일촌 거부 실패');
+				}
+			});
+		}
+	});
+	
+	$('#tempBox #cancel').on('click', (e)=>{
+		const cancel = $(e.target).prev().prev().val();
+		
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/cancel',
+			data: {
+				'cancel': cancel,
+			},
+			success: (data)=>{
+				const result = data['result'];
+				if(result > 0){
+					$(e.target).parent().parent().css('border', '1px solid tomato');
+					$(e.target).css('background-color', 'teal');
+					$(e.target).text('일촌신청');
+					$(e.target).attr('id', 'requestTo');
+					
+					setTimeout(()=>{
+						$('#find #searchBtn').trigger('click');
+					}, 500);
+				}
+				else alert('신청 취소 실패');
 			}
 		});
 	});

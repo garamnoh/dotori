@@ -41,6 +41,7 @@ public class SearchSomeoneServlet extends HttpServlet {
 		
 		for(SearchF s : resultList) System.out.println(s);
 		
+		request.setAttribute("myId", myId);
 		request.setAttribute("resultList", resultList);
 		request.getRequestDispatcher("/views/friends/sub/searchSomeone.jsp").forward(request, response);;
 	}

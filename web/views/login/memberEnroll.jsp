@@ -16,6 +16,18 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700;900&display=swap">
     <!-- 파비콘 -->
     <link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
+    <style>
+    .join{
+    border : 3px dotted orange;
+    height:570px;
+    }
+    .button{
+    position: relative;
+    left :-280px;
+    top :10px;
+    }
+    
+    </style>
 </head>
 <body>
     <div class="main">
@@ -101,11 +113,11 @@
 <input type="text" id="sample4_detailAddress" placeholder="상세주소"  size="60"><br>
 <input type="hidden" id="sample4_extraAddress" placeholder="참고항목"  size="60">
 <input type="hidden" id="sample4_engAddress" placeholder="영문주소"  size="60" ><br> -->
-          
+          <div class="button">
         <button id="cancle" onclick="location.href='SignUp.jsp'">취소</button>  
        
         <button id= "okay">등록</button>    
-
+		</div>
  </form> 
  
  <form name="duplicateFrm" action="" method="post">
@@ -155,6 +167,8 @@
                             $(e.target).next().html("비밀번호가 일치하지 않습니다.").css("color","red");
                           
                            $(e.target).focus();
+                        
+                       		return false;
                         }
                     
                 });

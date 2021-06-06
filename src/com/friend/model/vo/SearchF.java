@@ -4,6 +4,7 @@ import java.sql.Date;
 
 public class SearchF {
 	
+	private String follower;
 	private String memberId;
 	private String memberName;
 	private String nickname;
@@ -18,9 +19,10 @@ public class SearchF {
 		// TODO Auto-generated constructor stub
 	}
 
-	public SearchF(String memberId, String memberName, String nickname, Date birth, String gender, String address,
-			String phone, String profilePath, String friendship) {
+	public SearchF(String follower, String memberId, String memberName, String nickname, Date birth, String gender,
+			String address, String phone, String profilePath, String friendship) {
 		super();
+		this.follower = follower;
 		this.memberId = memberId;
 		this.memberName = memberName;
 		this.nickname = nickname;
@@ -30,6 +32,14 @@ public class SearchF {
 		this.phone = phone;
 		this.profilePath = profilePath;
 		this.friendship = friendship;
+	}
+
+	public String getFollower() {
+		return follower;
+	}
+
+	public void setFollower(String follower) {
+		this.follower = follower;
 	}
 
 	public String getMemberId() {
@@ -106,9 +116,9 @@ public class SearchF {
 
 	@Override
 	public String toString() {
-		return "SearchF [memberId=" + memberId + ", memberName=" + memberName + ", nickname=" + nickname + ", birth="
-				+ birth + ", gender=" + gender + ", address=" + address + ", phone=" + phone + ", profilePath="
-				+ profilePath + ", friendship=" + friendship + "]";
+		return "SearchF [follower=" + follower + ", memberId=" + memberId + ", memberName=" + memberName + ", nickname="
+				+ nickname + ", birth=" + birth + ", gender=" + gender + ", address=" + address + ", phone=" + phone
+				+ ", profilePath=" + profilePath + ", friendship=" + friendship + "]";
 	}
 	
 }

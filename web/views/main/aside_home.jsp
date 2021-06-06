@@ -8,19 +8,30 @@
     
     <div class="profile">
     	<img id='minimi' src="<%= request.getContextPath() %>/upload/MINIMI/<%= profilePath %>" alt="">
-    	<span id="editMinimi">MINIMI</span>
     </div>
     
     <div class="info">
-        <hr>
-        <div id="userName"><%= member.getNickname() %></div>
-        <div id="userEmail"><%= member.getMemberId() %></div>
-        <hr>
-        <div id="today">Today : <span></span>명</div>
-        <div id="total">Total : <span></span>명</div>
-        <hr>
-        <div id="board">New Feed : 10</div>
-        <div id="request">일촌 신청 : 5</div>
+        <div id='user_info'>
+	        <div id="userName"><%= member.getNickname() %></div>
+        </div>
+        <div id='detail_info'>
+        	<div class='conBox'>
+		        <div id="today">Today</div>
+		        <div><span></span></div>
+        	</div>
+	        <div class='conBox'>
+		        <div id="total">Total</div>
+		        <div><span></span></div>
+	        </div>
+	        <div class='conBox'>
+		        <div id="board">New Feed</div>
+		        <div><span></span></div>
+	        </div>
+	        <div class='conBox'>
+		        <div id="requestFromCount">일촌 신청</div>
+		        <div><span></span></div>
+	        </div>
+        </div>
         <div id="editBox">
 			<button id="editBtn">Edit Profile</button>
 		</div>
@@ -51,6 +62,14 @@
 		    justify-content: center;
 		    align-items: center;
 		    position: relative;
+		}
+		
+		.profile:hover{
+			opacity: 0.7;
+		}
+		
+		.profile:active{
+			opacity: 1;
 		}
 
 		.profile>img{
@@ -83,13 +102,31 @@
 		    margin: 0 10px 0 10px;
 		}
 		
-		.info>div{
-		    border-radius: 3px;
-		    padding: 8px 5px;
-		    font-size: 14px;
-		    font-weight: 500;
-		    color: rgb(94, 94, 94);
-		    margin: 10px 0 10px 0;
+		.info>#user_info{
+			background-color: #eee;
+			width: 100%;
+			height: 35px;
+			display: flex;
+			align-items: center;
+			font-size: 14px;
+			margin-bottom: 10px;
+			justify-content: center;
+		}
+		
+		.info>#detail_info{
+			background-color: #eee;
+			width: 100%;
+			height: auto;
+			display: flex;
+			flex-direction: column;
+			font-size: 14px;
+			margin-bottom: 10px;
+		}
+		
+		.info>#detail_info>.conBox{
+			margin: 10px;
+			display: flex;
+			justify-content: space-between;
 		}
 		
 		.info>hr{
@@ -106,7 +143,7 @@
 		.info>div#logoutBox button#logout,
 		.info>div#editBox button#editBtn{
 			background-color: #eee;
-			opacity: 0.4;
+			opacity: 1;
 			border: none;
 			border: 1px #eee solid;
 			width: 100%;
@@ -141,7 +178,7 @@
     		});
     	});
     
-    	$('#editMinimi').on('click', (e)=>{
+    	$('#minimi').on('click', (e)=>{
     		
     		$('#section').html('');
     		
@@ -163,8 +200,10 @@
 					'memberId': memberId
 				},
 				success: data=>{
-					$('#today').children('span').text(data['today']);
-					$('#total').children('span').text(data['total']);
+					$('#today').next().children('span').text(data['today']);
+					$('#total').next().children('span').text(data['total']);
+					$('#requestFromCount').next().children('span').text(data['requestedFromCount']);
+					$('#board').next().children('span').text(data['newFeedCount']);
 				}
 			});
 		});  
