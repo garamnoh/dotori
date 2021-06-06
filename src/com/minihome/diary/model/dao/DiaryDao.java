@@ -225,6 +225,23 @@ public class DiaryDao {
 		return list;
 	}
 	
+	public int insertDiaryFolder(Connection conn, String name, String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertDiaryFolder"));
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
+	
 	////////////////////////////comment////////////////////
 	public int insertComment(Connection conn, DiaryComment dc) {
 		PreparedStatement pstmt=null;

@@ -89,6 +89,15 @@ public class DiaryService {
 		return list;
 	}
 	
+	public int insertDiaryFolder(String name, String id) {
+		Connection conn=getConnection();
+		int result=dao.insertDiaryFolder(conn, name, id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	////////////////////comment////////////////////////
 	public int insertComment(DiaryComment dc) {
 		Connection conn=getConnection();

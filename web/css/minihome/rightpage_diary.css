@@ -11,7 +11,7 @@
 	margin:auto;
 	/* border:1px solid; */
 }
-/***********************/
+/******다이어리 입력창********/
 #diary_input_box{
 	display:flex;		
 	height:115px;
@@ -88,7 +88,7 @@
 	border-radius: 40%;
 	margin:3px 0 3px 3px;
 }
-/***********************/
+/*******다이어리 출력창*******/
 #diary_content_box{
 	display:flex;
 	position:relative;
@@ -181,7 +181,7 @@
 	font-size: 13px;
 	margin:5px 5px 0 10px;
 }
-/*******comment********/
+/*******댓글********/
 .diary_comment_list{	
 	display:flex;
 	width:420px;
@@ -340,6 +340,11 @@
 	color:#747474;
 	cursor:pointer;	
 }
+
+/******폴더 수정창*******/
+
+
+
 /*******************/
 #pageBar{
 	margin:15px 0 0 0;
@@ -359,35 +364,5 @@
 	color:#747474;
 	cursor:pointer;
 	font-weight:bolder;
-}
-/******************************/
-/*********left_diary***********/
-#diary_folder_box{	
-	height:525px;
-	width:175px;
-	/* border:1px solid; */
-}
-#diary_folder_title{
-	width:175px;
-	height: 30px;
-	font-weight:bolder;
-	color:#67A3AD;
-	text-align:center;	
-	argin-top: 5px;
-}
-#diary_folder_list{
-	width:175px;
-	height:495px;		
-}
-#diary_folder_box ul{	
-	list-style:none;
-	/* cursor:pointer; */
-	padding-left:10px;
-	font-size: 12px;
-    line-height: 25px;
-}
-div ul li:hover{
-	color:#5D5D5D;
-	cursor:pointer;
 }
 
