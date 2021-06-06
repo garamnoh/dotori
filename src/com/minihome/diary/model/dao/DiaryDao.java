@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 public class DiaryDao {
 
@@ -198,6 +199,29 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return result;
+	}
+	
+	public List<DiaryFolderShare> folderShare(Connection conn, int no){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryFolderShare> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("folderShare"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryFolderShare dfs=new DiaryFolderShare();
+				dfs.setDiaryNo(rs.getInt("folder_no"));
+				dfs.setAllowedMember(rs.getString("ALLOWED_MEMBER"));
+				list.add(dfs);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
 	}
 	
 	////////////////////////////comment////////////////////

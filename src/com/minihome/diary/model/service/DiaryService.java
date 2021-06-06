@@ -12,6 +12,7 @@ import com.minihome.diary.model.dao.DiaryDao;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 public class DiaryService {
 
@@ -79,6 +80,13 @@ public class DiaryService {
 		int result=dao.selectDiaryFolderCount(conn);
 		close(conn);
 		return result;
+	}
+	
+	public List<DiaryFolderShare> folderShare(int no){
+		Connection conn=getConnection();
+		List<DiaryFolderShare> list=dao.folderShare(conn, no);
+		close(conn);
+		return list;
 	}
 	
 	////////////////////comment////////////////////////

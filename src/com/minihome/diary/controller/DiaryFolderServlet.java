@@ -10,7 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 /**
  * Servlet implementation class DiaryFolder
@@ -34,11 +34,26 @@ public class DiaryFolderServlet extends HttpServlet {
 		
 		response.setContentType("text/html;charset=utf-8");
 		
-		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));		
+		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));
+		String loginMemberId=request.getParameter("loginMemberId");
+		String hostMemberId=request.getParameter("hostMemberId");
 		
-		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
-		
-		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		List<DiaryFolderShare> list=new DiaryService().folderShare(diaryFolderLevel);
+				 
+		for(DiaryFolderShare dfs : list) {
+			if(dfs.getAllowedMember().equals(loginMemberId)) {
+				request.setAttribute("diaryFolderLevel", diaryFolderLevel);				
+				request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+				break;
+			}else {
+				String msg="내용을 입력하세요.";
+				request.setAttribute("msg", msg);
+				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
+				break;
+			}
+		}		
+		//request.setAttribute("diaryFolderLevel", diaryFolderLevel);		
+		//request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 	}
 
 	/**
