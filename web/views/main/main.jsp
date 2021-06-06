@@ -1,7 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import='com.member.model.vo.Member' %>
 <%
 	String admin = (String)session.getAttribute("admin");
+	String memberName = (String)((Member)session.getAttribute("loginMember")).getMemberName();
 %>
 <!DOCTYPE html>
 <html>
@@ -29,12 +31,12 @@
             	<% if(admin.equals("admin@gmail.com")) { %>
             		<span class='title box'>Admin</span>
 	            	<span class="title box">Home</span>
-	                <span class="title box">Friends</span>
+	                <span class="title box" id='friendBtn'>Friends</span>
 	                <span class="title box">Shop</span>
 	                <img class="title" id="miniHome" src="<%= request.getContextPath() %>/images/logo_minihome.png" alt="">
             	<% } else {%>
 	                <span class="title box">Home</span>
-	                <span class="title box">Friends</span>
+	                <span class="title box" id='friendBtn'>Friends</span>
 	                <span class="title box">Shop</span>
 	                <img class="title" id="miniHome" src="<%= request.getContextPath() %>/images/logo_minihome.png" alt="">
 	            <% } %>
@@ -69,14 +71,15 @@
 
 
 	<script>
-		const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
+ 		const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
 	
 		socket.onopen = (e)=>{
 			//alert('webSocket server 접속');
 			console.log(e);
 			console.log("socket open");
 		}
-	
+		
+		
 		$('.menu').click((e)=>{
 			
 			const menu = $(e.target).html();
@@ -194,6 +197,33 @@
 					
 					break;
 			}	
+		});
+
+		
+		
+		
+		
+		
+		
+		function Message(sender, receiver, msg, date){
+			this.sender = sender;
+			this.receiver = receiver;
+			this.msg = msg;
+			this.date = date;
+		}
+		
+		const memberName = '<%=memberName%>';
+		
+		$('#footer-info').on('click', ()=>{
+			var sendMsg = new Message(memberName, 'test', 'test', 'test');
+			socket.send(JSON.stringify(sendMsg));
+		});
+		
+		
+		$(document).ready(function(){
+			setTimeout(()=>{
+				$('#footer-info').trigger('click');
+			}, 2000);
 		});
 	</script>
 

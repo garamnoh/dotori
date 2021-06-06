@@ -21,55 +21,43 @@ import com.chat.model.vo.Message;
 public class ChattingServer {
 	
 //	private HashMap<String, Session> clients = new HashMap<String, Session>();
-
+	
 	@OnOpen
 	public void open(Session session, EndpointConfig config) {
+		
 		System.out.println("client 접속");
-		System.out.println(session.getId());
+		System.out.println(session);
+		System.out.println(config);
 	}
 	
 	@OnMessage
 	//public void message(Session session, String msg) {
-	public void message(Session session, Message curMsg) {
-//		System.out.println(msg);
+	public void message(Session session, Message data) {
 		
 		// client에 대한 정보 유지를 위해서
 		// session.getUserProperties().put()
-		// session.getUserProperties().put("msg", msg);	
-		// String[] msgData = msg.split(",");
+		session.getUserProperties().put("data", data);
 		
-//		Message curMsg = new Gson().fromJson(msg, Message.class);
-		
-		
-		System.out.println("curMsg : " + curMsg);
-		
-		session.getUserProperties().put("msg", curMsg);
-		//session.getUserProperties().put("msg", msg.split(",")); // sender msg
-		
-		
-//		clients.put(msg, session);
-		// 접속한 모든 세션에게 msg 전송
-		// 접속한 모든 세션관리는 List, Set, Map
-		// 접속한 모든 세션 가져오는 method : getOpenSessions() -> Set<Session>
+		// 접속한 모든 세션 정보 로드
 		Set<Session> clients = session.getOpenSessions();
+		
 		for(Session s : clients) {
-			Message clientData = (Message)s.getUserProperties().get("msg");
+
+			Message clientData = (Message)s.getUserProperties().get("data");
 			// 접속한 모든 session에 메세지 전송
 			try{
-				// 0번 : 보낸사람 / 1번 : 받는사람 / 2번 : message
+				// 0번 : 보낸사람 / 1번 : 받는사람 / 2번 : message / 3번 : 날짜
 				if(clientData != null 
-						&& (clientData.getSender().equals(curMsg.getReceiver())
-							|| clientData.getSender().equals(curMsg.getSender()))) {
+						// 특정 client?
+						&& (clientData.getSender().equals(data.getReceiver())
+								// 자기 자신?
+								|| clientData.getSender().equals(data.getSender()))) {
 					
-					// 보낸 사람이 받는 사람과 같으면
-					// 접속한 session 중 보낸 사람의 데이터가 현재 보낸진 메세지 받는 ㅅ람과 같은 session을 필터링
-//					s.getBasicRemote().sendText(msg);
-					s.getBasicRemote().sendObject(curMsg);
+					s.getBasicRemote().sendObject(data);
 					
-				} else if(clientData != null && curMsg.getReceiver().equals("")){
+				} else if(clientData != null && data.getReceiver().equals("")){
 					
-//					s.getBasicRemote().sendText(msg);
-					s.getBasicRemote().sendObject(curMsg);
+					s.getBasicRemote().sendObject(data);
 				}
 					
 				

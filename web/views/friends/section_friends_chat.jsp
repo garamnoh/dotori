@@ -192,13 +192,6 @@
 
 <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
 <script>
-<%-- 	const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
-
-	socket.onopen = (e)=>{
-		//alert('webSocket server 접속');
-		console.log(e);
-		console.log("socket open");
-	} --%>
 	
 	// 서버에서 전송한 데이터를 수신하고 페이지에 적용하는 함수
 	socket.onmessage = (e)=>{
@@ -212,37 +205,62 @@
 		let data = JSON.parse(e.data);
 		
 		let msg;
+		
 		if($('#sender').val()==data['sender']){
 			// 자신
-			const rootPath = '<%=request.getContextPath()%>';			
-			const imgPath = '<%=profilePath%>';
 			
-			msg  = "<div id='senderBox'>";
-			msg += "<div id='align'>";
-			msg += "<div id='nameBox'>";
-			//msg += "<span>나</span>";
-			//msg += "<span>"+ data['sender'] +"</span>";
-			msg += "<img src='" + rootPath + "/upload/MINIMI/" + imgPath + "'>";
-			msg += "</div>";
-			msg += "<div id='msgBox'>";
-			msg += data['msg'];
-			msg += "</div></div></div>";
-
+			if(data['date']=="거절") {
+				
+				alert(data['msg']);
+				
+			} else {
+				
+				const rootPath = '<%=request.getContextPath()%>';			
+				const imgPath = '<%=profilePath%>';
+				
+				msg  = "<div id='senderBox'>";
+				msg += "<div id='align'>";
+				msg += "<div id='nameBox'>";
+				//msg += "<span>나</span>";
+				//msg += "<span>"+ data['sender'] +"</span>";
+				msg += "<img src='" + rootPath + "/upload/MINIMI/" + imgPath + "'>";
+				msg += "</div>";
+				msg += "<div id='msgBox'>";
+				msg += data['msg'];
+				msg += "</div></div></div>";
+			}
+			
 		} else{
 			// 상대방
-			const rootPath = '<%=request.getContextPath()%>';			
-			const imgPath = $('#receiverProfilePath').val();
 			
-			msg  = "<div id='receiverBox'>";
-			msg += "<div id='align'>";
-			msg += "<div id='nameBox'>";
-			msg += "<img src='" + rootPath + "/upload/MINIMI/" + imgPath + "'>";
-			msg += "<span>"+ data['sender'] +"</span>";
-			msg += "</div>";
-			msg += "<div id='msgBox'>";
-			msg += data['msg'];
-			msg += "</div></div></div>";
+			if(data['date']=="요청"){
+				
+				if(confirm(data['msg'])){
+					
+					
+				} else {
+					
+					const reject = "채팅 요청을 거부하였습니다.";
+					
+					var sendMsg = new Message(data['receiver'], data['sender'], reject, "거절");
+					socket.send(JSON.stringify(sendMsg));
+				}
+				
+			} else{
 			
+				const rootPath = '<%=request.getContextPath()%>';			
+				const imgPath = $('#receiverProfilePath').val();
+				
+				msg  = "<div id='receiverBox'>";
+				msg += "<div id='align'>";
+				msg += "<div id='nameBox'>";
+				msg += "<img src='" + rootPath + "/upload/MINIMI/" + imgPath + "'>";
+				msg += "<span>"+ data['sender'] +"</span>";
+				msg += "</div>";
+				msg += "<div id='msgBox'>";
+				msg += data['msg'];
+				msg += "</div></div></div>";
+			}
 		}
 		$('#chatBody').append(msg);
 	}
@@ -253,7 +271,30 @@
 	}
 	
 	$('#sendMsg').click((e)=>{
+		
+		// 날짜 및 시간 //////////////////////////////////////////////////
+        function getFormatDate(date){
+            var year = date.getFullYear();              
+            var month = (1 + date.getMonth());          
+            month = month >= 10 ? month : '0' + month;  
+            var day = date.getDate();                   
+            day = day >= 10 ? day : '0' + day;          
+            return  year + '-' + month + '-' + day;       
+        }
 
+        function getFormatTime(date){
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            return hour + ":" + minute + ":" + second;
+        }
+        var today = getFormatDate(new Date());
+        var time = getFormatTime(new Date());
+        console.log(today, time);
+        
+        var date = today + " " + time;
+        ///////////////////////////////////////////////////////////////
+        
 		if($(e.target).prev().val()==''){
 
 			$('#sendAlert').slideDown();
@@ -262,15 +303,16 @@
 			}, 1000);
 		} 
 		else{
-			const sendMsg = new Message($('#sender').val(), $('#receiver').val(), $('#msg').val());
+			var sendMsg = new Message($('#sender').val(), $('#receiver').val(), $('#msg').val(), date);
 			socket.send(JSON.stringify(sendMsg));
 		}
 	})
 	
-	function Message(sender, receiver, msg){
+	function Message(sender, receiver, msg, date){
 		this.sender = sender;
 		this.receiver = receiver;
 		this.msg = msg;
+		this.date = date;
 	}
 	
 	$('#sendMsg').on('click', (e)=>{
