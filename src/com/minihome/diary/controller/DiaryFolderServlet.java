@@ -37,23 +37,22 @@ public class DiaryFolderServlet extends HttpServlet {
 		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
+		String shareLevel=request.getParameter("shareLevel");
 		
-		List<DiaryFolderShare> list=new DiaryService().folderShare(diaryFolderLevel);
-				 
-		for(DiaryFolderShare dfs : list) {
-			if(dfs.getAllowedMember().equals(loginMemberId)) {
-				request.setAttribute("diaryFolderLevel", diaryFolderLevel);				
-				request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
-				break;
-			}else {
-				String msg="내용을 입력하세요.";
-				request.setAttribute("msg", msg);
-				request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
-				break;
-			}
-		}		
-		//request.setAttribute("diaryFolderLevel", diaryFolderLevel);		
-		//request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		if(shareLevel.equals("FOLLOWERS")) {
+			
+		}else if(shareLevel.equals("FRIENDS")) {
+			List<DiaryFolderShare> list=new DiaryService().folderShare(diaryFolderLevel);
+			for(DiaryFolderShare dfs : list) {
+				if(dfs.getAllowedMember().equals(loginMemberId)) {	
+				
+				}			
+			}		
+		}
+		
+		request.setAttribute("diaryFolderLevel", diaryFolderLevel);				
+		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		
 	}
 
 	/**

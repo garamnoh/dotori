@@ -33,65 +33,10 @@
 	        </div>
 	    </div>
     <% } %>
-
-    
-    <style>
-    
-		.newFeed{
-		    width: 400px;
-		    height: auto;
-		    border: 1px solid #eee;
-		    margin-bottom: 20px;
-		}
-		
-		.newFeed>.user{
-		    padding: 10px;
-		    display: flex;
-		}
-		
-		.newFeed>.user>.userImg{
-		    width: 35px;
-		    border-radius: 50%;
-		    margin-right: 10px;
-		}
-		
-		.newFeed>.user>.userInfo{
-		    display: flex;
-		    flex-direction: column;
-		    justify-content: center;
-		    color: rgb(94, 94, 94);
-		    font-size: 15px;
-		}
-		
-		.newFeed>.user>.userInfo>.userName{
-			margin-bottom: 5px;
-			font-weight: 500;
-		}
-		
-		.newFeed>.image{
-		    width: 400px;
-		    height: auto;
-		}
-		
-		.newFeed>.contents{
-		    padding: 10px;
-		}
-		
-		.newFeed>.contents>img{
-		    width: 20px;
-		}
-		
-		.newFeed>.contents>div>p{
-		    font-size: 15px;
-		    font-weight: 300;
-		    line-height: 1.5;
-		}
-    
-    </style>
     
 
     <script>
-	    $('.contents>.like').on('click', (e)=>{
+	    $('.like').on('click', (e)=>{
 	        let unlike = '<%= request.getContextPath() %>/images/unlike.png'
 	        let like = '<%= request.getContextPath() %>/images/like.png'
 	        let src = $(e.target).attr('src');
