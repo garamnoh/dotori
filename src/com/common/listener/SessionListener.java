@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
 
 import com.chat.model.service.ChatService;
+import com.friend.model.service.FriendService;
 import com.member.model.vo.Member;
 
 /**
@@ -37,7 +38,8 @@ public class SessionListener implements HttpSessionAttributeListener {
     	System.out.println("삭제된 세션 이름 : " + se.getName() + "  세션 값 : " + se.getValue());
     	if(se.getName().equals("loginMember")) {
     		Member m = (Member)se.getValue();
-    		new ChatService().deleteLogedInInfo(m); 
+    		new ChatService().deleteLogedInInfo(m);
+    		new FriendService().lastLogDate(m.getMemberId());
     	}
     }
 

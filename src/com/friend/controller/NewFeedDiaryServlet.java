@@ -36,8 +36,6 @@ public class NewFeedDiaryServlet extends HttpServlet {
 		
 		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
-		System.out.println("다이어리 서블릿");
-		
 		int linePerPage = 10;
 		int page = Integer.parseInt(request.getParameter("page"));
 		

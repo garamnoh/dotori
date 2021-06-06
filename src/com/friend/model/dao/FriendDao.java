@@ -526,9 +526,58 @@ public class FriendDao {
 		return newFeed;
 	}
 	
+	public int lastLogDate(Connection conn, String memberId) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("lastLogDate"));
+			ps.setString(1, memberId);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
 	
-	
-	
+	public int newFeedCount(Connection conn, String memberId) {
+		
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		ResultSet rs1 = null;
+		ResultSet rs2 = null;
+		int newFeedCount = 0;
+		
+		try {
+			ps1 = conn.prepareStatement(prop.getProperty("newFeedCountD"));
+			ps1.setString(1, memberId);
+			
+			int newFeedCountD = 0;
+			int newFeedCountA = 0;
+			
+			rs1 = ps1.executeQuery();
+			if(rs1.next()) newFeedCountD = rs1.getInt(1);
+			
+			ps2 = conn.prepareStatement(prop.getProperty("newFeedCountA"));
+			ps2.setString(2, memberId);
+			
+			rs2 = ps2.executeQuery();
+			if(rs2.next()) newFeedCountA = rs2.getInt(1);
+			
+			newFeedCount = newFeedCountA + newFeedCountD;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs1);
+			close(ps1);
+		} return newFeedCount;
+	}
 	
 	
 	

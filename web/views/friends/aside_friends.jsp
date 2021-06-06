@@ -137,12 +137,15 @@
 	    	});
 	    });
 	    
+	    var isData;
+	    
 	    $('#logedInFriends').on('click', (e)=>{
 			
 	    	$('div.logedInMember').html('');
 	    	$.ajax({
 	    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
 	    		success: (data)=>{
+	    			isData = data['logedList'].length;
 	    			if(data['logedList'].length!=0){
 						$.each(data, (i, v)=>{
 							$.each(v, (i, v)=>{
@@ -164,32 +167,36 @@
 	    
 	    $('div.logedInMember').on('click', (e)=>{
 	    	
-    		$('#section').html('');
-	    	$.ajax({
-	    		url: '<%= request.getContextPath() %>/chat/chatScreen',
-	    		success: data=>{
-	    			console.log('socket : success');
-	    			$('#section').append(data);
-	    		}
-	    	}).done(()=>{
+	    	console.log(isData);
+	    	if(isData!=0){
 	    		
-		    	const receiverName = $(e.target).text();
-		    	console.log(receiverName);
-	    		
+	    		$('#section').html('');
 		    	$.ajax({
-		    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
-		    		success: (data)=>{
-		    			$.each(data, (i,v)=>{
-			    			if(v[0].memberName==receiverName) {
-			    				 const filePath = v[0].profilePath;
-			    				 $('#receiverProfilePath').val(filePath);
-			    			}
-		    			});
+		    		url: '<%= request.getContextPath() %>/chat/chatScreen',
+		    		success: data=>{
+		    			console.log('socket : success');
+		    			$('#section').append(data);
 		    		}
-		    	});
-		    	$('#receiver').val(receiverName);
-		    	$('#receiver').next().focus();
-		    });
+		    	}).done(()=>{
+		    		
+			    	const receiverName = $(e.target).text();
+			    	console.log(receiverName);
+		    		
+			    	$.ajax({
+			    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
+			    		success: (data)=>{
+			    			$.each(data, (i,v)=>{
+				    			if(v[0].memberName==receiverName) {
+				    				 const filePath = v[0].profilePath;
+				    				 $('#receiverProfilePath').val(filePath);
+				    			}
+			    			});
+			    		}
+			    	});
+			    	$('#receiver').val(receiverName);
+			    	$('#receiver').next().focus();
+			    });
+	    	}
     	});
 	    	
 

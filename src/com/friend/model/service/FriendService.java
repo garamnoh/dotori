@@ -117,4 +117,19 @@ public class FriendService {
 		close(conn);
 		return newFeed;
 	}
+	
+	public void lastLogDate(String memberId) {
+		Connection conn = getConnection();
+		int result = dao.lastLogDate(conn, memberId);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+	}
+	
+	public int newFeedCount(String memberId) {
+		Connection conn = getConnection();
+		int newFeedCount = dao.newFeedCount(conn, memberId);
+		close(conn);
+		return newFeedCount;
+	}
 }
