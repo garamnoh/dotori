@@ -18,9 +18,12 @@
 
 <style>
 	#title{
+		width: 775px;
 	    font-size: 20px;
-	    margin-top: 20px;
+	    margin-top: 30px;
 	    margin-bottom: 30px;
+	    border-bottom: 1px solid #eee;
+	    text-align: center;
 	}
 		
 	#editMinimiContainer{

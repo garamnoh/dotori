@@ -69,6 +69,14 @@
 
 
 	<script>
+		const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
+	
+		socket.onopen = (e)=>{
+			//alert('webSocket server 접속');
+			console.log(e);
+			console.log("socket open");
+		}
+	
 		$('.menu').click((e)=>{
 			
 			const menu = $(e.target).html();

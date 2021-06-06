@@ -39,9 +39,11 @@ public class RefreshInfoServlet extends HttpServlet {
 		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		Minihome info = new MemberService().refreshInfo(memberId);
 		int requestedFromCount = new FriendService().requestedFromInfo(memberId);
+		int newFeedCount = new FriendService().newFeedCount(memberId);
 		
 		JSONObject json = new JSONObject();
 		
+		json.put("newFeedCount", newFeedCount);
 		json.put("requestedFromCount", requestedFromCount);
 		json.put("today", info.getToday());
 		json.put("total", info.getTotal());

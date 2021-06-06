@@ -58,12 +58,15 @@
 	    text-align: center;
 	    font-size: 15px;
 	    font-weight: bold;
-   	    margin-top: 20px;
 	}
 	
 	#container_membersList>#title{
-	    font-size: 20px;
-	    margin-bottom: 30px;
+		width: 100%;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		padding-bottom: 5px;
+		font-weight: bold;
+		border-bottom: 1px solid #eee;
 	}
 	
 	#container_membersList>#searchContainer{

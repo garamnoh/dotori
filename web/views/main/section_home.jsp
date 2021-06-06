@@ -88,12 +88,15 @@
 	    padding: 10px;
 	    display: flex;
 	    border-bottom: 1px solid #eee;
+	    cursor: default;
 	}
 	
 	#newFeedDiary>.user>.userImg{
 	    width: 35px;
 	    border-radius: 50%;
 	    margin-right: 10px;
+   	    border: 2px solid #eee;
+	    padding: 2px;
 	}
 	
 	#newFeedDiary>.user>.userInfo{
@@ -102,6 +105,21 @@
 	    justify-content: center;
 	    color: rgb(94, 94, 94);
 	    font-size: 15px;
+	    margin-top: 3px;
+	}
+	
+	#newFeedDiary>.user>.userImg:hover,
+	#newFeedDiary>.user>.userInfo>.userName:hover{
+		opacity: .7;
+	}
+	
+	#newFeedDiary>.user>.userImg:active,
+	#newFeedDiary>.user>.userInfo>.userName:active{
+		opacity: 1;
+	}
+	
+	#newFeedDiary>.user>.userInfo>.userName{
+		margin-bottom: 5px;
 	}
 	
 	#newFeedDiary>.contents{
@@ -134,12 +152,27 @@
 	#newFeedAlbum>.user{
 	    padding: 10px;
 	    display: flex;
+	    cursor: default;
 	}
 	
 	#newFeedAlbum>.user>.userImg{
 	    width: 35px;
 	    border-radius: 50%;
 	    margin-right: 10px;
+	    border: 2px solid #eee;
+	    padding: 2px;
+	}
+	
+	#newFeedAlbum>.user>.userImg:hover,
+	#newFeedAlbum>.user>.userInfo>.userName:hover,
+	#newFeedAlbum>.user>.userInfo>.userTitle:hover{
+		opacity: .7;
+	}
+	
+	#newFeedAlbum>.user>.userImg:active,
+	#newFeedAlbum>.user>.userInfo>.userName:active,
+	#newFeedAlbum>.user>.userInfo>.userTitle:active{
+		opacity: 1;
 	}
 	
 	#newFeedAlbum>.user>.userInfo{
@@ -148,6 +181,7 @@
 	    justify-content: center;
 	    color: rgb(94, 94, 94);
 	    font-size: 15px;
+	    margin-top: 3px;
 	}
 	
 	#newFeedAlbum>.user>.userInfo>.userName{
@@ -215,7 +249,7 @@
 	    page++;
 	});
 
-	 
+	
 	function getDiaryList(page){
 		console.log(page);
 	    $.ajax({
@@ -230,6 +264,24 @@
 	            } else {
 	            	console.log('2페이지');
 	            	$("#contentResultDiary").append(data);
+	            }
+	       }
+	    });
+	}
+	
+	function getAlbumList(page){
+		
+	    $.ajax({
+	        url : '<%=request.getContextPath() %>/main/newFeedAlbum',
+	        data : {
+	        	'page': page
+	        },
+	        success : (data)=>{
+	        	console.log('diary page :', page);
+	            if (page==1) {
+	            	$("#contentResultAlbum").html(data);
+	            } else {
+	            	$("#contentResultAlbum").append(data);
 	            }
 	       }
 	    });
@@ -273,25 +325,6 @@
 	});
 	
 	
-	function getAlbumList(page){
-		
-	    $.ajax({
-	        url : '<%=request.getContextPath() %>/main/newFeedAlbum',
-	        data : {
-	        	'page': page
-	        },
-	        success : (data)=>{
-	        	console.log('diary page :', page);
-	            if (page==1) {
-	            	$("#contentResultAlbum").html(data);
-	            } else {
-	            	$("#contentResultAlbum").append(data);
-	            }
-	       }
-	    });
-	}
-	
-	
  	$('#contentResultDiary').scroll(function(){
    		var scrollT = $(this).scrollTop();
    		var scrollH = $(this).height();
@@ -300,7 +333,7 @@
    		console.log(scrollT);
    		console.log(scrollH);
    		console.log(contentH);
-    		
+   		
         if(scrollT + scrollH + 20 >= contentH) {
 		
         	$('#loading').show();

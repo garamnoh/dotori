@@ -110,16 +110,15 @@ body{
     bottom:600px;
 }
 .miniMenu li{
-    /* color:white; */
     position:relative;
     font-weight:bold;
     box-sizing:border-box;
     margin-bottom:10px;
     list-style-type:none;
-    width:80px;
+    width:75px;
     height:35px;
     text-align:center;
-    padding-top:8px;    
+    padding-top:8px;
     border-top-right-radius:5px;
     border-bottom-right-radius:5px;    
     border: solid 1px black;
@@ -137,22 +136,33 @@ body{
     background-color:#1E7FA2;
     cursor:pointer;
 }
-
-/* home left-page */
-
-/* home right-page */
-
-/* album left-page */
-
-/* album right-page */
-
-/* diary left-page */
-
-/* diary right-page */
-
-/* jukebox left-page */
-#jukeboxMenu>li{
-    cursor:pointer;
+#background-music-control-box{
+    border:1px solid black;
+    background-color:rgba(255, 255, 255, 0.6);
+    border-radius:5px;
+    position:absolute;
+    left:1000px;
+    top:50px;
+    font-weight:bold;
+    text-align:center;
+    padding-top:5px;
 }
-
-/* jukebox right-page */
+.audio-controller-box{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    width:180px;
+}
+.audio-controller-box>#replayMusic{
+    margin-left:5px;
+}
+#weatherBox{
+    border:1px solid black;
+    border-radius:5px;
+    position:absolute;
+    left:1060px;
+    top:600px;
+    background-color:rgba(255, 255, 255, 0.6);
+    font-size:11px;
+    font-weight:bold;
+}

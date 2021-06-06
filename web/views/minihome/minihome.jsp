@@ -16,17 +16,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=hostMember.getNickname()%>님의 미니홈피</title>
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
-	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>"> --%>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/default.css">
-	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/flower.css"> --%>
-	
-	<%-- <link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/minihome.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_album.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_album.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_diary.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_diary.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css"> --%>
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
 </head>
 <body>
     
@@ -48,31 +46,31 @@
             <li class="unselected">설정</li>
         </ul>
     </nav>
-    <div id="musicInfo" style="position:absolute;top:50px;left:1000px;background-color:white;font-weight:bolder;font-size:12px">
-        <%for(int i=0;i<musicList.size();i++) {%>
-            <span style="display:none;">
-                제목 : <%=musicList.get(i).getMusicTitle()%><br>가수 : <%=musicList.get(i).getSinger()%><br>
-            </span>
-            <input type="hidden" value="<%=i%>">
-        <%}%>
+    
+    <div id="background-music-control-box">
+	    <div id="musicInfo">
+	        <%for(int i=0;i<musicList.size();i++) {%>
+	            <span style="display:none;">
+	                <%=musicList.get(i).getMusicTitle()%><br>
+	                by <%=musicList.get(i).getSinger()%>
+	            </span>
+	            <input type="hidden" value="<%=i%>">
+	        <%}%>
+	    </div>
+	    <div class="audio-controller-box">
+	    	<img src="<%=request.getContextPath()%>/images/minihome/mute-icon.png" id="muteMusic" width="20px" onclick="fn_muteBackMusic();">
+			<img src="<%=request.getContextPath()%>/images/minihome/play-icon.png" id="playMusic" width="30px" onclick="fn_pauseBackMusic();">
+			<img src="<%=request.getContextPath()%>/images/minihome/pause-icon.png" id="pauseMusic" width="30px" onclick="fn_pauseBackMusic();">
+			<img src="<%=request.getContextPath()%>/images/minihome/playNext-icon.png" id="playNextMusic" width="30px" onclick="fn_playNext();">
+			<img src="<%=request.getContextPath()%>/images/minihome/playPrevious-icon.png" id="playPreviousMusic" width="30px" onclick="fn_playPrevious();">
+			<img src="<%=request.getContextPath()%>/images/minihome/replay-icon.png" id="replayMusic" width="20px" onclick="fn_replay();">
+		</div>
     </div>
-    <button onclick="fn_muteBackMusic();" style="position:absolute;top:100px;left:1000px;">음소거/해제</button>
-    <button onclick="fn_pauseBackMusic();" style="position:absolute;top:150px;left:1000px;">일시정지/해제</button>
-    <button onclick="fn_replay();" style="position:absolute;top:200px;left:1000px;">현재 곡 다시재생</button>
-    <button onclick="fn_playNext();" style="position:absolute;top:250px;left:1000px;">다음 곡 재생</button>
-    <button onclick="fn_playPrevious();" style="position:absolute;top:300px;left:1000px;">이전 곡 재생</button>
-    
-    <div id="airQualityBox" style="border:1px solid black;position:absolute;left:100px;top:400px;background-color:white;font-size:11px;">
-    
-    
-    </div>
-    
-    <div id="WeatherBox" style="border:1px solid black;position:absolute;left:1000px;top:550px;background-color:white;font-size:11px;">
+
+    <div id="weatherBox">
     	<ul style="list-style-type:none;position:relative;left:-30px;">
     		<li><img src="" id="weather_icon" width="20px"></li>
     		<li id="weather_main"></li>
-    		<li id="weather_description"></li>
-    		<li id="feels_like"></li>
     		<li id="temp"></li>
     		<li id="temp_max"></li>
     		<li id="temp_min"></li>

@@ -7,37 +7,56 @@
 	List<AlbumComment> commentList=(List<AlbumComment>)request.getAttribute("commentList");
 	String pageBar=(String)request.getAttribute("pageBar");
 %>
-<p>처음 들어갔을 때는 모든 사진을 보여주며, 폴더 변경을 할 수 없습니다</p>
-<p>왼쪽 폴더를 클릭하여 선택하면 각 폴더 안의 사진을 보여주며, 폴더 변경을 할 수 있습니다</p>
-<p>폴더를 삭제하면 그 안의 사진들은 '기본폴더'로 들어가며 기본폴더는 삭제할 수 없습니다</p>
 
-<%if(folder!=null) {%>
-	<select id="changeFolderTarget">
-		<%for(int i=0;i<folderList.size();i++) {%>
-			<option value="<%=folderList.get(i)%>"><%=folderList.get(i)%></option>
-		<%} %>
-	</select>
-	<input type="button" id="changeFolderBtn" value="폴더 변경">
-<%} %>
+<div class="album-controller">
+	<%if(folder!=null) {%>
+		<select id="changeFolderTarget">
+			<%for(int i=0;i<folderList.size();i++) {%>
+				<option value="<%=folderList.get(i)%>"><%=folderList.get(i)%></option>
+			<%} %>
+		</select>
+		<input type="button" id="changeFolderBtn" value="폴더 변경">
+	<%} %>
+	<div class="album-tooltip">?
+		<div class="album-tooltip-text">
+			<ol>
+				<li>처음 들어갔을 때는 모든 사진을 보여주며, 폴더 변경을 할 수 없습니다</li>
+				<li>왼쪽 폴더를 클릭하여 선택하면 각 폴더 안의 사진을 보여주며, 폴더 변경을 할 수 있습니다</li>
+				<li>폴더를 삭제하면 그 안의 사진들은 '기본폴더'로 들어가며 기본폴더는 삭제할 수 없습니다</li>
+			</ol>
+		</div>
+	</div>
+</div>
 
-<div id="albumBox" style="text-align:center;">
+<hr>
+
+<div id="albumBox">
 	<%for(int i=0;i<albumList.size();i++) {%>
-		<%if(folder!=null) {%>
-			<input type="checkbox">
-			<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-		<%} %>
-		<div style="border:1px solid black; padding:20px 20px; width:400px;">
-			<p><%=albumList.get(i).getTitle()%></p>
-			<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>" width="400px">
-			<p><%=albumList.get(i).getContent()%>
-			<p><%=albumList.get(i).getPostDate()%></p>
-			<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
+		<div class="photoBox">
+			<p class="photoTitle"><%=albumList.get(i).getTitle()%></p>
+			<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>">
+			<div class="photoContent">
+				<%=albumList.get(i).getContent()%>
+				<span class="photoPostDate"> [<%=albumList.get(i).getPostDate()%>]</span>
+			</div>
+			
+			<hr>
+			
+			<div class="buttonsInPhotoBox">
+				<%if(folder!=null) {%>
+					<input type="checkbox">
+					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+				<%} %>
+				<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
+				<input type="button" value="수정하기">
+			</div>
+		</div>
+		<div class="albumCommentBox" style="border:1px solid black;padding:20px 20px;width:400px;display:none;">
+			
 			<input type="text"><input type="button" value="댓글 달기" onclick="fn_insertComment(event);">
 			<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
 			<input type="hidden" value="0">
 			<input type="hidden" value="1">
-		</div>
-		<div style="border:1px solid black;padding:20px 20px;width:400px;display:none;">
 			<%for(int j=0;j<commentList.size();j++) {%>
 				<%if(commentList.get(j).getAlbumRef()==albumList.get(i).getImgNo()) {%>
 					<%if(commentList.get(j).getCommentLevel()==1) {%>
@@ -79,10 +98,6 @@
 <div id="pageBar">
 	<%=pageBar%>
 </div>
-
-<style>
-	#pageBar>a{color:blue;cursor:pointer;}
-</style>
 
 <input type="hidden" id="currentFolder" value="<%=folder%>">
 

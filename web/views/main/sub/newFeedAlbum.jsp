@@ -10,6 +10,7 @@
    	<% for(FeedAlbum f : newFeedAlbum){ %>
 	    <div class="newFeed" id='newFeedAlbum'>
 	        <div class="user">
+	        	<input type='hidden' value='<%=f.getMemberId()%>'>
 	            <img src="<%= request.getContextPath() %>/upload/MINIMI/<%=f.getProfilePath() %>" alt="" class="userImg">
 	            <div class="userInfo">
 	                <p class="userName"><%=f.getMemberName() %></p>
@@ -42,5 +43,33 @@
 	        let src = $(e.target).attr('src');
 	        let newSrc = src==unlike ? like : unlike;
 	        $(e.target).attr('src', newSrc); 
+	    });
+	    
+	    $('#contentResultAlbum .userImg').on('click', (e)=>{
+	    	const hostMemberId = $(e.target).prev().val();
+	    	
+			const minihomeWidth = 1200;
+			const minihomeHeight = 756;
+			const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+			const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+    		
+			//const status="width=1200px,height=756px,left=50px,top=50px";
+			const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+    		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+    		window.open(url,"",status);
+	    });
+	    
+	    $('#contentResultAlbum .userName').on('click', (e)=>{
+	    	const hostMemberId = $(e.target).parent().prev().prev().val();
+	    	
+			const minihomeWidth = 1200;
+			const minihomeHeight = 756;
+			const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+			const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+    		
+			//const status="width=1200px,height=756px,left=50px,top=50px";
+			const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+    		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+    		window.open(url,"",status);
 	    });
     </script>

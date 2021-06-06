@@ -63,4 +63,36 @@ public class JukeboxService {
 		return deleteAlbumResult;
 	}
 	
+	public int cleanJukeboxTable(String hostMemberId,String album) {
+		Connection conn=getConnection();
+		int cleanJukeboxTableResult=jukeboxDao.cleanJukeboxTable(conn,hostMemberId,album);
+		if(cleanJukeboxTableResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return cleanJukeboxTableResult;
+	}
+	
+	public int changePlaySeq(String hostMemberId,int musicNo,int playSeq) {
+		Connection conn=getConnection();
+		int changePlaySeqResult=jukeboxDao.changePlaySeq(conn,hostMemberId,musicNo,playSeq);
+		if(changePlaySeqResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return changePlaySeqResult;
+	}
+	
+	public int countMusicOnAlbum(String hostMemberId,String album) {
+		Connection conn=getConnection();
+		int countMusicOnAlbum=jukeboxDao.countMusicOnAlbum(conn,hostMemberId,album);
+		close(conn);
+		return countMusicOnAlbum;
+	}
+	
+	public int countMusic(String hostMemberId) {
+		Connection conn=getConnection();
+		int countMusic=jukeboxDao.countMusic(conn,hostMemberId);
+		close(conn);
+		return countMusic;
+	}
+	
 }

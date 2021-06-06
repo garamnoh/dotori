@@ -61,22 +61,21 @@
     
     <style>
 		.editContainer{
+		   width: 100%;
 		   display: flex;
 		   flex-direction: column;
 		   justify-content: center;
 		   align-items: center;
-		   margin: 30px;
 		}
 		
 		.editContainer .boxTitle{
-		   display: flex;
-		   justify-content: center;
-		   margin-bottom: 40px;
-		}
-		
-		.editContainer .boxTitle{
-		    font-size: 18px;
-		    font-weight: bold;
+			width: 100%;
+			margin-top: 30px;
+			margin-bottom: 30px;
+			padding-bottom: 5px;
+			font-weight: bold;
+			border-bottom: 1px solid #eee;
+			text-align: center;
 		}
 		
 		.editContainer .box>.title{

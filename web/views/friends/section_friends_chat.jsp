@@ -192,13 +192,13 @@
 
 <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
 <script>
-	const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
+<%-- 	const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
 
 	socket.onopen = (e)=>{
 		//alert('webSocket server 접속');
 		console.log(e);
 		console.log("socket open");
-	}
+	} --%>
 	
 	// 서버에서 전송한 데이터를 수신하고 페이지에 적용하는 함수
 	socket.onmessage = (e)=>{
