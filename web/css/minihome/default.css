@@ -136,22 +136,3 @@ body{
     background-color:#1E7FA2;
     cursor:pointer;
 }
-
-/* home left-page */
-
-/* home right-page */
-
-/* album left-page */
-
-/* album right-page */
-
-/* diary left-page */
-
-/* diary right-page */
-
-/* jukebox left-page */
-#jukeboxMenu>li{
-    cursor:pointer;
-}
-
-/* jukebox right-page */

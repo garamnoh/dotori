@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/mini_diary.css">
 <%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.ProfilePath" %>
 <%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment" %>
 <%

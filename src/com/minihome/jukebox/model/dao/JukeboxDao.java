@@ -150,4 +150,74 @@ public class JukeboxDao {
 		return deleteAlbumResult;
 	}
 	
+	public int cleanJukeboxTable(Connection conn,String hostMemberId,String album) {
+		PreparedStatement pstmt=null;
+		int cleanJukeboxTableResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cleanJukeboxTable"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,album);
+			pstmt.setString(3,hostMemberId);
+			pstmt.setString(4,album);
+			cleanJukeboxTableResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cleanJukeboxTableResult;
+	}
+	
+	public int changePlaySeq(Connection conn,String hostMemberId,int musicNo,int playSeq) {
+		PreparedStatement pstmt=null;
+		int changePlaySeqResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("changePlaySeq"));
+			pstmt.setInt(1,playSeq);
+			pstmt.setString(2,hostMemberId);
+			pstmt.setInt(3,musicNo);
+			changePlaySeqResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return changePlaySeqResult;
+	}
+	
+	public int countMusicOnAlbum(Connection conn,String hostMemberId,String album) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int countMusicOnAlbum=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("countMusicOnAlbum"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,album);
+			rs=pstmt.executeQuery();
+			if(rs.next()) countMusicOnAlbum=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return countMusicOnAlbum;
+	}
+	
+	public int countMusic(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int countMusic=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("countMusic"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) countMusic=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return countMusic;
+	}
+	
 }

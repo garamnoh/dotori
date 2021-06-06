@@ -27,9 +27,25 @@ public class MinihomeRightPageToJukeboxServlet extends HttpServlet {
 		String album=request.getParameter("album");
 		String targetFolder=request.getParameter("targetFolder");
 		String musicNoArrayStr=request.getParameter("musicNoArray");
+		String seqArrStr=request.getParameter("seqArrStr");
+		
+		System.out.println("서블릿에서 확인 : "+hostMemberId+" "+targetFolder+" "+musicNoArrayStr);
 		
 		if(musicNoArrayStr!=null) {
 			int changeFolderResult=jukeboxService.changeFolder(hostMemberId,targetFolder,musicNoArrayStr);
+		}
+		
+		if(album!=null) {
+			int cleanJukeboxTableResult=jukeboxService.cleanJukeboxTable(hostMemberId,album);
+		}
+		
+		if(seqArrStr!=null) {
+			String[] seqArr=seqArrStr.split(",");
+			for(int i=0;i<seqArr.length;i++) {
+				int musicNo=Integer.parseInt(seqArr[i].split("/")[0]);
+				int playSeq=Integer.parseInt(seqArr[i].split("/")[1]);
+				int changePlaySeqResult=jukeboxService.changePlaySeq(hostMemberId,musicNo,playSeq);
+			}
 		}
 		
 		List<String> albumList=jukeboxService.getMyAlbums(hostMemberId);

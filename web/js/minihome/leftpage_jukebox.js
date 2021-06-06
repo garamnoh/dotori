@@ -1,12 +1,20 @@
 document.getElementById("jukeboxMenu").addEventListener("click",(e)=>{
-    console.log("테스트테스트");
     $.ajax({
         url:contextPath+"/page/minihomeRightPageToJukebox.do",
         type:"post",
+        data:{"album":e.target.innerText.substring(0,e.target.innerText.indexOf("[")),"hostMemberId":hostMemberId},
         dataType:"html",
-        data:{"album":e.target.innerText,"hostMemberId":hostMemberId},
         success:(data)=>{
             $("#right-page").html(data);
+        }
+    });
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToJukebox.do",
+        type:"post",
+        data:{"hostMemberId":hostMemberId,"currentFolder":$(e.target).text().substring(0,$(e.target).text().indexOf("["))},
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
         }
     });
 });
@@ -24,7 +32,6 @@ document.getElementById("addAlbum").addEventListener("click",(e)=>{
 });
 
 document.getElementById("deleteAlbum").addEventListener("click",(e)=>{
-    console.log($("#albumForDelete").val());
     $.ajax({
         url:contextPath+"/page/minihomeLeftPageToJukebox.do",
         type:"post",

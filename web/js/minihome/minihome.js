@@ -142,3 +142,40 @@ var fn_weather=()=>{
 
 window.setTimeout(fn_weather,0);
 window.setInterval(fn_weather,60000);
+
+$("#playMusic").hover((e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/play_hover-icon.png");
+},(e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/play-icon.png");
+});
+
+
+$("#pauseMusic").hover((e)=>{
+		$(e.target).attr("src",contextPath+"/images/minihome/pause_hover-icon.png");
+},(e)=>{
+		$(e.target).attr("src",contextPath+"/images/minihome/pause-icon.png");
+});
+
+$("#replayMusic").hover((e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/replay_hover-icon.png");
+},(e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/replay-icon.png");
+});
+
+$("#playNextMusic").hover((e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/playNext_hover-icon.png");
+},(e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/playNext-icon.png");
+});
+
+$("#playPreviousMusic").hover((e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/playPrevious_hover-icon.png");
+},(e)=>{
+    $(e.target).attr("src",contextPath+"/images/minihome/playPrevious-icon.png");
+});
+
+$("#muteMusic").hover((e)=>{
+	$(e.target).attr("src",contextPath+"/images/minihome/mute_hover-icon.png");
+},(e)=>{
+	$(e.target).attr("src",contextPath+"/images/minihome/mute-icon.png");
+});
