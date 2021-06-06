@@ -274,13 +274,14 @@ public class DiaryDao {
 		return list;
 	}
 	
-	public int commentDelete(Connection conn, int commentNo, String commentWriter) {
+	//public int commentDelete(Connection conn, int commentNo, String commentWriter) {
+	public int commentDelete(Connection conn, int commentNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("commentDelete"));	
 			pstmt.setInt(1,  commentNo);
-			pstmt.setString(2, commentWriter);
+			//pstmt.setString(2, commentWriter);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

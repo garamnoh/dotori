@@ -33,7 +33,6 @@ public class DiaryDeleteServlet extends HttpServlet {
 		
 		Diary d=new Diary();
 		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		System.out.println(diaryNo);
 		String id=request.getParameter("loginMemberId");
 		d.setDiaryNo(diaryNo);
 		d.setWriter(id);

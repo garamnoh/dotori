@@ -72,6 +72,7 @@
 					<div id="diary_content_title">
 						<div id="diary_writer_container"><%=d.getMemberName()%></div>									
 						<div id="diary_date_container"><%=d.getPostDate() %></div>
+						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">	
 						<div id="diary_btn_container">
 							<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
 									|| loginMember.getMemberId().equals("admin@gmail.com")
@@ -131,6 +132,7 @@
 									</div>
 								<%} else if(dc.getCommentLevel()==2) {%>									
 									<div class="diary_reply_list">										
+										<input type="hidden" name="diary_comment_ref" value="<%=dc.getCommentNo()%>">
 										<div class="diary_reply_user"><%= dc.getWriterName()%></div>
 										<div class="diary_reply_content"><%=dc.getCommentContent() %></div>	
 										<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
@@ -143,6 +145,8 @@
 							<%} %>
 						<%} %>
 					</div>
+						
+					<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">						
 						
 					<!-- 대댓글달기 / 원글 댓글창 닫기-->
 					<div id="diary_co_comment_box" style="display:none">

@@ -32,9 +32,7 @@
 				"diaryFolderLevel":$(e.target).parent().next().val(),
 				"loginMemberId":$("input[name='loginMemberId']").val(),
 				"hostMemberId":$("input[name='hostMemberId']").val(),
-				"shareLevel":$("input[name='shareLevel']").val()
-				//"folder":$(e.target).html()
-				//"folder":$(e.target).val()
+				"shareLevel":$("input[name='shareLevel']").val()				
 			},
 			dataType:"html",
 			success:data=>{				

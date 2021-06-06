@@ -106,9 +106,11 @@ public class DiaryService {
 		return list;
 	}
 	
-	public int commentDelete(int commentNo, String commentWriter) {
+	//public int commentDelete(int commentNo, String commentWriter) {
+	public int commentDelete(int commentNo) {
 		Connection conn=getConnection();
-		int result=dao.commentDelete(conn, commentNo, commentWriter);
+		//int result=dao.commentDelete(conn, commentNo, commentWriter);
+		int result=dao.commentDelete(conn, commentNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

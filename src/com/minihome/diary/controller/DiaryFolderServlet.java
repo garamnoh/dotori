@@ -39,16 +39,15 @@ public class DiaryFolderServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		String shareLevel=request.getParameter("shareLevel");
 		
-		if(shareLevel.equals("FOLLOWERS")) {
-			
-		}else if(shareLevel.equals("FRIENDS")) {
-			List<DiaryFolderShare> list=new DiaryService().folderShare(diaryFolderLevel);
-			for(DiaryFolderShare dfs : list) {
-				if(dfs.getAllowedMember().equals(loginMemberId)) {	
-				
-				}			
-			}		
-		}
+		/*
+		 * if(shareLevel.equals("FOLLOWERS")) {
+		 * 
+		 * }else if(shareLevel.equals("FRIENDS")) { List<DiaryFolderShare> list=new
+		 * DiaryService().folderShare(diaryFolderLevel); for(DiaryFolderShare dfs :
+		 * list) { if(dfs.getAllowedMember().equals(loginMemberId)) {
+		 * 
+		 * } } }
+		 */
 		
 		request.setAttribute("diaryFolderLevel", diaryFolderLevel);				
 		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
