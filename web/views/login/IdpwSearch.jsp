@@ -38,11 +38,6 @@
 		color:black;
 	
 	}
-	div#a{
-	
-	
-	
-	}
 
 </style>
 
@@ -112,11 +107,15 @@
  	</div>
 	<button id="homebutton" onclick="location.href='<%=request.getContextPath()%>/'">홈으로</button>  
 	
+	</div>
+   
 </div>
-   
-   
 
-
+	<footer>
+		<div id='footer'>
+			<p id='footer-info'>라이센스. @ right. javajava footer dotori</p>
+		</div>
+	</footer>
 
     <!-- 외부 js파일 -->
     <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>

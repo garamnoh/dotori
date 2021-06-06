@@ -1,13 +1,15 @@
 #a{
    position: relative;
    top: 100px;
-   border: chartreuse 3px solid;
+   border: orange 2px solid;
+    border-radius: 10px;
 }
 
 #b{
    position: relative;
    top: 200px;
-   border: chartreuse 3px solid;
+   border: orange 2px solid;
+    border-radius: 10px;
 }
 
 #title{
@@ -49,3 +51,24 @@
    left: 400px;
  
 }
+body>footer{
+	width: 100%;
+	position: fixed;
+	bottom: -30px;
+	text-align: center;
+	transition: bottom .5s;
+}
+
+body>footer:hover{
+	bottom: 0px;
+}
+
+body>footer>#footer{
+	width: 100%;
+	background-color: rgb(225, 118, 75);
+}
+
+body>footer p{
+	padding: 10px;
+}
+

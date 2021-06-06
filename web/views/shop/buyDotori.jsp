@@ -1,9 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+ <%@ page import="com.member.model.vo.Member" %>
+<%
+	Member member = (Member)session.getAttribute("loginMember");
+%>
 <br>   <img id="dotori" src="<%=request.getContextPath()%>/images/shopDOTORI.png" >
 	    <span class="Title">도토리 충전</span>
 	 <br>
+	 
+	 <div id="userdotori"><%= member.getNickname() %>님 <br><br> 
+	 <img id="dotorisize" src="<%=request.getContextPath()%>/images/shopDOTORI.png" ><%=member.getDotori() %>개</div>
+	
+	
+	 <br>
+	 
 	 <div class="dotoriBuy">
 	 	<div class="dotoriBuy1">
 	 	<form>
@@ -96,6 +106,7 @@
 		    if(val.replace(/[0-9]/g, "").length > 0) {
 		        alert("숫자만 입력해 주십시오.");
 		        $(this).val('');
+		        document.getElementById("result").innerText = 0;
 		    }
 
 		    if(val > 1000) {
@@ -169,9 +180,20 @@
 	 position:relative;
 	      
 	       left :50px;
-	
-	
-	
-	
+	}
+	#userdotori{
+		 position:relative;
+	left:345px;
+	font-size:15px;
+	top:-40px;
+	width: 150px;
+   height: 50px;
+    
+    position:relative;
+	}
+	#dotorisize{
+	 width: 21px;
+	 height : 21px;
+	 vertical-align:bottom;
 	}
 	    </style>
