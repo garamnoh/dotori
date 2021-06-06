@@ -1,1 +1,119 @@
 @charset "UTF-8";
+.album-controller{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    align-items:center;
+    justify-content:flex-end;
+    margin-bottom:10px;
+}
+.album-controller>#changeFolderBtn{
+    margin-left:5px;
+    border:1px solid black;
+    background-color:white;
+    color:black;
+}
+.album-controller>#changeFolderBtn:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+.album-tooltip{
+    border:1px solid black;
+    box-sizing:border-box;
+    text-align:center;
+    width:23px;
+    height:23px;
+    background-color:white;
+    color:black;
+    margin-left:5px;
+    font-size:15px;
+    font-weight:bold;
+}
+.album-tooltip:hover{
+    cursor:pointer;
+    color:white;
+    background-color:black;
+}
+.album-tooltip-text{
+    text-align:left;
+    display:none;
+    position:absolute;
+    top:35px;
+    right:0;
+    width:300px;
+    height:auto;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+    border-radius:5px;
+    z-index:3;
+    padding-right:5px;
+}
+.album-tooltip-text>ol{
+    list-style-type:disc;
+    list-style-position:outside;
+    margin-left:-10px;
+}
+.album-tooltip-text>ol>li{
+    margin-top:5px;
+}
+.album-tooltip:hover .album-tooltip-text{
+    display:block;
+}
+#pageBar>a{
+    color:blue;cursor:pointer;
+}
+#albumBox{
+    display:flex;
+    flex-direction:column;
+    flex-wrap:nowrap;
+}
+#albumBox>.photoBox{
+    background-color:white;
+    border:1px solid gray;
+    width:390px;
+    margin:10px auto;
+}
+#albumBox>.photoBox>img{
+    margin-left:10px;
+    width:370px;
+}
+.photoTitle{
+    font-size:15px;
+    font-weight:bold;
+    text-align:center;
+}
+.photoContent{
+    margin:10px 20px;
+    margin-top:10px;
+}
+.photoPostDate{
+    font-weight:bold;
+}
+.buttonsInPhotoBox{
+    position:relative;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content:flex-end;
+}
+.buttonsInPhotoBox>input[type=checkbox]{
+    position:absolute;
+    left:10px;
+    top:4px;
+}
+.buttonsInPhotoBox>input[type=button]{
+    margin-right:10px;
+    margin-bottom:10px;
+    margin-top:3px;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+.buttonsInPhotoBox>input[type=button]:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}

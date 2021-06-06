@@ -1,1 +1,57 @@
 @charset "UTF-8";
+.albums li{
+    cursor:pointer;
+    list-style-image:url("../../images/minihome/folder-icon.png");
+    margin-bottom:15px;
+    margin-left:0;
+    font-size:15px;
+}
+.albums{
+    overflow:scroll;
+    margin-top:0;
+}
+.album-title{
+    margin-top:0;
+    font-weight:bolder;
+    font-size:30px;
+}
+#addAlbumFolderBox{
+    position:absolute;
+    bottom:70px;
+}
+#addAlbumFolderBox>input[type=button]{
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+#addAlbumFolderBox>input[type=button]:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+#deleteAlbumFolderBox{
+    position:absolute;
+    bottom:40px;
+}
+#deleteAlbumFolderBox>input[type=button]{
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+#deleteAlbumFolderBox>input[type=button]:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+#uploadPhotoBtn{
+    position:absolute;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+    bottom:105px;
+}
+#uploadPhotoBtn:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
