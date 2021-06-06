@@ -67,12 +67,10 @@
 		</div>
     </div>
 
-    <div id="WeatherBox" style="border:1px solid black;position:absolute;left:1000px;top:550px;background-color:white;font-size:11px;">
+    <div id="weatherBox">
     	<ul style="list-style-type:none;position:relative;left:-30px;">
     		<li><img src="" id="weather_icon" width="20px"></li>
     		<li id="weather_main"></li>
-    		<li id="weather_description"></li>
-    		<li id="feels_like"></li>
     		<li id="temp"></li>
     		<li id="temp_max"></li>
     		<li id="temp_min"></li>

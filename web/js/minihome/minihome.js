@@ -127,16 +127,11 @@ for(let i=0;i<musicList.length;i++) {
 
 var fn_weather=()=>{
 	$.getJSON("http://api.openweathermap.org/data/2.5/weather?id=1835848&appid=73edd4b639013a97891b5aa23d7d5d0d&units=metric",function(data){
-		console.log(data.coord);
-		console.log(data.weather);
-		console.log(data.main);
 		$("#weather_main").text("날씨 : "+data.weather[0].main);
-		$("#weather_description").text("설명 : "+data.weather[0].description);
 		$("#weather_icon").attr("src","http://openweathermap.org/img/wn/"+data.weather[0].icon+"@2x.png");
-		$("#feels_like").text("체감온도 : "+data.main.feels_like);
-		$("#temp").text("현재온도 : "+data.main.temp);
-		$("#temp_max").text("최고기온 : "+data.main.temp_max);
-		$("#temp_min").text("최저기온 : "+data.main.temp_min);
+		$("#temp").text("현재 : "+data.main.temp);
+		$("#temp_max").text("최고 : "+data.main.temp_max);
+		$("#temp_min").text("최저 : "+data.main.temp_min);
 	});
 } 
 
