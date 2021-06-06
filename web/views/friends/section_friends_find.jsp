@@ -21,9 +21,11 @@
 <style>
 	#title{
 		width: 100%;
-		font-size: 16px;
-		font-weight: 500;
-		margin: 20px 0;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		padding-bottom: 5px;
+		font-weight: bold;
+		border-bottom: 1px solid #eee;
 	}
 	
 	#content1{

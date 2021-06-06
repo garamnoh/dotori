@@ -1,6 +1,8 @@
-package com.member.controller;
+package com.friend.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,25 +10,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.json.simple.JSONObject;
-
 import com.friend.model.service.FriendService;
-import com.google.gson.Gson;
-import com.member.model.service.MemberService;
+import com.friend.model.vo.FeedAlbum;
 import com.member.model.vo.Member;
-import com.minihome.model.vo.Minihome;
 
 /**
- * Servlet implementation class RefreshInfoServlet
+ * Servlet implementation class NewFeedAlbumServlet
  */
-@WebServlet("/refreshInfo")
-public class RefreshInfoServlet extends HttpServlet {
+@WebServlet("/main/newFeedAlbum")
+public class NewFeedAlbumServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefreshInfoServlet() {
+    public NewFeedAlbumServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,18 +34,29 @@ public class RefreshInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
-		Minihome info = new MemberService().refreshInfo(memberId);
-		int requestedFromCount = new FriendService().requestedFromInfo(memberId);
+		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
-		JSONObject json = new JSONObject();
+		int linePerPage = 10;
+		int page = Integer.parseInt(request.getParameter("page"));
+
+		int startNum;
+		int endNum;
 		
-		json.put("requestedFromCount", requestedFromCount);
-		json.put("today", info.getToday());
-		json.put("total", info.getTotal());
+		if(page == 1) {
+			startNum = 1;
+			endNum = 10;
+		} else {
+			startNum = ((page-1)*linePerPage) + 1;
+			endNum = page * linePerPage;
+		}
 		
-		response.setContentType("application/json;charset=utf-8;");
-		new Gson().toJson(json, response.getWriter());
+		HashMap<String, Object> newFeed = new FriendService().newFeed(myId, startNum, endNum);
+
+		ArrayList<FeedAlbum> feedAlbum = (ArrayList<FeedAlbum>)newFeed.get("feedAlbum");
+		for(FeedAlbum f: feedAlbum) System.out.println(f);
+		
+		request.setAttribute("newFeed", newFeed);
+		request.getRequestDispatcher("/views/main/sub/newFeedAlbum.jsp").forward(request, response);
 	}
 
 	/**

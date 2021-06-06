@@ -35,7 +35,9 @@ public class RequestedListServlet extends HttpServlet {
 		
 		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		ArrayList<Friend> requestedList = new FriendService().requestedList(memberId);
+		ArrayList<Friend> requestToList = new FriendService().requestToList(memberId);
 		
+		request.setAttribute("requestToList", requestToList);
 		request.setAttribute("requestedList", requestedList);
 		request.getRequestDispatcher("/views/friends/section_friends_recommend.jsp").forward(request, response);;
 	}

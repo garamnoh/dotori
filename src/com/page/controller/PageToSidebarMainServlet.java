@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 
 @WebServlet("/page/sidebarMain")
@@ -21,6 +22,13 @@ public class PageToSidebarMainServlet extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
+		
+		String myId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		String profilePath = new MemberService().getProfilePath(myId);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("profilePath", profilePath);
+		
 		request.getRequestDispatcher("/views/main/aside_home.jsp").forward(request,response);
 	}
 

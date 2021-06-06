@@ -7,6 +7,7 @@ import static com.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import com.friend.model.dao.FriendDao;
 import com.friend.model.vo.Friend;
@@ -21,6 +22,13 @@ public class FriendService {
 		ArrayList<Friend> requestedList = dao.requestedList(conn, memberId);
 		close(conn);
 		return requestedList;
+	}
+	
+	public ArrayList<Friend> requestToList(String memberId){
+		Connection conn = getConnection();
+		ArrayList<Friend> requestToList = dao.requestToList(conn, memberId);
+		close(conn);
+		return requestToList;
 	}
 	
 	public ArrayList<Friend> friendsList(String memberId){
@@ -55,4 +63,58 @@ public class FriendService {
 		return resultList;
 	}
 	
+	public int requestTo(String memberId, String requestTo) {
+		Connection conn = getConnection();
+		int result = dao.requestTo(conn, memberId, requestTo);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int reject(String memberId, String reject) {
+		Connection conn = getConnection();
+		int result = dao.reject(conn, memberId, reject);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int cancel(String memberId, String cancel) {
+		Connection conn = getConnection();
+		int result = dao.cancel(conn, memberId, cancel);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int requestedFromInfo(String memberId) {
+		Connection conn = getConnection();
+		int requestedFromCount = dao.requestedFromCount(conn, memberId);
+		close(conn);
+		return requestedFromCount;
+	}
+	
+	public int feedAlbumCount() {
+		Connection conn = getConnection();
+		int feedAlbumCount = dao.feedAlbumCount(conn);
+		close(conn);
+		return feedAlbumCount;
+	}
+	
+	public int feedDiaryCount() {
+		Connection conn = getConnection();
+		int feedDiaryCount = dao.feedDiaryCount(conn);
+		close(conn);
+		return feedDiaryCount;
+	}
+	
+	public HashMap<String, Object> newFeed(String myId, int startNum, int endNum) {
+		Connection conn = getConnection();
+		HashMap<String, Object> newFeed = dao.newFeed(conn, myId, startNum, endNum);
+		close(conn);
+		return newFeed;
+	}
 }

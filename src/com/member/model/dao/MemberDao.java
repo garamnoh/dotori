@@ -343,5 +343,24 @@ public class MemberDao {
 		} return info;
 	}
 	
-	
+	public String getProfilePath(Connection conn, String myId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		String profilePath = null;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("getProfilePath"));
+			ps.setString(1, myId);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) profilePath = rs.getString("PROFILE_PATH");
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return profilePath;
+	}
 }

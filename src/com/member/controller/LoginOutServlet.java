@@ -2,7 +2,6 @@ package com.member.controller;
 
 import java.io.IOException;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import com.member.model.service.MemberService;
+import com.chat.model.service.ChatService;
 import com.member.model.vo.Member;
 
 /**
@@ -36,7 +35,9 @@ public class LoginOutServlet extends HttpServlet {
 		//로그아웃-> session 값을 삭제 invalidate();
 		HttpSession session=request.getSession(false);
 		if(session!=null) {
+			Member m = (Member)session.getAttribute("loginMember");
 			session.invalidate();
+			new ChatService().deleteLogedInInfo(m);
 		}
  		response.sendRedirect(request.getContextPath());
  		

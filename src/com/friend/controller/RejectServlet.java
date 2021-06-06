@@ -1,4 +1,4 @@
-package com.member.controller;
+package com.friend.controller;
 
 import java.io.IOException;
 
@@ -12,21 +12,19 @@ import org.json.simple.JSONObject;
 
 import com.friend.model.service.FriendService;
 import com.google.gson.Gson;
-import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.minihome.model.vo.Minihome;
 
 /**
- * Servlet implementation class RefreshInfoServlet
+ * Servlet implementation class RejectServlet
  */
-@WebServlet("/refreshInfo")
-public class RefreshInfoServlet extends HttpServlet {
+@WebServlet("/friends/reject")
+public class RejectServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public RefreshInfoServlet() {
+    public RejectServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -36,15 +34,13 @@ public class RefreshInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		String reject = request.getParameter("reject");
 		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
-		Minihome info = new MemberService().refreshInfo(memberId);
-		int requestedFromCount = new FriendService().requestedFromInfo(memberId);
+		
+		int result = new FriendService().reject(memberId, reject);
 		
 		JSONObject json = new JSONObject();
-		
-		json.put("requestedFromCount", requestedFromCount);
-		json.put("today", info.getToday());
-		json.put("total", info.getTotal());
+		json.put("result", result);
 		
 		response.setContentType("application/json;charset=utf-8;");
 		new Gson().toJson(json, response.getWriter());

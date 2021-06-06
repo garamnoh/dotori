@@ -3,45 +3,55 @@
 <%@ page import="com.friend.model.vo.Friend, java.util.ArrayList" %>
 <%
 	ArrayList<Friend> requestedList = (ArrayList<Friend>)request.getAttribute("requestedList");
+	ArrayList<Friend> requestToList = (ArrayList<Friend>)request.getAttribute("requestToList");
 %>
 
-<p id='title'>친구추천</p>
+<p id='title'>신청현황</p>
 
-<div id='content1'>
-	<div id='propose'>
-		<p>일촌 신청한 친구</p>
-		<% if(requestedList != null){ %>
-			<% for(Friend f : requestedList){ %>
-				<div id='detail'>
-					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
-					<div id='person'>
-						<span><%=f.getFollowerProfileName() %></span>
-						<span><%=f.getFollowerProfilePhone() %></span>
-						<span id='followerId'><%=f.getFollower() %></span>
+<div id='contentScroll'>
+	<div id='content1'>
+		<div id='propose'>
+			<p>일촌 신청받은 친구</p>
+			<% if(requestedList != null){ %>
+				<% for(Friend f : requestedList){ %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
+						<div id='person'>
+							<span><%=f.getFollowerProfileName() %></span>
+							<span><%=f.getFollowerProfilePhone() %></span>
+							<span id='followerId'><%=f.getFollower() %></span>
+						</div>
+						<div id='buttons'>
+							<button id='minihome'>Mini</button>
+							<button id='accept'>수락</button>
+							<button id='reject'>거절</button>
+						</div>
 					</div>
-					<div id='buttons'>
-						<button id='accept'>수락</button>
-						<button id='reject'>거절</button>
-					</div>
-				</div>
+				<% } %>
 			<% } %>
-		<% } %>
+		</div>
 	</div>
-</div>
-<div id='content2'>
-	<div id='friends'>
-		<p>친구 추천</p>
-		<div id='detail'>
-			<img src='<%=request.getContextPath() %>/images/profile_img_default.png'>
-			<div id='person'>
-				<span>이름</span>
-				<span>전화번호</span>
-				<span>이메일</span>
-			</div>
-			<div id='buttons'>
-				<button id='minihome'>수락</button>
-				<button id='delete'>삭제</button>
-			</div>
+	<div id='content2'>
+		<div id='friends'>
+			<p>일촌 신청한 친구</p>
+			<% if(requestToList != null){ %>
+				<% for(Friend f : requestToList){ %>
+					<div id='detail'>
+						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
+						<div id='person'>
+							<span><%=f.getFollowerProfileName() %></span>
+							<span><%=f.getGender() %></span>
+							<span><%=f.getBirth() %></span>
+							<span><%=f.getAddress().substring(0, 2) %></span>
+						</div>
+						<div id='buttons'>
+							<input type='hidden' value='<%=f.getFollowee() %>'>
+							<button id='minihome'>Mini</button>
+							<button id='cancel'>신청중</button>
+						</div>
+					</div>
+				<% } %>
+			<% } %>
 		</div>
 	</div>
 </div>
@@ -49,9 +59,17 @@
 <style>
 	#title{
 		width: 100%;
-		font-size: 16px;
-		font-weight: 500;
-		margin: 20px 0;
+		margin-top: 30px;
+		margin-bottom: 30px;
+		padding-bottom: 5px;
+		font-weight: bold;
+		border-bottom: 1px solid #eee;
+	}
+	
+	#contentScroll{
+		width: 100%;
+		height: 88%;
+		overflow: scroll;
 	}
 	
 	#content1,
@@ -101,7 +119,8 @@
 		margin: 0 50px;
 	}
 	
-	#content1>#propose>#detail>#buttons>button,
+	#content1>#propose>#detail>#buttons>button#minihome,
+	#content1>#propose>#detail>#buttons>button#accept,
 	#content2>#friends>#detail>#buttons>button{
 		background-color: #eee;
 		border: none;
@@ -113,8 +132,20 @@
 		font-weight: 700;
 	}
 	
+	#content1>#propose>#detail>#buttons>button#reject{
+		background-color: tomato;
+		border: none;
+		border-radius: 5px;
+		width: 80px;
+		height: 30px;
+		margin-left: 10px;
+		font-size: 12px;
+		font-weight: 700;
+	}
+	
 	#content1>#propose>#detail>#buttons>#delete,
-	#content2>#friends>#detail>#buttons>#delete{
+	#content2>#friends>#detail>#buttons>#delete,
+	#content2>#friends>#detail>#buttons>#cancel{
 		background-color: tomato;
 	}
 	
@@ -144,30 +175,93 @@
 				console.log(result);
 				if(result > 0){
 					alert('일촌 수락 완료');
-					$(e.target).parent().parent().html("<p id='delP'>일촌이 수락완료</p><style>#delP{margin: 12px 0;width:100%;text-align:center;color:teal;font-size:14px;}</style>");
+					$(e.target).parent().parent().css('border', '1px solid teal');
 					setTimeout(()=>{
-						$('#delP').parent().animate({height:0,opacity:0}, 500);
-						$('#delP').animate({opacity:0}, 500);
-					}, 2000);
+						$(e.target).parent().parent().slideUp(500);
+					}, 1000);
 				}
 				else alert('일촌 수락 실패');
 			}
 		});
 	});
+	
+	$('#propose #reject').on('click', (e)=>{
+		const reject = $(e.target).parent().prev().children('span#followerId').text();
+		
+		if(confirm('일촌신청을 거절하시겠습니까?')){
+			
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/reject',
+				data: {
+					'reject': reject,
+				},
+				success: (data)=>{
+					const result = data['result'];
+					if(result > 0){
+						$(e.target).parent().parent().css('border', '1px solid tomato');
+						setTimeout(()=>{
+							$(e.target).parent().parent().slideUp(500);
+						}, 1000);
+					}
+					else alert('일촌 거부 실패');
+				}
+			});
+		}
+	});
+	
+	$('#friends #cancel').on('click', (e)=>{
+		const cancel = $(e.target).prev().prev().val();
+		console.log(cancel);
+		if(confirm('취소?')){
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/cancel',
+			data: {
+				'cancel': cancel,
+			},
+			success: (data)=>{
+				const result = data['result'];
+				if(result > 0){
+					$(e.target).parent().parent().css('border', '1px solid tomato');
+					setTimeout(()=>{
+						$(e.target).parent().parent().slideUp(500);
+					}, 1000);
+				}
+				else alert('신청 취소 실패');
+			}
+		}); }
+	});
+	
+	$('#propose #minihome').on('click', (e)=>{
+		const hostMemberId = $(e.target).parent().prev().children('span#followerId').text();
+
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+	});
+	
+	$('#friends #minihome').on('click', (e)=>{
+		const hostMemberId = $(e.target).parent().prev().children('span#followeeId').text();
+
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+	});
+	
+	
 </script>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

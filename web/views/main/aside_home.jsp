@@ -8,7 +8,6 @@
     
     <div class="profile">
     	<img id='minimi' src="<%= request.getContextPath() %>/upload/MINIMI/<%= profilePath %>" alt="">
-    	<span id="editMinimi">MINIMI</span>
     </div>
     
     <div class="info">
@@ -20,7 +19,7 @@
         <div id="total">Total : <span></span>명</div>
         <hr>
         <div id="board">New Feed : 10</div>
-        <div id="request">일촌 신청 : 5</div>
+        <div id="requestFromCount">일촌 신청 : <span></span>명</div>
         <div id="editBox">
 			<button id="editBtn">Edit Profile</button>
 		</div>
@@ -51,6 +50,14 @@
 		    justify-content: center;
 		    align-items: center;
 		    position: relative;
+		}
+		
+		.profile:hover{
+			opacity: 0.7;
+		}
+		
+		.profile:active{
+			opacity: 1;
 		}
 
 		.profile>img{
@@ -106,7 +113,7 @@
 		.info>div#logoutBox button#logout,
 		.info>div#editBox button#editBtn{
 			background-color: #eee;
-			opacity: 0.4;
+			opacity: 1;
 			border: none;
 			border: 1px #eee solid;
 			width: 100%;
@@ -141,7 +148,7 @@
     		});
     	});
     
-    	$('#editMinimi').on('click', (e)=>{
+    	$('#minimi').on('click', (e)=>{
     		
     		$('#section').html('');
     		
@@ -165,6 +172,7 @@
 				success: data=>{
 					$('#today').children('span').text(data['today']);
 					$('#total').children('span').text(data['total']);
+					$('#requestFromCount').children('span').text(data['requestedFromCount']);
 				}
 			});
 		});  
