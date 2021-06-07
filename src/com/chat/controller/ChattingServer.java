@@ -26,14 +26,13 @@ public class ChattingServer {
 	public void open(Session session, EndpointConfig config) {
 		
 		System.out.println("client 접속");
-		System.out.println(session);
-		System.out.println(config);
 	}
 	
 	@OnMessage
 	//public void message(Session session, String msg) {
 	public void message(Session session, Message data) {
 		
+		System.out.println("서버 메시지");
 		// client에 대한 정보 유지를 위해서
 		// session.getUserProperties().put()
 		session.getUserProperties().put("data", data);
@@ -46,7 +45,7 @@ public class ChattingServer {
 			Message clientData = (Message)s.getUserProperties().get("data");
 			// 접속한 모든 session에 메세지 전송
 			try{
-				// 0번 : 보낸사람 / 1번 : 받는사람 / 2번 : message / 3번 : 날짜
+				// 0번 : 보낸사람 / 1번 : 받는사람 / 2번 : message / 3번 : 날짜 / 4번 : 타입
 				if(clientData != null 
 						// 특정 client?
 						&& (clientData.getSender().equals(data.getReceiver())
