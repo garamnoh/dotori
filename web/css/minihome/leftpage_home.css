@@ -1,1 +1,56 @@
 @charset "UTF-8";
+
+#feelingBox{	
+	width:180px;
+	height:40px;
+	margin: 0 0 5px 0;
+}
+
+#feelingImg{	
+	display:inline-block;
+	position:absolute;
+	width:40px;
+	height:40px;
+	margin: 0 0 0 13px;
+	border-radius:5px;
+	/* border:1px solid; */
+}
+
+#selectFeeling{
+	position: absolute;    
+    margin: -10px 0 0 65px;
+    width: 100px;
+    height: 30px;
+}
+#selectFeelingBox{
+	display:inline-block;
+}
+
+#profileContent{
+	resize:none;
+	width: 175px;
+    height: 150px;
+}
+#prifileImgBox{
+	width:180px;
+    height: 230px;
+    margin: 0 0 15px 0;
+	border:1px solid;
+	vertical-align: middle;
+}
+#prifileImgBox img{
+	display:block;
+	margin-top:auto;
+	margin-bottom:auto;
+}
+#updateProfileContentBtn{	 
+	width:70px;
+	height:20px;
+	font-weight:bolder;	
+	text-align:center;		
+	cursor: pointer;	
+    margin: 80px 0 0 108px;
+}
+#updateProfileContentBtn:hover{
+	color:#747474;
+}
