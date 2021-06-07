@@ -288,7 +288,9 @@ private Properties prop=new Properties();
 			for(int i=0;i<bitemNo.size();i++) {
 				pstmt.setString(1, id);
 				pstmt.setString(2, bitemNo.get(i));
+				
 				bResultInput+=pstmt.executeUpdate();
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -303,11 +305,12 @@ private Properties prop=new Properties();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("cGetItemShoppingList"));
 			for(int i=0;i<citemNo.size();i++) {
+				System.out.println("디에이오 넘버 테스트 : "+citemNo.get(i));
 				pstmt.setString(1, id);
 				pstmt.setString(2, citemNo.get(i));
-				pstmt.setString(3, id);
-				pstmt.setString(4, citemNo.get(i));
+				pstmt.setString(3, "기본엘범");
 				cResultInput+=pstmt.executeUpdate();
+				System.out.println("디에이오 테스트 : "+cResultInput);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

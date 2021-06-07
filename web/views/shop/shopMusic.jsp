@@ -17,6 +17,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 		<table id="MusicTable">
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<tr>
+		<%if(3*i<list.size()) {%>
 			<td>
 			<div class="productMusic">
 				<div class="MusicPicture">
@@ -35,6 +36,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
                 </div>
 			</div>
 			</td>
+			<%} %>
 			<%if(3*i+1<list.size()) {%>
 			<td>
 			<div class="productMusic">

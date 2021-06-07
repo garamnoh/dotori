@@ -141,15 +141,18 @@
 		let aCheck=new Array();
 		document.querySelectorAll(".aShopbasketCheck").forEach((v,i)=>{
 			if($(v).prop("checked")) aCheck.push($(v).next().val());
+			console.log("a "+$(v).next().val());
 		});
 		
 		let bCheck=new Array();
 		document.querySelectorAll(".bShopbasketCheck").forEach((v,i)=>{
 			if($(v).prop("checked")) bCheck.push($(v).next().val());
+			console.log("b "+$(v).next().val());
 		});
 		let cCheck=new Array();
 		document.querySelectorAll(".cShopbasketCheck").forEach((v,i)=>{
 			if($(v).prop("checked")) cCheck.push($(v).next().val());
+			console.log("c "+$(v).next().val());
 		});
 		
 		$.ajax({

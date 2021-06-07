@@ -79,7 +79,7 @@ private ShopDao dao= new ShopDao();
 	}
 	public int bGetItemShoppingList(String id,List<String> bitemNo) {
 		Connection conn=getConnection();
-		int bResultIntput=dao.aGetItemShoppingList(conn,id,bitemNo);
+		int bResultIntput=dao.bGetItemShoppingList(conn,id,bitemNo);
 		if(bResultIntput>0) commit(conn);
 		else rollback(conn);
 		close(conn);
@@ -87,7 +87,7 @@ private ShopDao dao= new ShopDao();
 	}
 	public int cGetItemShoppingList(String id,List<String> citemNo) {
 		Connection conn=getConnection();
-		int cResultInput=dao.aGetItemShoppingList(conn,id,citemNo);
+		int cResultInput=dao.cGetItemShoppingList(conn,id,citemNo);
 		if(cResultInput>0) commit(conn);
 		else rollback(conn);
 		close(conn);

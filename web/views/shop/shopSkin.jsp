@@ -16,6 +16,7 @@ String result=(String)request.getAttribute("result");
 		<table id=SkinTable>
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<tr>
+			<%if(3*i<list.size()) {%>
 			<td>
 			<div class="productSkin">
 				<div class="SkinPicture">
@@ -34,6 +35,7 @@ String result=(String)request.getAttribute("result");
                 </div>
 			</div>
 			</td>
+			<%} %>
 			<%if(3*i+1<list.size()) {%>
 			<td>
 			<div class="productSkin">
@@ -63,7 +65,7 @@ String result=(String)request.getAttribute("result");
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*1+2).getItemNo() %>">
+                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+2).getSkinTitle() %></b></li>
