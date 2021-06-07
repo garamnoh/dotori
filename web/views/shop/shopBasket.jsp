@@ -103,7 +103,7 @@
 		</div>
 	
 		<div class="basketButtons">
-			<button>선물하기</button><button>도토리 충전하기</button><button>결제하기</button>
+			<input type="button" value="선물하기"><button>도토리 충전하기</button><button>결제하기</button>
 		</div>
 	</div>
 	
