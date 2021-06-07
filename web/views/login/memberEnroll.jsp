@@ -75,11 +75,11 @@
         </div> 
        
     <div id="name">
-        이름 <br>	 <input type="text" required name="memberName" id=memberName> 
+        이름 <br>	 <input type="text" required name="memberName" id=memberName required> 
     </div>
 
 	  <div id="ninkname1">
-        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최소 2글자 ~최대 10글자" name="nickname" id= "nickname" > 
+        닉네임 <br>	 <input type="text" maxlength="10" placeholder="최소 2글자 ~최대 10글자" name="nickname" id= "nickname" required > 
         <button type="button" onclick="fn_duplicateNickname();">확인</button>  
     </div>
 	<br>
@@ -317,17 +317,23 @@
 
             	   
                }
-                        /*     $("#phone").blur((e)=>{ 
+     /* 		 $("#phone").keyup((e)=>{ 
                
 	 		const phone =$("#phone").val();
-  			const regExphone = /^\d{3}\d{3,4}\d{4}$/;
+  			const regExphone =/^\d{3}\d{3,4}\d{4}$/;
   			if(!regExphone.test($("input[id='phone']").val())) {
   				alert("전화번호 형식이 올바르지 않습니다.");
   				
   			}; 
              }); */
-  			
-			
+             $(document).on("keyup", "input[name^=phone]", function() {
+     		    var val= $(this).val();
+
+     		    if(val.replace(/[0-9]/g, "").length > 0) {
+     		        alert("핸드폰번호를 입력해주세요");
+     		        $(this).val('');
+     		    }
+         	});
    </script>
    <!-- <script src="http://dmaps.daum.net/map_js_init/postcode.v2.js"></script>
    <script>
