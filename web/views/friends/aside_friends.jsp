@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+	String sender = (String)request.getAttribute("sender");
+%>
     
     <div class="menuOption">
         <div id="optionTitle">Friend</div>
@@ -167,8 +170,15 @@
 	    
 	    $('div.logedInMember').on('click', (e)=>{
 	    	
+	    	const sender = '<%=sender%>';
+	    	const receiver = $(e.target).text();
+	    	const invite = sender+"님이 채팅을 요청했습니다.";
+	    	
 	    	console.log(isData);
 	    	if(isData!=0){
+	    		
+				var sendMsg = new Message(sender, receiver, invite, "요청");
+				socket.send(JSON.stringify(sendMsg));
 	    		
 	    		$('#section').html('');
 		    	$.ajax({

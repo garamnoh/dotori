@@ -1,7 +1,6 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.DiaryFolderShare;
 
 /**
- * Servlet implementation class DiaryFolder
+ * Servlet implementation class DiaryFolderWrite
  */
-@WebServlet(name = "DiaryFolderServlet", urlPatterns = { "/diary/diaryFolder" })
-public class DiaryFolderServlet extends HttpServlet {
+@WebServlet("/diary/folderWrite")
+public class DiaryFolderWrite extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderServlet() {
+    public DiaryFolderWrite() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,25 +30,16 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html;charset=utf-8");
-		
-		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));
+		String addFolderName=request.getParameter("addFolderName");
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
-		String shareLevel=request.getParameter("shareLevel");
 		
-		/*
-		 * if(shareLevel.equals("FOLLOWERS")) {
-		 * 
-		 * }else if(shareLevel.equals("FRIENDS")) { List<DiaryFolderShare> list=new
-		 * DiaryService().folderShare(diaryFolderLevel); for(DiaryFolderShare dfs :
-		 * list) { if(dfs.getAllowedMember().equals(loginMemberId)) {
-		 * 
-		 * } } }
-		 */
-		
-		request.setAttribute("diaryFolderLevel", diaryFolderLevel);				
-		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		if(loginMemberId.equals(hostMemberId)) {
+			int result=new DiaryService().insertDiaryFolder(addFolderName, hostMemberId);			
+			if(result>0) {
+				request.getRequestDispatcher("/views/minihome/leftpage_diary.jsp").forward(request,response);
+			}
+		}		
 		
 	}
 

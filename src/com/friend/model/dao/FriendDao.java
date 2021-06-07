@@ -564,7 +564,7 @@ public class FriendDao {
 			if(rs1.next()) newFeedCountD = rs1.getInt(1);
 			
 			ps2 = conn.prepareStatement(prop.getProperty("newFeedCountA"));
-			ps2.setString(2, memberId);
+			ps2.setString(1, memberId);
 			
 			rs2 = ps2.executeQuery();
 			if(rs2.next()) newFeedCountA = rs2.getInt(1);

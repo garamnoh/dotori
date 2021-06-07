@@ -31,10 +31,11 @@ public class DiaryCommentDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		int commentNo=Integer.parseInt(request.getParameter("commentNo"));
-		String commentWriter=request.getParameter("commentWriter");
-		System.out.println(commentNo+" /// "+commentWriter);
+		//String commentWriter=request.getParameter("commentWriter");	
+		//String host=request.getParameter("hostMemberId");
 		
-		int result=new DiaryService().commentDelete(commentNo, commentWriter);
+		//int result=new DiaryService().commentDelete(commentNo, commentWriter);
+		int result=new DiaryService().commentDelete(commentNo);
 		
 		if(result>0) {
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);

@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 public class DiaryDao {
 
@@ -200,6 +201,47 @@ public class DiaryDao {
 		return result;
 	}
 	
+	public List<DiaryFolderShare> folderShare(Connection conn, int no){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryFolderShare> list=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("folderShare"));
+			pstmt.setInt(1, no);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryFolderShare dfs=new DiaryFolderShare();
+				dfs.setDiaryNo(rs.getInt("folder_no"));
+				dfs.setAllowedMember(rs.getString("ALLOWED_MEMBER"));
+				//dfs.setShareLevel(rs.getString("SHARE_LEVEL"));
+				list.add(dfs);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return list;
+	}
+	
+	public int insertDiaryFolder(Connection conn, String name, String id) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertDiaryFolder"));
+			pstmt.setString(1, name);
+			pstmt.setString(2, id);			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
+	
 	////////////////////////////comment////////////////////
 	public int insertComment(Connection conn, DiaryComment dc) {
 		PreparedStatement pstmt=null;
@@ -249,13 +291,14 @@ public class DiaryDao {
 		return list;
 	}
 	
-	public int commentDelete(Connection conn, int commentNo, String commentWriter) {
+	//public int commentDelete(Connection conn, int commentNo, String commentWriter) {
+	public int commentDelete(Connection conn, int commentNo) {
 		PreparedStatement pstmt=null;
 		int result=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("commentDelete"));	
 			pstmt.setInt(1,  commentNo);
-			pstmt.setString(2, commentWriter);
+			//pstmt.setString(2, commentWriter);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

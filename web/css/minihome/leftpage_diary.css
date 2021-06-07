@@ -1,1 +1,68 @@
 @charset "UTF-8";
+
+/******************************/
+/*********left_diary***********/
+#diary_folder_box{	
+	height:525px;
+	width:175px;
+	/* border:1px solid; */
+}
+#diary_folder_title{
+	width:175px;
+	height: 30px;
+	font-weight:bolder;
+	color:#67A3AD;
+	text-align:center;	
+	argin-top: 5px;
+}
+#diary_folder_list{
+	width:175px;
+	height:390px;		
+}
+#diary_folder_box ul{	
+	list-style:none;	
+	padding-left:10px;
+	font-size: 12px;
+    line-height: 25px;
+}
+div ul li:hover{
+	color:#5D5D5D;
+	cursor:pointer;
+}
+
+#diary_folder_setting{	
+	position:absolute;
+	width:190px;
+	height:100px;
+	margin: 10px 0 0 0;	
+}
+#diary_folder_name{
+	position: absolute;
+	width:120px;
+	border-radius: 5px;	
+}
+#diary_add_folder_btn{
+	margin: 2px 0 0 140px;
+    width: 55px;
+    cursor: pointer;
+    font-weight:bolder;
+    font-size: 12px;   
+}
+#diary_add_folder_btn:hover{
+	color:#747474;		
+}
+#folderName{
+	margin:15px 0 0 0;
+	width:90px;
+	border-radius: 5px;
+}
+#diary_del_folder_btn{
+	margin: -18px 0 0 140px;
+    width: 55px;
+    cursor: pointer;
+    font-weight:bolder;
+    font-size: 12px;    
+}
+#diary_del_folder_btn:hover{
+	color:#747474;		
+}

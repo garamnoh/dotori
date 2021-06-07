@@ -12,6 +12,7 @@ import com.minihome.diary.model.dao.DiaryDao;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
 import com.minihome.diary.model.vo.DiaryFolder;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 public class DiaryService {
 
@@ -81,6 +82,22 @@ public class DiaryService {
 		return result;
 	}
 	
+	public List<DiaryFolderShare> folderShare(int no){
+		Connection conn=getConnection();
+		List<DiaryFolderShare> list=dao.folderShare(conn, no);
+		close(conn);
+		return list;
+	}
+	
+	public int insertDiaryFolder(String name, String id) {
+		Connection conn=getConnection();
+		int result=dao.insertDiaryFolder(conn, name, id);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	////////////////////comment////////////////////////
 	public int insertComment(DiaryComment dc) {
 		Connection conn=getConnection();
@@ -98,9 +115,11 @@ public class DiaryService {
 		return list;
 	}
 	
-	public int commentDelete(int commentNo, String commentWriter) {
+	//public int commentDelete(int commentNo, String commentWriter) {
+	public int commentDelete(int commentNo) {
 		Connection conn=getConnection();
-		int result=dao.commentDelete(conn, commentNo, commentWriter);
+		//int result=dao.commentDelete(conn, commentNo, commentWriter);
+		int result=dao.commentDelete(conn, commentNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

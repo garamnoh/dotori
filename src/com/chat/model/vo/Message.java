@@ -7,17 +7,18 @@ public class Message {
 	private String sender;
 	private String receiver;
 	private String msg;
-	private Date sendDate;
+	private String date;
 	
 	public Message() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Message(String sender, String receiver, String msg) {
+	protected Message(String sender, String receiver, String msg, String date) {
 		super();
 		this.sender = sender;
 		this.receiver = receiver;
 		this.msg = msg;
+		this.date = date;
 	}
 
 	public String getSender() {
@@ -44,8 +45,17 @@ public class Message {
 		this.msg = msg;
 	}
 
+	public String getDate() {
+		return date;
+	}
+
+	public void setDate(String date) {
+		this.date = date;
+	}
+
 	@Override
 	public String toString() {
-		return "Message [sender=" + sender + ", receiver=" + receiver + ", msg=" + msg + "]";
+		return "Message [sender=" + sender + ", receiver=" + receiver + ", msg=" + msg + ", date=" + date + "]";
 	}
+
 }
