@@ -45,6 +45,8 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		String changeSkinItemNo=request.getParameter("changeSkinItemNo");
 		
+		System.out.println("테스트테스트 호스트멤버 : "+hostMemberId);
+		
 		if(changeSkinItemNo!=null) {
 			int changeSkinResult=minihomeService.changeSkin(hostMemberId,Integer.parseInt(changeSkinItemNo));
 		}
@@ -54,8 +56,9 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 			hostMember=memberService.selectMemberId(hostMemberId);
 		}else {
 			hostMember=loginMember;
+			hostMemberId=hostMember.getMemberId();
 		}
-		hostMemberId=hostMember.getMemberId();
+		
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		boolean visitFlag=false;
