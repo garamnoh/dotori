@@ -1,0 +1,21 @@
+@charset "UTF-8";
+#updatePhotoTable>tbody>tr>td:first-of-type{
+    text-align:center;
+    font-weight:bold;
+}
+#updatePhotoTable>tbody>tr>td{
+    padding:10px;
+}
+#updatePhotoTable{
+    border:1px solid black;
+    margin:10px auto;
+    height:350px;
+}
+#update-photo-container{
+    margin:50px auto;
+    width:450px;
+    height:400px;
+}
+#updatePhotoBtnBox{
+    text-align:center;
+}

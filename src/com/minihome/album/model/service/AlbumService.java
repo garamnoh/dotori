@@ -116,4 +116,31 @@ public class AlbumService {
 		return uploadResult;
 	}
 	
+	public int updatePhoto(Album l) {
+		Connection conn=getConnection();
+		int updatePhotoResult=albumDao.updatePhoto(conn,l);
+		if(updatePhotoResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return updatePhotoResult;
+	}
+	
+	public int cleanAlbumTable(String hostMemberId,String folder) {
+		Connection conn=getConnection();
+		int cleanAlbumTableResult=albumDao.cleanAlbumTable(conn,hostMemberId,folder);
+		if(cleanAlbumTableResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return cleanAlbumTableResult;
+	}
+	
+	public int deletePhoto(int deleteImgNo) {
+		Connection conn=getConnection();
+		int deletePhotoResult=albumDao.deletePhoto(conn,deleteImgNo);
+		if(deletePhotoResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return deletePhotoResult;
+	}
+	
 }

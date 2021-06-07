@@ -12,9 +12,7 @@
 	justify-content: space-between;
 	
 }
-.basketheader>button{
-	
-}
+
 #section{
 	overflow:scroll;
 }
@@ -29,7 +27,7 @@
 	display:flex;
 	align-items: center;
 }
-.basketCheck>input{
+.basketCheck>input:nth-child(1){
 	width:20px;
 	height:20px;
 }
@@ -65,12 +63,7 @@
 	padding:0 0 0 40px;
 }
 
-/* 도토리 타입 전체 info */
-.mybasketDotori{
-	display: flex;
-	border: 1px solid #c0c0c0;
-    border-radius: 5px;	
-}
+
 
 /* 미니미 타입 전체 info */
 .mybasketMinimi{
@@ -116,7 +109,7 @@
 /* 전체 */
 .Allbasket{
 	width:60%;
-	border: 1px solid  #c0c0c0;
+	/* border: 1px solid  #c0c0c0; */
 	/* min-width:60px; */ 
 }
 .basketButtons{

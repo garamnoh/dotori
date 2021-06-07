@@ -206,5 +206,13 @@
 					$('#board').next().children('span').text(data['newFeedCount']);
 				}
 			});
-		});  
+		});
+		
+		
+		$('#logout').on('click', ()=>{
+			socket.onclose = (e)=>{
+				console.log(e);
+				console.log('socket close');
+			}
+		});
     </script>

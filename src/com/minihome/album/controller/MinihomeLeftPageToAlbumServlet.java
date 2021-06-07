@@ -26,6 +26,7 @@ public class MinihomeLeftPageToAlbumServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		String addFolderTitle=request.getParameter("addFolderTitle");
 		String deleteFolderTarget=request.getParameter("deleteFolderTarget");
+		String currentFolder=request.getParameter("currentFolder");
 		
 		if(addFolderTitle!=null) {
 			int addFolderResult=albumService.addFolder(hostMemberId,addFolderTitle);
@@ -36,16 +37,34 @@ public class MinihomeLeftPageToAlbumServlet extends HttpServlet {
 		}
 		
 		List<String> folderList=albumService.getMyFolders(hostMemberId);
+		int[] albumCountArr=null;
 		
-		if(folderList.contains("기본폴더")) {
-			folderList.remove(folderList.indexOf("기본폴더"));
-			folderList.add(folderList.size(),"기본폴더");
-		}else {
-			int addDefaultFolderResult=albumService.addFolder(hostMemberId,"기본폴더");
-			folderList.add(folderList.size(),"기본폴더");
+		if(folderList!=null) {
+			if(folderList.contains("기본폴더")) {
+				folderList.remove(folderList.indexOf("기본폴더"));
+				folderList.add(folderList.size(),"기본폴더");
+			}else {
+				int addDefaultFolderResult=albumService.addFolder(hostMemberId,"기본폴더");
+				folderList.add(folderList.size(),"기본폴더");
+			}
+			folderList.add(0,"내 모든 사진");
+			
+			albumCountArr=new int[folderList.size()];
+			for(int i=0;i<folderList.size();i++) {
+				int countResult=0;
+				if(folderList.get(i).equals("내 모든 사진")) {
+					countResult=albumService.albumCount(hostMemberId);
+				}else {
+					countResult=albumService.albumCountOnFolder(hostMemberId,folderList.get(i));
+				}
+				albumCountArr[i]=countResult;				
+			}
+			
 		}
 		
 		request.setAttribute("folderList",folderList);
+		request.setAttribute("albumCountArr",albumCountArr);
+		request.setAttribute("currentFolder",currentFolder);
 		
 		request.getRequestDispatcher("/views/minihome/leftpage_album.jsp").forward(request,response);
 	}

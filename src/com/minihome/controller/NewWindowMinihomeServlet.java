@@ -45,6 +45,8 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		String changeSkinItemNo=request.getParameter("changeSkinItemNo");
 		
+		System.out.println("테스트테스트 호스트멤버 : "+hostMemberId);
+		
 		if(changeSkinItemNo!=null) {
 			int changeSkinResult=minihomeService.changeSkin(hostMemberId,Integer.parseInt(changeSkinItemNo));
 		}
@@ -54,8 +56,9 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 			hostMember=memberService.selectMemberId(hostMemberId);
 		}else {
 			hostMember=loginMember;
+			hostMemberId=hostMember.getMemberId();
 		}
-		hostMemberId=hostMember.getMemberId();
+		
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
 		boolean visitFlag=false;
@@ -97,13 +100,13 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		
 		List<Music> musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,"배경음악");
 		
+		System.out.println("호스트 멤버 객체 테스트 : "+hostMember);
+		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);
 		request.setAttribute("minihome",minihome);
 		request.setAttribute("musicList",musicList);
 		request.setAttribute("mySkin",mySkin);
-		
-		System.out.println("서블릿 스킨 테스트 : "+mySkin);
 		
 		request.getRequestDispatcher("/views/minihome/minihome.jsp").forward(request,response);
 	}

@@ -322,4 +322,57 @@ public class AlbumDao {
 		return uploadResult;
 	}
 	
+	public int updatePhoto(Connection conn,Album l) {
+		PreparedStatement pstmt=null;
+		int updatePhotoResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updatePhoto"));
+			pstmt.setString(1,l.getTitle());
+			pstmt.setString(2,l.getFilepath());
+			pstmt.setString(3,l.getFolder());
+			pstmt.setString(4,l.getHashTag());
+			pstmt.setString(5,l.getContent());
+			pstmt.setInt(6,l.getImgNo());
+			updatePhotoResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return updatePhotoResult;
+	}
+	
+	public int cleanAlbumTable(Connection conn,String hostMemberId,String folder) {
+		PreparedStatement pstmt=null;
+		int cleanAlbumTableResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cleanAlbumTable"));
+			pstmt.setString(1,hostMemberId);
+			pstmt.setString(2,folder);
+			pstmt.setString(3,hostMemberId);
+			pstmt.setString(4,folder);
+			cleanAlbumTableResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cleanAlbumTableResult;
+	}
+	
+	public int deletePhoto(Connection conn,int deleteImgNo) {
+		PreparedStatement pstmt=null;
+		int deletePhotoResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("deletePhoto"));
+			pstmt.setInt(1,deleteImgNo);
+			deletePhotoResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return deletePhotoResult;
+	}
+	
 }

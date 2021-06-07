@@ -6,7 +6,7 @@
 	Minihome minihome=(Minihome)request.getAttribute("minihome");
 	List<Music> musicList=(List<Music>)request.getAttribute("musicList");
 	Skin mySkin=(Skin)request.getAttribute("mySkin");
-	System.out.println(mySkin.getCssFilepath());
+	System.out.println("jsp에서 호스트멤버 테스트 : "+hostMember);
 %>   
 <!DOCTYPE html>
 <html lang="kor">
@@ -16,7 +16,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%=hostMember.getNickname()%>님의 미니홈피</title>
 	<link rel="icon" type="image/x-icon" href="<%=request.getContextPath()%>/images/favicon.ico"/>
-	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>">
+	<%if(mySkin!=null) {%>
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/<%=mySkin.getCssFilepath()%>">
+	<%}else {%>
+		<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/default.css">
+	<%} %>
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_home.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_album.css">
@@ -25,6 +29,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_diary.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_updateAlbum.css">
 </head>
 <body>
     
@@ -32,7 +37,7 @@
     <div class="cover">
         <div class="sheet">
             <div class="today">TODAY <span id="today"><%=minihome.getToday()%></span> | TOTAL <span id="total"><%=minihome.getTotal()%></span></div>
-            <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
+            <div class="miniTitle"><%=hostMember.getNickname()%>님의 미니홈피</div>
             <div id="left-page"></div>
             <div id="right-page"></div>
         </div>

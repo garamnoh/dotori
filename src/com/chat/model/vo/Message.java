@@ -1,24 +1,24 @@
 package com.chat.model.vo;
 
-import java.sql.Date;
-
 public class Message {
 
 	private String sender;
 	private String receiver;
 	private String msg;
 	private String date;
+	private String type;
 	
 	public Message() {
 		// TODO Auto-generated constructor stub
 	}
 
-	protected Message(String sender, String receiver, String msg, String date) {
+	public Message(String sender, String receiver, String msg, String date, String type) {
 		super();
 		this.sender = sender;
 		this.receiver = receiver;
 		this.msg = msg;
 		this.date = date;
+		this.type = type;
 	}
 
 	public String getSender() {
@@ -53,9 +53,17 @@ public class Message {
 		this.date = date;
 	}
 
-	@Override
-	public String toString() {
-		return "Message [sender=" + sender + ", receiver=" + receiver + ", msg=" + msg + ", date=" + date + "]";
+	public String getType() {
+		return type;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	@Override
+	public String toString() {
+		return "Message [sender=" + sender + ", receiver=" + receiver + ", msg=" + msg + ", date=" + date + ", type="
+				+ type + "]";
+	}
 }

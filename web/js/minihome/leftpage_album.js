@@ -1,14 +1,27 @@
 document.getElementById("albumMenu").addEventListener("click",(e)=>{
+    console.log(e.target.innerText.substring(0,e.target.innerText.indexOf("[")));
     $.ajax({
         url:contextPath+"/page/minihomeRightPageToAlbum.do",
         type:"post",
         data:{
             "hostMemberId":hostMemberId,
-            "folder":e.target.innerText
+            "folder":e.target.innerText.substring(0,e.target.innerText.indexOf("["))
         },
         dataType:"html",
         success:(data)=>{
             $("#right-page").html(data);
+        }
+    });
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "currentFolder":$(e.target).text().substring(0,$(e.target).text().indexOf("["))
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
         }
     });
 });

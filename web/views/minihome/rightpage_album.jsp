@@ -31,67 +31,83 @@
 <hr>
 
 <div id="albumBox">
-	<%for(int i=0;i<albumList.size();i++) {%>
-		<div class="photoBox">
-			<p class="photoTitle"><%=albumList.get(i).getTitle()%></p>
-			<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>">
-			<div class="photoContent">
-				<%=albumList.get(i).getContent()%>
-				<span class="photoPostDate"> [<%=albumList.get(i).getPostDate()%>]</span>
-			</div>
-			
-			<hr>
-			
-			<div class="buttonsInPhotoBox">
-				<%if(folder!=null) {%>
-					<input type="checkbox">
+	<%if(albumList==null||albumList.isEmpty()||albumList.get(0).getFilepath()==null) {%>
+		<%if(folder!=null) {%>
+			<p><strong><%=folder%></strong>에 들어있는 사진이 없습니다</p>
+		<%} %>
+	<%}else {%>
+		<%for(int i=0;i<albumList.size();i++) {%>
+			<div class="photoBox">
+				<p class="photoTitle"><%=albumList.get(i).getTitle()%></p>
+				<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>">
+				<div class="photoContent">
+					<%=albumList.get(i).getContent()%>
+					<span class="photoPostDate"> [<%=albumList.get(i).getPostDate()%>]</span>
+				</div>
+				
+				<hr>
+				
+				<div class="buttonsInPhotoBox">
+					<%if(folder!=null) {%>
+						<input type="checkbox">
+						<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+					<%} %>
+					<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
+					<input type="button" class="modifyPhotoBtn" value="수정하기">
 					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-				<%} %>
-				<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
-				<input type="button" value="수정하기">
+					<input type="hidden" value="<%=albumList.get(i).getFolder()%>">
+					<input type="hidden" value="<%=albumList.get(i).getTitle()%>">
+					<input type="hidden" value="<%=albumList.get(i).getHashTag()%>">
+					<input type="hidden" value="<%=albumList.get(i).getContent()%>">
+					<input type="hidden" value="<%=albumList.get(i).getFilepath()%>">
+					<input type="button" class="deletePhotoBtn" value="삭제하기">
+					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+				</div>
 			</div>
-		</div>
-		<div class="albumCommentBox" style="border:1px solid black;padding:20px 20px;width:400px;display:none;">
-			
-			<input type="text"><input type="button" value="댓글 달기" onclick="fn_insertComment(event);">
-			<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-			<input type="hidden" value="0">
-			<input type="hidden" value="1">
-			<%for(int j=0;j<commentList.size();j++) {%>
-				<%if(commentList.get(j).getAlbumRef()==albumList.get(i).getImgNo()) {%>
-					<%if(commentList.get(j).getCommentLevel()==1) {%>
-						<div style="font-size:11px;color:red;">
-							댓글 no : <%=commentList.get(j).getCommentNo()%> / 
-							댓글 level : <%=commentList.get(j).getCommentLevel()%> / 
-							참조 댓글 no : <%=commentList.get(j).getAlbumCommentRef()%> / 
-							내용 : <%=commentList.get(j).getCommentContent()%>
-							<input type="text"><input type="button" value="댓글" onclick="fn_insertComment(event);">
-							<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-							<input type="hidden" value="<%=commentList.get(j).getCommentNo()%>">
-							<input type="hidden" value="2">
-						</div>
-					<%}else if(commentList.get(j).getCommentLevel()==2) {%>
-						<div style="font-size:11px;color:orange;">
-							댓글 no : <%=commentList.get(j).getCommentNo()%> / 
-							댓글 level : <%=commentList.get(j).getCommentLevel()%> / 
-							참조 댓글 no : <%=commentList.get(j).getAlbumCommentRef()%> / 
-							내용 : <%=commentList.get(j).getCommentContent()%>
-							<input type="text"><input type="button" value="댓글" onclick="fn_insertComment(event);">
-							<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-							<input type="hidden" value="<%=commentList.get(j).getCommentNo()%>">
-							<input type="hidden" value="3">
-						</div>
-					<%}else {%>
-						<div style="font-size:11px;color:blue;">
-							댓글 no : <%=commentList.get(j).getCommentNo()%> / 
-							댓글 level : <%=commentList.get(j).getCommentLevel()%> / 
-							참조 댓글 no : <%=commentList.get(j).getAlbumCommentRef()%> / 
-							내용 : <%=commentList.get(j).getCommentContent()%>
-						</div>
+			<div class="albumCommentBox">
+				<div class="insertCommentBox">
+					<input type="text" size="35"><input type="button" value="작성" onclick="fn_insertComment(event);">
+					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+					<input type="hidden" value="0">
+					<input type="hidden" value="1">
+				</div>
+				<hr>
+				<%for(int j=0;j<commentList.size();j++) {%>
+					<%if(commentList.get(j).getAlbumRef()==albumList.get(i).getImgNo()) {%>
+						<%if(commentList.get(j).getCommentLevel()==1) {%>
+							<div class="level1-comment">
+								<%=commentList.get(j).getCommentWriter()%> / <%=commentList.get(j).getCommentDate()%><br>
+								<p><%=commentList.get(j).getCommentContent()%></p>
+								<input type="button" class="recommentBtn" onclick="fn_insertRecomment(event);" value="댓글">
+								<div class="insertCommentBox" style="display:none;">
+									<input type="text" size="35"><input type="button" value="작성" onclick="fn_insertComment(event);">
+									<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+									<input type="hidden" value="<%=commentList.get(j).getCommentNo()%>">
+									<input type="hidden" value="2">
+								</div>
+							</div>
+						<%}else if(commentList.get(j).getCommentLevel()==2) {%>
+							<div class="level2-comment">
+								<%=commentList.get(j).getCommentWriter()%> / <%=commentList.get(j).getCommentDate()%><br>
+								<p><%=commentList.get(j).getCommentContent()%></p>
+								<input type="button" class="recommentBtn" onclick="fn_insertRecomment(event);" value="댓글">
+								<div class="insertCommentBox" style="display:none;">
+									<input type="text" size="35"><input type="button" value="작성" onclick="fn_insertComment(event);">
+									<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+									<input type="hidden" value="<%=commentList.get(j).getCommentNo()%>">
+									<input type="hidden" value="3">
+								</div>
+							</div>
+						<%}else {%>
+							<div class="level3-comment">
+								<%=commentList.get(j).getCommentWriter()%> / <%=commentList.get(j).getCommentDate()%><br>
+								<p><%=commentList.get(j).getCommentContent()%></p>
+							</div>
+						<%} %>
 					<%} %>
 				<%} %>
-			<%} %>
-		</div>
+			</div>
+		<%} %>
 	<%} %>
 </div>
 

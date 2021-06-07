@@ -3,7 +3,6 @@
 <%
 	String sender = (String)request.getAttribute("sender");
 %>
-    
     <div class="menuOption">
         <div id="optionTitle">Friend</div>
         <div class="menuTitle abc" id="administrationFriends">친구관리</div>
@@ -165,20 +164,52 @@
 	    		}
 	    	});
 	    });
+
 	    
+		// 날짜 및 시간 //////////////////////////////////////////////////
+        function getFormatDate(date){
+            var year = date.getFullYear();              
+            var month = (1 + date.getMonth());          
+            month = month >= 10 ? month : '0' + month;  
+            var day = date.getDate();                   
+            day = day >= 10 ? day : '0' + day;          
+            return  year + '-' + month + '-' + day;       
+        }
+
+        function getFormatTime(date){
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            return hour + ":" + minute + ":" + second;
+        }
+        var today = getFormatDate(new Date());
+        var time = getFormatTime(new Date());
+        console.log(today, time);
+        
+        var date = today + " " + time;
+        ///////////////////////////////////////////////////////////////
 	    
+       	function Message(sender, receiver, msg, date, type){
+			this.sender = sender;
+			this.receiver = receiver;
+			this.msg = msg;
+			this.date = date;
+			this.type = type;
+		}
 	    
 	    $('div.logedInMember').on('click', (e)=>{
 	    	
 	    	const sender = '<%=sender%>';
 	    	const receiver = $(e.target).text();
-	    	const invite = sender+"님이 채팅을 요청했습니다.";
 	    	
 	    	console.log(isData);
 	    	if(isData!=0){
 	    		
-				var sendMsg = new Message(sender, receiver, invite, "요청");
+				var sendMsg = new Message(sender, receiver, "", date, "요청");
 				socket.send(JSON.stringify(sendMsg));
+				
+				console.log(sender);
+				console.log(receiver);
 	    		
 	    		$('#section').html('');
 		    	$.ajax({

@@ -2,6 +2,9 @@
     pageEncoding="UTF-8" import="java.util.List"%>
 <%
 	List<String> folderList=(List<String>)request.getAttribute("folderList");
+	int[] albumCountArr=(int[])request.getAttribute("albumCountArr");
+	String currentFolder=(String)request.getAttribute("currentFolder");
+	if(currentFolder==null) currentFolder="내 모든 사진";
 %>
 <div class="album-menu-container">
 	<p class="album-title">ALBUM</p>
@@ -9,7 +12,11 @@
 	<nav class="albums">
 		<ul id="albumMenu">
 			<%for(int i=0;i<folderList.size();i++) {%>
-				<li><%=folderList.get(i)%></li>
+				<%if(currentFolder.equals(folderList.get(i))) {%>
+					<li style="text-decoration:underline;"><%=folderList.get(i)%>[<%=albumCountArr[i]%>]</li>
+				<%}else {%>
+					<li><%=folderList.get(i)%>[<%=albumCountArr[i]%>]</li>
+				<%} %>
 			<%} %>
 		</ul>
 	</nav>
