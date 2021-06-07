@@ -230,15 +230,17 @@
 		
 		const myId = '<%=member.getMemberName()%>';
 		
+			
+		let msg;
 		
  		if(data['type']=="요청"){
 			if(data['receiver']==myId){
-				alert('a');
+				$('#fromWho').text(data['sender']);
+				$('#msgAlert').slideDown();
+				receiverName = data['sender'];
 			}
- 			
 		} else{
 			
-			let msg;
 			if($('#sender').val()==data['sender']){
 				// 자신
 				
