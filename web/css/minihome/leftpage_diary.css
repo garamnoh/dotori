@@ -30,7 +30,20 @@ div ul li:hover{
 	cursor:pointer;
 }
 
-#diary_folder_setting{	
+#diary_folder_setting_btn{
+	width:175px;
+	height: 30px;
+	font-weight:bolder;	
+	text-align:center;	
+	argin-top: 5px;
+	cursor: pointer;
+	margin-top: 85px;
+}
+#diary_folder_setting_btn:hover{
+	color:#747474;
+}
+
+/* #diary_folder_setting{	
 	position:absolute;
 	width:190px;
 	height:100px;
@@ -65,4 +78,4 @@ div ul li:hover{
 }
 #diary_del_folder_btn:hover{
 	color:#747474;		
-}
+} */

@@ -11,16 +11,16 @@ import javax.servlet.http.HttpServletResponse;
 import com.minihome.diary.model.service.DiaryService;
 
 /**
- * Servlet implementation class DiaryFolderWrite
+ * Servlet implementation class DiaryFolderDelete
  */
-@WebServlet("/diary/folderWrite")
-public class DiaryFolderWrite extends HttpServlet {
+@WebServlet("/diary/folderDelete")
+public class DiaryFolderDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderWrite() {
+    public DiaryFolderDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,16 +30,13 @@ public class DiaryFolderWrite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String addFolderName=request.getParameter("addFolderName");
-		String loginMemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
+		int delFolderNo=Integer.parseInt(request.getParameter("delFolderNo"));
 		
-		if(loginMemberId.equals(hostMemberId)) {
-			int result=new DiaryService().insertDiaryFolder(addFolderName, hostMemberId);			
-			if(result>0) {
-				request.getRequestDispatcher("/views/minihome/leftpage_diary.jsp").forward(request,response);
-			}
-		}		
+		int result=new DiaryService().folderDelete(delFolderNo);
+		
+		if(result>0) {
+			request.getRequestDispatcher("/page/minihomeRightPageToHome.do").forward(request, response);
+		}
 		
 	}
 

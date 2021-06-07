@@ -31,10 +31,9 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		
-		//String currentPage=request.getParameter("currentPage");
+		String currentPage=request.getParameter("currentPage");
 		
-		HttpSession session=request.getSession(false);
-		//if(session!=null) session.invalidate();
+		HttpSession session=request.getSession(false);		
 		if(session==null||session.getAttribute("loginMember")==null) {
 			request.getRequestDispatcher("/views/minihome/errorpage.jsp").forward(request,response);
 			return;
@@ -55,7 +54,7 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);	
 		request.setAttribute("list", list);
-		//request.setAttribute("currentPage",currentPage);
+		request.setAttribute("currentPage",currentPage);
 				
 		request.getRequestDispatcher("/views/minihome/leftpage_diary.jsp").forward(request,response);
 	}

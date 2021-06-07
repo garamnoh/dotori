@@ -108,6 +108,10 @@ body{
     position:relative;
     left:855px;
     bottom:600px;
+    z-index:1;
+}
+.miniMenu ul{
+	 z-index:1;
 }
 .miniMenu li{
     position:relative;
