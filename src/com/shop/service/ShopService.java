@@ -69,6 +69,30 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return c;
 	}
+	public int aGetItemShoppingList(String id,List<String> aitemNo) {
+		Connection conn=getConnection();
+		int aResultInput=dao.aGetItemShoppingList(conn,id,aitemNo);
+		if(aResultInput>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return aResultInput;
+	}
+	public int bGetItemShoppingList(String id,List<String> bitemNo) {
+		Connection conn=getConnection();
+		int bResultIntput=dao.aGetItemShoppingList(conn,id,bitemNo);
+		if(bResultIntput>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return bResultIntput;
+	}
+	public int cGetItemShoppingList(String id,List<String> citemNo) {
+		Connection conn=getConnection();
+		int cResultInput=dao.aGetItemShoppingList(conn,id,citemNo);
+		if(cResultInput>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return cResultInput;
+	}
 	public int aBuyDeleteShoppingList(String id,List<String> aitemNo) {
 		Connection conn=getConnection();
 		int aResult=dao.aBuyDeleteShoppingList(conn,id,aitemNo);

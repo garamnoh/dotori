@@ -16,7 +16,7 @@
 
 	<div class="basketheader">
 		<p>장바구니</p>
-		<button class="check-all">전체선택하기</button>
+		<input type="button" value="전체체크박스선택하기" class="check-all">
 	</div>
 	
 	<div class="basketbody">
@@ -41,7 +41,7 @@
 				</div>
 				<div class="basketselectCount">
 					<span>구입할 수량 :</span>
-					<input class="aCount" type="number" value="1" min="1" max="10">
+					<input class="aCount" type="number" value="1" min="1" max="1">
 				</div>
 			</div>
 		</div>
@@ -65,7 +65,7 @@
 				</div>
 				<div class="basketselectCount">
 					<span>구입할 수량 :</span>
-					<input class="bCount" type="number" value="1" min="1" max="10">
+					<input class="bCount" type="number" value="1" min="1" max="1">
 				</div>
 			</div>	
 		</div>
@@ -91,7 +91,7 @@
 				</div>
 				<div class="basketselectCount">
 					<span>구입할 수량 :</span>
-					<input class="cCount" type="number" value="1" min="1" max="10">
+					<input class="cCount" type="number" value="1" min="1" max="1">
 				</div>
 			</div>	
 		</div>
@@ -109,7 +109,7 @@
 		</div>
 	
 		<div class="basketButtons">
-			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기">도토리 충전하기</button><input type="button" value="결제하기" onclick="buyAll()">결제하기</button>
+			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기"><input type="button" value="결제하기" onclick="buyAll()">
 		</div>
 	</div>
 	
@@ -152,31 +152,6 @@
 			
 		});
 	}
-	
-	
-	
-	
-	
-	/* 사용자가 미니미 ,스킨, 뮤직에서 사고픈 개수 */
-	const avalue = document.getElementsByName('aCount').value;
-	const bvalue = document.getElementsByName('bCount').value;
-	const cvalue = document.getElementsByName('cCount').value;
-	
-	
-	const result1= <%=a.get(i).getPrice() %>*avalue[i];
-	
-	const result2= <%=b.get(i).getPrice() %>*bvalue2[2];
-	
-	const result3= <%=c.get(i).getPrice() %>*cvalue3[3];
-	 
-	  
-	  else{
-		  
-		  const result=value*100;
-	
-	  document.getElementById("result").innerText = result;
-	  } 
-
 
 </script>
 

@@ -59,16 +59,15 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 			citemNo.add((temp6[i]));
 		}
 		
-		
-		//장바구니 구매후 컬럼삭제용
-		int aResult =new ShopService().aBuyDeleteShoppingList(id,aitemNo);
-		int bResult =new ShopService().bBuyDeleteShoppingList(id,bitemNo);
-		int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
 		//내 구입목록에 추가
 		int aResultInput =new ShopService().aGetItemShoppingList(id,aitemNo);
 		int bResultInput =new ShopService().bGetItemShoppingList(id,bitemNo);
 		int cResultInput =new ShopService().cGetItemShoppingList(id,citemNo);
 		
+		//장바구니 구매후 컬럼삭제용
+		int aResult =new ShopService().aBuyDeleteShoppingList(id,aitemNo);
+		int bResult =new ShopService().bBuyDeleteShoppingList(id,bitemNo);
+		int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
 		//내가 가진 도토리수 차감하기
 		
 		

@@ -1,6 +1,9 @@
 package com.shop.model.dao;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -259,25 +262,112 @@ private Properties prop=new Properties();
 		}
 		return c;
 	}
-	public int aBuyDeleteShoppingList(Connection conn,String id,List<String> aitemNo){
+	public int aGetItemShoppingList(Connection conn,String id,List<String> aitemNo) {
 		PreparedStatement pstmt=null;
-		int result=0;
+		int aResultInput=0;
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("aBuyDeleteShoppingList"));
-			
+			pstmt=conn.prepareStatement(prop.getProperty("aGetItemShoppingList"));
 			for(int i=0;i<aitemNo.size();i++) {
-				pstmt.setString(1, aitemNo);
-				result=pstmt.executeUpdate();
+				pstmt.setString(1, id);
+				pstmt.setString(2, aitemNo.get(i));
+				aResultInput=pstmt.executeUpdate();
 			}
-			
-			
-			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		return result;
+		return aResultInput;
+	}
+	public int bGetItemShoppingList(Connection conn,String id,List<String> bitemNo) {
+		PreparedStatement pstmt=null;
+		int bResultInput=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bGetItemShoppingList"));
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				bResultInput=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bResultInput;
+	}
+	public int cGetItemShoppingList(Connection conn,String id,List<String> citemNo) {
+		PreparedStatement pstmt=null;
+		int cResultInput=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cGetItemShoppingList"));
+			for(int i=0;i<citemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				pstmt.setString(3, id);
+				pstmt.setString(4, citemNo.get(i));
+				cResultInput=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cResultInput;
+	}
+	public int aBuyDeleteShoppingList(Connection conn,String id,List<String> aitemNo){
+		PreparedStatement pstmt=null;
+		int aResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aBuyDeleteShoppingList"));
+			
+			for(int i=0;i<aitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, aitemNo.get(i));
+				aResult=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return aResult;
+	}
+	public int bBuyDeleteShoppingList(Connection conn,String id,List<String> bitemNo){
+		PreparedStatement pstmt=null;
+		int bResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bBuyDeleteShoppingList"));
+			
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				bResult=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bResult;
+	}
+	public int cBuyDeleteShoppingList(Connection conn,String id,List<String> citemNo){
+		PreparedStatement pstmt=null;
+		int cResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cBuyDeleteShoppingList"));
+			
+			for(int i=0;i<citemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				cResult=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cResult;
 	}
 	
 	
