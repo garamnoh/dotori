@@ -32,7 +32,7 @@ public class MiniHomeUploadPhotoServlet extends HttpServlet {
 			return;
 		}
 		
-		System.out.println("깃발깃발깃발");
+		String hostMemberId=request.getParameter("hostMemberId");
 		
 		String uploadPath=getServletContext().getRealPath("/upload/photo");
 		int maxSize=1024*1024*10;
@@ -43,16 +43,24 @@ public class MiniHomeUploadPhotoServlet extends HttpServlet {
 		
 		Album l=new Album();
 		l.setMemberId(mr.getParameter("upload_memberId"));
-		System.out.println("멤버아이디 테스트 서블릿 : "+mr.getParameter("upload_memberId"));
 		l.setTitle(mr.getParameter("title"));
 		l.setFilepath(mr.getFilesystemName("uploadFile"));
 		l.setFolder(mr.getParameter("folder"));
 		l.setHashTag(mr.getParameter("hashTag"));
 		l.setContent(mr.getParameter("content"));
 		
-		int uploadResult=albumService.uploadPhoto(l);
+		if(mr.getParameter("imgNo")==null) {
+			int uploadResult=albumService.uploadPhoto(l);
+		}else if(mr.getParameter("uploadFile")==null) {
+			l.setFilepath(mr.getParameter("existingFile"));
+			int updatePhotoResult=albumService.updatePhoto(l);
+		}else {
+			int imgNo=Integer.parseInt(mr.getParameter("imgNo"));
+			l.setImgNo(imgNo);
+			int updatePhotoResult=albumService.updatePhoto(l);
+		}
 		
-		
+		request.setAttribute("hostMemberId",hostMemberId);
 		request.getRequestDispatcher("/page/minihomeRightPageToAlbum.do").forward(request,response);
 		
 	}

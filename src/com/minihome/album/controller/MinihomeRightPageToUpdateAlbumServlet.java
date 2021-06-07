@@ -24,12 +24,26 @@ public class MinihomeRightPageToUpdateAlbumServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
+		String imgNo=request.getParameter("imgNo");
+		String folder=request.getParameter("folder");
+		String title=request.getParameter("title");
+		String hashTag=request.getParameter("hashTag");
+		String content=request.getParameter("content");
+		String filepath=request.getParameter("filepath");
+		
+		System.out.println(imgNo+"/"+folder+"/"+title+"/"+hashTag+"/"+content+"/"+filepath);
 		
 		List<String> folderList=albumService.getMyFolders(hostMemberId);
 		
 		request.setAttribute("loginMemberId",loginMemberId);
 		request.setAttribute("hostMemberId",hostMemberId);
 		request.setAttribute("folderList",folderList);
+		request.setAttribute("imgNo",imgNo);
+		request.setAttribute("folder",folder);
+		request.setAttribute("title",title);
+		request.setAttribute("hashTag",hashTag);
+		request.setAttribute("content",content);
+		request.setAttribute("filepath",filepath);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_updateAlbum.jsp").forward(request,response);
 	}

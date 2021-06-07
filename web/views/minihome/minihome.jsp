@@ -25,6 +25,7 @@
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_diary.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/leftpage_jukebox.css">
 	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_jukebox.css">
+	<link rel="stylesheet" href="<%=request.getContextPath()%>/css/minihome/rightpage_updateAlbum.css">
 </head>
 <body>
     

@@ -62,8 +62,12 @@
 .album-tooltip:hover .album-tooltip-text{
     display:block;
 }
+#pageBar{
+    padding-left:30px;
+}
 #pageBar>a{
-    color:blue;cursor:pointer;
+    color:cornflowerblue;
+    cursor:pointer;
 }
 #albumBox{
     display:flex;
@@ -74,7 +78,7 @@
     background-color:white;
     border:1px solid gray;
     width:390px;
-    margin:10px auto;
+    margin:10px auto 0 auto;
 }
 #albumBox>.photoBox>img{
     margin-left:10px;
@@ -116,4 +120,59 @@
     background-color:black;
     color:white;
     cursor:pointer;
+}
+.albumCommentBox{
+    box-sizing:border-box;
+    background-color:white;
+    border-top:transparent;
+    border-left:1px solid gray;
+    border-right:1px solid gray;
+    border-bottom:1px solid gray;
+    display:none;
+    width:392px;
+    max-height:300px;
+    overflow:scroll;
+    margin:0 auto;
+    padding:10px 10px;
+}
+.insertCommentBox{
+    margin-top:5px;
+    margin-bottom:10px;
+    display:flex;
+    flex-direction:row;
+    flex-wrap:nowrap;
+    justify-content:flex-end;
+}
+.insertCommentBox>input[type=button]{
+    margin-left:5px;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+.insertCommentBox>input[type=button]:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+.recommentBtn{
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+.recommentBtn:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+.level1-comment{
+    margin-left:0;
+    margin-bottom:10px;
+}
+.level2-comment{
+    margin-left:30px;
+    margin-bottom:10px;
+}
+.level3-comment{
+    margin-left:60px;
+    margin-bottom:10px;
 }

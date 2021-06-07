@@ -1,6 +1,6 @@
 $("#changeFolderBtn").click((e)=>{
     let targetPhotoNoArr=new Array();
-    document.querySelectorAll("#albumBox>input[type=checkbox]").forEach((v,i)=>{
+    document.querySelectorAll("#albumBox input[type=checkbox]").forEach((v,i)=>{
         if(v.checked) targetPhotoNoArr.push($(v).next().val());
     });
 
@@ -23,8 +23,7 @@ $("#changeFolderBtn").click((e)=>{
 });
 
 var fn_openCommentBox=(event)=>{
-	console.log("test");
-    let commentBox=$(event.target).parent().next();
+    let commentBox=$(event.target).parent().parent().next();
     if(commentBox.css("display")=="none") {
         commentBox.css("display","block");
     }else {
@@ -46,7 +45,8 @@ var fn_insertComment=(event)=>{
             "albumRef":albumRef,
             "albumCommentRef":albumCommentRef,
             "commentLevel":commentLevel,
-            "commentContent":commentContent
+            "commentContent":commentContent,
+            "folder":$("#currentFolder").val()
         },
         dataType:"html",
         success:(data)=>{
@@ -78,3 +78,57 @@ document.querySelectorAll("#pageBar>a").forEach((v,i)=>{
         });
     });
 });
+
+$(".modifyPhotoBtn").click((e)=>{
+    let imgNo=$(e.target).next();
+    let folder=imgNo.next();
+    let title=folder.next();
+    let hashTag=title.next();
+    let content=hashTag.next();
+    let filepath=content.next();
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToUpdateAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "loginMemberId":loginMemberId,
+            "imgNo":imgNo.val(),
+            "folder":folder.val(),
+            "title":title.val(),
+            "hashTag":hashTag.val(),
+            "content":content.val(),
+            "filepath":filepath.val()
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+});
+
+$(".deletePhotoBtn").click((e)=>{
+    let deleteTargetImgNo=$(e.target).next().val();
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "folder":$("#currentFolder").val(),
+            "deleteTargetImgNo":deleteTargetImgNo
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+});
+
+var fn_insertRecomment=(event)=>{
+    console.dir($(event.target).next().attr("class"));
+    let recommentBox=$(event.target).next();
+    if(recommentBox.css("display")=="none"){
+        recommentBox.css("display","block");
+    }else{
+        recommentBox.css("display","none");
+    }
+}

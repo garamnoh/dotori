@@ -29,6 +29,7 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		String hostMemberId=request.getParameter("hostMemberId");
 		String folder=request.getParameter("folder");
+		if(folder!=null&&folder.equals("내 모든 사진")) folder=null;
 		String changeFolderTarget=request.getParameter("changeFolderTarget");
 		String targetPhotoStr=request.getParameter("targetPhotoStr");
 		
@@ -37,10 +38,16 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		String albumCommentRef=request.getParameter("albumCommentRef");
 		String commentLevel=request.getParameter("commentLevel");
 		String commentContent=request.getParameter("commentContent");
+		String deleteTargetImgNo=request.getParameter("deleteTargetImgNo");
 		
-		if(folder==null) System.out.println("폴더는 널입니다!!!!");
-		else System.out.println("폴더는 널이 아닙니다!!!!");
+		if(folder!=null) {
+			int cleanAlbumTableResult=albumService.cleanAlbumTable(hostMemberId,folder);
+		}
 		
+		if(deleteTargetImgNo!=null) {
+			int deleteImgNo=Integer.parseInt(deleteTargetImgNo);
+			int deletePhotoResult=albumService.deletePhoto(deleteImgNo);
+		}
 		
 		int cPage;
 		int numPerPage;
