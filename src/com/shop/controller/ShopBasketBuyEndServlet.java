@@ -39,6 +39,9 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 		HttpSession session=request.getSession();
 		Member m=(Member)session.getAttribute("loginMember");
 		String id=m.getMemberId();
+		//도토리 가져오기
+		int myDotoriNums=(Integer.parseInt(request.getParameter("myDotoriNums")));
+		int itemDotoriNums=(Integer.parseInt(request.getParameter("itemDotoriNums")));
 		
 		List<String> aitemNo=new ArrayList();
 		String temp1=request.getParameter("aitemNo");  
@@ -69,8 +72,7 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 		int bResult =new ShopService().bBuyDeleteShoppingList(id,bitemNo);
 		int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
 		//내가 가진 도토리수 차감하기
-		
-		
+		int dotoriResult=new ShopService().dotoriMinusShoppingList(id,myDotoriNums,itemDotoriNums);
 	}
 
 	/**

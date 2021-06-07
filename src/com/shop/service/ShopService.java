@@ -117,6 +117,14 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return cResult;
 	}
+	public int dotoriMinusShoppingList(String id,int myDotoriNums,int itemDotoriNums) {
+		Connection conn=getConnection();
+		int dotoriResult=dao.dotoriMinusShoppingList(conn,id,myDotoriNums,itemDotoriNums);
+		if(dotoriResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return dotoriResult;
+	}
 	
 	
 	
