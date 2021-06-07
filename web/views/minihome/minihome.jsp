@@ -6,6 +6,7 @@
 	Minihome minihome=(Minihome)request.getAttribute("minihome");
 	List<Music> musicList=(List<Music>)request.getAttribute("musicList");
 	Skin mySkin=(Skin)request.getAttribute("mySkin");
+	System.out.println("jsp에서 호스트멤버 테스트 : "+hostMember);
 %>   
 <!DOCTYPE html>
 <html lang="kor">
@@ -36,7 +37,7 @@
     <div class="cover">
         <div class="sheet">
             <div class="today">TODAY <span id="today"><%=minihome.getToday()%></span> | TOTAL <span id="total"><%=minihome.getTotal()%></span></div>
-            <div class="miniTitle"><%=loginMember.getNickname()%>님의 미니홈피</div>
+            <div class="miniTitle"><%=hostMember.getNickname()%>님의 미니홈피</div>
             <div id="left-page"></div>
             <div id="right-page"></div>
         </div>

@@ -100,13 +100,13 @@ public class NewWindowMinihomeServlet extends HttpServlet {
 		
 		List<Music> musicList=jukeboxService.getMyMusicOnAlbum(hostMemberId,"배경음악");
 		
+		System.out.println("호스트 멤버 객체 테스트 : "+hostMember);
+		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);
 		request.setAttribute("minihome",minihome);
 		request.setAttribute("musicList",musicList);
 		request.setAttribute("mySkin",mySkin);
-		
-		System.out.println("서블릿 스킨 테스트 : "+mySkin);
 		
 		request.getRequestDispatcher("/views/minihome/minihome.jsp").forward(request,response);
 	}
