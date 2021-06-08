@@ -272,6 +272,9 @@ private Properties prop=new Properties();
 			for(int i=0;i<aitemNo.size();i++) {
 				pstmt.setString(1, id);
 				pstmt.setString(2, aitemNo.get(i));
+				
+				System.out.println("디에이오 테스트 : "+id+"/"+aitemNo.get(i));
+				
 				rs=pstmt.executeQuery();
 				if(rs.next()) aSearchResult+=1;
 			}
