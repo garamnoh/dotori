@@ -69,6 +69,24 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return c;
 	}
+	public int aIsInThereShoppingList(String id,List<String> aitemNo) {
+		Connection conn=getConnection();
+		int aSearchResult=dao.aIsInThereShoppingList(conn,id,aitemNo);
+		close(conn);
+		return aSearchResult;
+	}
+	public int bIsInThereShoppingList(String id,List<String> bitemNo) {
+		Connection conn=getConnection();
+		int bSearchResult=dao.bIsInThereShoppingList(conn,id,bitemNo);
+		close(conn);
+		return bSearchResult;
+	}
+	public int cIsInThereShoppingList(String id,List<String> citemNo) {
+		Connection conn=getConnection();
+		int cSearchResult=dao.cIsInThereShoppingList(conn,id,citemNo);
+		close(conn);
+		return cSearchResult;
+	}
 	public int aGetItemShoppingList(String id,List<String> aitemNo) {
 		Connection conn=getConnection();
 		int aResultInput=dao.aGetItemShoppingList(conn,id,aitemNo);

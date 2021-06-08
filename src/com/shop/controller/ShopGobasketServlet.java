@@ -60,6 +60,10 @@ public class ShopGobasketServlet extends HttpServlet {
 		System.out.println(c);
 		//request.setAttribute("type", type); map으로 분할할꺼임
 		
+		
+		request.setAttribute("msg",request.getAttribute("msg"));
+		
+		
 		//response.setContentType("text/html;charset=utf-8");
 		request.getRequestDispatcher("/views/shop/shopBasket.jsp").forward(request, response);
 	}
