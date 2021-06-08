@@ -88,7 +88,7 @@
    
 
           </select>
-                  <button id=email>이메일전송</button>
+               <!--    <button id=email>이메일전송</button> -->
                 <br>
         </div>
         <div id="id2">
