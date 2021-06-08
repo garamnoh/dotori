@@ -602,6 +602,28 @@ public class FriendDao {
 		} return likeList;
 	}
 	
+	public ArrayList<Integer> likeAlbum(Connection conn, String myId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Integer> likeListAlbum = new ArrayList<Integer>();
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("likeListAlbum"));
+			ps.setString(1, myId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) likeListAlbum.add(rs.getInt("IMG_NO"));
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return likeListAlbum;
+	}
+	
 	public ArrayList<Like> count(Connection conn){
 		
 		PreparedStatement ps = null;
@@ -616,7 +638,7 @@ public class FriendDao {
 			while(rs.next()) {
 				Like l = new Like();
 				
-				l.setDiaryNo(rs.getInt("DIARY_NO"));
+				l.setNo(rs.getInt("DIARY_NO"));
 				l.setCount(rs.getInt("COUNT"));
 				
 				count.add(l);
@@ -628,6 +650,34 @@ public class FriendDao {
 			close(rs);
 			close(ps);
 		} return count;
+	}
+	
+	public ArrayList<Like> countAlbum(Connection conn){
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Like> countAlbum = new ArrayList<Like>();
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("countAlbum"));
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Like l = new Like();
+				
+				l.setNo(rs.getInt("IMG_NO"));
+				l.setCount(rs.getInt("COUNT"));
+				
+				countAlbum.add(l);
+			}
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return countAlbum;
 	}
 	
 	public int checkLike(Connection conn, String diaryNo, String myId) {
@@ -667,6 +717,43 @@ public class FriendDao {
 		} return result;
 	}
 	
+	public int checkLikeAlbum(Connection conn, String imgNo, String myId) {
+		
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("ckeckLikeAlbum"));
+			ps.setString(1, myId);
+			ps.setString(2, imgNo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==0) {
+					ps1 = conn.prepareStatement(prop.getProperty("likeAlbum"));
+					ps1.setString(1, imgNo);
+					ps1.setString(2, myId);
+					
+					result = ps1.executeUpdate();
+				} else {
+					ps1 = conn.prepareStatement(prop.getProperty("unlikeAlbum"));
+					ps1.setString(1, myId);
+					ps1.setString(2, imgNo);
+					
+					result = ps1.executeUpdate();
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+			close(ps1);
+		} return result;
+	}
+	
 	public int likeCount(Connection conn, String diaryNo, String myId) {
 		
 		PreparedStatement ps = null;
@@ -689,14 +776,25 @@ public class FriendDao {
 		} return likeCount;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public int likeCountAlbum(Connection conn, String imgNo, String myId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int likeCountAlbum = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("likeCountAlbum"));
+			ps.setString(1, imgNo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) likeCountAlbum = rs.getInt(1);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return likeCountAlbum;
+	}
 }

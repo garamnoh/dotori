@@ -34,7 +34,6 @@ public class LikeServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		//String like = request.getParameter("like");
 		String diaryNo = request.getParameter("diaryNo");
 		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		

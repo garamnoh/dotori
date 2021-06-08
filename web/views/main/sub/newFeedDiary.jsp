@@ -34,16 +34,16 @@
 	            	}
 	            %>
 	            <div id="likeBox">
-	            <% for(Like like : count){ %>
-	            	<% if(d.getDiaryNo() == like.getDiaryNo()){ %>
-	            		<span><%= like.getCount() %></span>
-	            	<% break; } %>
-	            <% } %>
-	            <% if(likeOrNot == true) { %>
-	            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
-	            <% } else {%>
-	            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
-	            <% } %>
+		            <% for(Like like : count){ %>
+		            	<% if(d.getDiaryNo() == like.getNo()){ %>
+		            		<span><%= like.getCount() %></span>
+		            	<% break; } %>
+		            <% } %>
+		            <% if(likeOrNot == true) { %>
+		            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+		            <% } else {%>
+		            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+		            <% } %>
 	            </div>
 	        </div>
 	    </div>
