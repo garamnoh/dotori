@@ -34,7 +34,15 @@ public class DiaryUpdateServlet extends HttpServlet {
 		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
 		//System.out.println("diaryNo "+diaryNo);
 		d.setDiaryNo(diaryNo);
+		
+		
+		
+		System.out.println("서블릿 테스트 : "+diaryNo);
+		
 		String folder=request.getParameter("diary_folder");
+		
+		System.out.println("서블릿 테스트 폴더 No : "+folder);
+		
 		//System.out.println("folder "+folder);
 		switch(folder){
 			case "전체공개" : d.setFolderNo(1); break;

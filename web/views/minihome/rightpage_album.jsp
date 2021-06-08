@@ -6,16 +6,21 @@
 	String folder=(String)request.getAttribute("folder");
 	List<AlbumComment> commentList=(List<AlbumComment>)request.getAttribute("commentList");
 	String pageBar=(String)request.getAttribute("pageBar");
+	
+	
+	System.out.println("jsp테스트 : "+folder);
 %>
 
 <div class="album-controller">
 	<%if(folder!=null) {%>
+		<%if(!folder.equals("null")) {%>
 		<select id="changeFolderTarget">
 			<%for(int i=0;i<folderList.size();i++) {%>
 				<option value="<%=folderList.get(i)%>"><%=folderList.get(i)%></option>
 			<%} %>
 		</select>
 		<input type="button" id="changeFolderBtn" value="폴더 변경">
+		<%} %>
 	<%} %>
 	<div class="album-tooltip">?
 		<div class="album-tooltip-text">
@@ -49,8 +54,10 @@
 				
 				<div class="buttonsInPhotoBox">
 					<%if(folder!=null) {%>
+						<%if(!folder.equals("null")) {%>
 						<input type="checkbox">
 						<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+						<%} %>
 					<%} %>
 					<input type="button" onclick="fn_selectProfileImg(event);" value="대문 사진">
 					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
