@@ -31,6 +31,7 @@
             	<% if(admin.equals("admin@gmail.com")) { %>
             		<span class='title box'>Admin</span>
 	            	<span class="title box">Home</span>
+	            	<div id='notification'></div>
 	                <span class="title box" id='friendBtn'>Friends</span>
 	                <span class="title box">Shop</span>
 	                <img class="title" id="miniHome" src="<%= request.getContextPath() %>/images/logo_minihome.png" alt="">
@@ -41,8 +42,60 @@
 	                <img class="title" id="miniHome" src="<%= request.getContextPath() %>/images/logo_minihome.png" alt="">
 	            <% } %>
             </div>
+            <div id='msgAlert'>
+		    	<div id='msg'><span id='fromWho'></span>님의 채팅 요청</div>
+		    	<button id='yes'>수락</button>
+		    	<button id='no'>거절</button>
+		    </div>
         </div>
     </header>
+    
+    <style>
+    	#msgAlert{
+    		position: fixed;
+    		top: 0;
+    		left: 30%;
+    		border-bottom-left-radius: 10px;
+    		border-bottom-right-radius: 10px;
+    		background-color: #eee;
+    		opacity: .7;
+    		padding: 10px;
+    		display: flex;
+    		align-items: center;
+    	}
+    	#msgAlert>#msg{
+    		margin-top: 10px;
+    		color: gray;
+    		opacity: .7;
+    		margin-right: 20px;
+    	}
+    	#msgAlert>#msg>span{
+    		margin-right: 5px;
+    		font-size: 13px;
+    		font-weight: 500;
+    		opacity: 1;
+    	}
+    	#msgAlert button{
+    		margin-top: 10px;
+    		border: none;
+    		padding: 5px 10px;
+    		background-color: lightgray;
+    		opacity: 1;
+    		font-size: 13px;
+    		color: gray;
+    		margin-right: 5px;
+    		border-radius: 5px;
+    	}
+    	#msgAlert button:hover{
+    		opacity: .7;
+    	}
+    	#msgAlert button:active{
+    		opacity: 1;
+    	}
+    	#msgAlert button:focus{
+    		outline: none;
+    	}
+    </style>
 
 
 
@@ -202,29 +255,130 @@
 		
 		
 		
+		// 날짜 및 시간 //////////////////////////////////////////////////
+        function getFormatDate(date){
+            var year = date.getFullYear();              
+            var month = (1 + date.getMonth());          
+            month = month >= 10 ? month : '0' + month;  
+            var day = date.getDate();                   
+            day = day >= 10 ? day : '0' + day;          
+            return  year + '-' + month + '-' + day;       
+        }
+
+        function getFormatTime(date){
+            var hour = date.getHours();
+            var minute = date.getMinutes();
+            var second = date.getSeconds();
+            return hour + ":" + minute + ":" + second;
+        }
+        var today = getFormatDate(new Date());
+        var time = getFormatTime(new Date());
+        console.log(today, time);
+        
+        var date = today + " " + time;
+        ///////////////////////////////////////////////////////////////
 		
 		
 		
-		function Message(sender, receiver, msg, date){
+		
+		function Message(sender, receiver, msg, date, type){
 			this.sender = sender;
 			this.receiver = receiver;
 			this.msg = msg;
 			this.date = date;
+			this.type = type;
 		}
 		
 		const memberName = '<%=memberName%>';
 		
+		
 		$('#footer-info').on('click', ()=>{
-			var sendMsg = new Message(memberName, 'test', 'test', 'test');
+			console.log('access Member');
+			setTimeout(()=>{
+				var sendMsg = new Message(memberName, '', 'test', 'test', '');
+				socket.send(JSON.stringify(sendMsg));
+			}, 1000);
+		});
+		
+		var receiverName;
+
+		socket.onmessage = (e)=>{
+			console.log(e);
+			console.log("socket onmessage");
+			
+			let data = JSON.parse(e.data);
+			
+	 		if(data['type']=="요청"){
+				if(data['receiver']=='<%=memberName%>'){
+					$('#fromWho').text(data['sender']);
+					$('#msgAlert').slideDown();
+					receiverName = data['sender'];
+				}
+			} 
+		}
+		
+		const accept = memberName + "님이 채팅방에 입장했습니다.";
+		
+		$('#yes').on('click', (e)=>{
+			$('#aside').html('');
+			$('#section').html('');
+			
+			$('#aside').removeClass('hide');
+			
+			$.ajax({
+				url: '<%= request.getContextPath() %>/page/sidebarFriends',
+				dataYpe: 'html',
+				success: data=>{
+					$('#aside').append(data);
+				}
+			});
+			
+			$.ajax({
+				url: '<%= request.getContextPath() %>/chat/chatScreen',
+				dataTypd: 'html',
+				success: data=>{
+					$('#section').append(data);
+				}
+			}).done(()=>{
+	    		
+		    	$.ajax({
+		    		url: '<%= request.getContextPath() %>/chat/logedInInfo',
+		    		success: (data)=>{
+		    			$.each(data, (i,v)=>{
+			    			if(v[0].memberName==receiverName) {
+			    				 const filePath = v[0].profilePath;
+			    				 $('#receiverProfilePath').val(filePath);
+			    			}
+		    			});
+		    		}
+		    	});
+		    	$('#receiver').val(receiverName);
+		    	$('#receiver').next().focus();
+		    });
+			$('#msgAlert').slideUp();
+			var sendMsg = new Message(memberName, receiverName, accept, date, '채팅');
 			socket.send(JSON.stringify(sendMsg));
 		});
 		
 		
 		$(document).ready(function(){
+			$('#msgAlert').hide();
 			setTimeout(()=>{
 				$('#footer-info').trigger('click');
 			}, 2000);
 		});
+
+		
+
+		
+        const reject = memberName + "님이 채팅 요청을 거절 했습니다."
+        $('#no').on('click', (e)=>{
+			
+			var sendMsg = new Message(memberName, receiverName, reject, date, '채팅');
+			socket.send(JSON.stringify(sendMsg));
+			$('#msgAlert').slideUp();
+		});
+		
 	</script>
 
 </body>

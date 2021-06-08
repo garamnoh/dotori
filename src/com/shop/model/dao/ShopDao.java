@@ -1,6 +1,9 @@
 package com.shop.model.dao;
 
 import static com.common.JDBCTemplate.close;
+import static com.common.JDBCTemplate.commit;
+import static com.common.JDBCTemplate.getConnection;
+import static com.common.JDBCTemplate.rollback;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -259,27 +262,133 @@ private Properties prop=new Properties();
 		}
 		return c;
 	}
+	public int aGetItemShoppingList(Connection conn,String id,List<String> aitemNo) {
+		PreparedStatement pstmt=null;
+		int aResultInput=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aGetItemShoppingList"));
+			for(int i=0;i<aitemNo.size();i++) {
+				pstmt.setString(1, id);
+				System.out.println("dao test : "+aitemNo.get(i));
+				pstmt.setString(2, aitemNo.get(i));
+				aResultInput+=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return aResultInput;
+	}
+	public int bGetItemShoppingList(Connection conn,String id,List<String> bitemNo) {
+		PreparedStatement pstmt=null;
+		int bResultInput=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bGetItemShoppingList"));
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				
+				bResultInput+=pstmt.executeUpdate();
+				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bResultInput;
+	}
+	public int cGetItemShoppingList(Connection conn,String id,List<String> citemNo) {
+		PreparedStatement pstmt=null;
+		int cResultInput=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cGetItemShoppingList"));
+			for(int i=0;i<citemNo.size();i++) {
+				System.out.println("디에이오 넘버 테스트 : "+citemNo.get(i));
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				pstmt.setString(3, "기본엘범");
+				cResultInput+=pstmt.executeUpdate();
+				System.out.println("디에이오 테스트 : "+cResultInput);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cResultInput;
+	}
 	public int aBuyDeleteShoppingList(Connection conn,String id,List<String> aitemNo){
 		PreparedStatement pstmt=null;
-		int result=0;
+		int aResult=0;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("aBuyDeleteShoppingList"));
 			
 			for(int i=0;i<aitemNo.size();i++) {
-				pstmt.setString(1, aitemNo);
-				result=pstmt.executeUpdate();
+				pstmt.setString(1, id);
+				pstmt.setString(2, aitemNo.get(i));
+				aResult=pstmt.executeUpdate();
 			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return aResult;
+	}
+	public int bBuyDeleteShoppingList(Connection conn,String id,List<String> bitemNo){
+		PreparedStatement pstmt=null;
+		int bResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bBuyDeleteShoppingList"));
 			
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				bResult=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bResult;
+	}
+	public int cBuyDeleteShoppingList(Connection conn,String id,List<String> citemNo){
+		PreparedStatement pstmt=null;
+		int cResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cBuyDeleteShoppingList"));
 			
+			for(int i=0;i<citemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				cResult=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cResult;
+	}
+	public int dotoriMinusShoppingList(Connection conn,String id,int myDotoriNums,int itemDotoriNums) {
+		PreparedStatement pstmt=null;
+		int dotoriResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("dotoriMinusShoppingList"));
+			pstmt.setInt(1, myDotoriNums-itemDotoriNums);
+			pstmt.setString(2, id);
+			dotoriResult=pstmt.executeUpdate();
 			
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		return result;
+		return dotoriResult;
 	}
-	
 	
 	
 	

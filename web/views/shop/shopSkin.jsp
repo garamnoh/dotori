@@ -13,9 +13,10 @@ String result=(String)request.getAttribute("result");
 	<%if(list==null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
-		<table id=SkinTable>
+		<table id='SkinTable'>
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<tr>
+			<%if(3*i<list.size()) {%>
 			<td>
 			<div class="productSkin">
 				<div class="SkinPicture">
@@ -30,10 +31,11 @@ String result=(String)request.getAttribute("result");
                     <li><b><%=list.get(3*i).getSkinTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopSkinCheck" type="checkbox">
+                <input id='test7' class="shopSkinCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
+			<%} %>
 			<%if(3*i+1<list.size()) {%>
 			<td>
 			<div class="productSkin">
@@ -49,7 +51,7 @@ String result=(String)request.getAttribute("result");
                     <li><b><%=list.get(3*i+1).getSkinTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i+1).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopSkinCheck" type="checkbox">
+                <input id='test7' class="shopSkinCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -63,13 +65,13 @@ String result=(String)request.getAttribute("result");
 				<br>
                 <div class="SkinInfo">
                 <input class="shopSkinCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*1+2).getItemNo() %>">
+                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+2).getSkinTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i+2).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopSkinCheck" type="checkbox">
+                <input id='test7' class="shopSkinCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>

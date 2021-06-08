@@ -121,6 +121,8 @@
 		width: 25px;
 		border-radius: 50%;
 		margin-left: 10px;
+		border: 1px solid lightgray;
+		padding: 2px;
 	}
 	#chatBody>#senderBox>#align>#nameBox>span{
 		font-size: 13px;
@@ -128,12 +130,21 @@
 		margin-right: 2px;
 	}
 	#chatBody>#senderBox>#align>#msgBox{
-		border: 1px solid white;
+		display: flex;
+	}
+	#chatBody>#senderBox>#align>#msgBox>#msgText{
+		background-color: lightgray;
 		border-radius: 5px;
 		max-width: 400px;
 		height: auto;
 		word-break:break-all;
 		padding: 10px;
+		color: white;
+		margin-left: 5px;
+	}
+	#chatBody>#senderBox>#align>#msgBox>span{
+		font-size: 13px;
+		color: gray;
 	}
 	
 	
@@ -158,17 +169,28 @@
 		width: 25px;
 		border-radius: 50%;
 		margin-right: 10px;
+		border: 1px solid lightgray;
+		padding: 2px;
 	}
 	#chatBody>#receiverBox>#align>#nameBox>span{
 		font-size: 13px;
 		font-weight: 500;
 	}
 	#chatBody>#receiverBox>#align>#msgBox{
-		border: 1px solid black;
+		display: flex;
+	}
+	#chatBody>#receiverBox>#align>#msgBox>#msgText{
+		background-color: gray;
 		border-radius: 5px;
 		max-width: 400px;
 		height: auto;
-		padding: 10px;	
+		padding: 10px;
+		color: white;
+		margin-right: 5px;
+	}
+	#chatBody>#receiverBox>#align>#msgBox>span{
+		font-size: 13px;
+		color: gray;
 	}
 	
 	#sendAlert{
@@ -192,7 +214,8 @@
 
 <script src='<%=request.getContextPath()%>/js/jquery-3.6.0.min.js'></script>
 <script>
-	
+
+	var count = 0;
 	// 서버에서 전송한 데이터를 수신하고 페이지에 적용하는 함수
 	socket.onmessage = (e)=>{
 		console.log(e);
@@ -200,23 +223,30 @@
 		
 		// 자바스크립트 객체 형식으로 넘어온 문자열은 객체로 변환할 수 있음
 		// JSON.parse() 함수
-		console.log(JSON.parse(e.data));
 		
 		let data = JSON.parse(e.data);
+		console.log('메세지 : ', data['msg']);
+		console.log('센더 : ', data['sender']);
 		
+		const myId = '<%=member.getMemberName()%>';
+		
+			
 		let msg;
 		
-		if($('#sender').val()==data['sender']){
-			// 자신
+ 		if(data['type']=="요청"){
+			if(data['receiver']==myId){
+				$('#fromWho').text(data['sender']);
+				$('#msgAlert').slideDown();
+				receiverName = data['sender'];
+			}
+		} else{
 			
-			if(data['date']=="거절") {
-				
-				alert(data['msg']);
-				
-			} else {
+			if($('#sender').val()==data['sender']){
+				// 자신
 				
 				const rootPath = '<%=request.getContextPath()%>';			
 				const imgPath = '<%=profilePath%>';
+				const time = data['date'].substring(data['date'].indexOf(' ')+1, data['date'].lastIndexOf(':'));
 				
 				msg  = "<div id='senderBox'>";
 				msg += "<div id='align'>";
@@ -226,30 +256,16 @@
 				msg += "<img src='" + rootPath + "/upload/MINIMI/" + imgPath + "'>";
 				msg += "</div>";
 				msg += "<div id='msgBox'>";
-				msg += data['msg'];
+				msg += "<span>" + time + "</span><div id='msgText'>" + data['msg'] + "</div>";
 				msg += "</div></div></div>";
-			}
-			
-		} else{
-			// 상대방
-			
-			if(data['date']=="요청"){
 				
-				if(confirm(data['msg'])){
-					
-					
-				} else {
-					
-					const reject = "채팅 요청을 거부하였습니다.";
-					
-					var sendMsg = new Message(data['receiver'], data['sender'], reject, "거절");
-					socket.send(JSON.stringify(sendMsg));
-				}
+			} else {
+				// 상대방
 				
-			} else{
-			
+				
 				const rootPath = '<%=request.getContextPath()%>';			
 				const imgPath = $('#receiverProfilePath').val();
+				const time = data['date'].substring(data['date'].indexOf(' ')+1, data['date'].lastIndexOf(':'));
 				
 				msg  = "<div id='receiverBox'>";
 				msg += "<div id='align'>";
@@ -258,17 +274,28 @@
 				msg += "<span>"+ data['sender'] +"</span>";
 				msg += "</div>";
 				msg += "<div id='msgBox'>";
-				msg += data['msg'];
+				msg += "<div id='msgText'>" + data['msg'] + "</div><span>" + time + "</spans>";
 				msg += "</div></div></div>";
+						
 			}
+			$('#chatBody').append(msg);
+			$('#chatBody').animate({
+				scrollTop: $('#chatBody')[0].scrollHeight
+			}, 500);
 		}
-		$('#chatBody').append(msg);
 	}
 
-	socket.onclose = (e)=>{
-		console.log(e);
-		console.log('socket close');
+
+	
+	
+	function Message(sender, receiver, msg, date, type){
+		this.sender = sender;
+		this.receiver = receiver;
+		this.msg = msg;
+		this.date = date;
+		this.type = type;
 	}
+	
 	
 	$('#sendMsg').click((e)=>{
 		
@@ -303,17 +330,12 @@
 			}, 1000);
 		} 
 		else{
-			var sendMsg = new Message($('#sender').val(), $('#receiver').val(), $('#msg').val(), date);
+			var sendMsg = new Message($('#sender').val(), $('#receiver').val(), $('#chatInput #msg').val(), date, "채팅");
 			socket.send(JSON.stringify(sendMsg));
 		}
 	})
 	
-	function Message(sender, receiver, msg, date){
-		this.sender = sender;
-		this.receiver = receiver;
-		this.msg = msg;
-		this.date = date;
-	}
+
 	
 	$('#sendMsg').on('click', (e)=>{
 		$('#chatBody').animate({
@@ -321,5 +343,10 @@
 		}, 500);
 		$(e.target).prev().val('');
 		$(e.target).prev().focus();
+	});
+	
+
+	$('#chatInput #msg').on('keyup', (e)=>{
+		if(e.keyCode == 13) $('#sendMsg').trigger('click');
 	});
 </script>

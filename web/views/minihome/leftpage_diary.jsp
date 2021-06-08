@@ -5,7 +5,8 @@
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
 	Member loginMember=(Member)request.getAttribute("loginMember");	
 	Member hostMember=(Member)request.getAttribute("hostMember");
-	//String currentPage=(String)request.getAttribute("currentPage");	
+	String currentPage=(String)request.getAttribute("currentPage");
+	if(currentPage==null) currentPage="전체공개";
 %>
 
 <div id="diary_folder_box">
@@ -13,7 +14,11 @@
 	<div id="diary_folder_list">		
 		<%for(DiaryFolder df : list) {%>			
 			<ul>
-				<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>
+				<%if(currentPage.equals(df.getFolderName())) {%>
+					<li style="text-decoration:underline;" class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>				
+				<%} else{%>
+					<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>	
+				<%} %>
 			</ul>
 			<input type="hidden" name="diaryFolderLevel" value="<%=df.getFolderNo()%>">
 			<input type="hidden" name="shareLevel" value="<%=df.getShareLevel() %>">
@@ -23,18 +28,11 @@
 	<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
 	<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
 	
-	<div id="diary_folder_title">DIARY SETTING</div>
-	<div id="diary_folder_setting">
-		<input type="text" id="diary_folder_name" placeholder="추가할 폴더명 입력">
-		<div id="diary_add_folder_btn">폴더추가</div>
-		
-		<select id="folderName" name="folderName">
-			<%for(DiaryFolder df : list) {%>	
-				<option value=<%=df.getFolderName()%>><%=df.getFolderName()%></option>
-			<%} %>
-		</select>
-		<div id="diary_del_folder_btn">폴더삭제</div>
-	</div>	
+	<!-- 폴더 설정 버튼 -->
+	<%if(loginMember.getMemberId().equals(hostMember.getMemberId())
+		|| loginMember.getMemberId().equals("admin@gmail.com")) {%>
+		<div id="diary_folder_setting_btn">DIARY SETTING</div>
+	<%} %>	
 </div>
 
 <script src="<%=request.getContextPath()%>/js/minihome/leftpage_diary.js"></script>

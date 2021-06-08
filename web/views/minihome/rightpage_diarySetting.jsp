@@ -1,18 +1,64 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<%@ page import="com.minihome.diary.model.vo.DiaryFolder, java.util.List, com.member.model.vo.Member" %>
 
-	<div id="diarySetting">
-		
-		
-		
-	</div>
+<%
+	String loginMemberId=(String)request.getAttribute("loginMember");	
+	String hostMemberId=(String)request.getAttribute("hostMember");
+	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
+	System.out.println("리스트 테스트 : "+list);
+%>
 
-</body>
-</html>
+<div id="diarySetting">
+	<fieldset id="folderAdd">
+		<legend>폴더 추가</legend>
+		<table>					
+			<tr>
+				<th>공개 범위</th>
+				<td>
+					<select id="folderShareLevel" name="folderShareLevel">						
+						<option id="public" value="PUBLIC">전체공개</option>
+						<option id="followers" value="FOLLOWERS">일촌공개</option>
+						<option id="private" value="PRIVATE">비공개</option>
+						<option id="friends" value="FRIENDS">멤버공개</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<th>폴더 이름</th>
+				<td>
+					<input type="text" id="addFolderName" placeholder="추가할 폴더이름을 입력하세요.">
+				</td>
+			</tr>
+			<tr id="friendsTr">
+				<th>멤버 초대</th>
+				<td>
+					<input type="text" id="shareMember" placeholder="콤마(,)로 구분해서 작성해주세요.">
+				</td>
+			</tr>			
+		</table>
+		<div id="diaryFolderSaveBtn">저장</div>		
+	</fieldset>
+	
+	<input type="hidden" name="loginMemberId" value="<%=loginMemberId%>">
+	<input type="hidden" name="hostMemberId" value="<%=hostMemberId%>">
+	
+	<fieldset id="folderDel">
+		<legend>폴더 삭제</legend>
+		<table>			
+			<tr>
+				<th>폴더 선택</th>
+				<td>
+					<select id="folderName" name="folderName">
+						<%for(DiaryFolder df : list) {%>	
+							<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+						<%} %>
+					</select>
+				</td>
+			</tr>
+		</table>	
+		<div id="diary_del_folder_btn">삭제</div>
+	</fieldset>
+</div>
+
+<script src="<%=request.getContextPath()%>/js/minihome/rightpage_diarySetting.js"></script>

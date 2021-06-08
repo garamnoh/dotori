@@ -363,4 +363,25 @@ public class MemberDao {
 			close(ps);
 		} return profilePath;
 	}
+	
+	
+	public int updateDotori(Connection conn, String memberId, int dotori) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("updateDotori"));
+			ps.setInt(1, dotori);
+			ps.setString(2, memberId);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
 }

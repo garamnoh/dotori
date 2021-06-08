@@ -225,13 +225,14 @@ public class DiaryDao {
 		return list;
 	}
 	
-	public int insertDiaryFolder(Connection conn, String name, String id) {
+	public int insertDiaryFolder(Connection conn, String MemberId, String addFolderName, String folderShareLevel) {
 		PreparedStatement pstmt=null;
-		int result=0;
+		int result=0;		
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("insertDiaryFolder"));
-			pstmt.setString(1, name);
-			pstmt.setString(2, id);			
+			pstmt.setString(1, MemberId);			
+			pstmt.setString(2, addFolderName);
+			pstmt.setString(3, folderShareLevel);
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -239,6 +240,55 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return result;
+	}
+	
+	public int insertShareDiaryFolder(Connection conn, int folderNo, String shareMember) {
+		PreparedStatement pstmt=null;
+		int result=0;		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertShareDiaryFolder"));
+			pstmt.setInt(1, folderNo);
+			pstmt.setString(2, shareMember);			
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
+	public int selectDiaryShareFolder(Connection conn, String addFolderName) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int folderNo=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryShareFolder"));
+			pstmt.setString(1, addFolderName);
+			rs=pstmt.executeQuery();
+			if(rs.next()) folderNo=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return folderNo;
+	}
+	
+	public int folderDelete(Connection conn, int folderNo) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("folderDelete"));	
+			pstmt.setInt(1,  folderNo);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;	
 	}
 	
 	

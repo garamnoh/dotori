@@ -1,7 +1,6 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
-import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -10,19 +9,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.DiaryFolderShare;
 
 /**
- * Servlet implementation class DiaryFolder
+ * Servlet implementation class DiaryFolderDelete
  */
-@WebServlet(name = "DiaryFolderServlet", urlPatterns = { "/diary/diaryFolder" })
-public class DiaryFolderServlet extends HttpServlet {
+@WebServlet("/diary/folderDelete")
+public class DiaryFolderDeleteServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderServlet() {
+    public DiaryFolderDeleteServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,16 +30,13 @@ public class DiaryFolderServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		response.setContentType("text/html;charset=utf-8");
+		int delFolderNo=Integer.parseInt(request.getParameter("delFolderNo"));
 		
-		int diaryFolderLevel=Integer.parseInt(request.getParameter("diaryFolderLevel"));
-		String loginMemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
-		String shareLevel=request.getParameter("shareLevel");		
+		int result=new DiaryService().folderDelete(delFolderNo);
 		
-		request.setAttribute("diaryFolderLevel", diaryFolderLevel);	
-		
-		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+		if(result>0) {
+			request.getRequestDispatcher("/page/minihomeRightPageToHome.do").forward(request, response);
+		}
 		
 	}
 

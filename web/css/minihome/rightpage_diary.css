@@ -342,8 +342,42 @@
 }
 
 /******폴더 수정창*******/
-
-
+#diarySetting{
+	position:absolute;
+}
+#folderAdd{
+	position:absolute;
+	height: 110px;
+}
+#diaryFolderSaveBtn{
+	width:30px;
+	height: 30px;
+	font-weight:bolder;	
+	text-align:center;		
+	cursor: pointer;
+	margin: 0 0 -10px 285px;	
+}
+#addFolderName{
+	width:190px;
+}
+#shareMember{
+	width:190px;
+}
+#folderDel{
+	position:absolute;
+    margin-top: 150px;
+}
+#diary_del_folder_btn{
+	width:30px;
+	height: 30px;
+	font-weight:bolder;	
+	text-align:center;		
+	cursor: pointer;
+	margin: 0 0 -10px 285px;	
+}
+#diaryFolderSaveBtn:hover, #diary_del_folder_btn:hover{
+	color:#747474;
+}
 
 /*******************/
 #pageBar{
@@ -353,9 +387,9 @@
     text-align: center;    
 	font-size:13px;
 } 
-#pageBar span:nth-child(2){
+/* #pageBar span:nth-child(2){
 	text-decoration:underline;
-}
+} */
 #pageBar a, #pageBar span{
 	margin:0 5px 0 5px;
 	font-weight:bold;

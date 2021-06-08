@@ -1,5 +1,5 @@
 $("#selectFeeling").change((e)=>{
-    let changeFeeling=$(e.target).val();
+	let changeFeeling=$(e.target).val();
     $.ajax({
         url:contextPath+"/page/minihomeLeftPageToHome.do",
         type:"post",
