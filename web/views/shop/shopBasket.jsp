@@ -125,11 +125,11 @@
 
 	function buyDotoriGo(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/page/option1.do",
+			url:"<%=request.getContextPath()%>/ajax/goDotoriPay",
 			
-			data:{"msg": "성공"},
+			data:{},
 			success:data=>{
-				
+				$("#section").html(data);
 			}
 			
 		});
@@ -172,9 +172,8 @@
 			traditional :true, 
 			data:{"memberId": "<%=id%>","aitemNo":aCheck.toString(),"bitemNo":bCheck.toString(),"citemNo":cCheck.toString(),"myDotoriNums":<%=id.getDotori() %>,"itemDotoriNums":$('#totalPrice').text()},
 			success:data=>{
-				alert("구매 완료");
+				$("#section").html(data);
 			}
-			
 		});
 	}
 	

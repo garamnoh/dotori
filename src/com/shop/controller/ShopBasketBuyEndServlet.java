@@ -73,6 +73,8 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 		int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
 		//내가 가진 도토리수 차감하기
 		int dotoriResult=new ShopService().dotoriMinusShoppingList(id,myDotoriNums,itemDotoriNums);
+	
+		request.getRequestDispatcher("/shop/shopBasketSearch.do").forward(request, response);
 	}
 
 	/**
