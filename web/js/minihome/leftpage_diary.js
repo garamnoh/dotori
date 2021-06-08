@@ -3,10 +3,10 @@ $(".folderLevel").click(e=>{
 		url:contextPath+"/diary/diaryFolder",
 		type:"post",
 		data:{
-			"diaryFolderLevel":$(e.target).parent().next().val(),
+			"folderNo":$(e.target).parent().next().val(),
 			"loginMemberId":$("input[name='loginMemberId']").val(),
 			"hostMemberId":$("input[name='hostMemberId']").val(),
-			"shareLevel":$("input[name='shareLevel']").val()				
+			"shareLevel":$(e.target).parent().next().next().val()				
 		},
 		dataType:"html",
 		success:data=>{				
