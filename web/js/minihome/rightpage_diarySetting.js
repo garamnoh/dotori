@@ -1,49 +1,36 @@
 $("#diaryFolderSaveBtn").click(e=>{	
-	if($("#folderShareLevel").val()=="friends"){
-		$.ajax({
-			url:contextPath+"/diary/folderWrite",
-			type:"post",
-			data:{
-				"folderShareLevel":$("#folderShareLevel").val(),
-				"addFolderName":$("#addFolderName").val(),
-				"shareMember":$("#shareMember").val(),
-				"hostMemberId":$("input[name='hostMemberId']").val(),
-				"loginMemberId":$("input[name='loginMemberId']").val()
-			},
-			dataType:"html",
-			success:data=>{
-				$("#left-page").html(data);	
-			}
-		});
-	}else{
-		$.ajax({
-			url:contextPath+"/diary/folderWrite",
-			type:"post",
-			data:{
-				"folderShareLevel":$("#folderShareLevel").val(),
-				"addFolderName":$("#addFolderName").val(),
-				"hostMemberId":$("input[name='hostMemberId']").val(),
-				"loginMemberId":$("input[name='loginMemberId']").val()
-			},
-			dataType:"html",
-			success:data=>{
-				$("#left-page").html(data);
-			}		
-		});
-	}	
+	$.ajax({
+		url:contextPath+"/diary/folderWrite",
+		type:"post",
+		data:{
+			"folderShareLevel":$("#folderShareLevel").val(),
+			"addFolderName":$("#addFolderName").val(),
+			"hostMemberId":$("input[name='hostMemberId']").val(),
+			"loginMemberId":$("input[name='loginMemberId']").val()
+		},
+		dataType:"html",
+		success:data=>{
+			$("#left-page").html(data);
+		}		
+	});		
 });
 
-$("#folderShareLevel").change(e=>{
-	if($(e.target).val()=="FRIENDS"){
-		$("#shareMember").attr('disabled', false);		
-	}else{
-		$("#shareMember").attr('disabled', true);
-	}		
+$("#diaryMemberBtn").click(e=>{
+	$.ajax({
+		url:contextPath+"/diary/addFriend",
+		type:"post",
+		data:{
+			"shareMember":$("#shareMember").val(),
+			"shareFolderNo":$("#shareFolderNo").val(),
+			"hostMemberId":$("input[name='hostMemberId']").val(),
+			"loginMemberId":$("input[name='loginMemberId']").val()
+		},
+		dataType:"html",
+		success:data=>{
+			$("#left-page").html(data);
+		}		
+	});	
 });
-$(function(){
-	$("#folderShareLevel").change();
-});
-
 
 
 $("#diary_del_folder_btn").click(e=>{

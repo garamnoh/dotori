@@ -1,8 +1,6 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -10,19 +8,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.DiaryFolder;
 
 /**
- * Servlet implementation class DiaryFolderUpdate
+ * Servlet implementation class DiaryAddFriendServlet
  */
-@WebServlet("/diary/FolderSetting")
-public class DiaryFolderSettingServlet extends HttpServlet {
+@WebServlet("/diary/addFriend")
+public class DiaryAddFriendServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderSettingServlet() {
+    public DiaryAddFriendServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +28,21 @@ public class DiaryFolderSettingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
 		
-		String loginMemberId=request.getParameter("loginMemberId");
+		int shareFolderNo=Integer.parseInt(request.getParameter("shareFolderNo"));
+		String shareMember=request.getParameter("shareMember");
+		String MemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
+		String members[]=shareMember.split(",");
+		int result=0;
+			
+		for(int i=0; i<members.length; i++) {			
+			result=new DiaryService().insertShareDiaryFolder(shareFolderNo, members[i]);
+		}			
 		
-		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);
-		List<DiaryFolder> fList=new DiaryService().selectShareFolder(hostMemberId);
-		
-		request.setAttribute("loginMemberId", loginMemberId);
-		request.setAttribute("hostMemberId", hostMemberId);
-		request.setAttribute("list", list);
-		request.setAttribute("fList", fList);		
-				
-		request.getRequestDispatcher("/views/minihome/rightpage_diarySetting.jsp").forward(request,response);
-		
+		if(result>0) {
+			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
+		}
 	}
 
 	/**

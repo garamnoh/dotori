@@ -33,26 +33,10 @@ public class DiaryFolderWriteServlet extends HttpServlet {
 		String addFolderName=request.getParameter("addFolderName");
 		String folderShareLevel=request.getParameter("folderShareLevel");
 		String MemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
-		String shareMember="";
-		int result=0, check=0, folderNo=0;
-		
-		if(folderShareLevel.equals("friends")) {
-			shareMember=request.getParameter("shareMember");
-			String[] shareMembers=shareMember.split(",");
-			for(int i=0; i<shareMembers.length; i++) {
-				check=new DiaryService().insertDiaryFolder(MemberId, addFolderName, folderShareLevel);
-				folderNo=new DiaryService().selectDiaryShareFolder(addFolderName);
-				if(check>0) {
-					result=new DiaryService().insertShareDiaryFolder(folderNo, shareMembers[i]);					
-				}
-			}
-		}else {
-			result=new DiaryService().insertDiaryFolder(MemberId, addFolderName, folderShareLevel);
-		}	
-		
-		
-		
+		String hostMemberId=request.getParameter("hostMemberId");		
+			
+		int result=new DiaryService().insertDiaryFolder(hostMemberId, addFolderName, folderShareLevel);				
+			
 		if(result>0) {
 			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
 		}		
