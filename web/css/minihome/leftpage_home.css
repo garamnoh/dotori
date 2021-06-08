@@ -1,26 +1,26 @@
 @charset "UTF-8";
-
-#feelingBox{	
+#feelingBox{
+	position:relative;	
 	width:180px;
 	height:40px;
-	margin: 0 0 5px 0;
+	margin-bottom:5px;
 }
 
-#feelingImg{	
+.feelingImg{	
 	display:inline-block;
 	position:absolute;
-	width:40px;
-	height:40px;
-	margin: 0 0 0 13px;
+	left:30px;
+	top:5px;
+	width:30px;
 	border-radius:5px;
-	/* border:1px solid; */
 }
 
 #selectFeeling{
-	position: absolute;    
-    margin: -10px 0 0 65px;
-    width: 100px;
-    height: 30px;
+	position: absolute;
+	left:70px;
+	top:8px;
+	width:90px;
+	height:25px;
 }
 #selectFeelingBox{
 	display:inline-block;

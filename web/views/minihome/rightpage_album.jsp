@@ -42,6 +42,7 @@
 		<%} %>
 	<%}else {%>
 		<%for(int i=0;i<albumList.size();i++) {%>
+			<%if(albumList.get(i).getFilepath()!=null) {%>
 			<div class="photoBox">
 				<p class="photoTitle"><%=albumList.get(i).getTitle()%></p>
 				<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>">
@@ -116,6 +117,7 @@
 					<%} %>
 				<%} %>
 			</div>
+			<%} %>
 		<%} %>
 	<%} %>
 </div>
