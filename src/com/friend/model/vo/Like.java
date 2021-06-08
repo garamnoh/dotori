@@ -2,25 +2,25 @@ package com.friend.model.vo;
 
 public class Like {
 	
-	private int diaryNo;
+	private int No;
 	private int count;
 	
 	public Like() {
 		// TODO Auto-generated constructor stub
 	}
 
-	public Like(int diaryNo, int count) {
+	public Like(int no, int count) {
 		super();
-		this.diaryNo = diaryNo;
+		No = no;
 		this.count = count;
 	}
 
-	public int getDiaryNo() {
-		return diaryNo;
+	public int getNo() {
+		return No;
 	}
 
-	public void setDiaryNo(int diaryNo) {
-		this.diaryNo = diaryNo;
+	public void setNo(int no) {
+		No = no;
 	}
 
 	public int getCount() {
@@ -33,7 +33,7 @@ public class Like {
 
 	@Override
 	public String toString() {
-		return "Like [diaryNo=" + diaryNo + ", count=" + count + "]";
+		return "Like [No=" + No + ", count=" + count + "]";
 	}
 	
 }
