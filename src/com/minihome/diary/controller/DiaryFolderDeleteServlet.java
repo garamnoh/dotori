@@ -35,7 +35,7 @@ public class DiaryFolderDeleteServlet extends HttpServlet {
 		int result=new DiaryService().folderDelete(delFolderNo);
 		
 		if(result>0) {
-			request.getRequestDispatcher("/page/minihomeRightPageToHome.do").forward(request, response);
+			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);
 		}
 		
 	}

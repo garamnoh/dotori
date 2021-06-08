@@ -215,8 +215,21 @@
 	    padding: 10px;
 	}
 	
-	#newFeedAlbum>.contents>img{
+	#newFeedAlbum>.contents>#likeBox{
+		display: flex;
+		width: auto;
+		height: auto;
+		align-items: center;
+		margin-bottom: 5px;
+	}
+
+	#newFeedAlbum>.contents>#likeBox>img{
 	    width: 20px;
+	}
+	
+	#newFeedAlbum>.contents>#likeBox>span{
+		font-size: 13px;
+		margin: 5px;
 	}
 	
 	#newFeedAlbum>.contents>div>p{

@@ -141,9 +141,23 @@ public class FriendService {
 		return likeList;
 	}
 	
+	public ArrayList<Integer> likeAlbum(String myId){
+		Connection conn = getConnection();
+		ArrayList<Integer> likeListAlbum = dao.likeAlbum(conn, myId);
+		close(conn);
+		return likeListAlbum;
+	}
+	
 	public ArrayList<Like> count(){
 		Connection conn = getConnection();
-		ArrayList<Like> count = dao.count(conn);
+		ArrayList<Like> countAlbum = dao.count(conn);
+		close(conn);
+		return countAlbum;
+	}
+	
+	public ArrayList<Like> countAlbum(){
+		Connection conn = getConnection();
+		ArrayList<Like> count = dao.countAlbum(conn);
 		close(conn);
 		return count;
 	}
@@ -156,10 +170,25 @@ public class FriendService {
 		close(conn);
 	}
 	
+	public void checkLikeAlbum(String imgNo, String myId) {
+		Connection conn = getConnection();
+		int result = dao.checkLikeAlbum(conn, imgNo, myId);
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		close(conn);
+	}
+	
 	public int likeCount(String diaryNo, String myId) {
 		Connection conn = getConnection();
 		int likeCount = dao.likeCount(conn, diaryNo, myId);
 		close(conn);
 		return likeCount;
+	}
+	
+	public int likeCountAlbum(String imgNo, String myId) {
+		Connection conn = getConnection();
+		int likeCountAlbum = dao.likeCountAlbum(conn, imgNo, myId);
+		close(conn);
+		return likeCountAlbum;
 	}
 }

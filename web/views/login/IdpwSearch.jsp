@@ -138,16 +138,7 @@
               
 		
             
-              const fn_idcheck=()=>{
-/*             	
-            	  $( "#onClickTest" ).on( "click", function( event ) { 
-            		  alert( "This will be displayed only once." ); 
-            		  $( this ).off( event ); }); */
-        
-            
-            	
-            		 
-
+              const fn_idcheck=()=>{            	
             		$.ajax({
             			 url:"<%=request.getContextPath()%>/IdSearch",
             			data:{

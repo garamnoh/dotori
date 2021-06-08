@@ -6,8 +6,7 @@
 	String loginMemberId=(String)request.getAttribute("loginMember");	
 	String hostMemberId=(String)request.getAttribute("hostMember");
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
-	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");
-	System.out.println("폴더 쉐어 리스트 테스트 : "+fList);
+	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");	
 %>
 
 <div id="diarySetting">
@@ -30,13 +29,7 @@
 				<td>
 					<input type="text" id="addFolderName" placeholder="추가할 폴더이름을 입력하세요.">
 				</td>
-			</tr>
-			<tr id="friendsTr">
-				<th>멤버 초대</th>
-				<td>
-					<input type="text" id="shareMember" placeholder="콤마(,)로 구분해서 작성해주세요.">
-				</td>
-			</tr>			
+			</tr>						
 		</table>
 		<div id="diaryFolderSaveBtn">저장</div>		
 	</fieldset>
@@ -47,15 +40,10 @@
 				<tr>
 					<th>폴더 선택</th>
 					<td>
-						<select id="shareFolder" name="shareFolder">						
+						<select id="shareFolderNo" name="shareFolderNo">						
 							<%for(DiaryFolder dsf : fList) {%>	
 								<option value="<%=dsf.getFolderNo()%>"><%=dsf.getFolderName()%></option>							
-							<%} %>
-							
-							<!-- <option id="public" value="PUBLIC">전체공개</option>
-							<option id="followers" value="FOLLOWERS">일촌공개</option>
-							<option id="private" value="PRIVATE">비공개</option>
-							<option id="friends" value="FRIENDS">멤버공개</option> -->
+							<%} %>							
 						</select>
 					</td>
 				</tr>			

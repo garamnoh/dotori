@@ -5,23 +5,23 @@
 	ProfileImg profileImg=(ProfileImg)request.getAttribute("profileImg");
 	String feeling=minihome.getFeeling();
 %>
-	<div id="feelingBox">
+<div id="feelingBox">
 	<%if(feeling!=null) {%>		
 		<div id="feelingImgBox">
 			<%if(feeling.equals("기쁨")) {%>
-				<img id="feelingImg" alt="기쁨" src="<%=request.getContextPath()%>/images/minihome/joy.png">
+				<img class="feelingImg" alt="기쁨" src="<%=request.getContextPath()%>/images/minihome/joy.png">
 			<%}else if(feeling.equals("행복")){ %>
-				<img id="feelingImg" alt="행복" src="<%=request.getContextPath()%>/images/minihome/happy.png">
+				<img class="feelingImg" alt="행복" src="<%=request.getContextPath()%>/images/minihome/happy.png">
 			<%}else if(feeling.equals("즐거움")){ %>
-				<img id="feelingImg" alt="즐거움" src="<%=request.getContextPath()%>/images/minihome/pleasure.png">
+				<img class="feelingImg" alt="즐거움" src="<%=request.getContextPath()%>/images/minihome/pleasure.png">
 			<%}else if(feeling.equals("슬픔")){ %>
-				<img id="feelingImg" alt="슬픔" src="<%=request.getContextPath()%>/images/minihome/sad.png">
+				<img class="feelingImg" alt="슬픔" src="<%=request.getContextPath()%>/images/minihome/sad.png">
 			<%}else if(feeling.equals("사랑")){ %>
-				<img id="feelingImg" alt="사랑" src="<%=request.getContextPath()%>/images/minihome/love.png">
+				<img class="feelingImg" alt="사랑" src="<%=request.getContextPath()%>/images/minihome/love.png">
 			<%}else if(feeling.equals("분노")){ %>
-				<img id="feelingImg" alt="분노" src="<%=request.getContextPath()%>/images/minihome/angry.png">
+				<img class="feelingImg" alt="분노" src="<%=request.getContextPath()%>/images/minihome/angry.png">
 			<%}else if(feeling.equals("부끄러움")){ %>
-				<img id="feelingImg" alt="부끄러움" src="<%=request.getContextPath()%>/images/minihome/shy.png">			
+				<img class="feelingImg" alt="부끄러움" src="<%=request.getContextPath()%>/images/minihome/shy.png">			
 			<%} %>			
 		</div>
 		<div id="selectFeelingBox">
