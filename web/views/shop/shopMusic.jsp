@@ -83,6 +83,16 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 	}%>
 </form>
 <script>
+var shopSearchItem=(event)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopSearchItem.do",
+		data:{"searchKey":$(event.target).prev().prev().val(),"type":"music"},
+		success:data=>{
+			$("#section").html(data);
+		}
+	});
+	
+};
 function searchKeyup(e){
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopSearch.do",

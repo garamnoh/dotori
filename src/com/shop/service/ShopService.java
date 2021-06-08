@@ -69,6 +69,24 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return c;
 	}
+	public List<Minimi> ashopSearchItem(String searchKey){
+		Connection conn=getConnection();
+		List<Minimi> minimiSearchResult=dao.ashopSearchItem(conn,searchKey);
+		close(conn);
+		return minimiSearchResult;
+	}
+	public List<Skin> bshopSearchItem(String searchKey){
+		Connection conn=getConnection();
+		List<Skin> skinSearchResult=dao.bshopSearchItem(conn,searchKey);
+		close(conn);
+		return skinSearchResult;
+	}
+	public List<Music> cshopSearchItem(String searchKey){
+		Connection conn=getConnection();
+		List<Music> musicSearchResult=dao.cshopSearchItem(conn,searchKey);
+		close(conn);
+		return musicSearchResult;
+	}
 	public int aIsInThereShoppingList(String id,List<String> aitemNo) {
 		Connection conn=getConnection();
 		int aSearchResult=dao.aIsInThereShoppingList(conn,id,aitemNo);

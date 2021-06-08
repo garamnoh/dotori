@@ -262,6 +262,79 @@ private Properties prop=new Properties();
 		}
 		return c;
 	}
+	public List<Minimi> ashopSearchItem(Connection conn,String searchKey){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Minimi> minimiSearchResult= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("ashopSearchItem"));
+			pstmt.setString(1, "%"+searchKey+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Minimi mi= new Minimi();
+				mi.setItemNo(rs.getInt("item_no"));
+				mi.setFilepath(rs.getString("filepath"));
+				mi.setPrice(rs.getInt("price"));
+				mi.setTitle(rs.getString("title"));
+				minimiSearchResult.add(mi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return minimiSearchResult;
+	}
+	public List<Skin> bshopSearchItem(Connection conn,String searchKey){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Skin> skinSearchResult= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bshopSearchItem"));
+			pstmt.setString(1, "%"+searchKey+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk= new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				skinSearchResult.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinSearchResult;
+	}
+	public List<Music> cshopSearchItem(Connection conn,String searchKey){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Music> musicSearchResult= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cshopSearchItem"));
+			pstmt.setString(1, "%"+searchKey+"%");
+			pstmt.setString(2, "%"+searchKey+"%");
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				musicSearchResult.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return musicSearchResult;
+	}
 	public int aIsInThereShoppingList(Connection conn,String id,List<String> aitemNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
