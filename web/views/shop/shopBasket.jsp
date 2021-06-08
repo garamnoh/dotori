@@ -7,7 +7,7 @@
 	List<Skin> b=(List<Skin>)request.getAttribute("b");
 	List<Music> c=(List<Music>)request.getAttribute("c");
 	Member id = (Member)session.getAttribute("loginMember");
-	
+	String msg=(String)request.getAttribute("msg");
 	
 %>
 
@@ -124,7 +124,7 @@
 <input type="hidden" id="loginMemberId" value="<%=id.getMemberId()%>">
 
 <script>
-
+	
 	function buyDotoriGo(){
 		$.ajax({
 			url:"<%=request.getContextPath()%>/ajax/goDotoriPay",
@@ -208,6 +208,9 @@
 		
 	}
 	
+	<%if(msg!=null){%>
+		alert("<%=msg%>");
+	<%}%>
 	
 
 	

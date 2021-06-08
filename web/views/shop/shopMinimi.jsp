@@ -128,10 +128,11 @@ var getbasket=()=>{
 	});
 }
 
-
 <%if(result!=null){%>
 alert("<%=result%>");
 <%}%>
+
+$(".shopTopTap>span")
 
 
 </script>

@@ -41,10 +41,17 @@ public class ShopGobasketServlet extends HttpServlet {
 		
 		
 		
+
+		request.setAttribute("msg",request.getAttribute("msg"));
+		
+		
+		//response.setContentType("text/html;charset=utf-8");
+
 		request.setAttribute("a", a);
 		request.setAttribute("b", b);
 		request.setAttribute("c", c);
 		
+
 		request.getRequestDispatcher("/views/shop/shopBasket.jsp").forward(request, response);
 	}
 
