@@ -262,6 +262,67 @@ private Properties prop=new Properties();
 		}
 		return c;
 	}
+	public int aIsInThereShoppingList(Connection conn,String id,List<String> aitemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		int aSearchResult=0;
+		try {
+			
+			pstmt=conn.prepareStatement(prop.getProperty("aIsInThereShoppingList"));
+			for(int i=0;i<aitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, aitemNo.get(i));
+				
+				System.out.println("디에이오 테스트 : "+id+"/"+aitemNo.get(i));
+				
+				rs=pstmt.executeQuery();
+				if(rs.next()) aSearchResult+=1;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return aSearchResult;
+	}
+	public int bIsInThereShoppingList(Connection conn,String id,List<String> bitemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		int bSearchResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bIsInThereShoppingList"));
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				rs=pstmt.executeQuery();
+				if(rs.next()) bSearchResult+=1;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bSearchResult;
+	}
+	public int cIsInThereShoppingList(Connection conn,String id,List<String> citemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs =null;
+		int cSearchResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cIsInThereShoppingList"));
+			for(int i=0;i<citemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				rs=pstmt.executeQuery();
+				if(rs.next()) cSearchResult+=1;
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cSearchResult;
+	}
 	public int aGetItemShoppingList(Connection conn,String id,List<String> aitemNo) {
 		PreparedStatement pstmt=null;
 		int aResultInput=0;

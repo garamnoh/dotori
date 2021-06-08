@@ -1,4 +1,4 @@
-package com.minihome.diary.controller;
+package com.friend.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
+import org.json.simple.JSONObject;
+
+import com.friend.model.service.FriendService;
+import com.google.gson.Gson;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DiaryFolderWrite
+ * Servlet implementation class LikeServlet
  */
-@WebServlet("/diary/folderWrite")
-public class DiaryFolderWriteServlet extends HttpServlet {
+@WebServlet("/friends/like")
+public class LikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderWriteServlet() {
+    public LikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +34,18 @@ public class DiaryFolderWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String addFolderName=request.getParameter("addFolderName");
-		String folderShareLevel=request.getParameter("folderShareLevel");
-		String MemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");		
-			
-		int result=new DiaryService().insertDiaryFolder(hostMemberId, addFolderName, folderShareLevel);				
-			
-		if(result>0) {
-			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
-		}		
+		//String like = request.getParameter("like");
+		String diaryNo = request.getParameter("diaryNo");
+		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
+		new FriendService().checkLike(diaryNo, myId);
+		int likeCount = new FriendService().likeCount(diaryNo, myId);
+		
+		JSONObject json = new JSONObject();
+		json.put("likeCount", likeCount);
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(json, response.getWriter());
 	}
 
 	/**

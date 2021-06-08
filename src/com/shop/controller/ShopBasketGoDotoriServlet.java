@@ -1,28 +1,23 @@
-package com.minihome.diary.controller;
+package com.shop.controller;
 
 import java.io.IOException;
-import java.util.List;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.DiaryFolder;
-
 /**
- * Servlet implementation class DiaryFolderUpdate
+ * Servlet implementation class ShopBasketGoDotoriServlet
  */
-@WebServlet("/diary/FolderSetting")
-public class DiaryFolderSettingServlet extends HttpServlet {
+@WebServlet("/ajax/goDotoriPay")
+public class ShopBasketGoDotoriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderSettingServlet() {
+    public ShopBasketGoDotoriServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,21 +26,10 @@ public class DiaryFolderSettingServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		// TODO Auto-generated method stub
+		//response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html;charset=utf-8");
-		
-		String loginMemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
-		
-		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);
-		List<DiaryFolder> fList=new DiaryService().selectShareFolder(hostMemberId);
-		
-		request.setAttribute("loginMemberId", loginMemberId);
-		request.setAttribute("hostMemberId", hostMemberId);
-		request.setAttribute("list", list);
-		request.setAttribute("fList", fList);		
-				
-		request.getRequestDispatcher("/views/minihome/rightpage_diarySetting.jsp").forward(request,response);
-		
+		request.getRequestDispatcher("/views/shop/buyDotori.jsp").forward(request, response);
 	}
 
 	/**

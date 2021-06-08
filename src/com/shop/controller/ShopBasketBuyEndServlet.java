@@ -62,17 +62,39 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 			citemNo.add((temp6[i]));
 		}
 		
-		//내 구입목록에 추가
-		int aResultInput =new ShopService().aGetItemShoppingList(id,aitemNo);
-		int bResultInput =new ShopService().bGetItemShoppingList(id,bitemNo);
-		int cResultInput =new ShopService().cGetItemShoppingList(id,citemNo);
+		//현재 구매할 도토리가 내가 가지고 있는 도토리보다 큰가
+		if(itemDotoriNums<=myDotoriNums){
+			//현재 내 아이템 목록에 해당 아이템이 존재 하는가
+			int aSearchResult=new ShopService().aIsInThereShoppingList(id,aitemNo);
+			int bSearchResult=new ShopService().bIsInThereShoppingList(id,bitemNo);
+			int cSearchResult=new ShopService().cIsInThereShoppingList(id,citemNo);
+			
+			//System.out.println(aSearchResult+"/"+bSearchResult+"/"+cSearchResult);
+			
+			//MSG
+			if(aSearchResult==0 &&bSearchResult==0&&cSearchResult==0) {
+				
+				//내 구입목록에 추가
+				int aResultInput =new ShopService().aGetItemShoppingList(id,aitemNo);
+				int bResultInput =new ShopService().bGetItemShoppingList(id,bitemNo);
+				int cResultInput =new ShopService().cGetItemShoppingList(id,citemNo);
+				
+				//장바구니 구매후 컬럼삭제용
+				int aResult =new ShopService().aBuyDeleteShoppingList(id,aitemNo);
+				int bResult =new ShopService().bBuyDeleteShoppingList(id,bitemNo);
+				int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
+				//내가 가진 도토리수 차감하기
+				int dotoriResult=new ShopService().dotoriMinusShoppingList(id,myDotoriNums,itemDotoriNums);
+			
+			}else {
+				request.setAttribute("msg", "이미 구매한 항목이 있습니다");
+			}
+			
+		}else {
+			request.setAttribute("msg", "보유 도토리가 부족합니다 :(");
+		}
 		
-		//장바구니 구매후 컬럼삭제용
-		int aResult =new ShopService().aBuyDeleteShoppingList(id,aitemNo);
-		int bResult =new ShopService().bBuyDeleteShoppingList(id,bitemNo);
-		int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
-		//내가 가진 도토리수 차감하기
-		int dotoriResult=new ShopService().dotoriMinusShoppingList(id,myDotoriNums,itemDotoriNums);
+		request.getRequestDispatcher("/shop/shopBasketSearch.do").forward(request, response);
 	}
 
 	/**

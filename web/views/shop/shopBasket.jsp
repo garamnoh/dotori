@@ -7,7 +7,7 @@
 	List<Skin> b=(List<Skin>)request.getAttribute("b");
 	List<Music> c=(List<Music>)request.getAttribute("c");
 	Member id = (Member)session.getAttribute("loginMember");
-	
+	String msg=(String)request.getAttribute("msg");
 	
 %>
 
@@ -113,23 +113,25 @@
 		</div>
 	
 		<div class="basketButtons">
-			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기" onclick="buyDotoriGo()"><input type="button" value="결제하기" onclick="buyAll()">
+			<input type="button" id="presentItemBtn" value="선물하기"><input type="button" value="도토리 충전하기" onclick="buyDotoriGo();"><input type="button" value="결제하기" onclick="buyAll()">
 		</div>
 	</div>
 	
 
 </form>
 
+<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">
+<input type="hidden" id="loginMemberId" value="<%=id.getMemberId()%>">
 
 <script>
-
+	
 	function buyDotoriGo(){
 		$.ajax({
-			url:"<%=request.getContextPath()%>/page/option1.do",
+			url:"<%=request.getContextPath()%>/ajax/goDotoriPay",
 			
-			data:{"msg": "성공"},
+			data:{},
 			success:data=>{
-				
+				$("#section").html(data);
 			}
 			
 		});
@@ -172,9 +174,8 @@
 			traditional :true, 
 			data:{"memberId": "<%=id%>","aitemNo":aCheck.toString(),"bitemNo":bCheck.toString(),"citemNo":cCheck.toString(),"myDotoriNums":<%=id.getDotori() %>,"itemDotoriNums":$('#totalPrice').text()},
 			success:data=>{
-				alert("구매 완료");
+				$("#section").html(data);
 			}
-			
 		});
 	}
 	
@@ -207,6 +208,9 @@
 		
 	}
 	
+	<%if(msg!=null){%>
+		alert("<%=msg%>");
+	<%}%>
 	
 
 	

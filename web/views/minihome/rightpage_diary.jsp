@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.ProfilePath" %>
-<%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment" %>
+<%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment, com.minihome.diary.model.vo.DiaryFolder" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 	Member loginMember=(Member)request.getAttribute("loginMember");	
@@ -10,6 +10,7 @@
 	String pageBar=(String)request.getAttribute("pageBar");
 	List<DiaryComment> cList=(List<DiaryComment>)request.getAttribute("cList");
 	int diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
+	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");
 %>
 
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>
@@ -26,9 +27,9 @@
 				<div id="diary_title_left">
 					<div id="diary_input_title_box">
 						<select class="diary_folder" name="diary_folder">
-							<option value="전체공개" seleted>전체공개</option>
-							<option value="일촌공개">일촌공개</option>
-							<option value="비공개">비공개</option>
+							<%for(DiaryFolder df : fList) {%>
+								<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+							<%} %>							
 						</select>						
 					</div>
 					<div id="diary_input_content_box">						
@@ -94,9 +95,9 @@
 					<!-- 댓글수정박스 -->			
 					<div id="diary_content_update" style="display:none">
 						<select class="diary_folder_up" name="diary_folder_up">
-							<option value="전체공개" <%=d.getFolderNo()==1?"selected":""%>>전체공개</option>
-							<option value="일촌공개" <%=d.getFolderNo()==2?"selected":""%>>일촌공개</option>
-							<option value="비공개" <%=d.getFolderNo()==3?"selected":""%>>비공개</option>
+							<%for(DiaryFolder df : fList) {%>
+								<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+							<%} %>							
 						</select>
 						<textarea class="diary_content_up_input" placeholder="다이어리를 작성해주세요."><%=d.getContent() %></textarea>
 						<div id="diary_update_btn_box">

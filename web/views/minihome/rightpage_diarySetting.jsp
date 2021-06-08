@@ -6,7 +6,7 @@
 	String loginMemberId=(String)request.getAttribute("loginMember");	
 	String hostMemberId=(String)request.getAttribute("hostMember");
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
-	System.out.println("리스트 테스트 : "+list);
+	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");	
 %>
 
 <div id="diarySetting">
@@ -29,15 +29,32 @@
 				<td>
 					<input type="text" id="addFolderName" placeholder="추가할 폴더이름을 입력하세요.">
 				</td>
-			</tr>
-			<tr id="friendsTr">
-				<th>멤버 초대</th>
-				<td>
-					<input type="text" id="shareMember" placeholder="콤마(,)로 구분해서 작성해주세요.">
-				</td>
-			</tr>			
+			</tr>						
 		</table>
 		<div id="diaryFolderSaveBtn">저장</div>		
+	</fieldset>
+	
+	<fieldset id="addFriends">
+		<legend>멤버공개 다이어리 친구추가</legend>
+			<table>
+				<tr>
+					<th>폴더 선택</th>
+					<td>
+						<select id="shareFolderNo" name="shareFolderNo">						
+							<%for(DiaryFolder dsf : fList) {%>	
+								<option value="<%=dsf.getFolderNo()%>"><%=dsf.getFolderName()%></option>							
+							<%} %>							
+						</select>
+					</td>
+				</tr>			
+				<tr>
+					<th>멤버 초대</th>
+					<td>
+						<input type="text" id="shareMember" placeholder="콤마(,)로 구분해서 작성해주세요.">
+					</td>
+				</tr>
+			</table>
+			<div id="diaryMemberBtn">저장</div>
 	</fieldset>
 	
 	<input type="hidden" name="loginMemberId" value="<%=loginMemberId%>">

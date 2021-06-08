@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.friend.model.service.FriendService;
 import com.friend.model.vo.FeedDiary;
+import com.friend.model.vo.Like;
 import com.member.model.vo.Member;
 
 /**
@@ -34,7 +35,12 @@ public class NewFeedDiaryServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
+		
 		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		ArrayList<Integer> likeList = new FriendService().like(myId);
+		ArrayList<Like> count = new FriendService().count();
+		
+		for(Integer list : likeList) System.out.println(list);
 		
 		int linePerPage = 10;
 		int page = Integer.parseInt(request.getParameter("page"));
@@ -58,6 +64,8 @@ public class NewFeedDiaryServlet extends HttpServlet {
 		ArrayList<FeedDiary> feedDiary = (ArrayList<FeedDiary>)newFeed.get("feedDiary");
 		for(FeedDiary d: feedDiary) System.out.println(d);
 		
+		request.setAttribute("count", count);
+		request.setAttribute("likeList", likeList);
 		request.setAttribute("newFeed", newFeed);
 		request.getRequestDispatcher("/views/main/sub/newFeedDiary.jsp").forward(request, response);
 	}

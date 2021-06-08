@@ -347,7 +347,7 @@
 }
 #folderAdd{
 	position:absolute;
-	height: 110px;
+	height: 85px;
 }
 #diaryFolderSaveBtn{
 	width:30px;
@@ -363,9 +363,21 @@
 #shareMember{
 	width:190px;
 }
+#addFriends{
+	position:absolute;
+	margin-top:130px;
+}
+#diaryMemberBtn{
+	width:30px;
+	height: 30px;
+	font-weight:bolder;	
+	text-align:center;		
+	cursor: pointer;
+	margin: 0 0 -10px 285px;
+}
 #folderDel{
 	position:absolute;
-    margin-top: 150px;
+    margin-top: 260px;
 }
 #diary_del_folder_btn{
 	width:30px;
@@ -375,9 +387,10 @@
 	cursor: pointer;
 	margin: 0 0 -10px 285px;	
 }
-#diaryFolderSaveBtn:hover, #diary_del_folder_btn:hover{
+#diaryFolderSaveBtn:hover, #diary_del_folder_btn:hover, #diaryMemberBtn:hover{
 	color:#747474;
 }
+
 
 /*******************/
 #pageBar{
