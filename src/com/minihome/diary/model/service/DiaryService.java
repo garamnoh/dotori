@@ -67,6 +67,13 @@ public class DiaryService {
 		return result;
 	}
 	
+	public List<DiaryFolder> selectShareFolder(String hostMemberId){
+		Connection conn=getConnection();
+		List<DiaryFolder> list=dao.selectShareFolder(conn, hostMemberId);
+		close(conn);
+		return list;
+	}
+	
 	///////////////////////left_folder///////////////////
 	
 	public List<DiaryFolder> selectFolderList(String hostMemberId){

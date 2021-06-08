@@ -161,6 +161,32 @@ public class DiaryDao {
 		return result;
 	}
 	
+	public List<DiaryFolder> selectShareFolder(Connection conn, String hostMemberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<DiaryFolder> fList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectShareFolder"));
+			pstmt.setString(1, hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				DiaryFolder dfs=new DiaryFolder();
+				dfs.setFolderNo(rs.getInt("folder_no"));
+				dfs.setMemberId(rs.getString("member_id"));
+				dfs.setFolderName(rs.getString("folder_name"));
+				dfs.setShareLevel(rs.getString("share_level"));
+				dfs.setDiaryCount(rs.getInt("diarycount"));
+				fList.add(dfs);
+			}			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return fList;
+	}
+	
 	/////////////////////left_page_folder///////////////////////////
 	
 	public List<DiaryFolder> selectFolderList(Connection conn, String hostMemberId){

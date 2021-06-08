@@ -365,7 +365,7 @@
 }
 #folderDel{
 	position:absolute;
-    margin-top: 150px;
+    margin-top: 260px;
 }
 #diary_del_folder_btn{
 	width:30px;
@@ -377,6 +377,18 @@
 }
 #diaryFolderSaveBtn:hover, #diary_del_folder_btn:hover{
 	color:#747474;
+}
+#addFriends{
+	position:absolute;
+	margin-top:150px;
+}
+#diaryMemberBtn{
+	width:30px;
+	height: 30px;
+	font-weight:bolder;	
+	text-align:center;		
+	cursor: pointer;
+	margin: 0 0 -10px 285px;
 }
 
 /*******************/

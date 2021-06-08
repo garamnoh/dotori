@@ -32,39 +32,13 @@ public class DiaryUpdateServlet extends HttpServlet {
 		
 		Diary d=new Diary();	
 		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		System.out.println("diaryNo "+diaryNo);
-		d.setDiaryNo(diaryNo);
-<<<<<<< HEAD
-		int folder=Integer.parseInt(request.getParameter("diary_folder"));
-		System.out.println("folder "+folder);
-				
-=======
-		
-		
-		
-		System.out.println("서블릿 테스트 : "+diaryNo);
-		
-		String folder=request.getParameter("diary_folder");
-		
-		System.out.println("서블릿 테스트 폴더 No : "+folder);
-		
-		//System.out.println("folder "+folder);
-		switch(folder){
-			case "전체공개" : d.setFolderNo(1); break;
-			case "일촌공개" : d.setFolderNo(2); break;
-			case "비공개" : d.setFolderNo(3); break;
-		}		
->>>>>>> 3393ecb267a53b0a083e28eb4c8d03fc527058bf
+		int folder=Integer.parseInt(request.getParameter("diary_folder"));		
 		String content=request.getParameter("diary_content_input");
-		String msg="";
+		
+		d.setDiaryNo(diaryNo);
+		d.setFolderNo(folder);
 		if(content!=null) {
 			d.setContent(content);
-		}else {
-			/////////////////////////////////////////////
-			msg="내용을 입력하세요.";
-			request.setAttribute("msg", msg);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
-			///////////////////////////////////////////////
 		}		
 		
 		int result=new DiaryService().updateDiary(d);		
