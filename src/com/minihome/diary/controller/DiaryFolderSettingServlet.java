@@ -38,7 +38,7 @@ public class DiaryFolderSettingServlet extends HttpServlet {
 		
 		System.out.println(loginMemberId+"+++++"+hostMemberId);
 		
-		List<DiaryFolder> list=new DiaryService().selectFolderList();			
+		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);			
 		
 		//if(loginMemberId.equals(hostMemberId)) {
 			request.setAttribute("loginMemberId", loginMemberId);

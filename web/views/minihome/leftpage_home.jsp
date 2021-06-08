@@ -6,8 +6,7 @@
 	String feeling=minihome.getFeeling();
 %>
 	<div id="feelingBox">
-	<%if(feeling!=null) {%>
-		<%-- <p style="display:inline-block;"><%=feeling%></p> --%>
+	<%if(feeling!=null) {%>		
 		<div id="feelingImgBox">
 			<%if(feeling.equals("기쁨")) {%>
 				<img id="feelingImg" alt="기쁨" src="<%=request.getContextPath()%>/images/minihome/joy.png">
@@ -23,8 +22,7 @@
 				<img id="feelingImg" alt="분노" src="<%=request.getContextPath()%>/images/minihome/angry.png">
 			<%}else if(feeling.equals("부끄러움")){ %>
 				<img id="feelingImg" alt="부끄러움" src="<%=request.getContextPath()%>/images/minihome/shy.png">			
-			<%} %>
-			<!-- <img id="feelingImg" alt="" src=""> -->
+			<%} %>			
 		</div>
 		<div id="selectFeelingBox">
 			<select id="selectFeeling">
@@ -48,7 +46,6 @@
 
 <textarea id="profileContent" cols="20" rows="5"><%=minihome.getProfileContent()%></textarea>
 
-<!-- <input type="button" id="updateProfileContentBtn" value="자기소개글 작성/수정"> -->
 <div id="updateProfileContentBtn">프로필수정</div>
 
 <script src="<%=request.getContextPath()%>/js/minihome/leftpage_home.js"></script>

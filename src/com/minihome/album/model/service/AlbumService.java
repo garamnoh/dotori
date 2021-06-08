@@ -143,4 +143,13 @@ public class AlbumService {
 		return deletePhotoResult;
 	}
 	
+	public int selectProfileImg(String hostMemberId,int targetImgNo) {
+		Connection conn=getConnection();
+		int selectProfileImgResult=albumDao.selectProfileImg(conn,hostMemberId,targetImgNo);
+		if(selectProfileImgResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return selectProfileImgResult;
+	}
+	
 }

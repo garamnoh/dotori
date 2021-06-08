@@ -26,9 +26,9 @@ public class DiaryService {
 		return diaryList;
 	}
 	
-	public List<Diary> selectDiaryList(int cPage, int numPerpage, int diaryFolderLevel){
+	public List<Diary> selectDiaryList(int cPage, int numPerpage, int diaryFolderLevel, String hostMemberId){
 		Connection conn=getConnection();
-		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage, diaryFolderLevel);
+		List<Diary> list=dao.selectDiaryList(conn, cPage, numPerpage, diaryFolderLevel, hostMemberId);
 		close(conn);
 		return list;
 	}
@@ -68,9 +68,10 @@ public class DiaryService {
 	}
 	
 	///////////////////////left_folder///////////////////
-	public List<DiaryFolder> selectFolderList(){
+	
+	public List<DiaryFolder> selectFolderList(String hostMemberId){
 		Connection conn=getConnection();
-		List<DiaryFolder> list=dao.selectFolderList(conn);
+		List<DiaryFolder> list=dao.selectFolderList(conn, hostMemberId);
 		close(conn);
 		return list;
 	}

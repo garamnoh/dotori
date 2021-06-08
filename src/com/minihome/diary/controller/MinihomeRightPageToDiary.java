@@ -12,10 +12,10 @@ import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
-import com.member.model.vo.ProfilePath;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.diary.model.vo.DiaryComment;
+import com.minihome.diary.model.vo.DiaryFolder;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 
@@ -70,7 +70,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}catch(NullPointerException e) {
 			diaryFolderLevel=1; //처음엔 전체공개폴더의 게시물들만 보이게			
 		}				
-		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel);	
+		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel, hostMemberId);	
 		
 		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
 		System.out.println(diaryFolderLevel+"/"+totalData);
@@ -104,6 +104,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}
 		
 		List<DiaryComment> cList=new DiaryService().selectDiaryCommentList();
+		List<DiaryFolder> fList=new DiaryService().selectFolderList(hostMemberId);
 		String profilePath=new MemberService().profilePath(loginMember.getMemberId());
 		
 		request.setAttribute("loginMember",loginMember);
@@ -111,6 +112,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		request.setAttribute("pageBar", pageBar);	
 		request.setAttribute("list", list);
 		request.setAttribute("cList", cList);
+		request.setAttribute("fList", fList);
 		request.setAttribute("profilePath", profilePath);
 		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
 		
