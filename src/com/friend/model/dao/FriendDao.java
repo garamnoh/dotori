@@ -15,6 +15,7 @@ import java.util.Properties;
 import com.friend.model.vo.FeedAlbum;
 import com.friend.model.vo.FeedDiary;
 import com.friend.model.vo.Friend;
+import com.friend.model.vo.Like;
 import com.friend.model.vo.SearchF;
 
 public class FriendDao {
@@ -477,7 +478,7 @@ public class FriendDao {
 				d.setMemberName(rs1.getString("MEMBER_NAME"));
 				d.setProfilePath(rs1.getString("PROFILE_PATH"));
 				for(int i = 0; i < temp.size(); i++) {
-					if(rs1.getString("WRITER")==temp.get(i)) {
+					if(temp.get(i).equals(rs1.getString("WRITER"))) {
 						d.setFriendshipName("일촌");
 						break;
 					}
@@ -505,7 +506,7 @@ public class FriendDao {
 				a.setProfilePath(rs2.getString("PROFILE_PATH"));
 				a.setMemberName(rs2.getString("MEMBER_NAME"));
 				for(int i = 0; i < temp.size(); i++) {
-					if(rs2.getString("MEMBER_ID")==temp.get(i)) {
+					if(temp.get(i).equals(rs2.getString("MEMBER_ID"))) {
 						a.setFriendshipName("일촌");
 						break;
 					}
@@ -579,7 +580,114 @@ public class FriendDao {
 		} return newFeedCount;
 	}
 	
+	public ArrayList<Integer> like(Connection conn, String myId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Integer> likeList = new ArrayList<Integer>();
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("likeList"));
+			ps.setString(1, myId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) likeList.add(rs.getInt("DIARY_NO"));
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return likeList;
+	}
 	
+	public ArrayList<Like> count(Connection conn){
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Like> count = new ArrayList<Like>();
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("count"));
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Like l = new Like();
+				
+				l.setDiaryNo(rs.getInt("DIARY_NO"));
+				l.setCount(rs.getInt("COUNT"));
+				
+				count.add(l);
+			}
+			
+		} catch(SQLException e){
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return count;
+	}
+	
+	public int checkLike(Connection conn, String diaryNo, String myId) {
+		
+		PreparedStatement ps = null;
+		PreparedStatement ps1 = null;
+		ResultSet rs = null;
+		int result = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("ckeckLike"));
+			ps.setString(1, myId);
+			ps.setString(2, diaryNo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==0) {
+					ps1 = conn.prepareStatement(prop.getProperty("like"));
+					ps1.setString(1, diaryNo);
+					ps1.setString(2, myId);
+					
+					result = ps1.executeUpdate();
+				} else {
+					ps1 = conn.prepareStatement(prop.getProperty("unlike"));
+					ps1.setString(1, myId);
+					ps1.setString(2, diaryNo);
+					
+					result = ps1.executeUpdate();
+				}
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+			close(ps1);
+		} return result;
+	}
+	
+	public int likeCount(Connection conn, String diaryNo, String myId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		
+		int likeCount = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("likeCount"));
+			ps.setString(1, diaryNo);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) likeCount = rs.getInt(1);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return likeCount;
+	}
 	
 	
 	

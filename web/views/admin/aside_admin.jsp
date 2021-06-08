@@ -8,12 +8,12 @@
     	<p id='member'>회원정보 조회</p>
 <!--         <p id='memberOption'>option1</p> -->
     </div>
-    <div class='menuTitle' id="option2">게시글관리</div>
+<!--     <div class='menuTitle' id="option2">게시글관리</div>
     <div class="menuSub">
         <p id='board'>게시물 조회 및 관리</p>
         <p id='notice'>공지사항 조회 및 관리</p>
-<!--         <p id='boardOption2'>option2</p> -->
-    </div>
+        <p id='boardOption2'>option2</p>
+    </div> -->
     <div class='menuTitle' id="option3">상품관리</div>
     <div class="menuSub">
         <p id='searchItem'>상품조회 및 삭제</p>

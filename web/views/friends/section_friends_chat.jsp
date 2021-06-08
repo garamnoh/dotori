@@ -349,4 +349,5 @@
 	$('#chatInput #msg').on('keyup', (e)=>{
 		if(e.keyCode == 13) $('#sendMsg').trigger('click');
 	});
+	
 </script>

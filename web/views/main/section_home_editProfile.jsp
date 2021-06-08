@@ -52,7 +52,7 @@
             
 			<div id="buttons">
 	            <input type="button" value="수정" id='editProfile'>
-	            <input type="button" value="비밀번호 변경">
+	            <!-- <input type="button" value="비밀번호 변경"> -->
 	            <input type="button" value="회원 탈퇴" onclick="fn_deleteProfile();" >
 			</div>
         </form>

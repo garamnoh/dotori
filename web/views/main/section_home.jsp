@@ -120,16 +120,33 @@
 	
 	#newFeedDiary>.user>.userInfo>.userName{
 		margin-bottom: 5px;
+		font-weight: 500;
+	}
+	#newFeedDiary>.user>.userInfo>.userTitle{
+		font-size: 13px;
 	}
 	
 	#newFeedDiary>.contents{
 	    padding: 10px;
 	    display: flex;
 	    justify-content: space-between;
+	    align-items: center;
 	}
 	
-	#newFeedDiary>.contents>img{
+	#newFeedDiary>.contents>#likeBox{
+		display: flex;
+		width: auto;
+		height: auto;
+		align-items: center;
+	}
+	#newFeedDiary>.contents>#likeBox>img{
 	    width: 20px;
+	    height: 20px;
+	}
+	
+	#newFeedDiary>.contents>#likeBox>span{
+		font-size: 13px;
+		margin: 5px;
 	}
 	
 	#newFeedDiary>.contents>div{
