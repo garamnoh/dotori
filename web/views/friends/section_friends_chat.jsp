@@ -279,6 +279,9 @@
 						
 			}
 			$('#chatBody').append(msg);
+			$('#chatBody').animate({
+				scrollTop: $('#chatBody')[0].scrollHeight
+			}, 500);
 		}
 	}
 
@@ -343,4 +346,7 @@
 	});
 	
 
+	$('#chatInput #msg').on('keyup', (e)=>{
+		if(e.keyCode == 13) $('#sendMsg').trigger('click');
+	});
 </script>
