@@ -44,6 +44,8 @@ $(function(){
 	$("#folderShareLevel").change();
 });
 
+
+
 $("#diary_del_folder_btn").click(e=>{
 	$.ajax({
 		url:contextPath+"/diary/folderDelete",

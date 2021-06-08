@@ -1,26 +1,30 @@
-package com.minihome.diary.controller;
+package com.friend.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
-import com.minihome.diary.model.vo.Diary;
+import org.json.simple.JSONObject;
+
+import com.friend.model.service.FriendService;
+import com.google.gson.Gson;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DiaryUpdateServlet
+ * Servlet implementation class LikeServlet
  */
-@WebServlet("/diary/diaryUpdate")
-public class DiaryUpdateServlet extends HttpServlet {
+@WebServlet("/friends/like")
+public class LikeServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryUpdateServlet() {
+    public LikeServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,22 +34,18 @@ public class DiaryUpdateServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		Diary d=new Diary();	
-		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		int folder=Integer.parseInt(request.getParameter("diary_folder"));		
-		String content=request.getParameter("diary_content_input");
+		//String like = request.getParameter("like");
+		String diaryNo = request.getParameter("diaryNo");
+		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
-		d.setDiaryNo(diaryNo);
-		d.setFolderNo(folder);
-		if(content!=null) {
-			d.setContent(content);
-		}		
+		new FriendService().checkLike(diaryNo, myId);
+		int likeCount = new FriendService().likeCount(diaryNo, myId);
 		
-		int result=new DiaryService().updateDiary(d);		
+		JSONObject json = new JSONObject();
+		json.put("likeCount", likeCount);
 		
-		if(result>0) {
-			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
-		}
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(json, response.getWriter());
 	}
 
 	/**

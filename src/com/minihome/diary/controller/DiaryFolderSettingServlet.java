@@ -38,13 +38,14 @@ public class DiaryFolderSettingServlet extends HttpServlet {
 		
 		System.out.println(loginMemberId+"+++++"+hostMemberId);
 		
-		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);			
+		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);
+		List<DiaryFolder> fList=new DiaryService().selectShareFolder(hostMemberId);
 		
-		//if(loginMemberId.equals(hostMemberId)) {
-			request.setAttribute("loginMemberId", loginMemberId);
-			request.setAttribute("hostMemberId", hostMemberId);
-			request.setAttribute("list", list);
-		//}
+		request.setAttribute("loginMemberId", loginMemberId);
+		request.setAttribute("hostMemberId", hostMemberId);
+		request.setAttribute("list", list);
+		request.setAttribute("fList", fList);
+		
 				
 		request.getRequestDispatcher("/views/minihome/rightpage_diarySetting.jsp").forward(request,response);
 		

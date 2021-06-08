@@ -14,7 +14,9 @@
 	            <img src="<%= request.getContextPath() %>/upload/MINIMI/<%=f.getProfilePath() %>" alt="" class="userImg">
 	            <div class="userInfo">
 	                <p class="userName"><%=f.getMemberName() %></p>
+	                <% if(f.getTitle() != null){ %>
 	                <p class="userTitle"><%=f.getTitle() %></p>
+	                <% } %>
 	            </div>
 	        </div>
 	        <% if(f.getFilepath()==null){ %>

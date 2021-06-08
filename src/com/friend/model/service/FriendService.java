@@ -11,6 +11,7 @@ import java.util.HashMap;
 
 import com.friend.model.dao.FriendDao;
 import com.friend.model.vo.Friend;
+import com.friend.model.vo.Like;
 import com.friend.model.vo.SearchF;
 
 public class FriendService {
@@ -131,5 +132,34 @@ public class FriendService {
 		int newFeedCount = dao.newFeedCount(conn, memberId);
 		close(conn);
 		return newFeedCount;
+	}
+	
+	public ArrayList<Integer> like(String myId){
+		Connection conn = getConnection();
+		ArrayList<Integer> likeList = dao.like(conn, myId);
+		close(conn);
+		return likeList;
+	}
+	
+	public ArrayList<Like> count(){
+		Connection conn = getConnection();
+		ArrayList<Like> count = dao.count(conn);
+		close(conn);
+		return count;
+	}
+	
+	public void checkLike(String diaryNo, String myId) {
+		Connection conn = getConnection();
+		int result = dao.checkLike(conn, diaryNo, myId);
+		if(result > 0 ) commit(conn);
+		else rollback(conn);
+		close(conn);
+	}
+	
+	public int likeCount(String diaryNo, String myId) {
+		Connection conn = getConnection();
+		int likeCount = dao.likeCount(conn, diaryNo, myId);
+		close(conn);
+		return likeCount;
 	}
 }
