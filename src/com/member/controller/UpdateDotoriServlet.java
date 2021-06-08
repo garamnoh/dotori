@@ -1,4 +1,4 @@
-package com.minihome.diary.controller;
+package com.member.controller;
 
 import java.io.IOException;
 
@@ -8,19 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.minihome.diary.model.service.DiaryService;
+import org.json.simple.JSONObject;
+
+import com.google.gson.Gson;
+import com.member.model.service.MemberService;
+import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class DiaryFolderWrite
+ * Servlet implementation class UpdateMinimiServlet
  */
-@WebServlet("/diary/folderWrite")
-public class DiaryFolderWrite extends HttpServlet {
+@WebServlet("/updateDotori")
+public class UpdateDotoriServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryFolderWrite() {
+    public UpdateDotoriServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -30,17 +34,16 @@ public class DiaryFolderWrite extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String addFolderName=request.getParameter("addFolderName");
-		String loginMemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
+		String memberId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		int dotori= Integer.parseInt(request.getParameter("dotori"));
 		
-		if(loginMemberId.equals(hostMemberId)) {
-			int result=new DiaryService().insertDiaryFolder(addFolderName, hostMemberId);			
-			if(result>0) {
-				request.getRequestDispatcher("/views/minihome/leftpage_diary.jsp").forward(request,response);
-			}
-		}		
+		int result = new MemberService().updateDotori(memberId, dotori);
 		
+		JSONObject json = new JSONObject();
+		json.put("result", result);
+		
+		response.setContentType("application/json;charset=utf-8");
+		new Gson().toJson(json, response.getWriter());
 	}
 
 	/**

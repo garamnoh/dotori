@@ -89,9 +89,34 @@ public class DiaryService {
 		return list;
 	}
 	
-	public int insertDiaryFolder(String name, String id) {
+	public int insertDiaryFolder(String MemberId, String addFolderName, String folderShareLevel) {
 		Connection conn=getConnection();
-		int result=dao.insertDiaryFolder(conn, name, id);
+		int result=dao.insertDiaryFolder(conn, MemberId, addFolderName, folderShareLevel);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int insertShareDiaryFolder(int folderNo, String shareMember) {
+		Connection conn=getConnection();
+		int result=dao.insertShareDiaryFolder(conn, folderNo, shareMember);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public int selectDiaryShareFolder(String addFolderName) {
+		Connection conn=getConnection();
+		int folderNo=dao.selectDiaryShareFolder(conn, addFolderName);
+		close(conn);
+		return folderNo;
+	}
+	
+	public int folderDelete(int folderNo) {
+		Connection conn=getConnection();
+		int result=dao.folderDelete(conn, folderNo);
 		if(result>0) commit(conn);
 		else rollback(conn);
 		close(conn);

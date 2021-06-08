@@ -269,8 +269,9 @@ private Properties prop=new Properties();
 			pstmt=conn.prepareStatement(prop.getProperty("aGetItemShoppingList"));
 			for(int i=0;i<aitemNo.size();i++) {
 				pstmt.setString(1, id);
+				System.out.println("dao test : "+aitemNo.get(i));
 				pstmt.setString(2, aitemNo.get(i));
-				aResultInput=pstmt.executeUpdate();
+				aResultInput+=pstmt.executeUpdate();
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -287,7 +288,9 @@ private Properties prop=new Properties();
 			for(int i=0;i<bitemNo.size();i++) {
 				pstmt.setString(1, id);
 				pstmt.setString(2, bitemNo.get(i));
-				bResultInput=pstmt.executeUpdate();
+				
+				bResultInput+=pstmt.executeUpdate();
+				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -302,11 +305,12 @@ private Properties prop=new Properties();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("cGetItemShoppingList"));
 			for(int i=0;i<citemNo.size();i++) {
+				System.out.println("디에이오 넘버 테스트 : "+citemNo.get(i));
 				pstmt.setString(1, id);
 				pstmt.setString(2, citemNo.get(i));
-				pstmt.setString(3, id);
-				pstmt.setString(4, citemNo.get(i));
-				cResultInput=pstmt.executeUpdate();
+				pstmt.setString(3, "기본엘범");
+				cResultInput+=pstmt.executeUpdate();
+				System.out.println("디에이오 테스트 : "+cResultInput);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
@@ -369,7 +373,22 @@ private Properties prop=new Properties();
 		}
 		return cResult;
 	}
-	
+	public int dotoriMinusShoppingList(Connection conn,String id,int myDotoriNums,int itemDotoriNums) {
+		PreparedStatement pstmt=null;
+		int dotoriResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("dotoriMinusShoppingList"));
+			pstmt.setInt(1, myDotoriNums-itemDotoriNums);
+			pstmt.setString(2, id);
+			dotoriResult=pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return dotoriResult;
+	}
 	
 	
 	

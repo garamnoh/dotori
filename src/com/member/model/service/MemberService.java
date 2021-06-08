@@ -121,5 +121,15 @@ public class MemberService {
 		close(conn);
 		return profilePath;
 	}
+	
+	public int updateDotori(String memberId, int dotori) {
+		Connection conn = getConnection();
+		int result = dao.updateDotori(conn, memberId, dotori);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 
 }

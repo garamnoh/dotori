@@ -17,6 +17,7 @@ String result=(String)request.getAttribute("result");
 	<%}else{%> 
 		<table id='MinimiTable'>
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
+		<%if(3*i<list.size()) {%>
 		<tr>
 			<td>
 			<div class="productMinimi">
@@ -36,6 +37,7 @@ String result=(String)request.getAttribute("result");
                 </div>
 			</div>
 			</td>
+			<%} %>
 			<%if(3*i+1<list.size()) {%>
 			<td>
 			<div class="productMinimi">
