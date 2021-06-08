@@ -10,7 +10,7 @@
 	String pageBar=(String)request.getAttribute("pageBar");
 	List<DiaryComment> cList=(List<DiaryComment>)request.getAttribute("cList");
 	int diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
-	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");
+	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");	
 %>
 
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>

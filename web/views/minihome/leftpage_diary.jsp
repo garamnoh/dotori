@@ -20,7 +20,7 @@
 					<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>	
 				<%} %>
 			</ul>
-			<input type="hidden" name="diaryFolderLevel" value="<%=df.getFolderNo()%>">
+			<input type="hidden" name="folderNo" value="<%=df.getFolderNo()%>">
 			<input type="hidden" name="shareLevel" value="<%=df.getShareLevel() %>">
 		<%} %>
 	</div>

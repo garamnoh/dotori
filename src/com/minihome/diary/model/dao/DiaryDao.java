@@ -242,8 +242,7 @@ public class DiaryDao {
 			while(rs.next()) {
 				DiaryFolderShare dfs=new DiaryFolderShare();
 				dfs.setDiaryNo(rs.getInt("folder_no"));
-				dfs.setAllowedMember(rs.getString("ALLOWED_MEMBER"));
-				//dfs.setShareLevel(rs.getString("SHARE_LEVEL"));
+				dfs.setAllowedMember(rs.getString("ALLOWED_MEMBER"));				
 				list.add(dfs);
 			}			
 		}catch(SQLException e) {
