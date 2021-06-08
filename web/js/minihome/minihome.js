@@ -19,8 +19,7 @@ $("nav.miniMenu li").on("click",(e)=>{
 		case 0:pagesTo("Home");break;
 		case 1:pagesTo("Album");break;
 		case 2:pagesTo("Diary");break;
-		case 3:pagesTo("Jukebox");break;
-		case 4:pagesTo("Settings");
+		case 3:pagesTo("Jukebox");
 	}
 
 	$(e.target).removeClass("unselected").addClass("selected");
