@@ -52,6 +52,8 @@
 						<input type="checkbox">
 						<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
 					<%} %>
+					<input type="button" onclick="fn_selectProfileImg(event);" value="대문 사진">
+					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
 					<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
 					<input type="button" class="modifyPhotoBtn" value="수정하기">
 					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
