@@ -49,7 +49,15 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 		hostMemberId=hostMember.getMemberId();
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
 		
-		List<DiaryFolder> list=new DiaryService().selectFolderList();
+		List<DiaryFolder> list=new DiaryService().selectFolderList(hostMemberId);		
+		
+		if(list==null) {
+		//if(list.contains("전체공개")==false) {
+			int result=new DiaryService().insertDiaryFolder(hostMemberId, "전체공개", "PUBLIC");
+			result=new DiaryService().insertDiaryFolder(hostMemberId, "일촌공개", "FRIENDS");
+			result=new DiaryService().insertDiaryFolder(hostMemberId, "비공개", "PRIVATE");
+			list=new DiaryService().selectFolderList(hostMemberId);			
+		}	
 				
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);	

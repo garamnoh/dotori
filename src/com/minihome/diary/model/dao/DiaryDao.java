@@ -56,16 +56,17 @@ public class DiaryDao {
 		return diaryList;	
 	}
 	
-	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage, int diaryFolderLevel){
+	public List<Diary> selectDiaryList(Connection conn, int cPage, int numPerpage, int diaryFolderLevel, String hostMemberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<Diary> list=new ArrayList();
 		Diary d=null;
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryList"));
-			pstmt.setInt(1,  diaryFolderLevel);
-			pstmt.setInt(2,  (cPage-1)*numPerpage+1);
-			pstmt.setInt(3,  cPage*numPerpage);
+			pstmt.setString(1, hostMemberId);
+			pstmt.setInt(2,  diaryFolderLevel);
+			pstmt.setInt(3,  (cPage-1)*numPerpage+1);
+			pstmt.setInt(4,  cPage*numPerpage);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				d=new Diary();
@@ -159,12 +160,13 @@ public class DiaryDao {
 	
 	/////////////////////left_page_folder///////////////////////////
 	
-	public List<DiaryFolder> selectFolderList(Connection conn){
+	public List<DiaryFolder> selectFolderList(Connection conn, String hostMemberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<DiaryFolder> list=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("selectFolderList"));
+			pstmt.setString(1, hostMemberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DiaryFolder df=new DiaryFolder();
