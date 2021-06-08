@@ -6,8 +6,7 @@
 	String loginMemberId=(String)request.getAttribute("loginMember");	
 	String hostMemberId=(String)request.getAttribute("hostMember");
 	List<DiaryFolder> list=(List<DiaryFolder>)request.getAttribute("list");
-	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");
-	System.out.println("폴더 쉐어 리스트 테스트 : "+fList);
+	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");	
 %>
 
 <div id="diarySetting">
