@@ -15,7 +15,7 @@ String result=(String)request.getAttribute("result");
 	<%if(list!=null&&list.isEmpty()){ %>
 		<p>조회된 데이터가 없습니다</p>
 	<%}else{%> 
-		<table id=MinimiTable>
+		<table id="MinimiTable">
 		<% for(int i=0;i<list.size()/3+1;i++){%> 
 		<%if(3*i<list.size()) {%>
 		<tr>
@@ -33,7 +33,7 @@ String result=(String)request.getAttribute("result");
 		                <li><b><%=list.get(3*i).getTitle() %></b></li>
 		                <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
 		            </ul>
-	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
+	                <input id="test9" class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -53,7 +53,7 @@ String result=(String)request.getAttribute("result");
 		                    <li><b><%=list.get(3*i+1).getTitle() %></b></li>
 		                    <li><b>도토리 <%=list.get(3*i+1).getPrice() %>개</b></li>
 		                </ul>
-	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
+	                <input id="test9" class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -73,7 +73,7 @@ String result=(String)request.getAttribute("result");
 		                    <li><b><%=list.get(3*i+2).getTitle() %></b></li>
 		                    <li><b>도토리 <%=list.get(3*i+2).getPrice() %>개</b></li>
 		                </ul>
-	                <input class="shopMinimiCheck" type="checkbox" disabled="disabled">
+	                <input id="test9" class="shopMinimiCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>

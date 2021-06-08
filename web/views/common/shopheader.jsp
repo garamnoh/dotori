@@ -22,7 +22,7 @@
 		<span>  |  </span>
 		<span class="TopTap">인기순</span>
 	</div> 
-	<button onclick="getbasket();">장바구니에 담기</button> 
+	<button class="shopheaderbtn" onclick="getbasket();">장바구니에 담기</button> 
 </div>
 
 
