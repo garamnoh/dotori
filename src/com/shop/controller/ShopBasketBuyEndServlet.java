@@ -66,7 +66,8 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 		int bSearchResult=new ShopService().bIsInThereShoppingList(id,bitemNo);
 		int cSearchResult=new ShopService().cIsInThereShoppingList(id,citemNo);
 		
-	
+		System.out.println(aSearchResult+"/"+bSearchResult+"/"+cSearchResult);
+		
 		//MSG
 		if(aSearchResult==0 &&bSearchResult==0&&cSearchResult==0) {
 			
