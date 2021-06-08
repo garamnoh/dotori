@@ -113,13 +113,15 @@
 		</div>
 	
 		<div class="basketButtons">
-			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기" onclick="buyDotoriGo()"><input type="button" value="결제하기" onclick="buyAll()">
+			<input type="button" id="presentItemBtn" value="선물하기"><input type="button" value="도토리 충전하기">도토리 충전하기</button><input type="button" value="결제하기" onclick="buyAll()">결제하기</button>
 		</div>
 	</div>
 	
 
 </form>
 
+<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">
+<input type="hidden" id="loginMemberId" value="<%=id.getMemberId()%>">
 
 <script>
 

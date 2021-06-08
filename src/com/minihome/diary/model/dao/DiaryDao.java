@@ -149,6 +149,9 @@ public class DiaryDao {
 			pstmt.setInt(1,  d.getFolderNo());
 			pstmt.setString(2, d.getContent());
 			pstmt.setInt(3, d.getDiaryNo());
+			
+			System.out.println("디에이오 테스트 : "+d.getFolderNo()+" "+d.getDiaryNo());
+			
 			result=pstmt.executeUpdate();
 		}catch(SQLException e) {
 			e.printStackTrace();

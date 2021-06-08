@@ -375,4 +375,20 @@ public class AlbumDao {
 		return deletePhotoResult;
 	}
 	
+	public int selectProfileImg(Connection conn,String hostMemberId,int targetImgNo) {
+		PreparedStatement pstmt=null;
+		int selectProfileImgResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectProfileImg"));
+			pstmt.setInt(1,targetImgNo);
+			pstmt.setString(2,hostMemberId);
+			selectProfileImgResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return selectProfileImgResult;
+	}
+	
 }

@@ -132,3 +132,20 @@ var fn_insertRecomment=(event)=>{
         recommentBox.css("display","none");
     }
 }
+
+var fn_selectProfileImg=(event)=>{
+    let profileImgTarget=$(event.target).next().val();
+    $.ajax({
+        url:contextPath+"/page/minihomeRightPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "folder":$("#currentFolder").val(),
+            "profileImgTarget":profileImgTarget
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#right-page").html(data);
+        }
+    });
+};
