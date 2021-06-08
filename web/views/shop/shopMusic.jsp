@@ -32,7 +32,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
                     <li><b><%=list.get(3*i).getMusicTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopMusicCheck" type="checkbox">
+                <input id='test8' class="shopMusicCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -52,7 +52,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
                     <li><b><%=list.get(3*i+1).getMusicTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i+1).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopMusicCheck" type="checkbox">
+                <input id='test8' class="shopMusicCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>
@@ -72,7 +72,7 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
                     <li><b><%=list.get(3*i+2).getMusicTitle() %></b></li>
                     <li><b>도토리 <%=list.get(3*i+2).getPrice() %>개</b></li>
                 </ul>
-                <input class="shopMusicCheck" type="checkbox">
+                <input id='test8' class="shopMusicCheck" type="checkbox" disabled="disabled">
                 </div>
 			</div>
 			</td>

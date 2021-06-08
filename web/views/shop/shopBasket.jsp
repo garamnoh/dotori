@@ -113,7 +113,7 @@
 		</div>
 	
 		<div class="basketButtons">
-			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기"><input type="button" value="결제하기" onclick="buyAll()">
+			<input type="button" value="선물하기"><input type="button" value="도토리 충전하기" onclick="buyDotoriGo()"><input type="button" value="결제하기" onclick="buyAll()">
 		</div>
 	</div>
 	
@@ -122,6 +122,18 @@
 
 
 <script>
+
+	function buyDotoriGo(){
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/goDotoriPay",
+			
+			data:{},
+			success:data=>{
+				$("#section").html(data);
+			}
+			
+		});
+	}
 
 	$('input[type=button].check-all').click((e)=>{
 		$('.aShopbasketCheck').each((i,v)=>{
@@ -160,9 +172,8 @@
 			traditional :true, 
 			data:{"memberId": "<%=id%>","aitemNo":aCheck.toString(),"bitemNo":bCheck.toString(),"citemNo":cCheck.toString(),"myDotoriNums":<%=id.getDotori() %>,"itemDotoriNums":$('#totalPrice').text()},
 			success:data=>{
-				alert("구매 완료");
+				$("#section").html(data);
 			}
-			
 		});
 	}
 	

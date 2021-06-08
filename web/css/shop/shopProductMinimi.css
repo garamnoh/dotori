@@ -20,7 +20,7 @@ div.MinimiInfo{
     justify-content: space-between;
 }
 /* 가운데 정렬 밑 오른쪽 체크박스 없애기 */
-div.MinimiInfo>input:nth-child(3){
+#MinimiTable #test9{
     opacity: 0;
 }
 /* 체크박스정렬 */
