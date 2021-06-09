@@ -99,6 +99,15 @@ $("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
 		}
 	});
 });
+$("#shopTopTap>span:nth-child(3)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopLikeOrder",
+		data:{"type":"minimi"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
 $("#shopTopTap>span:nth-child(5)").on("click",(e)=>{
 	console.log("test");
 	$.ajax({

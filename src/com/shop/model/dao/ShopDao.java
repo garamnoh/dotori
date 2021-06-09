@@ -728,7 +728,57 @@ private Properties prop=new Properties();
 		}
 		return dotoriResult;
 	}
-	
+	public int aDeleteInShoppingList(Connection conn,String id,List<String> aitemNo){
+		PreparedStatement pstmt=null;
+		int aResultDelete=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aBuyDeleteShoppingList"));
+			for(int i=0;i<aitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, aitemNo.get(i));
+				aResultDelete=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return aResultDelete;
+	}
+	public int bDeleteInShoppingList(Connection conn,String id,List<String> bitemNo){
+		PreparedStatement pstmt=null;
+		int bResultDelete=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bBuyDeleteShoppingList"));
+			for(int i=0;i<bitemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, bitemNo.get(i));
+				bResultDelete=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return bResultDelete;
+	}
+	public int cDeleteInShoppingList(Connection conn,String id,List<String> citemNo){
+		PreparedStatement pstmt=null;
+		int cResultDelete=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cBuyDeleteShoppingList"));
+			for(int i=0;i<citemNo.size();i++) {
+				pstmt.setString(1, id);
+				pstmt.setString(2, citemNo.get(i));
+				cResultDelete=pstmt.executeUpdate();
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return cResultDelete;
+	}
 	
 	
 	
