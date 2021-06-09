@@ -1,18 +1,25 @@
 $("#diary_input_btn").click(e=>{
-	$.ajax({
-		url:contextPath+"/diary/diaryWrite",
-		type:"post",
-		data:{			  
-			"diary_folder":$("select[name='diary_folder']").val(),
-			"diary_content_input":$(".diary_content_input").val(),
-			"loginMemberId":$("input[name='loginMemberId']").val(),
-			"hostMemberId":$("input[name='hostMemberId']").val()
-		},
-		dataType:"html",
-		success:data=>{
-			$("#right-page").html(data);
-		}
-	})
+	const content=$(".diary_content_input").val();
+	console.log("///"+content+"///");
+	if(content.trim()==""){
+		alert("내용을 입력해주세요.");
+	}else{
+		$.ajax({
+			url:contextPath+"/diary/diaryWrite",
+			type:"post",
+			data:{			  
+				"diary_folder":$("select[name='diary_folder']").val(),
+				"diary_content_input":content,
+				"loginMemberId":$("input[name='loginMemberId']").val(),
+				"hostMemberId":$("input[name='hostMemberId']").val()
+			},
+			dataType:"html",
+			success:data=>{
+				console.log("///"+content+"///");
+				$("#right-page").html(data);
+			}
+		});		
+	}
 });
   
 $(".diary_del_btn").click(e => {
@@ -71,6 +78,26 @@ $(".diary_comment_btn").click(e=>{
 			$("#right-page").html(data);
 		}
 	})
+});
+
+$('.like').on('click', (e)=>{
+    let unlike = contextPath+"/images/unlike.png";
+    let like = contextPath+"/images/like.png";
+    let src = $(e.target).attr('src');
+    let newSrc = src==unlike ? like : unlike;
+    $(e.target).attr('src', newSrc);
+    
+    const diaryNo = $(e.target).parent().prev().val();
+    $.ajax({
+    	url: contextPath+"/friends/like",
+    	data:{
+    		'diaryNo': diaryNo
+    	},
+    	success: (data)=>{
+    		const likeCount = data['likeCount'];
+    		$(e.target).parent().children('span').text(likeCount);
+    	}
+    });
 });
 
 $(".diary_update_btn").click(e=>{
@@ -148,6 +175,8 @@ $(".diary_co_comment_btn").click(e=>{
 		}
 	})
 });
+
+
 
 document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 	$(v).click((e)=>{		

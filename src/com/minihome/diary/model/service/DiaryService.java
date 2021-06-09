@@ -74,6 +74,15 @@ public class DiaryService {
 		return list;
 	}
 	
+	public int insertShareFolder(int folderNo, String memberName, String folderName) {
+		Connection conn=getConnection();
+		int result=dao.insertShareFolder(conn, folderNo, memberName, folderName);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
 	///////////////////////left_folder///////////////////
 	
 	public List<DiaryFolder> selectFolderList(String hostMemberId){

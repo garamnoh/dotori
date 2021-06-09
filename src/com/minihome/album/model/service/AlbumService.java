@@ -11,6 +11,7 @@ import java.util.List;
 import com.minihome.album.model.dao.AlbumDao;
 import com.minihome.album.model.vo.Album;
 import com.minihome.album.model.vo.AlbumComment;
+import com.minihome.album.model.vo.PhotoLike;
 
 public class AlbumService {
 	
@@ -150,6 +151,38 @@ public class AlbumService {
 		else rollback(conn);
 		close(conn);
 		return selectProfileImgResult;
+	}
+	
+	public List<PhotoLike> getPhotoLikes(String hostMemberId) {
+		Connection conn=getConnection();
+		List<PhotoLike> photoLikeList=albumDao.getPhotoLikes(conn,hostMemberId);
+		close(conn);
+		return photoLikeList;
+	}
+	
+	public int likeImg(String loginMemberId,int likeImgNo) {
+		Connection conn=getConnection();
+		int likeImgResult=albumDao.likeImg(conn,loginMemberId,likeImgNo);
+		if(likeImgResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return likeImgResult;
+	}
+	
+	public int unlikeImg(String loginMemberId,int unlikeImgNo) {
+		Connection conn=getConnection();
+		int unlikeImgResult=albumDao.unlikeImg(conn,loginMemberId,unlikeImgNo);
+		if(unlikeImgResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return unlikeImgResult;
+	}
+	
+	public int countLikeNum(int targetNo) {
+		Connection conn=getConnection();
+		int likeNum=albumDao.countLikeNum(conn,targetNo);
+		close(conn);
+		return likeNum;
 	}
 	
 }

@@ -144,3 +144,9 @@ body{
     background-color:steelblue;
     cursor:pointer;
 }
+.sittingLittleGirl{
+    width:30px;
+    position:absolute;
+    left:1000px;
+    top:600px;
+}

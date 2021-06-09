@@ -22,11 +22,13 @@ $("#diaryMemberBtn").click(e=>{
 		data:{
 			"shareMember":$("#shareMember").val(),
 			"shareFolderNo":$("#shareFolderNo").val(),
+			"folderName":$(e.target).innerText(),
 			"hostMemberId":$("input[name='hostMemberId']").val(),
 			"loginMemberId":$("input[name='loginMemberId']").val()
 		},
 		dataType:"html",
 		success:data=>{
+			console.log(folderName);
 			$("#left-page").html(data);
 		}		
 	});	

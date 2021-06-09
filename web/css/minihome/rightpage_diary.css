@@ -127,17 +127,16 @@
 	width:425px;
 	/* height:80px; */
 	height:auto;
-	/* background-color: white; */
+	
 }
 #diary_content_title{
 	display:flex;	
-	width:425px;
+	width:420px;
 	height:20px;
-	margin:5px 0 5px 0;
-	/* background-color:#F0F0F0; */
+	margin:5px 0 5px 0;	
 }
 #diary_writer_container{
-	width:260px;
+	width:235px;
 	height:20px;
 	margin-left:10px;
 	font-weight:bolder;
@@ -151,12 +150,33 @@
 	font-size: 12px;
 	color: #999999;
 }
+#diary_btn_container img{
+	display:inline-block;
+	height:20px;
+	width:20px;	
+}
 #diary_btn_container{
 	margin:0 0 0 0;
-	width:81px;
+	width: 90px;
 	height:20px;
 	font-weight:bold;
 	font-size: 12px;
+}
+/*********다이어리 좋아요*******/
+#likeBox{	
+	width:37px;
+	height:20px;
+}
+#likeBox span{
+	font-size: 13px;
+    font-weight: bold;
+	margin:5px;		
+}
+#likeBox img{
+	position: absolute;
+	width:20px;
+	height:20px;
+	margin: 0 0 0 0;	
 }
 .diary_up_btn{
 	display:inline-block;
@@ -174,6 +194,7 @@
 	cursor:pointer;
 	font-size: 12px;
 }
+
 #diary_content_content{
 	width:400px;
 	height:35px;

@@ -16,6 +16,7 @@ import java.util.Properties;
 
 import com.minihome.album.model.vo.Album;
 import com.minihome.album.model.vo.AlbumComment;
+import com.minihome.album.model.vo.PhotoLike;
 
 public class AlbumDao {
 
@@ -389,6 +390,77 @@ public class AlbumDao {
 			close(pstmt);
 		}
 		return selectProfileImgResult;
+	}
+	
+	public List<PhotoLike> getPhotoLikes(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<PhotoLike> photoLikeList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getPhotoLikes"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				PhotoLike pl=new PhotoLike();
+				pl.setImgNo(rs.getInt("img_no"));
+				pl.setMemberId(rs.getString("member_id"));
+				photoLikeList.add(pl);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return photoLikeList;
+	}
+	
+	public int likeImg(Connection conn,String loginMemberId,int likeImgNo) {
+		PreparedStatement pstmt=null;
+		int likeImgResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("likeImg"));
+			pstmt.setInt(1,likeImgNo);
+			pstmt.setString(2,loginMemberId);
+			likeImgResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return likeImgResult;
+	}
+	
+	public int unlikeImg(Connection conn,String loginMemberId,int unlikeImgNo) {
+		PreparedStatement pstmt=null;
+		int unlikeResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("unlikeImg"));
+			pstmt.setInt(1,unlikeImgNo);
+			pstmt.setString(2,loginMemberId);
+			unlikeResult=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return unlikeResult;
+	}
+	
+	public int countLikeNum(Connection conn,int targetNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int likeNum=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("countLikeNum"));
+			pstmt.setInt(1,targetNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) likeNum=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return likeNum;
 	}
 	
 }

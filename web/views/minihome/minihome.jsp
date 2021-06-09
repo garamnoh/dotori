@@ -86,6 +86,9 @@
     		<audio src="<%=request.getContextPath()%>/audio/<%=musicList.get(i).getFilepath()%>"></audio>
 		<%} %>
     </div>
+    
+    <img src="<%=request.getContextPath()%>/images/minihome/앉아있는 여자아이.png" class="sittingLittleGirl">
+    <img src="<%=request.getContextPath()%>/images/minihome/누나의 인사.png" class="helloFromSister">
 </div>
 
 	<input type="hidden" id="contextPath" value="<%=request.getContextPath()%>">

@@ -10,53 +10,51 @@
 %>
 
    	<% for(FeedAlbum f : newFeedAlbum){ %>
-	    <div class="newFeed" id='newFeedAlbum'>
-	        <div class="user">
-	        	<input type='hidden' value='<%=f.getMemberId()%>'>
-	            <img src="<%= request.getContextPath() %>/upload/MINIMI/<%=f.getProfilePath() %>" alt="" class="userImg">
-	            <div class="userInfo">
-	                <p class="userName"><%=f.getMemberName() %></p>
-	                <% if(f.getTitle() != null){ %>
-	                <p class="userTitle"><%=f.getTitle() %></p>
-	                <% } %>
-	            </div>
-	        </div>
-	        <% if(f.getFilepath()==null){ %>
-	        	<img src="<%= request.getContextPath() %>/upload/photo/photo_path01.jpg" alt="" class="image">
-	        <% } else { %>
+        <% if(f.getFilepath()!=null){ %>
+		    <div class="newFeed" id='newFeedAlbum'>
+		        <div class="user">
+		        	<input type='hidden' value='<%=f.getMemberId()%>'>
+		            <img src="<%= request.getContextPath() %>/upload/MINIMI/<%=f.getProfilePath() %>" alt="" class="userImg">
+		            <div class="userInfo">
+		                <p class="userName"><%=f.getMemberName() %></p>
+		                <% if(f.getTitle() != null){ %>
+		                <p class="userTitle"><%=f.getTitle() %></p>
+		                <% } %>
+		            </div>
+		        </div>
 	        	<img src="<%= request.getContextPath() %>/upload/photo/<%=f.getFilepath() %>" alt="" class="image">
-	        <% } %>
-	        <div class="contents">
-   	            <%
-	            	boolean likeOrNotA = false;
-	            	for(Integer no: likeListAlbum){
-	            		if(no == f.getImgNo()){
-	            			likeOrNotA = true;
-	            			break;
-	            		}
-	            	}
-	            %>
-                <div id='likeBox'>
-                	<input type='hidden' value='<%=f.getImgNo() %>'>
-                	<% if(likeOrNotA == true) { %>
-		            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
-		            <% } else {%>
-		            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
-		            <% } %>
-	   	            <% for(Like like : countAlbum){ %>
-		            	<% if(f.getImgNo() == like.getNo()){ %>
-		            		<span><%= like.getCount() %></span>
-		            	<% break; } %>
-		            <% } %>
-	            </div>
-	            <div class="title">
-   	                <span>#감성</span>
-	                <span>#노을</span>
-	                <span>#바다</span>
-	                <p><%=f.getContent() %></p>
-	            </div>
-	        </div>
-	    </div>
+		        <div class="contents">
+	   	            <%
+		            	boolean likeOrNotA = false;
+		            	for(Integer no: likeListAlbum){
+		            		if(no == f.getImgNo()){
+		            			likeOrNotA = true;
+		            			break;
+		            		}
+		            	}
+		            %>
+	                <div id='likeBox'>
+	                	<input type='hidden' value='<%=f.getImgNo() %>'>
+	                	<% if(likeOrNotA == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+		   	            <% for(Like like : countAlbum){ %>
+			            	<% if(f.getImgNo() == like.getNo()){ %>
+			            		<span><%= like.getCount() %></span>
+			            	<% break; } %>
+			            <% } %>
+		            </div>
+		            <div class="title">
+	   	                <span>#감성</span>
+		                <span>#노을</span>
+		                <span>#바다</span>
+		                <p><%=f.getContent() %></p>
+		            </div>
+		        </div>
+		    </div>
+	    <% } %>
     <% } %>
     
 

@@ -134,7 +134,12 @@ var fn_insertRecomment=(event)=>{
 }
 
 var fn_selectProfileImg=(event)=>{
-    let profileImgTarget=$(event.target).next().val();
+    let checkedArr=new Array();
+    let profileImgTarget="";
+    $(".buttonsInPhotoBox>input[type=checkbox]").each((i,v)=>{
+        if($(v).prop("checked")) checkedArr.push($(v).next().val());
+    });
+    if(checkedArr.length==1) profileImgTarget=checkedArr[0];
     $.ajax({
         url:contextPath+"/page/minihomeRightPageToAlbum.do",
         type:"post",
@@ -149,3 +154,38 @@ var fn_selectProfileImg=(event)=>{
         }
     });
 };
+
+$(".photoLoveBox>.photoLoveImg").click((e)=>{
+    let currentHeartSrc=$(e.target).attr("src");
+    if(currentHeartSrc==contextPath+"/images/minihome/love_white.png") {
+        $(e.target).attr("src",contextPath+"/images/minihome/love_red.png");
+        $.ajax({
+            url:contextPath+"/ajax/albumLike.do",
+            type:"post",
+            data:{
+                "loginMemberId":loginMemberId,
+                "likeImgTarget":$(e.target).next().val()
+            },
+            dataType:"json",
+            success:(data)=>{
+                console.log("data테스트 : "+data["likeNum"]);
+                $(e.target).next().next().text(data["likeNum"]);
+            }
+        });
+    }else{
+        $(e.target).attr("src",contextPath+"/images/minihome/love_white.png");
+        $.ajax({
+            url:contextPath+"/ajax/albumLike.do",
+            type:"post",
+            data:{
+                "loginMemberId":loginMemberId,
+                "unlikeImgTarget":$(e.target).next().val()
+            },
+            dataType:"json",
+            success:(data)=>{
+                console.log("data테스트 : "+data["likeNum"]);
+                $(e.target).next().next().text(data["likeNum"]);
+            }
+        });
+    }
+});
