@@ -128,20 +128,22 @@
 			
 			//라디오버튼 선택 시 금액	
 		  const result1 = $("input[name=radio]:checked").val();
-		
+			
 		  //직접입력 시 금액
 		  //result 는 결제 금액
-			const result2 = document.getElementById("result").innerText 
+			const result2 = document.getElementById("result").innerText
+		
+
+			//직접입력 시 
 			 if($("input[name=radio]:checked").val() == "1"){
 				 
 				 result=result2;
-			
+		//직접입력 아닐 때
 			 }else{
-				 
 				result=result1;
 			 }
 			
-			
+	
 			
 			//가맹점 식별코드
 			IMP.init('imp50613142');
@@ -152,9 +154,9 @@
 			    name : '도토리충전' , //결제창에서 보여질 이름
 			    amount : result, //실제 결제되는 가격
 			    buyer_email : '',
-			    buyer_name : '구매자이름', 
-			    buyer_tel : '010-1234-5678',
-			    buyer_addr : '서울 강남구 도곡동',
+			    buyer_name : '<%=member.getMemberName()%>', 
+			    buyer_tel : '<%=member.getPhone()%>',
+			    buyer_addr : '<%=member.getAddress()%>',
 			    buyer_postcode : '123-456'
 			}, function(rsp) {
 				console.log(rsp);
@@ -165,26 +167,41 @@
 			        msg += '결제 금액 : ' + rsp.paid_amount;
 			        msg += '카드 승인번호 : ' + rsp.apply_num;
 			       
-			 /*        const result1 = $("input[name=radio]:checked").val(); */
-					
+			     const result1 = $("input[name=radio]:checked").val(); //9000
+				
+			  
 					  //직접입력 시 금액
 					  //result 는 결제 금액
-						const result2 = document.getElementById("result").innerText 
+					/* 	const result2 = document.getElementById("result").innerText  */
+						
+					const result2 = $("#text").val()
+					//직접입력일 때 
 						 if($("input[name=radio]:checked").val() == "1"){
 							 
-							 result=result;
+							 result=result2;
+					//직접입력이 아닐 때 도토리 개수 충전
+						 }else if($("input[name=radio]:checked").val() == "9000"){
 						
-						 }else{
-							 
-							result=result1;
+							result=(result1/100)+10;
 						 }
-						
-
+						 else if($("input[name=radio]:checked").val() == "27000"){
+								
+								result=(result1/100)+30;
+							 }
+							
+						 else if($("input[name=radio]:checked").val() == "40000"){
+								
+								result=(result1/100)+100;
+						 }else{
+							 result=result/100;
+						 }
+					  
+					 
 			        $.ajax({
 			   
 	                    url: "<%=request.getContextPath()%>/updateDotori", 
 	                    data: {
-	                        "dotori" : result/100
+	                        "dotori" : result
 	                    },
 	                });
 			        
