@@ -1,14 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.minihome.album.model.vo.Album,com.minihome.album.model.vo.AlbumComment"%>
+    pageEncoding="UTF-8" import="java.util.List,com.minihome.album.model.vo.Album,com.minihome.album.model.vo.AlbumComment,com.minihome.album.model.vo.PhotoLike,com.member.model.vo.Member"%>
 <%
+	String loginMemberId=((Member)session.getAttribute("loginMember")).getMemberId();
 	List<Album> albumList=(List<Album>)request.getAttribute("albumList");
 	List<String> folderList=(List<String>)request.getAttribute("folderList");
 	String folder=(String)request.getAttribute("folder");
 	List<AlbumComment> commentList=(List<AlbumComment>)request.getAttribute("commentList");
 	String pageBar=(String)request.getAttribute("pageBar");
-	
-	
-	System.out.println("jsp테스트 : "+folder);
+	String msg=(String)request.getAttribute("msg");
+	List<PhotoLike> photoLikeList=(List<PhotoLike>)request.getAttribute("photoLikeList");
+	System.out.println("photoLikeList : "+photoLikeList);
 %>
 
 <div class="album-controller">
@@ -22,6 +23,7 @@
 		<input type="button" id="changeFolderBtn" value="폴더 변경">
 		<%} %>
 	<%} %>
+	<input type="button" onclick="fn_selectProfileImg(event);" value="대문 사진">
 	<div class="album-tooltip">?
 		<div class="album-tooltip-text">
 			<ol>
@@ -42,6 +44,7 @@
 		<%} %>
 	<%}else {%>
 		<%for(int i=0;i<albumList.size();i++) {%>
+			<%if(albumList.get(i).getFilepath()!=null) {%>
 			<div class="photoBox">
 				<p class="photoTitle"><%=albumList.get(i).getTitle()%></p>
 				<img src="<%=request.getContextPath()%>/upload/photo/<%=albumList.get(i).getFilepath()%>">
@@ -53,14 +56,24 @@
 				<hr>
 				
 				<div class="buttonsInPhotoBox">
-					<%if(folder!=null) {%>
-						<%if(!folder.equals("null")) {%>
-						<input type="checkbox">
-						<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
-						<%} %>
-					<%} %>
-					<input type="button" onclick="fn_selectProfileImg(event);" value="대문 사진">
+					<input type="checkbox">
 					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+					<div class="photoLoveBox">
+						<%int likeNum=0;%>
+						<%String loveImgPath=request.getContextPath()+"/images/minihome/love_white.png";%>
+						<%for(int l=0;l<photoLikeList.size();l++) {%>
+							<%System.out.println("jsp테스트테스트 : "+photoLikeList.get(l).getImgNo()+"/"+albumList.get(i).getImgNo()); %>
+							<%if(photoLikeList.get(l).getImgNo()==albumList.get(i).getImgNo()) {%>
+								<%if(photoLikeList.get(l).getMemberId().equals(loginMemberId)) {%>
+									<%loveImgPath=request.getContextPath()+"/images/minihome/love_red.png";%>
+								<%}%>
+								<%likeNum++;%>
+							<%}%>
+						<%} %>
+						<img src="<%=loveImgPath%>" class="photoLoveImg">
+						<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
+						<span class="photoLoveNumber"><%=likeNum%></span>
+					</div>
 					<input type="button" onclick="fn_openCommentBox(event);" value="댓글 보기">
 					<input type="button" class="modifyPhotoBtn" value="수정하기">
 					<input type="hidden" value="<%=albumList.get(i).getImgNo()%>">
@@ -116,6 +129,7 @@
 					<%} %>
 				<%} %>
 			</div>
+			<%} %>
 		<%} %>
 	<%} %>
 </div>
@@ -125,5 +139,11 @@
 </div>
 
 <input type="hidden" id="currentFolder" value="<%=folder%>">
+
+<script>
+	<%if(msg!=null) {%>
+		alert("<%=msg%>");
+	<%}%>
+</script>
 
 <script src="<%=request.getContextPath()%>/js/minihome/rightpage_album.js"></script>

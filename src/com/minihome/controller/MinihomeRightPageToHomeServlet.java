@@ -10,8 +10,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.minihome.album.model.vo.Album;
-import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.service.MinihomeService;
+import com.minihome.model.vo.LatestDiaryInfo;
 
 @WebServlet("/page/minihomeRightPageToHome.do")
 public class MinihomeRightPageToHomeServlet extends HttpServlet {
@@ -28,7 +28,7 @@ public class MinihomeRightPageToHomeServlet extends HttpServlet {
 		String hostMemberId=request.getParameter("hostMemberId");
 		
 		List<Album> latestAlbumList=minihomeService.getLatestAlbum(hostMemberId);
-		List<Diary>	latestDiaryList=minihomeService.getLatestDiary(hostMemberId);
+		List<LatestDiaryInfo> latestDiaryList=minihomeService.getLatestDiary(hostMemberId);
 		
 		request.setAttribute("latestAlbumList",latestAlbumList);
 		request.setAttribute("latestDiaryList",latestDiaryList);

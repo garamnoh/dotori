@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.friend.model.service.FriendService;
 import com.friend.model.vo.FeedAlbum;
+import com.friend.model.vo.Like;
 import com.member.model.vo.Member;
 
 /**
@@ -35,6 +36,8 @@ public class NewFeedAlbumServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		ArrayList<Integer> likeListAlbum = new FriendService().likeAlbum(myId);
+		ArrayList<Like> countAlbum = new FriendService().countAlbum();
 		
 		int linePerPage = 10;
 		int page = Integer.parseInt(request.getParameter("page"));
@@ -55,6 +58,10 @@ public class NewFeedAlbumServlet extends HttpServlet {
 		ArrayList<FeedAlbum> feedAlbum = (ArrayList<FeedAlbum>)newFeed.get("feedAlbum");
 		for(FeedAlbum f: feedAlbum) System.out.println(f);
 		
+		for(Integer a : likeListAlbum) System.out.println(a);
+		
+		request.setAttribute("countAlbum", countAlbum);
+		request.setAttribute("likeListAlbum", likeListAlbum);
 		request.setAttribute("newFeed", newFeed);
 		request.getRequestDispatcher("/views/main/sub/newFeedAlbum.jsp").forward(request, response);
 	}

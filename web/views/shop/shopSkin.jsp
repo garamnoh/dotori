@@ -82,6 +82,43 @@ String result=(String)request.getAttribute("result");
 	}%>
 </form>
 <script>
+$("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopTotalTitleOrder",
+		data:{"type":"skin"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(5)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopPriceOrder",
+		data:{"type":"skin"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(7)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopPopularOrder",
+		data:{"type":"skin"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+var shopSearchItem=(event)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopSearchItem.do",
+		data:{"searchKey":$(event.target).prev().prev().val(),"type":"skin"},
+		success:data=>{
+			$("#section").html(data);
+		}
+	});
+	
+};
 function searchKeyup(e){
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopSearch.do",

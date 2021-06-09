@@ -4,6 +4,7 @@
 	List<String> albumList=(List<String>)request.getAttribute("albumList");
 	String album=(String)request.getAttribute("album");
 	List<Music> musicList=(List<Music>)request.getAttribute("musicList");
+	String msg=(String)request.getAttribute("msg");
 %>
 
 <%if(album!=null&&album.equals("내 모든 음악")) {%>
@@ -76,5 +77,11 @@
 </div>
 
 <input type="hidden" id="currentAlbum" value="<%=album%>">
+
+<script>
+	<%if(msg!=null) {%>
+		alert("<%=msg%>");
+	<%}%>
+</script>
 
 <script src="<%=request.getContextPath()%>/js/minihome/rightpage_jukebox.js"></script>

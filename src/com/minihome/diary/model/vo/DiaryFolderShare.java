@@ -21,5 +21,11 @@ public class DiaryFolderShare {
 	public void setAllowedMember(String allowedMember) {this.allowedMember = allowedMember;}
 	public String getShareLevel() {return shareLevel;}
 	public void setShareLevel(String shareLevel) {this.shareLevel = shareLevel;}
+
+	@Override
+	public String toString() {
+		return "DiaryFolderShare [diaryNo=" + diaryNo + ", allowedMember=" + allowedMember + ", shareLevel="
+				+ shareLevel + "]";
+	}
 	
 }

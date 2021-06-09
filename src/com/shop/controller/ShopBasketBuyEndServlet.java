@@ -85,7 +85,7 @@ public class ShopBasketBuyEndServlet extends HttpServlet {
 				int cResult =new ShopService().cBuyDeleteShoppingList(id,citemNo);
 				//내가 가진 도토리수 차감하기
 				int dotoriResult=new ShopService().dotoriMinusShoppingList(id,myDotoriNums,itemDotoriNums);
-			
+				request.setAttribute("msg", "결제 되었습니다:)");
 			}else {
 				request.setAttribute("msg", "이미 구매한 항목이 있습니다");
 			}

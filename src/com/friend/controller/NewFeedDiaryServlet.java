@@ -40,8 +40,6 @@ public class NewFeedDiaryServlet extends HttpServlet {
 		ArrayList<Integer> likeList = new FriendService().like(myId);
 		ArrayList<Like> count = new FriendService().count();
 		
-		for(Integer list : likeList) System.out.println(list);
-		
 		int linePerPage = 10;
 		int page = Integer.parseInt(request.getParameter("page"));
 		

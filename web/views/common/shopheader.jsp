@@ -7,9 +7,8 @@
 	<div id="searchShop">
 		<form>
 		    <input id="searchTap" type="text" onkeyup="searchKeyup(event);" list="list">
-		    <datalist id="list">
-			</datalist>
-		    <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="검색버튼" type="submit" value="검색">
+		    <datalist id="list"></datalist>
+		    <img src="<%=request.getContextPath()%>/images/shop_search.png" alt="검색버튼" value="검색" onclick="shopSearchItem(event);">
 		</form>
 	</div>
 

@@ -40,12 +40,14 @@ public class MinihomeRightPageToJukeboxServlet extends HttpServlet {
 		}
 		
 		if(seqArrStr!=null) {
+			int changePlaySeqResult=0;
 			String[] seqArr=seqArrStr.split(",");
 			for(int i=0;i<seqArr.length;i++) {
 				int musicNo=Integer.parseInt(seqArr[i].split("/")[0]);
 				int playSeq=Integer.parseInt(seqArr[i].split("/")[1]);
-				int changePlaySeqResult=jukeboxService.changePlaySeq(hostMemberId,musicNo,playSeq);
+				changePlaySeqResult+=jukeboxService.changePlaySeq(hostMemberId,musicNo,playSeq);
 			}
+			if(changePlaySeqResult>0) request.setAttribute("msg","음악 순서 변경에 성공했습니다");
 		}
 		
 		List<String> albumList=jukeboxService.getMyAlbums(hostMemberId);

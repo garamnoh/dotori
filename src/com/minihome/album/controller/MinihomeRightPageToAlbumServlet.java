@@ -9,11 +9,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
-
 import com.minihome.album.model.service.AlbumService;
 import com.minihome.album.model.vo.Album;
 import com.minihome.album.model.vo.AlbumComment;
+import com.minihome.album.model.vo.PhotoLike;
 
 @WebServlet("/page/minihomeRightPageToAlbum.do")
 public class MinihomeRightPageToAlbumServlet extends HttpServlet {
@@ -40,10 +39,31 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		String commentContent=request.getParameter("commentContent");
 		String deleteTargetImgNo=request.getParameter("deleteTargetImgNo");
 		String profileImgTarget=request.getParameter("profileImgTarget");
+		String likeImgTarget=request.getParameter("likeImgTarget");
+		String unlikeImgTarget=request.getParameter("unlikeImgTarget");
+		
+		if(loginMemberId!=null) {
+			if(likeImgTarget!=null) {
+				int likeImgNo=Integer.parseInt(likeImgTarget);
+				int likeImgResult=albumService.likeImg(loginMemberId,likeImgNo);
+			}
+			
+			if(unlikeImgTarget!=null) {
+				int unlikeImgNo=Integer.parseInt(unlikeImgTarget);
+				int unlikeImgResult=albumService.unlikeImg(loginMemberId,unlikeImgNo);
+			}
+		}
 		
 		if(profileImgTarget!=null) {
-			int targetImgNo=Integer.parseInt(profileImgTarget);
-			int selectProfileImgResult=albumService.selectProfileImg(hostMemberId,targetImgNo);
+			if(profileImgTarget.equals("")) {
+				request.setAttribute("msg","사진을 선택하지 않았거나 두 개 이상 선택하셨습니다");
+			}else {
+				System.out.println("서블릿 이미지 타겟 테스트 : "+profileImgTarget);
+				int targetImgNo=Integer.parseInt(profileImgTarget);
+				int selectProfileImgResult=albumService.selectProfileImg(hostMemberId,targetImgNo);
+				if(selectProfileImgResult>0) request.setAttribute("msg","대문 사진 등록에 성공하였습니다");
+				else request.setAttribute("msg","대문 사진 등록에 실패하였습니다");
+			}
 		}
 		
 		if(folder!=null) {
@@ -65,7 +85,7 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		try{
 			numPerPage=Integer.parseInt(request.getParameter("numPerPage"));
 		}catch(NumberFormatException e) {
-			numPerPage=2;
+			numPerPage=3;
 		}
 		
 		int totalData=0;
@@ -124,12 +144,17 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		List<String> folderList=albumService.getMyFolders(hostMemberId);
 		
 		List<AlbumComment> commentList=albumService.getMyComments(hostMemberId);
+		
+		List<PhotoLike> photoLikeList=albumService.getPhotoLikes(hostMemberId);
+		
+		System.out.println("서블릿 photoLikeList : "+photoLikeList);
 
 		request.setAttribute("folderList",folderList);
 		request.setAttribute("albumList",albumList);
 		request.setAttribute("folder",folder);
 		request.setAttribute("commentList",commentList);
 		request.setAttribute("pageBar",pageBar);
+		request.setAttribute("photoLikeList",photoLikeList);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_album.jsp").forward(request,response);
 	}
