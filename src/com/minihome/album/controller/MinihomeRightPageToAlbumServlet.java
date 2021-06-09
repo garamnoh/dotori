@@ -39,20 +39,6 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 		String commentContent=request.getParameter("commentContent");
 		String deleteTargetImgNo=request.getParameter("deleteTargetImgNo");
 		String profileImgTarget=request.getParameter("profileImgTarget");
-		String likeImgTarget=request.getParameter("likeImgTarget");
-		String unlikeImgTarget=request.getParameter("unlikeImgTarget");
-		
-		if(loginMemberId!=null) {
-			if(likeImgTarget!=null) {
-				int likeImgNo=Integer.parseInt(likeImgTarget);
-				int likeImgResult=albumService.likeImg(loginMemberId,likeImgNo);
-			}
-			
-			if(unlikeImgTarget!=null) {
-				int unlikeImgNo=Integer.parseInt(unlikeImgTarget);
-				int unlikeImgResult=albumService.unlikeImg(loginMemberId,unlikeImgNo);
-			}
-		}
 		
 		if(profileImgTarget!=null) {
 			if(profileImgTarget.equals("")) {

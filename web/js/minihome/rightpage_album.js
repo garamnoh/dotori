@@ -160,33 +160,31 @@ $(".photoLoveBox>.photoLoveImg").click((e)=>{
     if(currentHeartSrc==contextPath+"/images/minihome/love_white.png") {
         $(e.target).attr("src",contextPath+"/images/minihome/love_red.png");
         $.ajax({
-            url:contextPath+"/page/minihomeRightPageToAlbum.do",
+            url:contextPath+"/ajax/albumLike.do",
             type:"post",
             data:{
                 "loginMemberId":loginMemberId,
-                "hostMemberId":hostMemberId,
-                "folder":$("#currentFolder").val(),
                 "likeImgTarget":$(e.target).next().val()
             },
-            dataType:"html",
+            dataType:"json",
             success:(data)=>{
-                $("#right-page").html(data);
+                console.log("data테스트 : "+data["likeNum"]);
+                $(e.target).next().next().text(data["likeNum"]);
             }
         });
     }else{
         $(e.target).attr("src",contextPath+"/images/minihome/love_white.png");
         $.ajax({
-            url:contextPath+"/page/minihomeRightPageToAlbum.do",
+            url:contextPath+"/ajax/albumLike.do",
             type:"post",
             data:{
                 "loginMemberId":loginMemberId,
-                "hostMemberId":hostMemberId,
-                "folder":$("#currentFolder").val(),
                 "unlikeImgTarget":$(e.target).next().val()
             },
-            dataType:"html",
+            dataType:"json",
             success:(data)=>{
-                $("#right-page").html(data);
+                console.log("data테스트 : "+data["likeNum"]);
+                $(e.target).next().next().text(data["likeNum"]);
             }
         });
     }

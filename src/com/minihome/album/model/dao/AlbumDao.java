@@ -446,4 +446,21 @@ public class AlbumDao {
 		return unlikeResult;
 	}
 	
+	public int countLikeNum(Connection conn,int targetNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int likeNum=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("countLikeNum"));
+			pstmt.setInt(1,targetNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) likeNum=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return likeNum;
+	}
+	
 }
