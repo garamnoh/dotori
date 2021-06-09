@@ -11,6 +11,7 @@ import java.util.List;
 import com.minihome.album.model.vo.Album;
 import com.minihome.diary.model.vo.Diary;
 import com.minihome.model.dao.MinihomeDao;
+import com.minihome.model.vo.LatestDiaryInfo;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
 import com.shop.model.vo.Skin;
@@ -74,9 +75,9 @@ public class MinihomeService {
 		return latestAlbumList;
 	}
 	
-	public List<Diary> getLatestDiary(String hostMemberId) {
+	public List<LatestDiaryInfo> getLatestDiary(String hostMemberId) {
 		Connection conn=getConnection();
-		List<Diary> latestDiaryList=minihomeDao.getLatestDiary(conn,hostMemberId);
+		List<LatestDiaryInfo> latestDiaryList=minihomeDao.getLatestDiary(conn,hostMemberId);
 		close(conn);
 		return latestDiaryList;
 	}

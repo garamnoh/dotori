@@ -17,7 +17,7 @@
 
 	<div class="basketheader">
 		<p>장바구니</p>
-		<input type="button" value="전체체크박스선택하기" class="check-all">
+		<input type="button" value="전체체크박스선택하기" class="check-all"><input type="button" value="장바구니에서삭제하기" onclick="deleteInBasket();">
 	</div>
 	
 	<div class="basketbody">
@@ -41,10 +41,6 @@
 				        </li>
 					</ul>
 				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input class="aCount" type="number" value="1" min="1" max="1">
-				</div>
 			</div>
 		</div>
 		<%}} %>
@@ -66,10 +62,7 @@
 				        <li><b>도토리<%=b.get(i).getPrice() %> 개</b></li>
 				   </ul>
 				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input class="bCount" type="number" value="1" min="1" max="1">
-				</div>
+				
 			</div>	
 		</div>
 		
@@ -93,10 +86,7 @@
 				        <li><b>도토리<%=c.get(i).getPrice() %> 개</b></li>
 				   </ul>
 				</div>
-				<div class="basketselectCount">
-					<span>구입할 수량 :</span>
-					<input class="cCount" type="number" value="1" min="1" max="1">
-				</div>
+				
 			</div>	
 		</div>
 	</div>
@@ -124,6 +114,34 @@
 <input type="hidden" id="loginMemberId" value="<%=id.getMemberId()%>">
 
 <script>
+	function deleteInBasket(){
+		let aCheck=new Array();
+		document.querySelectorAll(".aShopbasketCheck").forEach((v,i)=>{
+			if($(v).prop("checked")) aCheck.push($(v).next().val());
+			console.log("a "+$(v).next().val());
+		});
+		
+		let bCheck=new Array();
+		document.querySelectorAll(".bShopbasketCheck").forEach((v,i)=>{
+			if($(v).prop("checked")) bCheck.push($(v).next().val());
+			console.log("b "+$(v).next().val());
+		});
+		let cCheck=new Array();
+		document.querySelectorAll(".cShopbasketCheck").forEach((v,i)=>{
+			if($(v).prop("checked")) cCheck.push($(v).next().val());
+			console.log("c "+$(v).next().val());
+		});
+		
+		$.ajax({
+			url:"<%=request.getContextPath()%>/ajax/deleteInBasket",
+			
+			data:{"memberId": "<%=id%>","aitemNo":aCheck.toString(),"bitemNo":bCheck.toString(),"citemNo":cCheck.toString()},
+			success:data=>{
+				$("#section").html(data);
+			}
+			
+		});
+	}
 	
 	function buyDotoriGo(){
 		$.ajax({

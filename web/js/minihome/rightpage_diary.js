@@ -158,8 +158,7 @@ document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 		$.ajax({
 			url:contextPath+"/diary/diaryFolder",
 			type:"post",
-			data:{
-				//"hostMemberId":hostMemberId,
+			data:{				
 				"diaryFolderLevel":$(e.target).parent().prev().val(),
 				"cPage":cPage,
 				"numPerpage":numPerpage			

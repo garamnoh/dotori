@@ -15,6 +15,7 @@ import java.util.Properties;
 
 import com.minihome.album.model.vo.Album;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.model.vo.LatestDiaryInfo;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
 import com.shop.model.vo.Skin;
@@ -171,23 +172,21 @@ public class MinihomeDao {
 		return latestAlbumList;
 	}
 	
-	public List<Diary> getLatestDiary(Connection conn,String hostMemberId) {
+	public List<LatestDiaryInfo> getLatestDiary(Connection conn,String hostMemberId) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
-		List<Diary> latestDiaryList=new ArrayList();
+		List<LatestDiaryInfo> latestDiaryList=new ArrayList();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("getLatestDiary"));
 			pstmt.setString(1,hostMemberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
-				Diary d=new Diary();
-				d.setDiaryNo(rs.getInt("diary_no"));
-				d.setMemberId(rs.getString("member_id"));
-				d.setWriter(rs.getString("writer"));
-				d.setFolderNo(rs.getInt("folder_no"));
-				d.setContent(rs.getString("content"));
-				d.setPostDate(rs.getDate("post_date"));
-				latestDiaryList.add(d);
+				LatestDiaryInfo ld=new LatestDiaryInfo();
+				ld.setWriter(rs.getString("writer"));
+				ld.setNickname(rs.getString("nickname"));
+				ld.setFolderName(rs.getString("folder_name"));
+				ld.setPostDate(rs.getDate("post_date"));
+				latestDiaryList.add(ld);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
