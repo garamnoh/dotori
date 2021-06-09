@@ -108,6 +108,24 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return musicTotalTitleOrder;
 	}
+	public List<Minimi> ashopLikeOrder(){
+		Connection conn=getConnection();
+		List<Minimi> minimiLikeOrder=dao.ashopLikeOrder(conn);
+		close(conn);
+		return minimiLikeOrder;
+	}
+	public List<Skin> bshopLikeOrder(){
+		Connection conn=getConnection();
+		List<Skin> skinLikeOrder=dao.bshopLikeOrder(conn);
+		close(conn);
+		return skinLikeOrder;
+	}
+	public List<Music> cshopLikeOrder(){
+		Connection conn=getConnection();
+		List<Music> musicLikeOrder=dao.cshopLikeOrder(conn);
+		close(conn);
+		return musicLikeOrder;
+	}
 	public List<Minimi> ashopPriceOrder(){
 		Connection conn=getConnection();
 		List<Minimi> minimiPriceOrder=dao.ashopPriceOrder(conn);

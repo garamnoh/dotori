@@ -8,6 +8,7 @@ String result=(String)request.getAttribute("result");
 List<SkinLike> bHeartList=(List<SkinLike>)request.getAttribute("bheartList");
 List<Integer> myHeartItemList=(List<Integer>)request.getAttribute("myHeartItemList");
 
+
 %>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
@@ -179,6 +180,15 @@ $("#SkinTable #likeBox>img").on("click",(e)=>{
 $("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopTotalTitleOrder",
+		data:{"type":"skin"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(3)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopLikeOrder",
 		data:{"type":"skin"},
 		success:(data)=>{
 			 $("#section").html(data);

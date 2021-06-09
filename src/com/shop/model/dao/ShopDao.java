@@ -405,6 +405,78 @@ private Properties prop=new Properties();
 		}
 		return musicTotalTitleOrder;
 	}
+	
+	public List<Minimi> ashopLikeOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Minimi> minimiLikeOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("ashopLikeOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Minimi mi= new Minimi();
+				mi.setItemNo(rs.getInt("item_no"));
+				mi.setFilepath(rs.getString("filepath"));
+				mi.setPrice(rs.getInt("price"));
+				mi.setTitle(rs.getString("title"));
+				minimiLikeOrder.add(mi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return minimiLikeOrder;
+	}
+	
+	public List<Skin> bshopLikeOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Skin> skinLikeOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bshopLikeOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk= new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				skinLikeOrder.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinLikeOrder;
+	}
+	
+	public List<Music> cshopLikeOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Music> skinLikeOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cshopLikeOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				skinLikeOrder.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinLikeOrder;
+	}
 	public List<Minimi> ashopPriceOrder(Connection conn){
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
