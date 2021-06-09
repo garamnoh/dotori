@@ -80,6 +80,26 @@ $(".diary_comment_btn").click(e=>{
 	})
 });
 
+$('.like').on('click', (e)=>{
+    let unlike = contextPath+"/images/unlike.png";
+    let like = contextPath+"/images/like.png";
+    let src = $(e.target).attr('src');
+    let newSrc = src==unlike ? like : unlike;
+    $(e.target).attr('src', newSrc);
+    
+    const diaryNo = $(e.target).parent().prev().val();
+    $.ajax({
+    	url: contextPath+"/friends/like",
+    	data:{
+    		'diaryNo': diaryNo
+    	},
+    	success: (data)=>{
+    		const likeCount = data['likeCount'];
+    		$(e.target).parent().children('span').text(likeCount);
+    	}
+    });
+});
+
 $(".diary_update_btn").click(e=>{
 	$.ajax({
 		url:contextPath+"/diary/diaryUpdate",
@@ -155,6 +175,8 @@ $(".diary_co_comment_btn").click(e=>{
 		}
 	})
 });
+
+
 
 document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 	$(v).click((e)=>{		

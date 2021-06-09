@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.minihome.diary.model.vo.Diary, java.util.List, com.member.model.vo.ProfilePath" %>
 <%@ page import="com.member.model.vo.Member, com.minihome.diary.model.vo.DiaryComment, com.minihome.diary.model.vo.DiaryFolder" %>
+<%@ page import="java.util.ArrayList, com.friend.model.vo.Like" %>
 <%
 	List<Diary> list=(List<Diary>)request.getAttribute("list");	
 	Member loginMember=(Member)request.getAttribute("loginMember");	
@@ -12,39 +13,39 @@
 	int diaryFolderLevel=(int)request.getAttribute("diaryFolderLevel");
 	List<DiaryFolder> fList=(List<DiaryFolder>)request.getAttribute("fList");
 	String msg=(String)request.getAttribute("msg");
+	ArrayList<Integer> likeList = (ArrayList<Integer>)request.getAttribute("likeList");
+	ArrayList<Like> count = (ArrayList<Like>)request.getAttribute("count");
 %>
 
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>
 
 <div id="diary_content">
-	<form>
-		<div id="diary_input_box">
-			<!-- 미니홈피 방문자(로그인한사람) 미니미출력 -->
-			<div id="input_minimi_container">
-				<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=profilePath %>" alt="나의미니미">
-			</div>
-			<!-- 다이어리 작성 박스 -->
-			<div id="diary_input_container">
-				<div id="diary_title_left">
-					<div id="diary_input_title_box">
-						<select class="diary_folder" name="diary_folder">
-							<%for(DiaryFolder df : fList) {%>
-								<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
-							<%} %>							
-						</select>						
-					</div>
-					<div id="diary_input_content_box">						
-						<textarea class="diary_content_input" placeholder="다이어리를 작성해주세요."></textarea>
-					</div>
-				</div>				
-				<div id="diary_input_btn_box">
-					<input type="submit" value="저장" id="diary_input_btn">
-				</div>									
-			</div>
-			<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
-			<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
+	<div id="diary_input_box">
+		<!-- 미니홈피 방문자(로그인한사람) 미니미출력 -->
+		<div id="input_minimi_container">
+			<img src="<%=request.getContextPath()%>/upload/MINIMI/<%=profilePath %>" alt="나의미니미">
 		</div>
-	</form>
+		<!-- 다이어리 작성 박스 -->
+		<div id="diary_input_container">
+			<div id="diary_title_left">
+				<div id="diary_input_title_box">
+					<select class="diary_folder" name="diary_folder">
+						<%for(DiaryFolder df : fList) {%>
+							<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+						<%} %>							
+					</select>						
+				</div>
+				<div id="diary_input_content_box">						
+					<textarea class="diary_content_input" placeholder="다이어리를 작성해주세요."></textarea>
+				</div>
+			</div>				
+			<div id="diary_input_btn_box">
+				<input type="submit" value="저장" id="diary_input_btn">
+			</div>									
+		</div>
+		<input type="hidden" name="loginMemberId" value="<%=loginMember.getMemberId()%>">
+		<input type="hidden" name="hostMemberId" value="<%=hostMember.getMemberId()%>">
+	</div>	
 	
 	<%if(list.isEmpty()) {%>
 		<tr>
@@ -71,7 +72,7 @@
 				<div id="diary_content_list">
 				
 					<!-- 댓글작성자, 날짜, 버튼박스 -->
-					<div id="diary_content_title">
+					<div id="diary_content_title">						
 						<div id="diary_writer_container"><%=d.getMemberName()%></div>									
 						<div id="diary_date_container"><%=d.getPostDate() %></div>
 						<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">	
@@ -84,6 +85,30 @@
 							<%} %>
 							<div class="diary_com_btn">댓글</div>
 						</div>
+						
+						<!-- 다이어리 좋아요 -->										            
+			            <input type='hidden' value='<%=d.getDiaryNo() %>'>
+			            <%
+			            	boolean likeOrNot = false;
+			            	for(Integer no: likeList){
+			            		if(no == d.getDiaryNo()){
+			            			likeOrNot = true;
+			            			break;
+			            		}
+			            	}
+			            %>
+			            <div id="likeBox">
+				            <% for(Like like : count){ %>
+				            	<% if(d.getDiaryNo() == like.getNo()){ %>
+				            		<span><%= like.getCount() %></span>
+				            	<% break; } %>
+				            <% } %>
+				            <% if(likeOrNot == true) { %>
+				            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+				            <% } else {%>
+				            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+				            <% } %>
+			            </div>				        
 					</div>	
 					
 					<!-- 댓글내용 -->						
