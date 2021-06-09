@@ -10,8 +10,11 @@ import java.util.List;
 
 import com.shop.model.dao.ShopDao;
 import com.shop.model.vo.Minimi;
+import com.shop.model.vo.MinimiLike;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.MusicLike;
 import com.shop.model.vo.Skin;
+import com.shop.model.vo.SkinLike;
 
 
 public class ShopService {
@@ -239,7 +242,85 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return cResultDelete;
 	}
+	public List<MinimiLike> aSearchHeartList(){
+		Connection conn=getConnection();
+		List<MinimiLike> aheartList=dao.aSearchHeartList(conn);
+		close(conn);
+		return aheartList;
+	}
+	public List<SkinLike> bSearchHeartList(){
+		Connection conn=getConnection();
+		List<SkinLike> bheartList=dao.bSearchHeartList(conn);
+		close(conn);
+		return bheartList;
+	}
+	public List<MusicLike> cSearchHeartList(){
+		Connection conn=getConnection();
+		List<MusicLike> cheartList=dao.cSearchHeartList(conn);
+		close(conn);
+		return cheartList;
+	}
+	public List<Integer> aMyHeartItemNoList(String memberId){
+		Connection conn=getConnection();
+		List<Integer> myHeartItemList=dao.aMyHeartItemNoList(conn,memberId);
+		close(conn);
+		return myHeartItemList;
+	}
+	public List<Integer> bMyHeartItemNoList(String memberId){
+		Connection conn=getConnection();
+		List<Integer> myHeartItemList=dao.bMyHeartItemNoList(conn,memberId);
+		close(conn);
+		return myHeartItemList;
+	}
 	
+	public List<Integer> cMyHeartItemNoList(String memberId){
+		Connection conn=getConnection();
+		List<Integer> myHeartItemList=dao.cMyHeartItemNoList(conn,memberId);
+		close(conn);
+		return myHeartItemList;
+	}
+	public int aHeartCount(int itemNo) {
+		Connection conn=getConnection();
+		int aHeartResult=dao.aHeartCount(conn,itemNo);
+		close(conn);
+		return aHeartResult;
+	}
+	public int bHeartCount(int itemNo) {
+		Connection conn=getConnection();
+		int bHeartResult=dao.bHeartCount(conn,itemNo);
+		close(conn);
+		return bHeartResult;
+	}
+	public int cHeartCount(int itemNo) {
+		Connection conn=getConnection();
+		int cHeartResult=dao.cHeartCount(conn,itemNo);
+		close(conn);
+		return cHeartResult;
+	}
+	public void aHeartInsert(String id,int itemNo) {
+		Connection conn=getConnection();
+		int aHeartResult=dao.aHeartInsertResult(conn,id,itemNo);
+		if(aHeartResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+	}
+	public void bHeartInsert(String id,int itemNo) {
+		Connection conn=getConnection();
+		int bHeartResult=dao.bHeartInsertResult(conn,id,itemNo);
+		if(bHeartResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+	}
+	public void cHeartInsert(String id,int itemNo) {
+		Connection conn=getConnection();
+		int cHeartResult=dao.cHeartInsertResult(conn,id,itemNo);
+		if(cHeartResult>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		
+	}
 	
 	
 	

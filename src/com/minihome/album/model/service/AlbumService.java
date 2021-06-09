@@ -178,4 +178,11 @@ public class AlbumService {
 		return unlikeImgResult;
 	}
 	
+	public int countLikeNum(int targetNo) {
+		Connection conn=getConnection();
+		int likeNum=albumDao.countLikeNum(conn,targetNo);
+		close(conn);
+		return likeNum;
+	}
+	
 }

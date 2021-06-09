@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.vo.Member;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.MusicLike;
 import com.shop.service.ShopService;
 
 /**
@@ -44,6 +45,13 @@ public class ShopMusicTableServlet extends HttpServlet {
 		request.setAttribute("type", "music");
 		request.setAttribute("memberId", memberId); 
 		request.setAttribute("result", result); 
+		
+		List<MusicLike> cheartList=new ShopService().cSearchHeartList();
+		request.setAttribute("cheartList", cheartList);
+		
+		List<Integer> myHeartItemList=new ShopService().cMyHeartItemNoList(memberId);
+		request.setAttribute("myHeartItemList", myHeartItemList); 
+		
 		request.getRequestDispatcher("/views/shop/shopMusic.jsp").forward(request, response);
 		
 	}

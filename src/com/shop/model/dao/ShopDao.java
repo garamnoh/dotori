@@ -1,9 +1,6 @@
 package com.shop.model.dao;
 
 import static com.common.JDBCTemplate.close;
-import static com.common.JDBCTemplate.commit;
-import static com.common.JDBCTemplate.getConnection;
-import static com.common.JDBCTemplate.rollback;
 
 import java.io.FileReader;
 import java.io.IOException;
@@ -16,8 +13,11 @@ import java.util.List;
 import java.util.Properties;
 
 import com.shop.model.vo.Minimi;
+import com.shop.model.vo.MinimiLike;
 import com.shop.model.vo.Music;
+import com.shop.model.vo.MusicLike;
 import com.shop.model.vo.Skin;
+import com.shop.model.vo.SkinLike;
 
 public class ShopDao {
 private Properties prop=new Properties();
@@ -285,6 +285,7 @@ private Properties prop=new Properties();
 		}
 		return minimiSearchResult;
 	}
+	
 	public List<Skin> bshopSearchItem(Connection conn,String searchKey){
 		PreparedStatement pstmt=null;
 		ResultSet rs= null;
@@ -779,7 +780,273 @@ private Properties prop=new Properties();
 		}
 		return cResultDelete;
 	}
+	public List<MinimiLike> aSearchHeartList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MinimiLike> aheartList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aSearchHeartList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MinimiLike ml= new MinimiLike();
+				ml.setItemNo(rs.getInt("item_no"));
+				ml.setaHeartCount(rs.getInt("count"));
+				aheartList.add(ml);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return aheartList;
+	}
+	public List<SkinLike> bSearchHeartList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<SkinLike> bheartList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bSearchHeartList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				SkinLike sl= new SkinLike();
+				sl.setItemNo(rs.getInt("item_no"));
+				sl.setbHeartCount(rs.getInt("count"));
+				bheartList.add(sl);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return bheartList;
+	}
 	
+	public List<MusicLike> cSearchHeartList(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<MusicLike> cheartList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cSearchHeartList"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				MusicLike ml= new MusicLike();
+				ml.setMusicNo(rs.getInt("music_no"));
+				ml.setcHeartCount(rs.getInt("count"));
+				cheartList.add(ml);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cheartList;
+	}
+	public List<Integer> aMyHeartItemNoList(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Integer> myHeartItemList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aMyHeartItemNoList"));
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				myHeartItemList.add(rs.getInt("item_no"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myHeartItemList;
+	}
+	public List<Integer> bMyHeartItemNoList(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Integer> myHeartItemList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bMyHeartItemNoList"));
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				myHeartItemList.add(rs.getInt("item_no"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myHeartItemList;
+	}
+	public List<Integer> cMyHeartItemNoList(Connection conn,String memberId){
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		List<Integer> myHeartItemList=new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cMyHeartItemNoList"));
+			pstmt.setString(1,memberId);
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				myHeartItemList.add(rs.getInt("music_no"));
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return myHeartItemList;
+	}
+	public int aHeartCount(Connection conn,int itemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int aHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aHeartCount"));
+			pstmt.setInt(1,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) aHeartResult=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return aHeartResult;
+	}
+
+	public int bHeartCount(Connection conn,int itemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int bHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bHeartCount"));
+			pstmt.setInt(1,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) bHeartResult=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return bHeartResult;
+	}
+	
+	public int cHeartCount(Connection conn,int itemNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		int cHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cHeartCount"));
+			pstmt.setInt(1,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) cHeartResult=rs.getInt(1);
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cHeartResult;
+	}
+	public int aHeartInsertResult(Connection conn,String id,int itemNo) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int aHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("aHeartCheckResult"));
+			pstmt.setString(1,id);
+			pstmt.setInt(2,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==0) {
+					pstmt2=conn.prepareStatement(prop.getProperty("aHeartInsertResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					aHeartResult=pstmt2.executeUpdate();
+				}else {
+					pstmt2=conn.prepareStatement(prop.getProperty("aHeartDeleteResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					aHeartResult=pstmt2.executeUpdate();
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return aHeartResult;
+	}
+	public int bHeartInsertResult(Connection conn,String id,int itemNo) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int bHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bHeartCheckResult"));
+			pstmt.setString(1,id);
+			pstmt.setInt(2,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==0) {
+					pstmt2=conn.prepareStatement(prop.getProperty("bHeartInsertResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					bHeartResult=pstmt2.executeUpdate();
+				}else {
+					pstmt2=conn.prepareStatement(prop.getProperty("bHeartDeleteResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					bHeartResult=pstmt2.executeUpdate();
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return bHeartResult;
+	}
+	public int cHeartInsertResult(Connection conn,String id,int itemNo) {
+		PreparedStatement pstmt=null;
+		PreparedStatement pstmt2=null;
+		ResultSet rs=null;
+		int cHeartResult=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cHeartCheckResult"));
+			pstmt.setString(1,id);
+			pstmt.setInt(2,itemNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				if(rs.getInt(1)==0) {
+					pstmt2=conn.prepareStatement(prop.getProperty("cHeartInsertResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					cHeartResult=pstmt2.executeUpdate();
+				}else {
+					pstmt2=conn.prepareStatement(prop.getProperty("cHeartDeleteResult"));
+					pstmt2.setInt(1,itemNo);
+					pstmt2.setString(2,id);
+					cHeartResult=pstmt2.executeUpdate();
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);
+		}
+		return cHeartResult;
+	}
 	
 	
 	
