@@ -31,16 +31,21 @@ public class DiaryAddFriendServlet extends HttpServlet {
 		
 		int shareFolderNo=Integer.parseInt(request.getParameter("shareFolderNo"));
 		String shareMember=request.getParameter("shareMember");
+		String folderName=request.getParameter("folderName");
 		String MemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
 		String members[]=shareMember.split(",");
-		int result=0;
+		int result=0, check=0;
 			
 		for(int i=0; i<members.length; i++) {			
 			result=new DiaryService().insertShareDiaryFolder(shareFolderNo, members[i]);
+			System.out.println("이건 되냐고?????"+result);
+			if(result>0) {
+				check=new DiaryService().insertShareFolder(shareFolderNo, members[i], folderName);
+			}
 		}			
 		
-		if(result>0) {
+		if(result>0 && check>0) {
 			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
 		}
 	}

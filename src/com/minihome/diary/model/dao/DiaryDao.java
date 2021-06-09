@@ -287,6 +287,24 @@ public class DiaryDao {
 		return result;
 	}
 	
+	public int insertShareFolder(Connection conn, int folderNo, String memberName, String folderName) {
+		PreparedStatement pstmt=null;
+		int result=0;		
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("insertShareFolder"));
+			pstmt.setInt(1, folderNo);			
+			pstmt.setString(2, memberName);
+			pstmt.setString(3, folderName);
+			pstmt.setString(4, "FRIENDS");
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);			
+		}
+		return result;
+	}
+	
 	public int selectDiaryShareFolder(Connection conn, String addFolderName) {
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;

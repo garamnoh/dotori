@@ -53,7 +53,7 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 		
 		if(list.size()==0) {		
 			int result=new DiaryService().insertDiaryFolder(hostMemberId, "전체공개", "PUBLIC");
-			result=new DiaryService().insertDiaryFolder(hostMemberId, "일촌공개", "FRIENDS");
+			result=new DiaryService().insertDiaryFolder(hostMemberId, "일촌공개", "FOLLOWERS");
 			result=new DiaryService().insertDiaryFolder(hostMemberId, "비공개", "PRIVATE");
 			list=new DiaryService().selectFolderList(hostMemberId);			
 		}	
