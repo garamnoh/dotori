@@ -13,3 +13,22 @@
 .latestDiaryBox{
     margin:10px;
 }
+.hawaiianFriends{
+    width:120px;
+    height:100px;
+    position:absolute;
+    left:470px;
+    top:470px;
+}
+.lureOfBear{
+    width:130px;
+    position:absolute;
+    left:430px;
+    top:400px;
+}
+.lureOfBear:hover{
+    width:150px;
+    left:400px;
+    top:385px;
+    cursor:pointer;
+}
