@@ -76,6 +76,8 @@
 	<%} %>
 </div>
 
+<img src="<%=request.getContextPath()%>/images/minihome/작은 도토리.png" class="littelDotori">
+
 <input type="hidden" id="currentAlbum" value="<%=album%>">
 
 <script>

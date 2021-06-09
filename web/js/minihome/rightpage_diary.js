@@ -1,7 +1,7 @@
 $("#diary_input_btn").click(e=>{
 	const content=$(".diary_content_input").val();
 	console.log("///"+content+"///");
-	if(content.trim()=="" || content.equals("null")){
+	if(content.trim()==""){
 		alert("내용을 입력해주세요.");
 	}else{
 		$.ajax({

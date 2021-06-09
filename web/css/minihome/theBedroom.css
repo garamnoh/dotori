@@ -215,3 +215,22 @@ body{
     background-color:white;
     cursor:pointer;
 }
+.sittingLittleGirl{
+    width:70px;
+    position:absolute;
+    left:1115px;
+    top:500px;
+}
+.helloFromSister{
+    width:220px;
+    position:absolute;
+    left:950px;
+    top:470px;
+}
+.helloFromSister:hover{
+    width:300px;
+    left:870px;
+    top:460px;
+    cursor:pointer;
+    z-index:10;
+}

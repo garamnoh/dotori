@@ -116,3 +116,9 @@ input::-webkit-inner-spin-button{
     font-weight:bold;
     margin-top:10px;
 }
+.littelDotori{
+    width:25px;
+    position:absolute;
+    left:30px;
+    top:20px;
+}
