@@ -335,6 +335,213 @@ private Properties prop=new Properties();
 		}
 		return musicSearchResult;
 	}
+	public List<Minimi> ashopTotalOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Minimi> minimiTotalTitleOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("ashopTotalOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Minimi mi= new Minimi();
+				mi.setItemNo(rs.getInt("item_no"));
+				mi.setFilepath(rs.getString("filepath"));
+				mi.setPrice(rs.getInt("price"));
+				mi.setTitle(rs.getString("title"));
+				minimiTotalTitleOrder.add(mi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return minimiTotalTitleOrder;
+	}
+	public List<Skin> bshopTotalOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Skin> skinTotalTitleOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bshopTotalOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk= new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				skinTotalTitleOrder.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinTotalTitleOrder;
+	}
+	public List<Music> cshopTotalOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Music> musicTotalTitleOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cshopTotalOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				musicTotalTitleOrder.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return musicTotalTitleOrder;
+	}
+	public List<Minimi> ashopPriceOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Minimi> minimiPriceOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("ashopPriceOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Minimi mi= new Minimi();
+				mi.setItemNo(rs.getInt("item_no"));
+				mi.setFilepath(rs.getString("filepath"));
+				mi.setPrice(rs.getInt("price"));
+				mi.setTitle(rs.getString("title"));
+				minimiPriceOrder.add(mi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return minimiPriceOrder;
+	}
+	public List<Skin> bshopPriceOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Skin> skinPriceOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bshopPriceOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk= new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				skinPriceOrder.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinPriceOrder;
+	}
+	public List<Music> cshopPriceOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Music> musicPriceOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cshopPriceOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				musicPriceOrder.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return musicPriceOrder;
+	}
+	public List<Minimi> ashopPopularOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Minimi> minimiPopularOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("ashopPopularOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Minimi mi= new Minimi();
+				mi.setItemNo(rs.getInt("item_no"));
+				mi.setFilepath(rs.getString("filepath"));
+				mi.setPrice(rs.getInt("price"));
+				mi.setTitle(rs.getString("title"));
+				minimiPopularOrder.add(mi);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return minimiPopularOrder;
+	}
+	public List<Skin> bshopPopularOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Skin> skinPopularOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("bshopPopularOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Skin sk= new Skin();
+				sk.setItemNo(rs.getInt("item_no"));
+				sk.setSkinTitle(rs.getString("skin_title"));
+				sk.setPrice(rs.getInt("price"));
+				sk.setPreviewImgFilepath(rs.getString("preview_img_filepath"));
+				sk.setCssFilepath(rs.getString("css_filepath"));
+				skinPopularOrder.add(sk);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return skinPopularOrder;
+	}
+	public List<Music> cshopPopularOrder(Connection conn){
+		PreparedStatement pstmt=null;
+		ResultSet rs= null;
+		List<Music> musicPopularOrder= new ArrayList();
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("cshopPopularOrder"));
+			rs=pstmt.executeQuery();
+			while(rs.next()) {
+				Music m= new Music();
+				m.setMusicNo(rs.getInt("music_no"));
+				m.setMusicTitle(rs.getString("music_title"));
+				m.setSinger(rs.getString("singer"));
+				m.setFilepath(rs.getString("filepath"));
+				m.setPrice(rs.getInt("price"));
+				m.setImgFilepath(rs.getString("img_filepath"));
+				musicPopularOrder.add(m);
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return musicPopularOrder;
+	}
 	public int aIsInThereShoppingList(Connection conn,String id,List<String> aitemNo) {
 		PreparedStatement pstmt=null;
 		ResultSet rs =null;
@@ -439,12 +646,10 @@ private Properties prop=new Properties();
 		try {
 			pstmt=conn.prepareStatement(prop.getProperty("cGetItemShoppingList"));
 			for(int i=0;i<citemNo.size();i++) {
-				System.out.println("디에이오 넘버 테스트 : "+citemNo.get(i));
 				pstmt.setString(1, id);
 				pstmt.setString(2, citemNo.get(i));
-				pstmt.setString(3, "기본엘범");
+				pstmt.setString(3, "기본앨범");
 				cResultInput+=pstmt.executeUpdate();
-				System.out.println("디에이오 테스트 : "+cResultInput);
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();

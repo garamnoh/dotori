@@ -87,6 +87,60 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return musicSearchResult;
 	}
+	public List<Minimi> ashopTotalOrder(){
+		Connection conn=getConnection();
+		List<Minimi> minimiTotalTitleOrder=dao.ashopTotalOrder(conn);
+		close(conn);
+		return minimiTotalTitleOrder;
+	}
+	public List<Skin> bshopTotalOrder(){
+		Connection conn=getConnection();
+		List<Skin> skinTotalTitleOrder=dao.bshopTotalOrder(conn);
+		close(conn);
+		return skinTotalTitleOrder;
+	}
+	public List<Music> cshopTotalOrder(){
+		Connection conn=getConnection();
+		List<Music> musicTotalTitleOrder=dao.cshopTotalOrder(conn);
+		close(conn);
+		return musicTotalTitleOrder;
+	}
+	public List<Minimi> ashopPriceOrder(){
+		Connection conn=getConnection();
+		List<Minimi> minimiPriceOrder=dao.ashopPriceOrder(conn);
+		close(conn);
+		return minimiPriceOrder;
+	}
+	public List<Skin> bshopPriceOrder(){
+		Connection conn=getConnection();
+		List<Skin> skinPriceOrder=dao.bshopPriceOrder(conn);
+		close(conn);
+		return skinPriceOrder;
+	}
+	public List<Music> cshopPriceOrder(){
+		Connection conn=getConnection();
+		List<Music> musicPriceOrder=dao.cshopPriceOrder(conn);
+		close(conn);
+		return musicPriceOrder;
+	}
+	public List<Minimi> ashopPopularOrder(){
+		Connection conn=getConnection();
+		List<Minimi> minimiPopularOrder=dao.ashopPopularOrder(conn);
+		close(conn);
+		return minimiPopularOrder;
+	}
+	public List<Skin> bshopPopularOrder(){
+		Connection conn=getConnection();
+		List<Skin> skinPopularOrder=dao.bshopPopularOrder(conn);
+		close(conn);
+		return skinPopularOrder;
+	}
+	public List<Music> cshopPopularOrder(){
+		Connection conn=getConnection();
+		List<Music> musicPopularOrder=dao.cshopPopularOrder(conn);
+		close(conn);
+		return musicPopularOrder;
+	}
 	public int aIsInThereShoppingList(String id,List<String> aitemNo) {
 		Connection conn=getConnection();
 		int aSearchResult=dao.aIsInThereShoppingList(conn,id,aitemNo);
@@ -161,6 +215,7 @@ private ShopDao dao= new ShopDao();
 		close(conn);
 		return dotoriResult;
 	}
+	
 	
 	
 	
