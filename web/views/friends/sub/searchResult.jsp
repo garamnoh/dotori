@@ -15,6 +15,7 @@
 				<span><%=f.getFollower() %></span>
 			</div>
 			<div id='buttons'>
+				<input type='hidden' value='<%=f.getFollowerProfileName() %>'>
 				<input type='hidden' name='hostMemberId' value='<%=f.getFollower() %>'>
 				<button id='minihome'>Mini</button>
 				<button id='delete'>일촌끊기</button>
@@ -76,6 +77,7 @@
 <script>
 	$('#searchResult button#minihome').on('click', (e)=>{
 		const hostMemberId = $(e.target).prev().val();
+		const hostMemberName = $(e.target).prev().prev().val();
 		
 		console.log(hostMemberId);
 		
@@ -88,6 +90,21 @@
 		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
 		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
 		window.open(url,"",status);
+		
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/accessLog',
+			data: {
+				'friendId': hostMemberId
+			},
+			success: (data)=>{
+				$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+				$('#accessAlert>div>span').text(data['accessCount']);
+				$('#accessAlert').slideDown();
+				setTimeout(()=>{
+					$('#accessAlert').slideUp();
+				}, 3000);
+			}
+		});
 	});
 	
 	$('#searchResult button#delete').on('click', (e)=>{

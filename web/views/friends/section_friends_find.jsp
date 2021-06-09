@@ -83,12 +83,25 @@
 <script>
 	$('#find #searchBtn').on('click', ()=>{
 		const searchKeyword = $('#searchKeyword').val();
+		var from = $('#from').val();
+		var to = $('#to').val();
+		
+		const today = new Date;
+		
+		if(from == '') from=0;
+		if(to == '') to=today.getFullYear();
+		
+		console.log(from);
+		console.log(to);
+		
 		$('#findResult').html('');
 		
 		$.ajax({
 			url: '<%=request.getContextPath() %>/friends/searchSomeone',
 			data: {
-				'searchKeyword': searchKeyword
+				'searchKeyword': searchKeyword,
+				'from': from,
+				'to': to
 			},
 			success: data=>{
 				$('#content1 #findResult').append(data);

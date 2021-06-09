@@ -91,7 +91,3 @@
 	}
 </style>
 
-
-<script>
-	$('')
-</script>

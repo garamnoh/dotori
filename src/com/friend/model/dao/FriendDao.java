@@ -16,6 +16,7 @@ import com.friend.model.vo.FeedAlbum;
 import com.friend.model.vo.FeedDiary;
 import com.friend.model.vo.Friend;
 import com.friend.model.vo.Like;
+import com.friend.model.vo.Log;
 import com.friend.model.vo.SearchF;
 
 public class FriendDao {
@@ -196,7 +197,7 @@ public class FriendDao {
 		} return result;
 	}
 	
-	public ArrayList<SearchF> searchList(Connection conn, String myId, String searchKeyword){
+	public ArrayList<SearchF> searchList(Connection conn, String myId, String from, String to, String searchKeyword){
 		
 		PreparedStatement ps = null;
 		PreparedStatement ps2 = null;
@@ -212,6 +213,8 @@ public class FriendDao {
 			
 			ps = conn.prepareStatement(prop.getProperty("searchList"));
 			ps.setString(1, "%"+searchKeyword+"%");
+			ps.setString(2, from);
+			ps.setString(3, to);
 			
 			rs = ps.executeQuery();
 			
@@ -796,5 +799,107 @@ public class FriendDao {
 			close(rs);
 			close(ps);
 		} return likeCountAlbum;
+	}
+	
+	public int accessLog(Connection conn, String myId, String friendId) {
+		
+		PreparedStatement ps = null;
+		int result = 0;
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("accessLog"));
+			ps.setString(1, myId);
+			ps.setString(2, friendId);
+			
+			result = ps.executeUpdate();
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps);
+		} return result;
+	}
+	
+	public int accessCount(Connection conn, String myId, String friendId) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		int accessCount = 0;
+		
+		try {
+			ps = conn.prepareStatement(prop.getProperty("accessCount"));
+			ps.setString(1, myId);
+			ps.setString(2, friendId);
+			
+			rs = ps.executeQuery();
+			if(rs.next()) accessCount = rs.getInt(1);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return accessCount;
+	}
+	
+	public ArrayList<Log> myLog(Connection conn, String myId, int period) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Log> myLog = new ArrayList<Log>();
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("myLog"));
+			ps.setInt(1, period);
+			ps.setString(2, myId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Log l = new Log();
+				
+				l.setMemberId(rs.getString("FRIEND_ID"));
+				l.setVisitCount(rs.getInt("COUNT"));
+				
+				myLog.add(l);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return myLog;
+	}
+	
+	public ArrayList<Log> friendsLog(Connection conn, String myId, int period) {
+		
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		ArrayList<Log> friendsLog = new ArrayList<Log>();
+		
+		try {
+			
+			ps = conn.prepareStatement(prop.getProperty("friendsLog"));
+			ps.setInt(1, period);
+			ps.setString(2, myId);
+			
+			rs = ps.executeQuery();
+			
+			while(rs.next()) {
+				Log l = new Log();
+				
+				l.setMemberId(rs.getString("MEMBER_ID"));
+				l.setVisitCount(rs.getInt("COUNT"));
+				
+				friendsLog.add(l);
+			}
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rs);
+			close(ps);
+		} return friendsLog;
 	}
 }

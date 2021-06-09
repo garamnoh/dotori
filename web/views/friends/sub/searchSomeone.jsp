@@ -11,6 +11,7 @@
 	 	<% for(SearchF list : resultList){ %>
  			<% if(list.getFriendship().equals("일촌")) { %>
 				<div id='detail'>
+					<input type='hidden' value='<%=list.getMemberName() %>'>
 					<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
 					<div id='person'>
 						<span><%=list.getMemberName() %></span>
@@ -26,6 +27,7 @@
 			<% } else if(list.getFriendship().equals("신청")) { %>
 				<% if(list.getFollower().equals(list.getMemberId())){ %>
 					<div id='detail'>
+						<input type='hidden' value='<%=list.getMemberName() %>'>
 						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
 						<div id='person'>
 							<span><%=list.getMemberName() %></span>
@@ -41,6 +43,7 @@
 					</div>
 				<% } else { %>
 					<div id='detail'>
+						<input type='hidden' value='<%=list.getMemberName() %>'>
 						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
 						<div id='person'>
 						<span><%=list.getMemberName() %></span>
@@ -58,6 +61,7 @@
 			<% } else { %>
 				<% if(list.getMemberId().equals(myId)){ %>
 					<div id='detail'>
+						<input type='hidden' value='<%=list.getMemberName() %>'>
 						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
 						<div id='person'>
 							<span>내 계정</span>
@@ -69,6 +73,7 @@
 					</div>
 				<% } else { %>
 					<div id='detail'>
+						<input type='hidden' value='<%=list.getMemberName() %>'>
 						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=list.getProfilePath() %>'>
 						<div id='person'>
 							<span><%=list.getMemberName() %></span>
@@ -149,6 +154,8 @@
 <script>
 	$('#tempBox button#minihome').on('click', (e)=>{
 		const hostMemberId = $(e.target).prev().val();
+		const hostMemberName = $(e.target).parent().parent().children('input[type=hidden]').val();
+		const myId = '<%=myId %>'
 		
 		console.log(hostMemberId);
 		
@@ -161,6 +168,23 @@
 		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
 		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
 		window.open(url,"",status);
+		
+		if(hostMemberId != myId){
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/accessLog',
+				data: {
+					'friendId': hostMemberId
+				},
+				success: (data)=>{
+					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+					$('#accessAlert>div>span').text(data['accessCount']);
+					$('#accessAlert').slideDown();
+					setTimeout(()=>{
+						$('#accessAlert').slideUp();
+					}, 3000);
+				}
+			});
+		}
 	});
 
 	$('#tempBox button#delete').on('click', (e)=>{
