@@ -90,6 +90,43 @@ String result=(String)request.getAttribute("result");
 
 <script>
 
+$("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopTotalTitleOrder",
+		data:{"type":"minimi"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(3)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopLikeOrder",
+		data:{"type":"minimi"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(5)").on("click",(e)=>{
+	console.log("test");
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopPriceOrder",
+		data:{"type":"minimi"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(7)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopPopularOrder",
+		data:{"type":"minimi"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
 var shopSearchItem=(event)=>{
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopSearchItem.do",

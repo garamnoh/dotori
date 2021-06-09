@@ -12,8 +12,6 @@ $('div#shopTopTap>.TopTap').on('click',(e)=>{
             $(i.target).css("color","black");
         }
         
-       
-        
     });
 });
 
