@@ -12,6 +12,7 @@ import java.util.HashMap;
 import com.friend.model.dao.FriendDao;
 import com.friend.model.vo.Friend;
 import com.friend.model.vo.Like;
+import com.friend.model.vo.Log;
 import com.friend.model.vo.SearchF;
 
 public class FriendService {
@@ -57,9 +58,9 @@ public class FriendService {
 		return result;
 	}
 	
-	public ArrayList<SearchF> searchList(String myId, String searchKeyword){
+	public ArrayList<SearchF> searchList(String myId, String from, String to, String searchKeyword){
 		Connection conn = getConnection();
-		ArrayList<SearchF> resultList = dao.searchList(conn, myId, searchKeyword);
+		ArrayList<SearchF> resultList = dao.searchList(conn, myId, from, to, searchKeyword);
 		close(conn);
 		return resultList;
 	}
@@ -190,5 +191,29 @@ public class FriendService {
 		int likeCountAlbum = dao.likeCountAlbum(conn, imgNo, myId);
 		close(conn);
 		return likeCountAlbum;
+	}
+	
+	public int accessCount(String myId, String friendId) {
+		Connection conn = getConnection();
+		int result = dao.accessLog(conn, myId, friendId);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		int accessCount = dao.accessCount(conn, myId, friendId);
+		close(conn);
+		return accessCount;
+	}
+	
+	public ArrayList<Log> myLog(String myId, int period) {
+		Connection conn = getConnection();
+		ArrayList<Log> myLog = dao.myLog(conn, myId, period);
+		close(conn);
+		return myLog;
+	}
+	
+	public ArrayList<Log> friendsLog(String myId, int period) {
+		Connection conn = getConnection();
+		ArrayList<Log> friendsLog = dao.friendsLog(conn, myId, period);
+		close(conn);
+		return friendsLog;
 	}
 }

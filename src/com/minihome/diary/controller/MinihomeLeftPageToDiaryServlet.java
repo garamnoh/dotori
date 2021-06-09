@@ -31,7 +31,7 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
 		
-		String currentPage=request.getParameter("currentPage");
+		String currentPage=request.getParameter("currentPage");		
 		
 		HttpSession session=request.getSession(false);		
 		if(session==null||session.getAttribute("loginMember")==null) {

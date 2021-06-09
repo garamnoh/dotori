@@ -40,20 +40,16 @@ public class DiaryFolderServlet extends HttpServlet {
 		int folderNo=Integer.parseInt(request.getParameter("folderNo"));
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
-		String shareLevel=request.getParameter("shareLevel");	
+		String shareLevel=request.getParameter("shareLevel");		
 		
 		boolean flag=false;
-		
-		System.out.println("폴더번호 : "+folderNo+" 쉐어레벨 : "+shareLevel);
-		System.out.println("미니홈피주인 : "+hostMemberId+" 로그인아이디 : "+loginMemberId);
 		
 		if(shareLevel.equals("PUBLIC")) { //전체공개 폴더는 다 보이게
 			flag=true;			
 		}else if(shareLevel.equals("FOLLOWERS")) { //일촌 공개폴더는 일촌인지 확인하고
 			ArrayList<Friend> friend=new FriendService().friendsList(hostMemberId);			
 			int test=friend.indexOf(loginMemberId);			
-			for(Friend f : friend) {
-				System.out.println(loginMemberId.equals(f.getFollower())+"이건 되나요?");
+			for(Friend f : friend) {				
 				if(loginMemberId.equals(f.getFollower())) {
 					flag=true;
 				}
@@ -72,10 +68,11 @@ public class DiaryFolderServlet extends HttpServlet {
 		}
 		
 		if(loginMemberId.equals(hostMemberId) || flag==true) {
-			request.setAttribute("diaryFolderLevel", folderNo);				
+			request.setAttribute("diaryFolderLevel", folderNo);			
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}else {
-			System.out.println("권한이 없습니다");
+			request.setAttribute("msg", "권한이 없습니다.");			
+			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}
 	}
 

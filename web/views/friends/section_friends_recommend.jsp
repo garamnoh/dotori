@@ -17,7 +17,7 @@
 					<div id='detail'>
 						<img src='<%=request.getContextPath() %>/upload/MINIMI/<%=f.getFollowerProfilePath() %>'>
 						<div id='person'>
-							<span><%=f.getFollowerProfileName() %></span>
+							<span id='followerName'><%=f.getFollowerProfileName() %></span>
 							<span><%=f.getFollowerProfilePhone() %></span>
 							<span id='followerId'><%=f.getFollower() %></span>
 						</div>
@@ -45,6 +45,7 @@
 							<span><%=f.getAddress().substring(0, 2) %></span>
 						</div>
 						<div id='buttons'>
+							<input type='hidden' value='<%=f.getFollowerProfileName() %>'>
 							<input type='hidden' value='<%=f.getFollowee() %>'>
 							<button id='minihome'>Mini</button>
 							<button id='cancel'>신청중</button>
@@ -211,7 +212,7 @@
 	
 	$('#friends #cancel').on('click', (e)=>{
 		const cancel = $(e.target).prev().prev().val();
-		console.log(cancel);
+
 		if(confirm('취소?')){
 		$.ajax({
 			url: '<%=request.getContextPath() %>/friends/cancel',
@@ -233,9 +234,8 @@
 	
 	$('#propose #minihome').on('click', (e)=>{
 		const hostMemberId = $(e.target).parent().prev().children('span#followerId').text();
+		const hostMemberName = $(e.target).parent().prev().children('span#followerName').text();
 
-		console.log(hostMemberId);
-		
 		const minihomeWidth = 1200;
 		const minihomeHeight = 756;
 		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
@@ -245,13 +245,27 @@
 		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
 		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
 		window.open(url,"",status);
+		
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/accessLog',
+			data: {
+				'friendId': hostMemberId
+			},
+			success: (data)=>{
+				$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+				$('#accessAlert>div>span').text(data['accessCount']);
+				$('#accessAlert').slideDown();
+				setTimeout(()=>{
+					$('#accessAlert').slideUp();
+				}, 3000);
+			}
+		});
 	});
 	
 	$('#friends #minihome').on('click', (e)=>{
-		const hostMemberId = $(e.target).parent().prev().children('span#followeeId').text();
+		const hostMemberId = $(e.target).prev().val();
+		const hostMemberName = $(e.target).prev().prev().val();
 
-		console.log(hostMemberId);
-		
 		const minihomeWidth = 1200;
 		const minihomeHeight = 756;
 		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
@@ -261,6 +275,21 @@
 		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
 		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
 		window.open(url,"",status);
+		
+		$.ajax({
+			url: '<%=request.getContextPath() %>/friends/accessLog',
+			data: {
+				'friendId': hostMemberId
+			},
+			success: (data)=>{
+				$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+				$('#accessAlert>div>span').text(data['accessCount']);
+				$('#accessAlert').slideDown();
+				setTimeout(()=>{
+					$('#accessAlert').slideUp();
+				}, 3000);
+			}
+		});
 	});
 	
 	
