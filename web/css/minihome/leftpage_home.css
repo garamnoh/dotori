@@ -34,6 +34,7 @@
     height: 150px;
 	width:182px;
 	height:155px;
+	border-radius:5px;
 }
 #profileImgBox{
 	display:flex;
@@ -44,6 +45,7 @@
     height: 230px;
     margin: 0 0 15px 0;
 	border:1px solid gray;
+	border-radius:10px;
 	vertical-align: middle;
 }
 #profileImgBox img{
@@ -55,6 +57,7 @@
 	box-sizing:border-box;
 	padding:5px;
 	border:1px solid gray;
+	border-radius:5px;
 	width:182px;
 	height:155px;
 	overflow:scroll;
