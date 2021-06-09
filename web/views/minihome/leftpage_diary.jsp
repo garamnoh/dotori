@@ -14,8 +14,8 @@
 	<div id="diary_folder_list">		
 		<%for(DiaryFolder df : list) {%>			
 			<ul>
-				<%if(currentPage.equals(df.getFolderName())) {%>
-					<li style="text-decoration:underline;" class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>				
+				<%if(df.getFolderName().equals(currentPage)) {%>
+					<li class="folderLevel" style="text-decoration:underline;"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>				
 				<%} else{%>
 					<li class="folderLevel"><%=df.getFolderName()%> (<%=df.getDiaryCount() %>)</li>	
 				<%} %>
