@@ -2,6 +2,7 @@ package com.minihome.diary.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -12,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.friend.model.service.FriendService;
+import com.friend.model.vo.FeedDiary;
 import com.friend.model.vo.Friend;
+import com.friend.model.vo.Like;
 import com.member.model.service.MemberService;
 import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
@@ -110,6 +113,16 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		List<DiaryFolder> fList=new DiaryService().selectFolderList(hostMemberId);
 		
 		String profilePath=new MemberService().profilePath(loginMember.getMemberId());
+		
+		///////////좋아요///////////////
+		
+		ArrayList<Integer> likeList = new FriendService().like(loginMember.getMemberId());
+		ArrayList<Like> count = new FriendService().count();		
+		
+		request.setAttribute("count", count);
+		request.setAttribute("likeList", likeList);		
+		
+		//////////////////////////////		
 		
 		request.setAttribute("loginMember",loginMember);
 		request.setAttribute("hostMember",hostMember);		
