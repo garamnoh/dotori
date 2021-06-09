@@ -5,7 +5,7 @@
 <%
 	HashMap<String, Object> newFeed = (HashMap<String, Object>)request.getAttribute("newFeed");
 	ArrayList<FeedDiary> newFeedDiary = (ArrayList<FeedDiary>)(newFeed.get("feedDiary"));
-	ArrayList<Integer> likeList = (ArrayList<Integer>)request.getAttribute("likeList");
+	ArrayList<Integer> likeList = (ArrayList<Integer>)request.getAttribute("likeList"); 
 	ArrayList<Like> count = (ArrayList<Like>)request.getAttribute("count");
 %>
 

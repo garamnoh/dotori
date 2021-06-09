@@ -10,7 +10,7 @@
     	<p id='saleItem'>세일 아이템</p>
     </div>
     <div class='menuTitle' id="option1">도토리</div>
-    
+    <div class="menuSub"></div>
     <div class='menuTitle' id="option2">아이템</div>
     <div class="menuSub">
         <p id='shopMinimi'>미니미</p>

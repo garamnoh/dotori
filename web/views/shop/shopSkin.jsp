@@ -1,10 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Skin"%>
+    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Skin,com.shop.model.vo.SkinLike"%>
 <%
 List<Skin> list=(List<Skin>)request.getAttribute("skinList");
 Skin s=(Skin)request.getAttribute("skin");
 String id=(String)request.getAttribute("memberId"); 
 String result=(String)request.getAttribute("result"); 
+List<SkinLike> bHeartList=(List<SkinLike>)request.getAttribute("bheartList");
+List<Integer> myHeartItemList=(List<Integer>)request.getAttribute("myHeartItemList");
+
 %>  
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductSkin.css">
 
@@ -24,8 +27,32 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="SkinInfo">
-                <input class="shopSkinCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
+                	<div class="skinline">
+		                <input class="shopSkinCheck" type="checkbox">
+		                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
+	                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+			            <div id="likeBox">
+			            
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(SkinLike ml:bHeartList){ %>
+			            	<% if(ml.getItemNo()==list.get(3*i).getItemNo()){ %>
+			            		<span><%= ml.getbHeartCount() %></span>
+			            	<% break; } %>
+				        <% } %>
+			       		</div>
+                	</div>
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i).getSkinTitle() %></b></li>
@@ -44,8 +71,32 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="SkinInfo">
-                <input class="shopSkinCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i+1).getItemNo() %>">
+                	<div class="skinline">
+		                <input class="shopSkinCheck" type="checkbox">
+		                <input type="hidden" value="<%=list.get(3*i+1).getItemNo() %>">
+		            	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+1).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+			            <div id="likeBox">
+			            
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(SkinLike ml:bHeartList){ %>
+			            	<% if(ml.getItemNo()==list.get(3*i+1).getItemNo()){ %>
+			            		<span><%= ml.getbHeartCount() %></span>
+			            	<% break; } %>
+				        <% } %>
+			       		</div>
+	            	</div>
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+1).getSkinTitle() %></b></li>
@@ -64,8 +115,32 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="SkinInfo">
-                <input class="shopSkinCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
+                	<div class="skinline">
+	                <input class="shopSkinCheck" type="checkbox">
+	                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
+                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+2).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+			            <div id="likeBox">
+			            
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(SkinLike ml:bHeartList){ %>
+			            	<% if(ml.getItemNo()==list.get(3*i+2).getItemNo()){ %>
+			            		<span><%= ml.getbHeartCount() %></span>
+			            	<% break; } %>
+				        <% } %>
+			       		</div>
+                </div>
                 <ul>
                     <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
                     <li><b><%=list.get(3*i+2).getSkinTitle() %></b></li>
@@ -82,6 +157,25 @@ String result=(String)request.getAttribute("result");
 	}%>
 </form>
 <script>
+$("#SkinTable #likeBox>img").on("click",(e)=>{
+	let like="<%= request.getContextPath() %>/images/like.png";
+	let unlike="<%= request.getContextPath() %>/images/unlike.png"
+	if($(e.target).attr("src")==like){
+		$(e.target).attr("src",unlike);
+	}else {
+		$(e.target).attr("src",like);
+	}   
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/aHeartCount",
+		data:{"type":"skin","itemNo":$(e.target).parent().prev().val(),"memberId":"<%=id%>"},
+		
+		success:(data)=>{
+			const HeartResult= data["bHeartResult"];
+			 $(e.target).prev().text(HeartResult);
+		}
+	}); 
+});
 $("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopTotalTitleOrder",
