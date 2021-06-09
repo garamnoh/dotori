@@ -42,8 +42,8 @@
 					<td>
 						<select id="shareFolderNo" name="shareFolderNo">						
 							<%for(DiaryFolder dsf : fList) {%>	
-								<option value="<%=dsf.getFolderNo()%>"><%=dsf.getFolderName()%></option>							
-							<%} %>							
+								<option value="<%=dsf.getFolderNo()%>"><%=dsf.getFolderName()%></option>
+							<%} %>																
 						</select>
 					</td>
 				</tr>			
@@ -68,7 +68,7 @@
 				<td>
 					<select id="folderName" name="folderName">
 						<%for(DiaryFolder df : list) {%>	
-							<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+							<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>													
 						<%} %>
 					</select>
 				</td>
