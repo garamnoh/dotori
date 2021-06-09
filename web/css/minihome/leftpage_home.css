@@ -26,31 +26,75 @@
 	display:inline-block;
 }
 
-#profileContent{
+#updateProfileContent{
+	box-sizing:border-box;
+	padding:5px;
 	resize:none;
 	width: 175px;
     height: 150px;
+	width:182px;
+	height:155px;
 }
-#prifileImgBox{
+#profileImgBox{
+	display:flex;
+	align-items:center;
+	justify-content:center;
+	overflow:hidden;
 	width:180px;
     height: 230px;
     margin: 0 0 15px 0;
-	border:1px solid;
+	border:1px solid gray;
 	vertical-align: middle;
 }
-#prifileImgBox img{
+#profileImgBox img{
 	display:block;
 	margin-top:auto;
 	margin-bottom:auto;
 }
-#updateProfileContentBtn{	 
-	width:70px;
-	height:20px;
-	font-weight:bolder;	
-	text-align:center;		
-	cursor: pointer;	
-    margin: 80px 0 0 108px;
+.profileContent{
+	box-sizing:border-box;
+	padding:5px;
+	border:1px solid gray;
+	width:182px;
+	height:155px;
+	overflow:scroll;
 }
-#updateProfileContentBtn:hover{
-	color:#747474;
+#profileContentBox input[type=button]{
+	background-color:white;
+	color:black;
+	border:1px solid black;
+	margin-top:10px;
+	margin-right:2px;
+}
+#profileContentBox input[type=button]:hover{
+	background-color:black;
+	color:white;
+	cursor:pointer;
+}
+.profileContentBtnBox{
+	margin:0;
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:flex-end;
+}
+#updateProfileContentBtn{
+	display:none;
+}
+.changeSkinController{
+	display:flex;
+	flex-wrap:nowrap;
+	justify-content:flex-end;
+	margin-top:35px;
+}
+.changeSkinController>input[type=button]{
+	margin-left:5px;
+	margin-right:3px;
+	background-color:white;
+	color:black;
+	border:1px solid black;
+}
+.changeSkinController>input[type=button]:hover{
+	background-color:black;
+	color:white;
+	cursor:pointer;
 }

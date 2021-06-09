@@ -37,7 +37,7 @@
     <div class="cover">
         <div class="sheet">
             <div class="today">TODAY <span id="today"><%=minihome.getToday()%></span> | TOTAL <span id="total"><%=minihome.getTotal()%></span></div>
-            <div class="miniTitle"><%=hostMember.getNickname()%>님의 미니홈피</div>
+            <div class="miniTitle"><span id="miniTitle"><%=hostMember.getNickname()%></span>님의 미니홈피</div>
             <div id="left-page"></div>
             <div id="right-page"></div>
         </div>
@@ -48,7 +48,6 @@
             <li class="unselected">사진첩</li>
             <li class="unselected">다이어리</li>
             <li class="unselected">쥬크박스</li>
-            <li class="unselected">설정</li>
         </ul>
     </nav>
     
@@ -73,13 +72,13 @@
     </div>
 
     <div id="weatherBox">
-    	<ul style="list-style-type:none;position:relative;left:-30px;">
-    		<li><img src="" id="weather_icon" width="20px"></li>
-    		<li id="weather_main"></li>
-    		<li id="temp"></li>
-    		<li id="temp_max"></li>
-    		<li id="temp_min"></li>
-    	</ul>
+    	<div>
+    		<img src="" id="weather_icon" width="50px">
+    	</div>
+    	<div>
+    		<p><span id="weather_main"></span> / <span id="temp"></span></p>
+    		<p><span id="temp_max"></span> / <span id="temp_min"></span></p>
+    	</div>
     </div>
     
     <div id="backgroundMusic">

@@ -1,6 +1,7 @@
 package com.minihome.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.minihome.model.service.MinihomeService;
 import com.minihome.model.vo.Minihome;
 import com.minihome.model.vo.ProfileImg;
+import com.shop.model.vo.Skin;
 
 @WebServlet("/page/minihomeLeftPageToHome.do")
 public class MinihomeLeftPageToHomeServlet extends HttpServlet {
@@ -37,9 +39,11 @@ public class MinihomeLeftPageToHomeServlet extends HttpServlet {
 		}
 		
 		Minihome minihome=minihomeService.getMinihome(hostMemberId);
+		List<Skin> skinList=minihomeService.getMySkins(hostMemberId);
 		ProfileImg profileImg=minihomeService.getMyProfileImg(hostMemberId);
 		
 		request.setAttribute("minihome",minihome);
+		request.setAttribute("skinList",skinList);
 		request.setAttribute("profileImg",profileImg);
 		
 		request.getRequestDispatcher("/views/minihome/leftpage_home.jsp").forward(request,response);
