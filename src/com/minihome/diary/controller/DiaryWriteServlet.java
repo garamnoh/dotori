@@ -46,15 +46,18 @@ public class DiaryWriteServlet extends HttpServlet {
 		d.setFolderNo(folder);			
 		String content=request.getParameter("diary_content_input");
 		
-		if(content!=null) {
+		if(content!=null || content.equals("null")) {
 			d.setContent(content);
-		}
-		
-		int result=new DiaryService().insertDiary(d);		
-		
-		if(result>0) {
+			int result=new DiaryService().insertDiary(d);		
+			if(result>0) {
+				request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+			}
+		}else {
+			request.setAttribute("msg", "내용을 입력해주세요");
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}
+		
+		
 	}
 
 	/**
