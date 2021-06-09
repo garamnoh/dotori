@@ -1,18 +1,25 @@
 $("#diary_input_btn").click(e=>{
-	$.ajax({
-		url:contextPath+"/diary/diaryWrite",
-		type:"post",
-		data:{			  
-			"diary_folder":$("select[name='diary_folder']").val(),
-			"diary_content_input":$(".diary_content_input").val(),
-			"loginMemberId":$("input[name='loginMemberId']").val(),
-			"hostMemberId":$("input[name='hostMemberId']").val()
-		},
-		dataType:"html",
-		success:data=>{
-			$("#right-page").html(data);
-		}
-	})
+	const content=$(".diary_content_input").val();
+	console.log("///"+content+"///");
+	if(content.trim()=="" || content.equals("null")){
+		alert("내용을 입력해주세요.");
+	}else{
+		$.ajax({
+			url:contextPath+"/diary/diaryWrite",
+			type:"post",
+			data:{			  
+				"diary_folder":$("select[name='diary_folder']").val(),
+				"diary_content_input":content,
+				"loginMemberId":$("input[name='loginMemberId']").val(),
+				"hostMemberId":$("input[name='hostMemberId']").val()
+			},
+			dataType:"html",
+			success:data=>{
+				console.log("///"+content+"///");
+				$("#right-page").html(data);
+			}
+		});		
+	}
 });
   
 $(".diary_del_btn").click(e => {
