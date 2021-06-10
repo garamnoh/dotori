@@ -4,7 +4,7 @@
 <div id='titleFriend'>
 	<p>Friend</p>
 	<div>
-		최근 <input id='date' type='text'>일
+		최근 <input id='date' type='text' value='3'>일
 	</div>
 </div>
 <div id='logResultContainer'>
@@ -49,6 +49,7 @@
 			
 			$('#logResultContainer').html('');
 			const period = $('#date').val();
+			console.log('period', period);
 			
 			$.ajax({
 				url: '<%=request.getContextPath() %>/friends/logPeriod',

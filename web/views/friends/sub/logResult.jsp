@@ -4,6 +4,7 @@
 <%
 	ArrayList<Log> myLog = (ArrayList<Log>)request.getAttribute("myLog");
 	ArrayList<Log> friendsLog = (ArrayList<Log>)request.getAttribute("friendsLog");
+	String myId = (String)request.getAttribute("myId");
 %>
 
 <div id='logContainer'>
@@ -12,6 +13,7 @@
 			<% if(myLog.size() != 0){ %>
 				<% for(int i = 0; i < 5; i++){ %>
 					<div id='userInfo'>
+						<input type='hidden' value='<%=myLog.get(i).getMemberId() %>'>
 						<img id='userImg' src='<%=request.getContextPath() %>/upload/MINIMI/<%=myLog.get(i).getProfilePath() %>'>
 						<div id='userName'><%=myLog.get(i).getMemberName() %></div>
 						<div id='gender'><%=myLog.get(i).getGender()	 %></div>
@@ -26,6 +28,7 @@
 		<% if(friendsLog.size() != 0){ %>
 			<% for(int i = 0; i < 5; i++){ %>
 				<div id='userInfo'>
+					<input type='hidden' value='<%=friendsLog.get(i).getMemberId() %>'>
 					<img id='userImg' src='<%=request.getContextPath() %>/upload/MINIMI/<%=friendsLog.get(i).getProfilePath() %>'>
 					<div id='userName'><%=friendsLog.get(i).getMemberName() %></div>
 					<div id='gender'><%=friendsLog.get(i).getGender()	 %></div>
@@ -53,10 +56,21 @@
 		padding: 10px;
 	}
 	
+	#myLogContainer>#userInfo>div#userName:hover,
+	#myLogContainer>#userInfo>img:hover{
+		opacity: .7;
+	}
+	
+	#myLogContainer>#userInfo>div#userName:active,
+	#myLogContainer>#userInfo>img:active{
+		opacity: 1;
+	}
+	
 	#myLogContainer>#userInfo>div{
 		margin: 10px 0;
 		text-align: center;
 		font-size: 14px;
+		cursor: default;
 	}
 
 	#myLogContainer>#userInfo>img{
@@ -116,10 +130,21 @@
 		padding: 10px;
 	}
 	
+	#friendsLogContainer>#userInfo>div#userName:hover,
+	#friendsLogContainer>#userInfo>img:hover{
+		opacity: .7;
+	}
+	
+	#friendsLogContainer>#userInfo>div#userName:active,
+	#friendsLogContainer>#userInfo>img:active{
+		opacity: 1;
+	}
+	
 	#friendsLogContainer>#userInfo>div{
 		margin: 10px 0;
 		text-align: center;
 		font-size: 14px;
+		cursor: default;
 	}
 
 	#friendsLogContainer>#userInfo>img{
@@ -158,3 +183,145 @@
 		border-radius: 50%;
 	}
 </style>
+
+<script>
+	$('#myLogContainer #userImg').on('click', (e)=>{
+		const hostMemberId = $(e.target).prev().val();
+		const hostMemberName = $(e.target).next().text();
+		const myId = '<%=myId %>'
+		
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+		
+		if(hostMemberId != myId){
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/accessLog',
+				data: {
+					'friendId': hostMemberId
+				},
+				success: (data)=>{
+					$(e.target).next().next().next().text(data['accessCount']);
+					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+					$('#accessAlert>div>span').text(data['accessCount']);
+					$('#accessAlert').slideDown();
+					setTimeout(()=>{
+						$('#accessAlert').slideUp();
+					}, 3000);
+				}
+			});
+		}
+	});
+	$('#myLogContainer #userName').on('click', (e)=>{
+		const hostMemberId = $(e.target).prev().prev().val();
+		const hostMemberName = $(e.target).text();
+		const myId = '<%=myId %>'
+		
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+		
+		if(hostMemberId != myId){
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/accessLog',
+				data: {
+					'friendId': hostMemberId
+				},
+				success: (data)=>{
+					$(e.target).next().next().text(data['accessCount']);
+					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+					$('#accessAlert>div>span').text(data['accessCount']);
+					$('#accessAlert').slideDown();
+					setTimeout(()=>{
+						$('#accessAlert').slideUp();
+					}, 3000);
+				}
+			});
+		}
+	});
+	
+	$('#friendsLogContainer #userImg').on('click', (e)=>{
+		const hostMemberId = $(e.target).prev().val();
+		const hostMemberName = $(e.target).next().text();
+		const myId = '<%=myId %>'
+		
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+		
+		if(hostMemberId != myId){
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/accessLog',
+				data: {
+					'friendId': hostMemberId
+				},
+				success: (data)=>{
+					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+					$('#accessAlert>div>span').text(data['accessCount']);
+					$('#accessAlert').slideDown();
+					setTimeout(()=>{
+						$('#accessAlert').slideUp();
+					}, 3000);
+				}
+			});
+		}
+	});
+	$('#friendsLogContainer #userName').on('click', (e)=>{
+		const hostMemberId = $(e.target).prev().prev().val();
+		const hostMemberName = $(e.target).text();
+		const myId = '<%=myId %>'
+		
+		console.log(hostMemberId);
+		
+		const minihomeWidth = 1200;
+		const minihomeHeight = 756;
+		const xAxis = (window.screen.width / 2) - (minihomeWidth / 2);
+		const yAxis = (window.screen.height / 2) - (minihomeHeight / 2); 
+		
+		//const status="width=1200px,height=756px,left=50px,top=50px";
+		const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
+		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
+		window.open(url,"",status);
+		
+		if(hostMemberId != myId){
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/accessLog',
+				data: {
+					'friendId': hostMemberId
+				},
+				success: (data)=>{
+					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+					$('#accessAlert>div>span').text(data['accessCount']);
+					$('#accessAlert').slideDown();
+					setTimeout(()=>{
+						$('#accessAlert').slideUp();
+					}, 3000);
+				}
+			});
+		}
+	});
+</script>

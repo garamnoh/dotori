@@ -321,7 +321,7 @@
 		$('#footer-info').on('click', ()=>{
 			console.log('access Member');
 			setTimeout(()=>{
-				var sendMsg = new Message(memberName, '', 'test', 'test', '');
+				var sendMsg = new Message(memberName, 'admin_test', 'test', 'test', '');
 				socket.send(JSON.stringify(sendMsg));
 			}, 1000);
 		});

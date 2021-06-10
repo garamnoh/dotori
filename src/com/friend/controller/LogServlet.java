@@ -40,6 +40,7 @@ public class LogServlet extends HttpServlet {
 		ArrayList<Log> myLog = new FriendService().myLog(myId, period);
 		ArrayList<Log> friendsLog = new FriendService().friendsLog(myId, period);
 		
+		request.setAttribute("myId", myId);
 		request.setAttribute("myLog", myLog);
 		request.setAttribute("friendsLog", friendsLog);
 		request.getRequestDispatcher("/views/friends/section_friends_log.jsp").forward(request, response);
