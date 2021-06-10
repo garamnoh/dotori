@@ -20,6 +20,18 @@ $("#changeFolderBtn").click((e)=>{
             $("#right-page").html(data);
         }
     });
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToAlbum.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "currentFolder":$("#currentFolder").val()
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
+        }
+    });
 });
 
 var fn_openCommentBox=(event)=>{
