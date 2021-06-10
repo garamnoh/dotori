@@ -122,6 +122,7 @@ $(".diary_update_btn").click(e=>{
 $(".diary_co_com_btn").click(e=>{	
 	$(e.target).parents('#diary_content_list').children('#diary_comment_box').hide();
 	//$(e.target).parents('#diary_content_list').children('#diary_co_comment_box').show();
+	$(e.target).next().css("display","block");
 	$(e.target).next().show();
 	
 });

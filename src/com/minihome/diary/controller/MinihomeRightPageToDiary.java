@@ -112,7 +112,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		String currentPage=(String)request.getParameter("currentPage");
 		//System.out.println("이건 찍히니"+currentPage);
 		
-		List<DiaryComment> cList=new DiaryService().selectDiaryCommentList();
+		List<DiaryComment> cList=new DiaryService().selectDiaryCommentList(hostMemberId);
 		List<DiaryFolder> fList=new DiaryService().selectFolderList(hostMemberId);
 		
 		String profilePath=new MemberService().profilePath(loginMember.getMemberId());
