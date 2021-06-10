@@ -157,15 +157,27 @@
 	}
 
 	$('input[type=button].check-all').click((e)=>{
+		let aDotoriCount=0;
+		let bDotoriCount=0;
+		let cDotoriCount=0;
+		
+		
 		$('.aShopbasketCheck').each((i,v)=>{
 			$(v).prop("checked","checked");
+			aDotoriCount+=parseInt($(v).next().next().val());
 		});
 		$(".bShopbasketCheck").each((i,v)=>{
 			$(v).prop("checked","checked");
+			bDotoriCount+=parseInt($(v).next().next().val());
 		});
 		$(".cShopbasketCheck").each((i,v)=>{
 			$(v).prop("checked","checked");
+			cDotoriCount+=parseInt($(v).next().next().val());
 		});
+		
+		let totalDotoriCount= aDotoriCount+bDotoriCount+cDotoriCount;
+		
+		document.getElementById("totalPrice").innerText=totalDotoriCount;
 	});
 
 	
@@ -204,6 +216,8 @@
 		let bDotoriCount=0;
 		let cDotoriCount=0;
 		
+		
+		
 		$(".aShopbasketCheck").each((i,v)=>{
 			if($(v).prop("checked")) {
 				aDotoriCount+=parseInt($(v).next().next().val())
@@ -220,6 +234,8 @@
 				cDotoriCount+=parseInt($(v).next().next().val())
 			}
 		});
+		
+		
 		
 		let totalDotoriCount= aDotoriCount+bDotoriCount+cDotoriCount;
 		
