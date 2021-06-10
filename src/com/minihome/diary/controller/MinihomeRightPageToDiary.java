@@ -39,7 +39,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		HttpSession session=request.getSession(false);
-		//if(session!=null) session.invalidate();
+		
 		if(session==null||session.getAttribute("loginMember")==null) {
 			request.getRequestDispatcher("/views/minihome/errorpage.jsp").forward(request,response);
 			return;
@@ -76,9 +76,11 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		}catch(NullPointerException e) {
 			diaryFolderLevel=1; //처음엔 전체공개폴더의 게시물들만 보이게			
 		}				
-		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel, hostMemberId);	
+		list=new DiaryService().selectDiaryList(cPage, numPerpage, diaryFolderLevel, hostMemberId);
+		int diaryCount= new DiaryService().selectDiaryCount(diaryFolderLevel);
+		//System.out.println(diaryCount+"몇개뜨냐???????");
 		
-		int totalData=new DiaryService().selectDiaryCount(diaryFolderLevel);		
+		int totalData=diaryCount;		
 		System.out.println(diaryFolderLevel+"/"+totalData);
 		
 		int totalPage=(int)Math.ceil((double)totalData/numPerpage);

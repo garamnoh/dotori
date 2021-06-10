@@ -107,6 +107,34 @@ public class DiaryDao {
 		return result;		
 	}
 	
+	public Diary selectDiary(Connection conn, int diaryNo) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		Diary d=null;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiary"));
+			pstmt.setInt(1,  diaryNo);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				d=new Diary();
+				d.setDiaryNo(rs.getInt("diary_no"));
+				d.setMemberId(rs.getString("member_id"));
+				d.setWriter(rs.getString("writer"));
+				d.setContent(rs.getString("content"));
+				d.setFolderNo(rs.getInt("folder_no"));
+				d.setPostDate(rs.getDate("post_date"));
+				d.setMemberName(rs.getString("member_name"));
+				d.setProfilePath(rs.getString("profile_path"));				
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);
+			close(pstmt);			
+		}
+		return d;
+	}
+	
 	public int insertDiary(Connection conn, Diary d) {
 		PreparedStatement pstmt=null;
 		int result=0;

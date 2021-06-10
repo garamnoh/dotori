@@ -15,8 +15,7 @@
 	String msg=(String)request.getAttribute("msg");
 	ArrayList<Integer> likeList = (ArrayList<Integer>)request.getAttribute("likeList");
 	ArrayList<Like> count = (ArrayList<Like>)request.getAttribute("count");
-	String currentPage=(String)request.getAttribute("currentPage");
-	//System.out.print(currentPage+"/////////////");
+	String currentPage=(String)request.getAttribute("currentPage");	
 %>
 
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>
@@ -199,7 +198,8 @@
 	}%>	
 				
 	<input type="hidden" name="diaryFolderLevel" value="<%=diaryFolderLevel%>">
-											
+	<input type="hidden" name="currentPage" value="currentPage">
+									
 	<div id="pageBar">
 		<%=pageBar %>		
 	</div> 	

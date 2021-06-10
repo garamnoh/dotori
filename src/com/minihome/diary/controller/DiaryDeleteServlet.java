@@ -32,17 +32,27 @@ public class DiaryDeleteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		Diary d=new Diary();
-		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));
-		String id=request.getParameter("loginMemberId");
+		int diaryNo=Integer.parseInt(request.getParameter("diary_no"));		
+		String loginId=request.getParameter("loginMemberId");
+		String hostId=request.getParameter("hostMemberId");
+		
 		d.setDiaryNo(diaryNo);
-		d.setWriter(id);
-
+		
+		if(hostId.equals(loginId)) { //미니홈피 주인이 게시글을 삭제하는 경우
+			Diary delDiary=new DiaryService().selectDiary(diaryNo);			
+			String diaryWriter=delDiary.getWriter();
+			d.setWriter(diaryWriter);
+		}else {			
+			d.setWriter(loginId);
+		}		
+		
 		int result=new DiaryService().deleteDiary(d);		
 		
 		if(result>0) {
+			request.setAttribute("msg", "다이어리 삭제가 완료되었습니다.");
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
-		}	
-		
+		}
+				
 	}
 
 	/**
