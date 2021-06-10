@@ -17,7 +17,8 @@
 
 	<div class="basketheader">
 		<p>장바구니</p>
-		<input type="button" value="전체체크박스선택하기" class="check-all"><input type="button" value="장바구니에서삭제하기" onclick="deleteInBasket();">
+		<input type="button" value="전체체크박스선택하기" class="check-all">
+		<input type="button" value="장바구니에서삭제하기" onclick="deleteInBasket();">
 	</div>
 	
 	<div class="basketbody">
