@@ -1,5 +1,4 @@
 document.getElementById("albumMenu").addEventListener("click",(e)=>{
-    console.log(e.target.innerText.substring(0,e.target.innerText.indexOf("[")));
     $.ajax({
         url:contextPath+"/page/minihomeRightPageToAlbum.do",
         type:"post",

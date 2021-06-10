@@ -203,14 +203,25 @@
 	margin:5px 5px 0 10px;
 }
 /*******댓글********/
-.diary_comment_list{	
-	display:flex;
+.diary_comment_list{
 	width:420px;
 	/* height:35px; */
 	height:auto;
 	font-size: 13px;
 	margin:0 5px 5px 5px;
 	/* border:1px solid; */
+}
+.diary_comment_user{
+	float:left;
+}
+.diary_comment_content{
+	float:left;
+}
+.diary_co_del_btn{
+	float:left;
+}
+.diary_con_com_btn{
+	float:left;
 }
 .diary_comment_user{	
 	width:65px;
