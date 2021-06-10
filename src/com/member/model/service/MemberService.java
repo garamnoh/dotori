@@ -131,5 +131,13 @@ public class MemberService {
 		return result;
 	}
 	
+	public int deleteProfile(String memberId) {
+		Connection conn = getConnection();
+		int result = dao.deleteProfile(conn, memberId);
+		if(result > 0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
 
 }
