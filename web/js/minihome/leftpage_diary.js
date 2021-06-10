@@ -8,7 +8,8 @@ $(".folderLevel").click(e=>{
 			"folderNo":$(e.target).parent().next().val(),
 			"loginMemberId":$("input[name='loginMemberId']").val(),
 			"hostMemberId":$("input[name='hostMemberId']").val(),			
-			"shareLevel":$(e.target).parent().next().next().val()				
+			"shareLevel":$(e.target).parent().next().next().val(),
+			"currentPage":current
 		},
 		dataType:"html",
 		success:data=>{				

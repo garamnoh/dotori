@@ -40,7 +40,9 @@ public class DiaryFolderServlet extends HttpServlet {
 		int folderNo=Integer.parseInt(request.getParameter("folderNo"));
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
-		String shareLevel=request.getParameter("shareLevel");		
+		String shareLevel=request.getParameter("shareLevel");
+		String currentPage=request.getParameter("currentPage");
+		//System.out.println("여기는???????"+currentPage); 
 		
 		boolean flag=false;
 		
@@ -68,9 +70,11 @@ public class DiaryFolderServlet extends HttpServlet {
 		}
 		
 		if(loginMemberId.equals(hostMemberId) || flag==true) {
-			request.setAttribute("diaryFolderLevel", folderNo);			
+			request.setAttribute("diaryFolderLevel", folderNo);
+			request.setAttribute("currentPage", currentPage);
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}else {
+			request.setAttribute("currentPage", currentPage);
 			request.setAttribute("msg", "권한이 없습니다.");			
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}

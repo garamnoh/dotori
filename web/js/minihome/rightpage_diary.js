@@ -1,6 +1,5 @@
 $("#diary_input_btn").click(e=>{
-	const content=$(".diary_content_input").val();
-	console.log("///"+content+"///");
+	const content=$(".diary_content_input").val();	
 	if(content.trim()==""){
 		alert("내용을 입력해주세요.");
 	}else{
@@ -14,8 +13,7 @@ $("#diary_input_btn").click(e=>{
 				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
 			dataType:"html",
-			success:data=>{
-				console.log("///"+content+"///");
+			success:data=>{				
 				$("#right-page").html(data);
 			}
 		});		
@@ -63,21 +61,26 @@ $(".diary_cancel_btn").click(e=>{
 });
 
 $(".diary_comment_btn").click(e=>{
-	$.ajax({
-		url:contextPath+"/diary/diaryCommentWrite",
-		type:"post",
-		data:{
-			"comment_level":1,
-			"loginMemberId":$("input[name='loginMemberId']").val(),	
-			"diary_comment":$(e.target).prev().val(),
-			"diary_no":$(e.target).parent().prev().prev().val(),			
-			"diary_comment_ref":0 //원댓글은 참고댓글번호가 없다
-		},
-		dataType:"html",
-		success:data=>{
-			$("#right-page").html(data);
-		}
-	})
+	const comment=$(e.target).prev().val();
+	if(comment.trim()==""){
+		alert("댓글을 입력해주세요.");
+	}else{
+		$.ajax({
+			url:contextPath+"/diary/diaryCommentWrite",
+			type:"post",
+			data:{
+				"comment_level":1,
+				"loginMemberId":$("input[name='loginMemberId']").val(),	
+				"diary_comment":comment,
+				"diary_no":$(e.target).parent().prev().prev().val(),			
+				"diary_comment_ref":0 //원댓글은 참고댓글번호가 없다
+			},
+			dataType:"html",
+			success:data=>{
+				$("#right-page").html(data);
+			}
+		});
+	}
 });
 
 $('.like').on('click', (e)=>{
@@ -118,17 +121,20 @@ $(".diary_update_btn").click(e=>{
 
 $(".diary_co_com_btn").click(e=>{	
 	$(e.target).parents('#diary_content_list').children('#diary_comment_box').hide();
-	$(e.target).parents('#diary_content_list').children('#diary_co_comment_box').show();
+	//$(e.target).parents('#diary_content_list').children('#diary_co_comment_box').show();
+	$(e.target).next().show();
 	
 });
 
 $(".diary_co_del_btn").click(e=>{
+	const diaryComment=$(e.target).parent().prev().prev().val();
+	console.log(diaryComment);
 	if(confirm("정말 삭제하시겠습니까?")){
 		$.ajax({
 			url:contextPath+"/diary/commentDelete",
 			type:"post",
 			data:{
-				"commentNo":$(e.target).parent().prev().val(),
+				"commentNo":diaryComment,
 				"commentWriter":$("input[name='loginMemberId']").val(),
 				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
@@ -166,8 +172,8 @@ $(".diary_co_comment_btn").click(e=>{
 			"comment_level":2,
 			"loginMemberId":$("input[name='loginMemberId']").val(),	
 			"diary_comment":$(e.target).prev().val(),						
-			"diary_no":$(e.target).parent().prev().val(),
-			"diary_comment_ref":$(e.target).parent().prev().prev().children().val()
+			"diary_no":$(e.target).parent().parent().prev().val(),
+			"diary_comment_ref":$(e.target).parent().parent().prev().prev().val()
 		},
 		dataType:"html",
 		success:data=>{
