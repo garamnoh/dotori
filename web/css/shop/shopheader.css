@@ -28,6 +28,10 @@
 	
 	
 }
+.TopTap:hover{
+	color:orange;
+	cursor:pointer;
+}
 #shopHeader>div{
 	display: flex;
 	justify-content: center;
