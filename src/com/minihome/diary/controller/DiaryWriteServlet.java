@@ -1,20 +1,19 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import com.member.model.service.MemberService;
-import com.member.model.vo.Member;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 import com.minihome.model.service.MinihomeService;
-import com.minihome.model.vo.Minihome;
 
 /**
  * Servlet implementation class DiaryWriteServlet
@@ -39,25 +38,40 @@ public class DiaryWriteServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 				
+		boolean flag=false;
+
 		Diary d=new Diary();
-		d.setMemberId(request.getParameter("hostMemberId"));
-		d.setWriter(request.getParameter("loginMemberId"));		
-		int folder=Integer.parseInt(request.getParameter("diary_folder"));
-		d.setFolderNo(folder);			
+		String hostId=request.getParameter("hostMemberId");		
+		String loginId=request.getParameter("loginMemberId");		
+		int folder=Integer.parseInt(request.getParameter("diary_folder"));		
 		String content=request.getParameter("diary_content_input");
 		
-		if(content!=null || content.equals("null")) {
+		List<DiaryFolderShare> fsList=new DiaryService().folderShare(folder);
+		
+		for(DiaryFolderShare fs : fsList) {
+			if(fs.getDiaryNo()==folder) {
+				if(fs.getAllowedMember().equals(loginId)) {
+					flag=true;
+				}
+			}else {
+				flag=true;
+			}
+		}
+		 
+		if(flag==true) {
+			d.setWriter(loginId);
+			d.setMemberId(hostId);
+			d.setFolderNo(folder);
 			d.setContent(content);
-			int result=new DiaryService().insertDiary(d);		
+			int result=new DiaryService().insertDiary(d);
 			if(result>0) {
 				request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 			}
 		}else {
-			request.setAttribute("msg", "내용을 입력해주세요");
+			request.setAttribute("msg", "권한이 없습니다.");
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}
-		
-		
+	
 	}
 
 	/**

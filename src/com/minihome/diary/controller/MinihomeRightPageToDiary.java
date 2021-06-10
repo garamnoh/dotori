@@ -109,7 +109,8 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 			pageBar+="<a id='"+pageNo+"/"+numPerpage+"'>[다음]</a>";
 		}
 		
-		String currentFolder=(String)request.getAttribute("currentFolder");
+		String currentPage=(String)request.getParameter("currentPage");
+		//System.out.println("이건 찍히니"+currentPage);
 		
 		List<DiaryComment> cList=new DiaryService().selectDiaryCommentList();
 		List<DiaryFolder> fList=new DiaryService().selectFolderList(hostMemberId);
@@ -134,7 +135,7 @@ public class MinihomeRightPageToDiary extends HttpServlet {
 		request.setAttribute("fList", fList);
 		request.setAttribute("profilePath", profilePath);
 		request.setAttribute("diaryFolderLevel", diaryFolderLevel);
-		request.setAttribute("currentFolder", currentFolder);
+		request.setAttribute("currentPage", currentPage);
 		String msg=(String)request.getAttribute("msg");
 		request.setAttribute("msg", msg);
 		

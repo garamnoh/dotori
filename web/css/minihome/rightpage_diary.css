@@ -184,7 +184,7 @@
 	cursor:pointer;
 	font-size: 12px;
 }
-.diary_up_btn:hover, .diary_del_btn:hover{
+.diary_up_btn:hover, .diary_del_btn:hover, .diary_com_btn:hover{
 	color:#747474;
 	cursor:pointer;
 }
@@ -258,6 +258,11 @@
 	font-weight:bold;
 	color:#8C8C8C;	
 }
+.diary_co_del_btn:hover, .diary_co_com_btn:hover,
+ .diary_reply_btn:hover{
+	color:black;
+}
+
 /******대댓글 출력창*******/
 .diary_reply_list{
 	display:flex;
