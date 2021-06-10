@@ -1,8 +1,8 @@
-let columnLength=14;
-let rowLength=14;
-let signalTable=$("<table>");
-let colorStr=$("#colorStrVal").val();
-let colorTrArr=colorStr.split("&");
+var columnLength=14;
+var rowLength=14;
+var signalTable=$("<table>");
+var colorStr=$("#colorStrVal").val();
+var colorTrArr=colorStr.split("&");
 
 for(let j=0;j<rowLength;j++) {
     let signalTr=$("<tr>");
