@@ -173,3 +173,22 @@ $("#muteMusic").hover((e)=>{
 },(e)=>{
 	$(e.target).attr("src",contextPath+"/images/minihome/mute-icon.png");
 });
+
+const socket=new WebSocket("ws://localhost:9090/"+contextPath+"/webSocket/drawingSignal");
+
+socket.onopen=(e)=>{
+	$.ajax({
+        url:contextPath+"/ajax/drawingSignal.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId
+        },
+        dataType:"json",
+        success:(data)=>{
+            console.log(data["colorStr"]);
+            socket.send(hostMemberId+"<<<"+data["colorStr"]);
+        }
+    });
+};
+
+socket.onclose=(e)=>{};
