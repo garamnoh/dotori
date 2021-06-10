@@ -17,11 +17,19 @@
 .basketheader input{
 	margin:10px 10px;
 }
-.basketheader input{
+.check-all{
 	color:white;
 	background-color:orange;
 	height:30px;
 }
+.basketheader>input:nth-child(3){
+	
+}
+.basketButtons>input:nth-child(3){
+	color:black;
+	background-color:orange;
+}
+
 
 #section{
 	overflow:scroll;
