@@ -29,9 +29,11 @@ public class MinihomeRightPageToHomeServlet extends HttpServlet {
 		
 		List<Album> latestAlbumList=minihomeService.getLatestAlbum(hostMemberId);
 		List<LatestDiaryInfo> latestDiaryList=minihomeService.getLatestDiary(hostMemberId);
+		String colorStr=minihomeService.getColorStr(hostMemberId);
 		
 		request.setAttribute("latestAlbumList",latestAlbumList);
 		request.setAttribute("latestDiaryList",latestDiaryList);
+		request.setAttribute("colorStr",colorStr);
 		
 		request.getRequestDispatcher("/views/minihome/rightpage_home.jsp").forward(request,response);
 	}
