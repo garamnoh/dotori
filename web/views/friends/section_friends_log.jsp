@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<div id='titleFriend'>Friend</div>
-<%@ include file='/views/friends/sub/logResult.jsp' %>
-
+<div id='titleFriend'>
+	<p>Friend</p>
+	<div>
+		최근 <input id='date' type='text'>일
+	</div>
+</div>
+<div id='logResultContainer'>
+	<%@ include file='/views/friends/sub/logResult.jsp' %>
+</div>
 
 
 <style>
@@ -14,5 +20,45 @@
 		padding-bottom: 5px;
 		font-weight: bold;
 		border-bottom: 1px solid #eee;
+		display: flex;
+		justify-content: space-between;
+	}
+	
+	#titleFriend #date{
+		width: 20px;
+		border: none;
+		border-bottom: 2px solid gray;
+		text-align: center;
+	}
+	
+	#titleFriend>div{
+		font-size: 14px;
+		font-weigth: 300;
+		color: gray;
+	}
+	
+	#titleFriend #date:focus{
+		outline: none;
+		text-align: center;
 	}
 </style>
+
+<script>
+	$('#titleFriend #date').on('keyup', (e)=>{
+		if(e.keyCode == 13){
+			
+			$('#logResultContainer').html('');
+			const period = $('#date').val();
+			
+			$.ajax({
+				url: '<%=request.getContextPath() %>/friends/logPeriod',
+				data: {
+					'period': period
+				},
+				success: (data)=>{
+					$('#logResultContainer').html(data);
+				}
+			});
+		}
+	});
+</script>

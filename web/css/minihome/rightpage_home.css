@@ -87,3 +87,38 @@ input#resetAllColor:hover{
     color:white;
     cursor:pointer;
 }
+.drawing-signal-question{
+    position:absolute;
+    left:390px;
+    top:540px;
+    padding:0 8px;
+    font-size:20px;
+    font-weight:bolder;
+    background-color:white;
+    color:black;
+    border:1px solid black;
+}
+.drawing-signal-question:hover{
+    background-color:black;
+    color:white;
+    cursor:pointer;
+}
+.drawing-signal-explanation{
+    border:1px solid black;
+    position:absolute;
+    left:117px;
+    top:400px;
+    list-style:disc;
+    background-color:white;
+    color:black;
+    width:300px;
+    height:120px;
+    font-weight:bold;
+    box-sizing:border-box;
+    padding:5px;
+    display:none;
+}
+.drawing-signal-explanation>li{
+    margin-top:10px;
+    margin-left:20px;
+}

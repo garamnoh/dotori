@@ -862,6 +862,10 @@ public class FriendDao {
 				
 				l.setMemberId(rs.getString("FRIEND_ID"));
 				l.setVisitCount(rs.getInt("COUNT"));
+				l.setMemberName(rs.getString("MEMBER_NAME"));
+				l.setGender(rs.getString("GENDER"));
+				l.setBirth(rs.getDate("BIRTH_DATE"));
+				l.setProfilePath(rs.getString("PROFILE_PATH"));
 				
 				myLog.add(l);
 			}
@@ -892,6 +896,10 @@ public class FriendDao {
 				
 				l.setMemberId(rs.getString("MEMBER_ID"));
 				l.setVisitCount(rs.getInt("COUNT"));
+				l.setMemberName(rs.getString("MEMBER_NAME"));
+				l.setGender(rs.getString("GENDER"));
+				l.setBirth(rs.getDate("BIRTH_DATE"));
+				l.setProfilePath(rs.getString("PROFILE_PATH"));
 				
 				friendsLog.add(l);
 			}

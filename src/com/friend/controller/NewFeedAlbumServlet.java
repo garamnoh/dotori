@@ -60,6 +60,7 @@ public class NewFeedAlbumServlet extends HttpServlet {
 		
 		for(Integer a : likeListAlbum) System.out.println(a);
 		
+		request.setAttribute("myId", myId);
 		request.setAttribute("countAlbum", countAlbum);
 		request.setAttribute("likeListAlbum", likeListAlbum);
 		request.setAttribute("newFeed", newFeed);

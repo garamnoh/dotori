@@ -14,16 +14,16 @@ import com.friend.model.vo.Log;
 import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class LogServlet
+ * Servlet implementation class LogPeriodServlet
  */
-@WebServlet("/friends/log")
-public class LogServlet extends HttpServlet {
+@WebServlet("/friends/logPeriod")
+public class LogPeriodServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public LogServlet() {
+    public LogPeriodServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -35,14 +35,14 @@ public class LogServlet extends HttpServlet {
 		
 		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
 		
-		int period = 3;
+		int period = Integer.parseInt(request.getParameter("period"));
 		
 		ArrayList<Log> myLog = new FriendService().myLog(myId, period);
 		ArrayList<Log> friendsLog = new FriendService().friendsLog(myId, period);
 		
 		request.setAttribute("myLog", myLog);
 		request.setAttribute("friendsLog", friendsLog);
-		request.getRequestDispatcher("/views/friends/section_friends_log.jsp").forward(request, response);
+		request.getRequestDispatcher("/views/friends/sub/logResult.jsp").forward(request, response);
 	}
 
 	/**
