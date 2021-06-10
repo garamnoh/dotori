@@ -22,8 +22,8 @@
 	background-color:orange;
 	height:30px;
 }
-.basketheader>input:nth-child(3){
-	
+.basketInfo>ul>li:nth-child(2){
+	color:orange;
 }
 .basketButtons>input:nth-child(3){
 	color:black;
