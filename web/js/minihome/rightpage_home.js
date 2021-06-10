@@ -98,3 +98,9 @@ socket.onmessage=(e)=>{
         }
     });
 };
+
+$("div.drawing-signal-question").hover((e)=>{
+    $(e.target).next().css("display","block");
+},(e)=>{
+    $(e.target).next().css("display","none");
+});
