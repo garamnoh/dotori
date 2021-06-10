@@ -28,7 +28,7 @@ public class MinihomeLeftPageToAlbumServlet extends HttpServlet {
 		String deleteFolderTarget=request.getParameter("deleteFolderTarget");
 		String currentFolder=request.getParameter("currentFolder");
 		
-		if(addFolderTitle!=null) {
+		if(addFolderTitle!=null&&!addFolderTitle.equals("")) {
 			int addFolderResult=albumService.addFolder(hostMemberId,addFolderTitle);
 		}
 		
