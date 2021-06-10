@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Music"%>
+    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Music,com.shop.model.vo.MusicLike"%>
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMusic.css">
 
 <%
@@ -7,6 +7,8 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 	Music m=(Music)request.getAttribute("music");
 	String id=(String)request.getAttribute("memberId"); 
 	String result=(String)request.getAttribute("result");
+	List<MusicLike> cHeartList=(List<MusicLike>)request.getAttribute("cheartList");
+	List<Integer> myHeartItemList=(List<Integer>)request.getAttribute("myHeartItemList");
 %> 
 <%@ include file="/views/common/shopheader.jsp"%>
 
@@ -25,8 +27,32 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				</div>
 				<br>
                 <div class="MusicInfo">
-                <input class="shopMusicCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i).getMusicNo() %>">
+                <div class="musicline">
+	                <input class="shopMusicCheck" type="checkbox">
+	                <input type="hidden" value="<%=list.get(3*i).getMusicNo() %>">
+                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i).getMusicNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            	}
+	            	%>
+			        <div id="likeBox">
+			            
+			        <% if(likeOrNot == true) { %>
+			            <img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			        <% } else {%>
+			            <img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			        <% } %>
+			        <% for(MusicLike ml:cHeartList){ %>
+			            <% if(ml.getMusicNo()==list.get(3*i).getMusicNo()){ %>
+			            	<span><%= ml.getcHeartCount() %></span>
+			            <% break; } %>
+				    <% } %>
+			       	</div>
+                </div>
                 <ul>
                     <li><b>[<%=list.get(3*i).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i).getMusicTitle() %></b></li>
@@ -45,8 +71,32 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				</div>
 				<br>
                 <div class="MusicInfo">
-                <input class="shopMusicCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i+1).getMusicNo() %>">
+                <div class="musicline">
+	                <input class="shopMusicCheck" type="checkbox">
+	                <input type="hidden" value="<%=list.get(3*i+1).getMusicNo() %>">
+                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+1).getMusicNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            	}
+	            	%>
+			        <div id="likeBox">
+			            
+			        <% if(likeOrNot == true) { %>
+			            <img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			        <% } else {%>
+			            <img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			        <% } %>
+			        <% for(MusicLike ml:cHeartList){ %>
+			            <% if(ml.getMusicNo()==list.get(3*i+1).getMusicNo()){ %>
+			            	<span><%= ml.getcHeartCount() %></span>
+			            <% break; } %>
+				    <% } %>
+			       	</div>
+                </div>
                 <ul>
                     <li><b>[<%=list.get(3*i+1).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i+1).getMusicTitle() %></b></li>
@@ -65,8 +115,32 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 				</div>
 				<br>
                 <div class="MusicInfo">
-                <input class="shopMusicCheck" type="checkbox">
-                <input type="hidden" value="<%=list.get(3*i+2).getMusicNo() %>">
+                <div class="musicline">
+	                <input class="shopMusicCheck" type="checkbox">
+	                <input type="hidden" value="<%=list.get(3*i+2).getMusicNo() %>">
+	                <%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+2).getMusicNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            	}
+	            	%>
+			        <div id="likeBox">
+			            
+			        <% if(likeOrNot == true) { %>
+			            <img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			        <% } else {%>
+			            <img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			        <% } %>
+			        <% for(MusicLike ml:cHeartList){ %>
+			            <% if(ml.getMusicNo()==list.get(3*i+2).getMusicNo()){ %>
+			            	<span><%= ml.getcHeartCount() %></span>
+			            <% break; } %>
+				    <% } %>
+			       	</div>
+                </div>
                 <ul>
                     <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li>
                     <li><b><%=list.get(3*i+2).getMusicTitle() %></b></li>
@@ -83,10 +157,38 @@ List<Music> list=(List<Music>)request.getAttribute("musicList");
 	}%>
 </form>
 <script>
+$("#MusicTable #likeBox>img").on("click",(e)=>{
+	let like="<%= request.getContextPath() %>/images/like.png";
+	let unlike="<%= request.getContextPath() %>/images/unlike.png"
+	if($(e.target).attr("src")==like){
+		$(e.target).attr("src",unlike);
+	}else {
+		$(e.target).attr("src",like);
+	}   
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/aHeartCount",
+		data:{"type":"music","itemNo":$(e.target).parent().prev().val(),"memberId":"<%=id%>"},
+		
+		success:(data)=>{
+			const HeartResult= data["cHeartResult"];
+			 $(e.target).prev().text(HeartResult);
+		}
+	}); 
+});
 
 $("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
 	$.ajax({
 		url:"<%=request.getContextPath()%>/ajax/shopTotalTitleOrder",
+		data:{"type":"music"},
+		success:(data)=>{
+			 $("#section").html(data);
+		}
+	});
+});
+$("#shopTopTap>span:nth-child(3)").on("click",(e)=>{
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/shopLikeOrder",
 		data:{"type":"music"},
 		success:(data)=>{
 			 $("#section").html(data);

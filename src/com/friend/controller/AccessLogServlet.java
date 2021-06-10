@@ -1,7 +1,6 @@
 package com.friend.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,22 +8,23 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.json.simple.JSONObject;
+
 import com.friend.model.service.FriendService;
-import com.friend.model.vo.Friend;
-import com.friend.model.vo.SearchF;
+import com.google.gson.Gson;
 import com.member.model.vo.Member;
 
 /**
- * Servlet implementation class SearchFriendServlet
+ * Servlet implementation class AccessLogServlet
  */
-@WebServlet("/friends/searchSomeone")
-public class SearchSomeoneServlet extends HttpServlet {
+@WebServlet("/friends/accessLog")
+public class AccessLogServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SearchSomeoneServlet() {
+    public AccessLogServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -34,18 +34,16 @@ public class SearchSomeoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		String searchKeyword = request.getParameter("searchKeyword");
-		String from = request.getParameter("from");
-		String to = request.getParameter("to");
-		String myId = ((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		String myId = (String)((Member)request.getSession().getAttribute("loginMember")).getMemberId();
+		String friendId = request.getParameter("friendId");
 		
-		ArrayList<SearchF> resultList = new FriendService().searchList(myId, from, to, searchKeyword);
+		int accessCount = new FriendService().accessCount(myId, friendId);
 		
-		for(SearchF s : resultList) System.out.println(s);
+		JSONObject json = new JSONObject();
+		json.put("accessCount", accessCount);
 		
-		request.setAttribute("myId", myId);
-		request.setAttribute("resultList", resultList);
-		request.getRequestDispatcher("/views/friends/sub/searchSomeone.jsp").forward(request, response);;
+		response.setContentType("application/json;charset=utf-8;");
+		new Gson().toJson(json, response.getWriter());
 	}
 
 	/**

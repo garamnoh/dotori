@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Minimi,com.member.model.vo.Member"%>
+    pageEncoding="UTF-8" import="java.util.List,com.shop.model.vo.Minimi,com.member.model.vo.Member,com.shop.model.vo.MinimiLike"%>
 <%
 List<Minimi> list=(List<Minimi>)request.getAttribute("minimiList");
 Minimi mini=(Minimi)request.getAttribute("minimi");
 String id=(String)request.getAttribute("memberId"); 
 String result=(String)request.getAttribute("result");
+List<MinimiLike> aHeartList=(List<MinimiLike>)request.getAttribute("aheartList");
+List<Integer> myHeartItemList=(List<Integer>)request.getAttribute("myHeartItemList");
 
 %> 
 <link rel="stylesheet" href="<%=request.getContextPath()%>/css/shop/shopProductMinimi.css">
@@ -26,15 +28,41 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="MinimiInfo">
-	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
-	                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
+                	<div class="minimiline">
+		                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
+		                <input type="hidden" value="<%=list.get(3*i).getItemNo() %>">
+				        <%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+			            <div id="likeBox">
+			            
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(MinimiLike ml:aHeartList){ %>
+			            	<% if(ml.getItemNo()==list.get(3*i).getItemNo()){ %>
+			            		<span><%= ml.getaHeartCount() %></span>
+			            	<% break; } %>
+				        <% } %>
+			       		</div>
+		            </div>
 		            <ul>
 		                <%-- <li><b>[<%=list.get(3*i).getSinger()%>]</b></li> --%>
 		                <li><b><%=list.get(3*i).getTitle() %></b></li>
 		                <li><b>도토리 <%=list.get(3*i).getPrice() %>개</b></li>
 		            </ul>
 	                <input id='test9' class="shopMinimiCheck" type="checkbox" disabled="disabled">
+	                
                 </div>
+                
 			</div>
 			</td>
 			<%} %>
@@ -46,8 +74,32 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="MinimiInfo">
+                	<div class="minimiline">
 	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
 	                <input type="hidden" value="<%=list.get(3*i+1).getItemNo() %>">
+	                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+1).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+		                <div id="likeBox">
+				        
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(MinimiLike ml:aHeartList){ %>
+			            <% if(ml.getItemNo()==list.get(3*i+1).getItemNo()){ %>
+			            	<span><%= ml.getaHeartCount() %></span>
+			            <% break; } %>
+				        <% } %>
+				       	</div>
+	               	</div>
 		                <ul>
 		                    <%-- <li><b>[<%=list.get(3*i+1).getTitle()%>]</b></li> --%>
 		                    <li><b><%=list.get(3*i+1).getTitle() %></b></li>
@@ -66,8 +118,32 @@ String result=(String)request.getAttribute("result");
 				</div>
 				<br>
                 <div class="MinimiInfo">
+                <div class="minimiline">
 	                <input class="shopMinimiCheck" type="checkbox" name="Check_YN">
 	                <input type="hidden" value="<%=list.get(3*i+2).getItemNo() %>">
+	                	<%
+	            		boolean likeOrNot = false;
+	            		for(Integer mhl:myHeartItemList){
+	            		if(mhl==list.get(3*i+2).getItemNo()){
+	            			likeOrNot = true;
+	            			break;
+	            			}
+	            		}
+	            		%>
+		        	<div id="likeBox">
+				        
+			            <% if(likeOrNot == true) { %>
+			            	<img src="<%= request.getContextPath() %>/images/like.png" alt="" class="like">
+			            <% } else {%>
+			            	<img src="<%= request.getContextPath() %>/images/unlike.png" alt="" class="like">
+			            <% } %>
+			            <% for(MinimiLike ml:aHeartList){ %>
+			            <% if(ml.getItemNo()==list.get(3*i+2).getItemNo()){ %>
+			            	<span><%= ml.getaHeartCount() %></span>
+			            <% break; } %>
+				        <% } %>
+				    </div>
+		        </div>
 		                <ul>
 		                    <%-- <li><b>[<%=list.get(3*i+2).getSinger()%>]</b></li> --%>
 		                    <li><b><%=list.get(3*i+2).getTitle() %></b></li>
@@ -89,6 +165,26 @@ String result=(String)request.getAttribute("result");
 
 
 <script>
+
+$("#MinimiTable #likeBox>img").on("click",(e)=>{
+	let like="<%= request.getContextPath() %>/images/like.png";
+	let unlike="<%= request.getContextPath() %>/images/unlike.png"
+	if($(e.target).attr("src")==like){
+		$(e.target).attr("src",unlike);
+	}else {
+		$(e.target).attr("src",like);
+	}   
+	
+	$.ajax({
+		url:"<%=request.getContextPath()%>/ajax/aHeartCount",
+		data:{"type":"minimi","itemNo":$(e.target).parent().prev().val(),"memberId":"<%=id%>"},
+		
+		success:(data)=>{
+			const HeartResult= data["aHeartResult"];
+			 $(e.target).prev().text(HeartResult);
+		}
+	}); 
+});
 
 $("#shopTopTap>span:nth-child(1)").on("click",(e)=>{
 	$.ajax({

@@ -49,3 +49,22 @@ div.productSkin{
 #SkinTable>tbody tr td{
     padding: 40px 0 40px 40px;   
 }
+#likeBox>img{
+	width: 25px;
+    height: 25px;
+}
+.skinline{
+	display: flex;
+	flex-direction: column;
+	height: 70px;
+	align-items:center;
+}
+.shopSkinCheck:nth-child(1){
+	width: 20px;
+    height: 20px;
+}
+#likeBox{
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}

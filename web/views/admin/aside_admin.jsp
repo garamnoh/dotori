@@ -6,7 +6,6 @@
     <div class='menuTitle' id="option1">회원관리</div>
     <div class="menuSub">
     	<p id='member'>회원정보 조회</p>
-<!--         <p id='memberOption'>option1</p> -->
     </div>
 <!--     <div class='menuTitle' id="option2">게시글관리</div>
     <div class="menuSub">
@@ -121,16 +120,31 @@
 		});
 	});
 	
-	$('.menuSub p').on('click', (e)=>{
+	$('.menuSub').on('click', (e)=>{
+		
+		$('#section').html('');
 		
 		switch(e.target.id){
 			case 'enrollItem':
 				$.ajax({
-					url: '<%=request.getContextPath() %>/'
+					url: '<%=request.getContextPath() %>/page/enrollItem',
+					success: (data)=>{
+						$('#section').append(data);
+					}
 				});
-		
+				break;
+				
+			case 'searchItem':
+				$.ajax({
+					url: '<%=request.getContextPath() %>/page/searchItem',
+					success: (data)=>{
+						$('#section').append(data);
+					}
+				});
+				break;
 		}
 	});
+	
 	
 	
 </script>

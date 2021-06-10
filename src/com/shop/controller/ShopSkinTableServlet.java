@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.vo.Member;
 import com.shop.model.vo.Skin;
+import com.shop.model.vo.SkinLike;
 import com.shop.service.ShopService;
 
 /**
@@ -41,6 +42,12 @@ public class ShopSkinTableServlet extends HttpServlet {
 		request.setAttribute("type", "skin"); 
 		request.setAttribute("memberId", memberId); 
 		request.setAttribute("result", result); 
+		
+		List<SkinLike> bheartList=new ShopService().bSearchHeartList();
+		request.setAttribute("bheartList", bheartList);
+		
+		List<Integer> myHeartItemList=new ShopService().bMyHeartItemNoList(memberId);
+		request.setAttribute("myHeartItemList", myHeartItemList); 
 		
 		request.getRequestDispatcher("/views/shop/shopSkin.jsp").forward(request, response);
 		

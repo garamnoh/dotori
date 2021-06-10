@@ -112,8 +112,34 @@
 	        </section>
 	    </div>
 	</div>
-	
-	
+	<div id="accessAlert">
+		<span id='accessName'></span>
+		<span>MINIhome 방문</span>
+		<div>최근 3일 : <span></span>회</div>
+	</div>
+	<style>
+		#accessAlert{
+			position: fixed;
+			width: 200px;
+			height: 100px;
+			right: 30px;
+			bottom: 30px;
+			background-color: #eee;
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			border-radius: 5px;
+		}
+		#accessAlert>span{
+			margin: 5px;
+			color: gray;
+		}
+		#accessAlert>div{
+			font-size: 13px;
+			color: gray;
+		}
+	</style>
 	
 	<footer>
 		<div id='footer'>
@@ -202,7 +228,7 @@
 					});
 					
 					$.ajax({
-						url: '<%= request.getContextPath() %>/friends/myFriends',
+						url: '<%= request.getContextPath() %>/friends/log',
 						dataTypd: 'html',
 						success: data=>{
 							$('#section').append(data);
@@ -361,8 +387,9 @@
 		});
 		
 		
+		$('#accessAlert').hide();
+		$('#msgAlert').hide();
 		$(document).ready(function(){
-			$('#msgAlert').hide();
 			setTimeout(()=>{
 				$('#footer-info').trigger('click');
 			}, 2000);

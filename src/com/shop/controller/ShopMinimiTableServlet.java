@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.member.model.vo.Member;
 import com.shop.model.vo.Minimi;
+import com.shop.model.vo.MinimiLike;
 import com.shop.service.ShopService;
 
 /**
@@ -44,6 +45,11 @@ public class ShopMinimiTableServlet extends HttpServlet {
 		request.setAttribute("memberId", memberId);
 		request.setAttribute("result",result);
 		
+		List<MinimiLike> aheartList=new ShopService().aSearchHeartList();
+		request.setAttribute("aheartList", aheartList);
+		//내 하트가 포함된 아이템 목록임
+		List<Integer> myHeartItemList=new ShopService().aMyHeartItemNoList(memberId);
+		request.setAttribute("myHeartItemList", myHeartItemList); 
 		request.getRequestDispatcher("/views/shop/shopMinimi.jsp").forward(request, response);
 		
 	

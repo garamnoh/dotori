@@ -19,16 +19,16 @@ import com.shop.model.vo.SkinLike;
 import com.shop.service.ShopService;
 
 /**
- * Servlet implementation class ShopSearchItemAjaxServlet
+ * Servlet implementation class ShopTapLikeOrderServlet
  */
-@WebServlet("/ajax/shopSearchItem.do")
-public class ShopSearchItemAjaxServlet extends HttpServlet {
+@WebServlet("/ajax/shopLikeOrder")
+public class ShopTapLikeOrderServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ShopSearchItemAjaxServlet() {
+    public ShopTapLikeOrderServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -37,48 +37,47 @@ public class ShopSearchItemAjaxServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html;charset=utf-8");
-		String searchKey = request.getParameter("searchKey");
 		String type =request.getParameter("type");
+		
 		String memberId=((Member)request.getSession().getAttribute("loginMember")).getMemberId();
-		//현재 내가 검색할 카테고리가 미니미인가 / 스킨인가 / 뮤직인가
+		
+		
+		//현재 내가 추천순을 정렬할 카테고리가 미니미인가 / 스킨인가 / 뮤직인가
 		String view="";
 		if(type.equals("minimi")) {
-			List<Minimi> minimiSearchResult= new ShopService().ashopSearchItem(searchKey);
+			List<Minimi> minimiLikeOrder= new ShopService().ashopLikeOrder();
 			List<MinimiLike> aheartList=new ShopService().aSearchHeartList();
 			request.setAttribute("aheartList", aheartList);
 			//내 하트가 포함된 아이템 목록임
 			List<Integer> myHeartItemList=new ShopService().aMyHeartItemNoList(memberId);
 			request.setAttribute("myHeartItemList", myHeartItemList);
-			request.setAttribute("minimiList", minimiSearchResult);
+			
+			request.setAttribute("minimiList", minimiLikeOrder);
 			view="/views/shop/shopMinimi.jsp";
 		}else if(type.equals("skin")) {
-			List<Skin> skinSearchResult= new ShopService().bshopSearchItem(searchKey);
+			List<Skin> skinLikeOrder= new ShopService().bshopLikeOrder();
 			List<SkinLike> bheartList=new ShopService().bSearchHeartList();
 			request.setAttribute("bheartList", bheartList);
 			
 			List<Integer> myHeartItemList=new ShopService().bMyHeartItemNoList(memberId);
 			request.setAttribute("myHeartItemList", myHeartItemList); 
 			
-			request.setAttribute("skinList", skinSearchResult);
+			request.setAttribute("skinList", skinLikeOrder);
 			view="/views/shop/shopSkin.jsp";
 		}else if(type.equals("music")) {
-			List<Music> musicSearchResult= new ShopService().cshopSearchItem(searchKey);
+			List<Music> musicLikeOrder= new ShopService().cshopLikeOrder();
 			List<MusicLike> cheartList=new ShopService().cSearchHeartList();
 			request.setAttribute("cheartList", cheartList);
 			
 			List<Integer> myHeartItemList=new ShopService().cMyHeartItemNoList(memberId);
 			request.setAttribute("myHeartItemList", myHeartItemList); 
 			
-			request.setAttribute("musicList", musicSearchResult);
+			request.setAttribute("musicList", musicLikeOrder);
 			view="/views/shop/shopMusic.jsp";
 		}
-		
+				
 		request.getRequestDispatcher(view).forward(request, response);
 		
-		
-	
-	
 	}
 
 	/**

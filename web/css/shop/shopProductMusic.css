@@ -54,3 +54,22 @@ div.productMusic{
 	
     padding: 40px 0 40px 40px;   
 }
+#likeBox>img{
+	width: 25px;
+    height: 25px;
+}
+.musicline{
+	display: flex;
+	flex-direction: column;
+	height: 70px;
+	align-items:center;
+}
+.shopMusicCheck:nth-child(1){
+	width: 20px;
+    height: 20px;
+}
+#likeBox{
+	display: flex;
+	flex-direction: column;
+	align-items:center;
+}
