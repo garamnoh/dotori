@@ -32,6 +32,7 @@ public class MinihomeService {
 		int todayResult=minihomeDao.addToday(conn,hostMemberId);
 		if(todayResult>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return todayResult;
 	}
 	
@@ -40,6 +41,7 @@ public class MinihomeService {
 		int todayToTotalResult=minihomeDao.todayToTotal(conn,hostMemberId);
 		if(todayToTotalResult>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return todayToTotalResult;
 	}
 	
@@ -101,7 +103,24 @@ public class MinihomeService {
 		int changeSkinResult=minihomeDao.changeSkin(conn,hostMemberId,changeSkinItemNo);
 		if(changeSkinResult>0) commit(conn);
 		else rollback(conn);
+		close(conn);
 		return changeSkinResult;
+	}
+	
+	public int updateColorStr(String hostMemberId,String[] colorArr) {
+		Connection conn=getConnection();
+		int result=minihomeDao.updateColorStr(conn,hostMemberId,colorArr);
+		if(result>0) commit(conn);
+		else rollback(conn);
+		close(conn);
+		return result;
+	}
+	
+	public String getColorStr(String hostMemberId) {
+		Connection conn=getConnection();
+		String colorStr=minihomeDao.getColorStr(conn,hostMemberId);
+		close(conn);
+		return colorStr;
 	}
 	
 }

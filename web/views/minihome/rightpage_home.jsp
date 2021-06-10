@@ -3,6 +3,7 @@
 <%
 	List<Album> latestAlbumList=(List<Album>)request.getAttribute("latestAlbumList");
 	List<LatestDiaryInfo> latestDiaryList=(List<LatestDiaryInfo>)request.getAttribute("latestDiaryList");
+	String colorStr=(String)request.getAttribute("colorStr");
 %>
 
 <div class="latestUploadBox">
@@ -29,7 +30,18 @@
 
 <hr>
 
+<div id="drawing-signal-box"><p>시그널 보내~ 시그널 보내~ 찌릿찌릿!</p></div>
+
+<div id="color-selector-box">
+	<label for="color-selector">색상 선택</label>
+	<input type="color" id="color-selector">
+</div>
+
+<input type="button" id="resetAllColor" value="전체 칠하기">
+
 <img src="<%=request.getContextPath()%>/images/minihome/하와이에서 만난 친구들.png" class="hawaiianFriends">
 <img src="<%=request.getContextPath()%>/images/minihome/곰돌이의 유혹.png" class="lureOfBear">
+
+<input type="hidden" id="colorStrVal" value="<%=colorStr%>">
 
 <script src="<%=request.getContextPath()%>/js/minihome/rightpage_home.js"></script>

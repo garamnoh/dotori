@@ -261,4 +261,44 @@ public class MinihomeDao {
 		return changeSkinResult;
 	}
 	
+	public int updateColorStr(Connection conn,String hostMemberId,String[] colorArr) {
+		PreparedStatement pstmt=null;
+		int result=0;
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("updateColorStr"));
+			for(int i=0;i<colorArr.length;i++) {
+				pstmt.setString(i+1,colorArr[i]);
+			}
+			pstmt.setString(15,hostMemberId);
+			result=pstmt.executeUpdate();
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		return result;
+	}
+	
+	public String getColorStr(Connection conn,String hostMemberId) {
+		PreparedStatement pstmt=null;
+		ResultSet rs=null;
+		String colorStr="";
+		try {
+			pstmt=conn.prepareStatement(prop.getProperty("getColorStr"));
+			pstmt.setString(1,hostMemberId);
+			rs=pstmt.executeQuery();
+			if(rs.next()) {
+				for(int i=0;i<14;i++) {
+					if(i!=13) colorStr+=rs.getString("color_str_"+(i+1))+"&";
+					else colorStr+=rs.getString("color_str_"+(i+1));
+				}
+			}
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rs);close(pstmt);
+		}
+		return colorStr;
+	}
+	
 }
