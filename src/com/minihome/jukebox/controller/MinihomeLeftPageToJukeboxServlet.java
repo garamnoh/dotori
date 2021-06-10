@@ -32,7 +32,7 @@ public class MinihomeLeftPageToJukeboxServlet extends HttpServlet {
 			currentFolder="배경음악";
 		}
 		
-		if(newAlbumTitle!=null) {
+		if(newAlbumTitle!=null&&!newAlbumTitle.equals("")) {
 			int addAlbumResult=jukeboxService.addAlbum(hostMemberId,newAlbumTitle);
 		}
 		

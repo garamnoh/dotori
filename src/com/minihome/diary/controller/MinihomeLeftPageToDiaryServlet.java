@@ -32,7 +32,7 @@ public class MinihomeLeftPageToDiaryServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
 		
 		String currentPage=request.getParameter("currentPage");		
-		
+		//System.out.println("여기는 나오겠지"+currentPage);
 		HttpSession session=request.getSession(false);		
 		if(session==null||session.getAttribute("loginMember")==null) {
 			request.getRequestDispatcher("/views/minihome/errorpage.jsp").forward(request,response);

@@ -15,6 +15,8 @@
 	String msg=(String)request.getAttribute("msg");
 	ArrayList<Integer> likeList = (ArrayList<Integer>)request.getAttribute("likeList");
 	ArrayList<Like> count = (ArrayList<Like>)request.getAttribute("count");
+	String currentPage=(String)request.getAttribute("currentPage");
+	//System.out.print(currentPage+"/////////////");
 %>
 
 <script src="<%=request.getContextPath() %>/js/minihome/rightpage_diary.js"></script>
@@ -31,7 +33,11 @@
 				<div id="diary_input_title_box">
 					<select class="diary_folder" name="diary_folder">
 						<%for(DiaryFolder df : fList) {%>
-							<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>							
+							<%if(df.getFolderName()==currentPage) {%>							
+								<option selected value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>
+							<%}else {%>
+								<option value="<%=df.getFolderNo()%>"><%=df.getFolderName()%></option>
+							<%} %>							
 						<%} %>							
 					</select>						
 				</div>
@@ -118,7 +124,7 @@
 					
 					<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">					
 					
-					<!-- 댓글수정박스 -->			
+					<!-- 다이어리 수정박스 -->			
 					<div id="diary_content_update" style="display:none">
 						<select class="diary_folder_up" name="diary_folder_up">
 							<%for(DiaryFolder df : fList) {%>
@@ -153,9 +159,14 @@
 											|| loginMember.getMemberId().equals("admin@gmail.com")
 											|| loginMember.getMemberId().equals(dc.getCommentWriter())) {%>
 											<div class="diary_co_del_btn">삭제</div>
-										<%} %>									
+										<%} %>
 										<div class="diary_co_com_btn">댓글</div>
-											
+										<!-- 대댓글달기 / 원글 댓글창 닫기-->									
+										<div id="diary_co_comment_box" style="display:none">
+											<label>대댓글</label>							
+											<input type="text" class="diary_co_comment" name="diary_co_comment">				
+											<button class="diary_co_comment_btn">확인</button>
+										</div>
 									</div>
 								<%} else if(dc.getCommentLevel()==2) {%>									
 									<div class="diary_reply_list">										
@@ -176,11 +187,11 @@
 					<input type="hidden" name="diary_no" value="<%=d.getDiaryNo()%>">						
 						
 					<!-- 대댓글달기 / 원글 댓글창 닫기-->
-					<div id="diary_co_comment_box" style="display:none">
+					<!-- <div id="diary_co_comment_box" style="display:none">
 						<label>대댓글</label>							
 						<input type="text" class="diary_co_comment" name="diary_co_comment">				
 						<button class="diary_co_comment_btn">확인</button>
-					</div>	
+					</div> -->	
 									
 				</div>
 			</div>	

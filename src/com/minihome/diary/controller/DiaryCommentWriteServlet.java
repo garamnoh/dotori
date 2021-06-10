@@ -32,37 +32,26 @@ public class DiaryCommentWriteServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		DiaryComment dc=new DiaryComment();
-		int level=Integer.parseInt(request.getParameter("comment_level"));
-		System.out.println("level"+level);
+		String id=request.getParameter("loginMemberId");		
+		int level=Integer.parseInt(request.getParameter("comment_level"));		
+		int no=Integer.parseInt(request.getParameter("diary_no"));		
+		int ref=Integer.parseInt(request.getParameter("diary_comment_ref"));		
+		String comment=request.getParameter("diary_comment");	
 		dc.setCommentLevel(level);
-		String id=request.getParameter("loginMemberId");
-		System.out.println("id"+id);
 		dc.setCommentWriter(id);
-		int no=Integer.parseInt(request.getParameter("diary_no"));
-		System.out.println("no"+no);
 		dc.setDiaryRef(no);
-		int ref=Integer.parseInt(request.getParameter("diary_comment_ref"));
-		System.out.println("ref"+ref);
-		dc.setDiaryCommentRef(ref);
-		String comment=request.getParameter("diary_comment");		
-		System.out.println(comment);
-		String msg="";
-		if(comment!=null) {
+		dc.setDiaryCommentRef(ref);		
+		
+		if(comment!=null || comment.equals("null")) {
 			dc.setCommentContent(comment);
+			int result=new DiaryService().insertComment(dc);			
+			if(result>0) {
+				request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
+			}
 		}else {
-			/////////////////////////////////////////////
-			msg="내용을 입력하세요.";
-			request.setAttribute("msg", msg);
-			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);	
-			///////////////////////////////////////////////
-		}
-		
-		int result=new DiaryService().insertComment(dc);		
-		
-		if(result>0) {
+			request.setAttribute("msg", "댓글을 입력해주세요");
 			request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);
 		}
-		
 		
 	}
 

@@ -15,6 +15,18 @@ $("#changeBtn").click((e)=>{
             $("#right-page").html(data);
         }
     });
+    $.ajax({
+        url:contextPath+"/page/minihomeLeftPageToJukebox.do",
+        type:"post",
+        data:{
+            "hostMemberId":hostMemberId,
+            "currentAlbum":$("#currentAlbum").val()
+        },
+        dataType:"html",
+        success:(data)=>{
+            $("#left-page").html(data);
+        }
+    });
 });
 
 $("#changePlaySeqBtn").click((e)=>{

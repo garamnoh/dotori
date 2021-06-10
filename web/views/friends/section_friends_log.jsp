@@ -4,7 +4,7 @@
 <div id='titleFriend'>
 	<p>Friend</p>
 	<div>
-		최근 <input id='date' type='text'>일
+		최근 <input id='date' type='text' value='3'>일
 	</div>
 </div>
 <div id='logResultContainer'>
@@ -48,7 +48,13 @@
 		if(e.keyCode == 13){
 			
 			$('#logResultContainer').html('');
-			const period = $('#date').val();
+			var period = $('#date').val();
+			if(period == 0) {
+				period = 1;
+				$('#date').val('1');
+			}
+			
+			console.log('period', period);
 			
 			$.ajax({
 				url: '<%=request.getContextPath() %>/friends/logPeriod',

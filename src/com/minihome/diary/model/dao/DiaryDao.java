@@ -403,6 +403,6 @@ public class DiaryDao {
 			close(pstmt);			
 		}
 		return result;	
-	}
+	}	
 	
 }
