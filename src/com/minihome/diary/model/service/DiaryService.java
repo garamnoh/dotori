@@ -150,14 +150,13 @@ public class DiaryService {
 		return result;
 	}
 		
-	public List<DiaryComment> selectDiaryCommentList(){
+	public List<DiaryComment> selectDiaryCommentList(String hostMemberId){
 		Connection conn=getConnection();	
-		List<DiaryComment> list=dao.selectDiaryCommentList(conn);
+		List<DiaryComment> list=dao.selectDiaryCommentList(conn, hostMemberId);
 		close(conn);
 		return list;
 	}
-	
-	//public int commentDelete(int commentNo, String commentWriter) {
+		
 	public int commentDelete(int commentNo) {
 		Connection conn=getConnection();
 		//int result=dao.commentDelete(conn, commentNo, commentWriter);

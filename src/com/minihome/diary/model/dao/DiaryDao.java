@@ -360,12 +360,13 @@ public class DiaryDao {
 		return result;	
 	}
 	
-	public List<DiaryComment> selectDiaryCommentList(Connection conn){
+	public List<DiaryComment> selectDiaryCommentList(Connection conn, String hostMemberId){
 		PreparedStatement pstmt=null;
 		ResultSet rs=null;
 		List<DiaryComment> list=new ArrayList();
 		try {
-			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));			
+			pstmt=conn.prepareStatement(prop.getProperty("selectDiaryCommentList"));
+			pstmt.setString(1, hostMemberId);
 			rs=pstmt.executeQuery();
 			while(rs.next()) {
 				DiaryComment dc=new DiaryComment();
