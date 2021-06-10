@@ -48,7 +48,12 @@
 		if(e.keyCode == 13){
 			
 			$('#logResultContainer').html('');
-			const period = $('#date').val();
+			var period = $('#date').val();
+			if(period == 0) {
+				period = 1;
+				$('#date').val('1');
+			}
+			
 			console.log('period', period);
 			
 			$.ajax({
