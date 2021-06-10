@@ -213,24 +213,6 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public int enrollDefaultMinimi(Connection conn, String memberId) {
-		
-		PreparedStatement ps = null;
-		int result = 0;
-		
-		try {
-			ps = conn.prepareStatement(prop.getProperty("enrollDefaultMinimi"));
-			ps.setString(1, memberId);
-			
-			result = ps.executeUpdate();
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(ps);
-		} return result;
-	}
-	
 	public int editProfile(Connection conn, Member member) {
 		
 		PreparedStatement ps = null;
