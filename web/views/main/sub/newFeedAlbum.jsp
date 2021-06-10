@@ -7,6 +7,7 @@
 	ArrayList<FeedAlbum> newFeedAlbum = (ArrayList<FeedAlbum>)(newFeed.get("feedAlbum"));
 	ArrayList<Integer> likeListAlbum = (ArrayList<Integer>)request.getAttribute("likeListAlbum");
 	ArrayList<Like> countAlbum = (ArrayList<Like>)request.getAttribute("countAlbum");
+	String myId = (String)request.getAttribute("myId");
 %>
 
    	<% for(FeedAlbum f : newFeedAlbum){ %>
@@ -59,6 +60,8 @@
     
 
     <script>
+    	var myId = '<%=myId %>';
+    
 	    $('.like').on('click', (e)=>{
 	        let unlike = '<%= request.getContextPath() %>/images/unlike.png'
 	        let like = '<%= request.getContextPath() %>/images/like.png'
@@ -81,6 +84,7 @@
 	    
 	    $('#contentResultAlbum .userImg').on('click', (e)=>{
 	    	const hostMemberId = $(e.target).prev().val();
+	    	const hostMemberName = $(e.target).next().children('p.userName').text();
 	    	
 			const minihomeWidth = 1200;
 			const minihomeHeight = 756;
@@ -91,10 +95,28 @@
 			const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
     		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
     		window.open(url,"",status);
+    		
+    		if(hostMemberId != myId){
+    			$.ajax({
+    				url: '<%=request.getContextPath() %>/friends/accessLog',
+    				data: {
+    					'friendId': hostMemberId
+    				},
+    				success: (data)=>{
+    					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+    					$('#accessAlert>div>span').text(data['accessCount']);
+    					$('#accessAlert').slideDown();
+    					setTimeout(()=>{
+    						$('#accessAlert').slideUp();
+    					}, 3000);
+    				}
+    			});
+    		}
 	    });
 	    
 	    $('#contentResultAlbum .userName').on('click', (e)=>{
 	    	const hostMemberId = $(e.target).parent().prev().prev().val();
+	    	const hostMemberName = $(e.target).text();
 	    	
 			const minihomeWidth = 1200;
 			const minihomeHeight = 756;
@@ -105,5 +127,22 @@
 			const status="width=1200px,height=756px,left="+xAxis+",top="+yAxis;
     		const url="<%=request.getContextPath()%>/page/minihome.do?hostMemberId="+hostMemberId;
     		window.open(url,"",status);
+    		
+    		if(hostMemberId != myId){
+    			$.ajax({
+    				url: '<%=request.getContextPath() %>/friends/accessLog',
+    				data: {
+    					'friendId': hostMemberId
+    				},
+    				success: (data)=>{
+    					$('#accessAlert>span#accessName').text("["+hostMemberName+"]님의");
+    					$('#accessAlert>div>span').text(data['accessCount']);
+    					$('#accessAlert').slideDown();
+    					setTimeout(()=>{
+    						$('#accessAlert').slideUp();
+    					}, 3000);
+    				}
+    			});
+    		}
 	    });
     </script>

@@ -62,6 +62,7 @@ public class NewFeedDiaryServlet extends HttpServlet {
 		ArrayList<FeedDiary> feedDiary = (ArrayList<FeedDiary>)newFeed.get("feedDiary");
 		for(FeedDiary d: feedDiary) System.out.println(d);
 		
+		request.setAttribute("myId", myId);
 		request.setAttribute("count", count);
 		request.setAttribute("likeList", likeList);
 		request.setAttribute("newFeed", newFeed);
