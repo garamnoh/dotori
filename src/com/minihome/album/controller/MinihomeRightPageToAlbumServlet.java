@@ -91,7 +91,6 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 			pageBar+="<span>[이전]</span>";
 		}else {
 			pageBar+="<a id='"+(pageNo-1)+"/"+numPerPage+"'>[이전]</a>";
-			//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToAlbum.do?cPage="+(pageNo-1)+"&numPerPage="+numPerPage+"'>[이전]</a>";
 		}
 		
 		while(!(pageNo>pageEnd||pageNo>totalPage)) {
@@ -99,7 +98,6 @@ public class MinihomeRightPageToAlbumServlet extends HttpServlet {
 				pageBar+="<span>"+pageNo+"</span>";
 			}else {
 				pageBar+="<a id='"+pageNo+"/"+numPerPage+"'>"+pageNo+"</a>";
-				//pageBar+="<a href='"+request.getContextPath()+"/page/minihomeRightPageToAlbum.do?cPage="+pageNo+"&numPerPage="+numPerPage+"'>"+pageNo+"</a>";
 			}
 			pageNo++;
 		}

@@ -88,7 +88,6 @@ $("input#resetAllColor").click((e)=>{
 });
 
 socket.onmessage=(e)=>{
-    console.log("onmessage 테스트 : "+e.data);
     let colorTrArr=e.data.split("&");
 
     $("#drawing-signal-box tr").each((i,v)=>{

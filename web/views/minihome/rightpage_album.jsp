@@ -62,7 +62,6 @@
 						<%int likeNum=0;%>
 						<%String loveImgPath=request.getContextPath()+"/images/minihome/love_white.png";%>
 						<%for(int l=0;l<photoLikeList.size();l++) {%>
-							<%System.out.println("jsp테스트테스트 : "+photoLikeList.get(l).getImgNo()+"/"+albumList.get(i).getImgNo()); %>
 							<%if(photoLikeList.get(l).getImgNo()==albumList.get(i).getImgNo()) {%>
 								<%if(photoLikeList.get(l).getMemberId().equals(loginMemberId)) {%>
 									<%loveImgPath=request.getContextPath()+"/images/minihome/love_red.png";%>

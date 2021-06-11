@@ -180,7 +180,6 @@ $(".photoLoveBox>.photoLoveImg").click((e)=>{
             },
             dataType:"json",
             success:(data)=>{
-                console.log("data테스트 : "+data["likeNum"]);
                 $(e.target).next().next().text(data["likeNum"]);
             }
         });
@@ -195,7 +194,6 @@ $(".photoLoveBox>.photoLoveImg").click((e)=>{
             },
             dataType:"json",
             success:(data)=>{
-                console.log("data테스트 : "+data["likeNum"]);
                 $(e.target).next().next().text(data["likeNum"]);
             }
         });
