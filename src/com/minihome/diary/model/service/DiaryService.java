@@ -40,6 +40,13 @@ public class DiaryService {
 		return result;
 	}
 	
+	public Diary selectDiary(int diaryNo) {
+		Connection conn=getConnection();
+		Diary d=dao.selectDiary(conn, diaryNo);
+		close(conn);
+		return d;
+	}
+	
 	public int insertDiary(Diary d) {
 		Connection conn=getConnection();
 		int result=dao.insertDiary(conn, d);

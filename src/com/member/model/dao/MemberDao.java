@@ -213,24 +213,6 @@ public class MemberDao {
 		}return result;
 	}
 	
-	public int enrollDefaultMinimi(Connection conn, String memberId) {
-		
-		PreparedStatement ps = null;
-		int result = 0;
-		
-		try {
-			ps = conn.prepareStatement(prop.getProperty("enrollDefaultMinimi"));
-			ps.setString(1, memberId);
-			
-			result = ps.executeUpdate();
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(ps);
-		} return result;
-	}
-	
 	public int editProfile(Connection conn, Member member) {
 		
 		PreparedStatement ps = null;
@@ -382,6 +364,36 @@ public class MemberDao {
 			e.printStackTrace();
 		} finally {
 			close(ps);
+		} return result;
+	}
+	
+	public int deleteProfile(Connection conn, String memberId) {
+		
+		PreparedStatement ps1 = null;
+		PreparedStatement ps2 = null;
+		int temp = 0;
+		int result = 0;
+		
+		try {
+			
+			ps1 = conn.prepareStatement(prop.getProperty("deleteMinimi"));
+			ps1.setString(1, memberId);
+			
+			temp = ps1.executeUpdate();
+			
+			if(temp > 0) {
+				ps2 = conn.prepareStatement(prop.getProperty("deleteProfile"));
+				ps2.setString(1, memberId);
+				
+				result = ps2.executeUpdate();
+			}
+			else result = temp;
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(ps1);
+			close(ps2);
 		} return result;
 	}
 }

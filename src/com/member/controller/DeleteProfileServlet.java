@@ -1,25 +1,27 @@
-package com.minihome.diary.controller;
+package com.member.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import com.minihome.diary.model.service.DiaryService;
+import com.member.model.service.MemberService;
 
 /**
- * Servlet implementation class DiaryAddFriendServlet
+ * Servlet implementation class DeleteProfileServlet
  */
-@WebServlet("/diary/addFriend")
-public class DiaryAddFriendServlet extends HttpServlet {
+@WebServlet("/deleteProfile")
+public class DeleteProfileServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryAddFriendServlet() {
+    public DeleteProfileServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,20 +31,25 @@ public class DiaryAddFriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int shareFolderNo=Integer.parseInt(request.getParameter("shareFolderNo"));
-		String shareMember=request.getParameter("shareMember");
-		String folderName=request.getParameter("folderName");
-		String MemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
-		String members[]=shareMember.split(",");
-		int result=0, check=0;
-			
-		for(int i=0; i<members.length; i++) {			
-			result=new DiaryService().insertShareDiaryFolder(shareFolderNo, members[i]);			
-		}			
+		String memberId = request.getParameter("memberId");
 		
-		if(result>0 && check>0) {
-			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
+		int result = new MemberService().deleteProfile(memberId);
+		
+		if(result > 0) {
+			
+			HttpSession session = request.getSession();
+			session.invalidate();
+			
+			request.getRequestDispatcher("/").forward(request, response);
+			
+			
+		} else {
+			
+			request.setAttribute("msg", "탈퇴에 실패했습니다.");
+			request.setAttribute("loc", "/views/main/section_home_editProfile.jsp");
+			
+			request.getRequestDispatcher("/views/common/msg.jsp").forward(request, response);
+
 		}
 	}
 

@@ -41,8 +41,7 @@ public class DiaryFolderServlet extends HttpServlet {
 		String loginMemberId=request.getParameter("loginMemberId");
 		String hostMemberId=request.getParameter("hostMemberId");
 		String shareLevel=request.getParameter("shareLevel");
-		String currentPage=request.getParameter("currentPage");
-		//System.out.println("여기는???????"+currentPage); 
+		String currentPage=request.getParameter("currentPage");		 
 		
 		boolean flag=false;
 		

@@ -65,7 +65,6 @@ public class EditProfileServlet extends HttpServlet {
 		json.put("address", member.getAddress());
 
 		response.setContentType("application/json;charset=utf-8;");
-//		response.getWriter().print(json);
 		new Gson().toJson(json, response.getWriter());
 		
 	}

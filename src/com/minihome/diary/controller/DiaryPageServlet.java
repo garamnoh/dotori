@@ -1,25 +1,31 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.friend.model.service.FriendService;
+import com.friend.model.vo.Friend;
 import com.minihome.diary.model.service.DiaryService;
+import com.minihome.diary.model.vo.DiaryFolderShare;
 
 /**
- * Servlet implementation class DiaryAddFriendServlet
+ * Servlet implementation class DiaryPageServlet
  */
-@WebServlet("/diary/addFriend")
-public class DiaryAddFriendServlet extends HttpServlet {
+@WebServlet("/diary/page")
+public class DiaryPageServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public DiaryAddFriendServlet() {
+    public DiaryPageServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,21 +35,17 @@ public class DiaryAddFriendServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		int shareFolderNo=Integer.parseInt(request.getParameter("shareFolderNo"));
-		String shareMember=request.getParameter("shareMember");
-		String folderName=request.getParameter("folderName");
-		String MemberId=request.getParameter("loginMemberId");
-		String hostMemberId=request.getParameter("hostMemberId");
-		String members[]=shareMember.split(",");
-		int result=0, check=0;
-			
-		for(int i=0; i<members.length; i++) {			
-			result=new DiaryService().insertShareDiaryFolder(shareFolderNo, members[i]);			
-		}			
+response.setContentType("text/html;charset=utf-8");
 		
-		if(result>0 && check>0) {
-			request.getRequestDispatcher("/page/minihomeLeftPageToDiary.do").forward(request,response);		
-		}
+		int folderNo=Integer.parseInt(request.getParameter("diaryFolderLevel"));
+		String loginMemberId=request.getParameter("loginMemberId");
+		String hostMemberId=request.getParameter("hostMemberId");		
+		String currentPage=request.getParameter("currentPage");		
+		
+		request.setAttribute("diaryFolderLevel", folderNo);
+		request.setAttribute("currentPage", currentPage);
+		request.getRequestDispatcher("/page/minihomeRightPageToDiary.do").forward(request, response);	
+		
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.minihome.diary.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -9,9 +10,12 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.friend.model.service.FriendService;
+import com.friend.model.vo.Friend;
 import com.member.model.service.MemberService;
 import com.minihome.diary.model.service.DiaryService;
 import com.minihome.diary.model.vo.Diary;
+import com.minihome.diary.model.vo.DiaryFolder;
 import com.minihome.diary.model.vo.DiaryFolderShare;
 import com.minihome.model.service.MinihomeService;
 
@@ -46,19 +50,33 @@ public class DiaryWriteServlet extends HttpServlet {
 		int folder=Integer.parseInt(request.getParameter("diary_folder"));		
 		String content=request.getParameter("diary_content_input");
 		
+		List<DiaryFolder> fList=new DiaryService().selectFolderList(hostId);
 		List<DiaryFolderShare> fsList=new DiaryService().folderShare(folder);
 		
-		for(DiaryFolderShare fs : fsList) {
-			if(fs.getDiaryNo()==folder) {
-				if(fs.getAllowedMember().equals(loginId)) {
+		for(DiaryFolder df : fList) {
+			if(folder==df.getFolderNo()) {
+				if(df.getShareLevel().equals("PUBLIC")) {
 					flag=true;
+				}else if(df.getShareLevel().equals("FOLLOWERS")) {
+					ArrayList<Friend> friend=new FriendService().friendsList(hostId);			
+					int test=friend.indexOf(loginId);			
+					for(Friend f : friend) {				
+						if(loginId.equals(f.getFollower())) {
+							flag=true;
+						}
+					}
+				}else if(df.getShareLevel().equals("FRIENDS")) {
+					List<DiaryFolderShare> shareMember=new DiaryService().folderShare(folder);			
+					for(DiaryFolderShare fs : shareMember) {
+						if(loginId.equals(fs.getAllowedMember())) {
+							flag=true;
+						}
+					}
 				}
-			}else {
-				flag=true;
-			}
-		}
-		 
-		if(flag==true) {
+			}									
+		}	
+		
+		if(loginId.equals(hostId) || flag==true) {
 			d.setWriter(loginId);
 			d.setMemberId(hostId);
 			d.setFolderNo(folder);

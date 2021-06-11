@@ -163,7 +163,7 @@
     <script>
     
     	$('#editProfile').on('click', ()=>{
-    		
+
     		$.ajax({
     			url: '<%= request.getContextPath() %>/editProfile',
      			data: {
@@ -182,7 +182,15 @@
     					$('#memberId').val(data['memberId']);
     					$('#memberName').val(data['memberName']);
     					$('#nickname').val(data['nickname']);
-    					$('#birth').val(data['birth']);
+    					var year = data['birth'].substring(data['birth'].lastIndexOf(' ')+1, data['birth'].lastIndexOf(' ')+5);
+						var day = data['birth'].substring(data['birth'].indexOf(' ')+1, data['birth'].indexOf(' ')+3);
+						var month = data['birth'].substring(0, data['birth'].indexOf('월'));
+						if(day.length==1) day = "0"+day;
+						if(month.length==1) month = "0"+month;
+						
+						const birth = year+"-"+month+"-"+day;
+
+						$('#birth').val(birth);
     					if(data['gender']=='M'){
     						$('#genderM').attr('checked',true);
     					} else{

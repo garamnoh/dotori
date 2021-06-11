@@ -69,17 +69,17 @@ public class ShopBasketInsertServlet extends HttpServlet {
 				//request.setAttribute("loc", "/page/shopMinimi.do");
 				//request.setAttribute("loc", "/views/main/main.jsp");
 				//request.setAttribute("loc", "/views/shop/shopMinimi.jsp");
-				request.setAttribute("result","성공하셨습니다");
+				request.setAttribute("result","장바구니에 담겼습니다:)");
 				view="/shop/minimiTable";
 			}else if(type.equals("skin")) {
 				//request.setAttribute("loc", "/shop/skinTable");
 				//request.setAttribute("loc", "/page/shopSkin.do");
-				request.setAttribute("result","성공하셨습니다");
+				request.setAttribute("result","장바구니에 담겼습니다:)");
 				view="/shop/skinTable";
 			}else if(type.equals("music")) {
 				//request.setAttribute("loc", "/shop/musicTable");
 				//request.setAttribute("loc", "/page/shopMusic.do");
-				request.setAttribute("result","성공하셨습니다");
+				request.setAttribute("result","장바구니에 담겼습니다:)");
 				view="/shop/musicTable";
 			}
 			

@@ -27,7 +27,8 @@ $(".diary_del_btn").click(e => {
 			type:"post",
 			data:{
 				"diary_no":$(e.target).parent().prev().val(),
-				"loginMemberId":$("input[name='loginMemberId']").val()		 	
+				"loginMemberId":$("input[name='loginMemberId']").val(),	
+				"hostMemberId":$("input[name='hostMemberId']").val()
 			},
 			dataType:"html",
 			success:data=>{
@@ -192,12 +193,13 @@ document.querySelectorAll("#pageBar>a").forEach((v, i)=>{
 		let numPerpage=strArr[1];
 		console.log(cPage,numPerpage);		
 		$.ajax({
-			url:contextPath+"/diary/diaryFolder",
+			url:contextPath+"/diary/page",
 			type:"post",
 			data:{				
-				"diaryFolderLevel":$(e.target).parent().prev().val(),
+				"diaryFolderLevel":$(e.target).parent().prev().prev().val(),
 				"cPage":cPage,
-				"numPerpage":numPerpage			
+				"numPerpage":numPerpage,
+				"currentPage":$(e.target).parent().prev().val()
 			},
 			dataType:"html",
 			success:data=>{
