@@ -182,6 +182,7 @@
     					$('#memberId').val(data['memberId']);
     					$('#memberName').val(data['memberName']);
     					$('#nickname').val(data['nickname']);
+    					
     					var year = data['birth'].substring(data['birth'].lastIndexOf(' ')+1, data['birth'].lastIndexOf(' ')+5);
 						var day = data['birth'].substring(data['birth'].indexOf(' ')+1, data['birth'].indexOf(' ')+3);
 						var month = data['birth'].substring(0, data['birth'].indexOf('월'));

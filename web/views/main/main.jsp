@@ -143,14 +143,16 @@
 	
 	<footer>
 		<div id='footer'>
-			<p id='footer-info'>라이센스. @ right. javajava footer dotori</p>
+			<p id='dotori'>DOTORI</p>
+			<p>TEAM&emsp;|&emsp;김규희&emsp; 김기영&ensp; 노가람&ensp; 유혜신&ensp; 이시후
+			<p>Copyright 2021 by 자바를 자바라.&emsp;All rights reserved.</p>
 		</div>
 	</footer>
 
 
 
 	<script>
- 		const socket = new WebSocket('ws://localhost:9090/<%=request.getContextPath()%>/chatting');
+ 		const socket = new WebSocket('ws://rclass.iptime.org:9999/<%=request.getContextPath()%>/chatting');
 	
 		socket.onopen = (e)=>{
 			//alert('webSocket server 접속');

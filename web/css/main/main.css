@@ -180,7 +180,7 @@ body>.contents>.contentsSub>.hide{
 body>footer{
 	width: 100%;
 	position: fixed;
-	bottom: -30px;
+	bottom: -100px;
 	text-align: center;
 	transition: bottom .5s;
 }
@@ -195,7 +195,11 @@ body>footer>#footer{
 }
 
 body>footer p{
+	color: white;
 	padding: 10px;
+}
+body>footer p#dotori{
+	margin-top: 10px;
 }
 
 #section{overflow:hidden;}
