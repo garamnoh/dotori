@@ -174,7 +174,7 @@ $("#muteMusic").hover((e)=>{
 	$(e.target).attr("src",contextPath+"/images/minihome/mute-icon.png");
 });
 
-const socket=new WebSocket("ws://localhost:9090/"+contextPath+"/webSocket/drawingSignal");
+const socket=new WebSocket("ws://rclass.iptime.org:9999/"+contextPath+"/webSocket/drawingSignal");
 
 socket.onopen=(e)=>{
 	$.ajax({
